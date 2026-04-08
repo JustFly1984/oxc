@@ -113,6 +113,8 @@ pub use crate::rules::eslint::no_redeclare::NoRedeclare as EslintNoRedeclare;
 pub use crate::rules::eslint::no_regex_spaces::NoRegexSpaces as EslintNoRegexSpaces;
 pub use crate::rules::eslint::no_restricted_globals::NoRestrictedGlobals as EslintNoRestrictedGlobals;
 pub use crate::rules::eslint::no_restricted_imports::NoRestrictedImports as EslintNoRestrictedImports;
+pub use crate::rules::eslint::no_restricted_properties::NoRestrictedProperties as EslintNoRestrictedProperties;
+pub use crate::rules::eslint::no_restricted_syntax::NoRestrictedSyntax as EslintNoRestrictedSyntax;
 pub use crate::rules::eslint::no_return_assign::NoReturnAssign as EslintNoReturnAssign;
 pub use crate::rules::eslint::no_script_url::NoScriptUrl as EslintNoScriptUrl;
 pub use crate::rules::eslint::no_self_assign::NoSelfAssign as EslintNoSelfAssign;
@@ -864,6 +866,8 @@ pub enum RuleEnum {
     EslintNoRegexSpaces(EslintNoRegexSpaces),
     EslintNoRestrictedGlobals(EslintNoRestrictedGlobals),
     EslintNoRestrictedImports(EslintNoRestrictedImports),
+    EslintNoRestrictedProperties(EslintNoRestrictedProperties),
+    EslintNoRestrictedSyntax(EslintNoRestrictedSyntax),
     EslintNoReturnAssign(EslintNoReturnAssign),
     EslintNoScriptUrl(EslintNoScriptUrl),
     EslintNoSelfAssign(EslintNoSelfAssign),
@@ -1579,7 +1583,9 @@ const ESLINT_NO_REDECLARE_ID: usize = ESLINT_NO_PROTOTYPE_BUILTINS_ID + 1usize;
 const ESLINT_NO_REGEX_SPACES_ID: usize = ESLINT_NO_REDECLARE_ID + 1usize;
 const ESLINT_NO_RESTRICTED_GLOBALS_ID: usize = ESLINT_NO_REGEX_SPACES_ID + 1usize;
 const ESLINT_NO_RESTRICTED_IMPORTS_ID: usize = ESLINT_NO_RESTRICTED_GLOBALS_ID + 1usize;
-const ESLINT_NO_RETURN_ASSIGN_ID: usize = ESLINT_NO_RESTRICTED_IMPORTS_ID + 1usize;
+const ESLINT_NO_RESTRICTED_PROPERTIES_ID: usize = ESLINT_NO_RESTRICTED_IMPORTS_ID + 1usize;
+const ESLINT_NO_RESTRICTED_SYNTAX_ID: usize = ESLINT_NO_RESTRICTED_PROPERTIES_ID + 1usize;
+const ESLINT_NO_RETURN_ASSIGN_ID: usize = ESLINT_NO_RESTRICTED_SYNTAX_ID + 1usize;
 const ESLINT_NO_SCRIPT_URL_ID: usize = ESLINT_NO_RETURN_ASSIGN_ID + 1usize;
 const ESLINT_NO_SELF_ASSIGN_ID: usize = ESLINT_NO_SCRIPT_URL_ID + 1usize;
 const ESLINT_NO_SELF_COMPARE_ID: usize = ESLINT_NO_SELF_ASSIGN_ID + 1usize;
@@ -2379,6 +2385,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(_) => ESLINT_NO_REGEX_SPACES_ID,
             Self::EslintNoRestrictedGlobals(_) => ESLINT_NO_RESTRICTED_GLOBALS_ID,
             Self::EslintNoRestrictedImports(_) => ESLINT_NO_RESTRICTED_IMPORTS_ID,
+            Self::EslintNoRestrictedProperties(_) => ESLINT_NO_RESTRICTED_PROPERTIES_ID,
+            Self::EslintNoRestrictedSyntax(_) => ESLINT_NO_RESTRICTED_SYNTAX_ID,
             Self::EslintNoReturnAssign(_) => ESLINT_NO_RETURN_ASSIGN_ID,
             Self::EslintNoScriptUrl(_) => ESLINT_NO_SCRIPT_URL_ID,
             Self::EslintNoSelfAssign(_) => ESLINT_NO_SELF_ASSIGN_ID,
@@ -3199,6 +3207,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(_) => EslintNoRegexSpaces::NAME,
             Self::EslintNoRestrictedGlobals(_) => EslintNoRestrictedGlobals::NAME,
             Self::EslintNoRestrictedImports(_) => EslintNoRestrictedImports::NAME,
+            Self::EslintNoRestrictedProperties(_) => EslintNoRestrictedProperties::NAME,
+            Self::EslintNoRestrictedSyntax(_) => EslintNoRestrictedSyntax::NAME,
             Self::EslintNoReturnAssign(_) => EslintNoReturnAssign::NAME,
             Self::EslintNoScriptUrl(_) => EslintNoScriptUrl::NAME,
             Self::EslintNoSelfAssign(_) => EslintNoSelfAssign::NAME,
@@ -4011,6 +4021,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(_) => EslintNoRegexSpaces::CATEGORY,
             Self::EslintNoRestrictedGlobals(_) => EslintNoRestrictedGlobals::CATEGORY,
             Self::EslintNoRestrictedImports(_) => EslintNoRestrictedImports::CATEGORY,
+            Self::EslintNoRestrictedProperties(_) => EslintNoRestrictedProperties::CATEGORY,
+            Self::EslintNoRestrictedSyntax(_) => EslintNoRestrictedSyntax::CATEGORY,
             Self::EslintNoReturnAssign(_) => EslintNoReturnAssign::CATEGORY,
             Self::EslintNoScriptUrl(_) => EslintNoScriptUrl::CATEGORY,
             Self::EslintNoSelfAssign(_) => EslintNoSelfAssign::CATEGORY,
@@ -4870,6 +4882,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(_) => EslintNoRegexSpaces::FIX,
             Self::EslintNoRestrictedGlobals(_) => EslintNoRestrictedGlobals::FIX,
             Self::EslintNoRestrictedImports(_) => EslintNoRestrictedImports::FIX,
+            Self::EslintNoRestrictedProperties(_) => EslintNoRestrictedProperties::FIX,
+            Self::EslintNoRestrictedSyntax(_) => EslintNoRestrictedSyntax::FIX,
             Self::EslintNoReturnAssign(_) => EslintNoReturnAssign::FIX,
             Self::EslintNoScriptUrl(_) => EslintNoScriptUrl::FIX,
             Self::EslintNoSelfAssign(_) => EslintNoSelfAssign::FIX,
@@ -5697,6 +5711,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(_) => EslintNoRegexSpaces::documentation(),
             Self::EslintNoRestrictedGlobals(_) => EslintNoRestrictedGlobals::documentation(),
             Self::EslintNoRestrictedImports(_) => EslintNoRestrictedImports::documentation(),
+            Self::EslintNoRestrictedProperties(_) => EslintNoRestrictedProperties::documentation(),
+            Self::EslintNoRestrictedSyntax(_) => EslintNoRestrictedSyntax::documentation(),
             Self::EslintNoReturnAssign(_) => EslintNoReturnAssign::documentation(),
             Self::EslintNoScriptUrl(_) => EslintNoScriptUrl::documentation(),
             Self::EslintNoSelfAssign(_) => EslintNoSelfAssign::documentation(),
@@ -6906,6 +6922,12 @@ impl RuleEnum {
                 EslintNoRestrictedImports::config_schema(generator)
                     .or_else(|| EslintNoRestrictedImports::schema(generator))
             }
+            Self::EslintNoRestrictedProperties(_) => {
+                EslintNoRestrictedProperties::config_schema(generator)
+                    .or_else(|| EslintNoRestrictedProperties::schema(generator))
+            }
+            Self::EslintNoRestrictedSyntax(_) => EslintNoRestrictedSyntax::config_schema(generator)
+                .or_else(|| EslintNoRestrictedSyntax::schema(generator)),
             Self::EslintNoReturnAssign(_) => EslintNoReturnAssign::config_schema(generator)
                 .or_else(|| EslintNoReturnAssign::schema(generator)),
             Self::EslintNoScriptUrl(_) => EslintNoScriptUrl::config_schema(generator)
@@ -8724,6 +8746,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(_) => "eslint",
             Self::EslintNoRestrictedGlobals(_) => "eslint",
             Self::EslintNoRestrictedImports(_) => "eslint",
+            Self::EslintNoRestrictedProperties(_) => "eslint",
+            Self::EslintNoRestrictedSyntax(_) => "eslint",
             Self::EslintNoReturnAssign(_) => "eslint",
             Self::EslintNoScriptUrl(_) => "eslint",
             Self::EslintNoSelfAssign(_) => "eslint",
@@ -9710,6 +9734,12 @@ impl RuleEnum {
             )),
             Self::EslintNoRestrictedImports(_) => Ok(Self::EslintNoRestrictedImports(
                 EslintNoRestrictedImports::from_configuration(value)?,
+            )),
+            Self::EslintNoRestrictedProperties(_) => Ok(Self::EslintNoRestrictedProperties(
+                EslintNoRestrictedProperties::from_configuration(value)?,
+            )),
+            Self::EslintNoRestrictedSyntax(_) => Ok(Self::EslintNoRestrictedSyntax(
+                EslintNoRestrictedSyntax::from_configuration(value)?,
             )),
             Self::EslintNoReturnAssign(_) => {
                 Ok(Self::EslintNoReturnAssign(EslintNoReturnAssign::from_configuration(value)?))
@@ -11723,6 +11753,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(rule) => rule.to_configuration(),
             Self::EslintNoRestrictedGlobals(rule) => rule.to_configuration(),
             Self::EslintNoRestrictedImports(rule) => rule.to_configuration(),
+            Self::EslintNoRestrictedProperties(rule) => rule.to_configuration(),
+            Self::EslintNoRestrictedSyntax(rule) => rule.to_configuration(),
             Self::EslintNoReturnAssign(rule) => rule.to_configuration(),
             Self::EslintNoScriptUrl(rule) => rule.to_configuration(),
             Self::EslintNoSelfAssign(rule) => rule.to_configuration(),
@@ -12441,6 +12473,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(rule) => rule.run(node, ctx),
             Self::EslintNoRestrictedGlobals(rule) => rule.run(node, ctx),
             Self::EslintNoRestrictedImports(rule) => rule.run(node, ctx),
+            Self::EslintNoRestrictedProperties(rule) => rule.run(node, ctx),
+            Self::EslintNoRestrictedSyntax(rule) => rule.run(node, ctx),
             Self::EslintNoReturnAssign(rule) => rule.run(node, ctx),
             Self::EslintNoScriptUrl(rule) => rule.run(node, ctx),
             Self::EslintNoSelfAssign(rule) => rule.run(node, ctx),
@@ -13155,6 +13189,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(rule) => rule.run_once(ctx),
             Self::EslintNoRestrictedGlobals(rule) => rule.run_once(ctx),
             Self::EslintNoRestrictedImports(rule) => rule.run_once(ctx),
+            Self::EslintNoRestrictedProperties(rule) => rule.run_once(ctx),
+            Self::EslintNoRestrictedSyntax(rule) => rule.run_once(ctx),
             Self::EslintNoReturnAssign(rule) => rule.run_once(ctx),
             Self::EslintNoScriptUrl(rule) => rule.run_once(ctx),
             Self::EslintNoSelfAssign(rule) => rule.run_once(ctx),
@@ -13873,6 +13909,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoRestrictedGlobals(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoRestrictedImports(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::EslintNoRestrictedProperties(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::EslintNoRestrictedSyntax(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoReturnAssign(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoScriptUrl(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoSelfAssign(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -14683,6 +14721,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(rule) => rule.should_run(ctx),
             Self::EslintNoRestrictedGlobals(rule) => rule.should_run(ctx),
             Self::EslintNoRestrictedImports(rule) => rule.should_run(ctx),
+            Self::EslintNoRestrictedProperties(rule) => rule.should_run(ctx),
+            Self::EslintNoRestrictedSyntax(rule) => rule.should_run(ctx),
             Self::EslintNoReturnAssign(rule) => rule.should_run(ctx),
             Self::EslintNoScriptUrl(rule) => rule.should_run(ctx),
             Self::EslintNoSelfAssign(rule) => rule.should_run(ctx),
@@ -15413,6 +15453,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(_) => EslintNoRegexSpaces::IS_TSGOLINT_RULE,
             Self::EslintNoRestrictedGlobals(_) => EslintNoRestrictedGlobals::IS_TSGOLINT_RULE,
             Self::EslintNoRestrictedImports(_) => EslintNoRestrictedImports::IS_TSGOLINT_RULE,
+            Self::EslintNoRestrictedProperties(_) => EslintNoRestrictedProperties::IS_TSGOLINT_RULE,
+            Self::EslintNoRestrictedSyntax(_) => EslintNoRestrictedSyntax::IS_TSGOLINT_RULE,
             Self::EslintNoReturnAssign(_) => EslintNoReturnAssign::IS_TSGOLINT_RULE,
             Self::EslintNoScriptUrl(_) => EslintNoScriptUrl::IS_TSGOLINT_RULE,
             Self::EslintNoSelfAssign(_) => EslintNoSelfAssign::IS_TSGOLINT_RULE,
@@ -16422,6 +16464,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(_) => EslintNoRegexSpaces::HAS_CONFIG,
             Self::EslintNoRestrictedGlobals(_) => EslintNoRestrictedGlobals::HAS_CONFIG,
             Self::EslintNoRestrictedImports(_) => EslintNoRestrictedImports::HAS_CONFIG,
+            Self::EslintNoRestrictedProperties(_) => EslintNoRestrictedProperties::HAS_CONFIG,
+            Self::EslintNoRestrictedSyntax(_) => EslintNoRestrictedSyntax::HAS_CONFIG,
             Self::EslintNoReturnAssign(_) => EslintNoReturnAssign::HAS_CONFIG,
             Self::EslintNoScriptUrl(_) => EslintNoScriptUrl::HAS_CONFIG,
             Self::EslintNoSelfAssign(_) => EslintNoSelfAssign::HAS_CONFIG,
@@ -17302,6 +17346,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(rule) => rule.types_info(),
             Self::EslintNoRestrictedGlobals(rule) => rule.types_info(),
             Self::EslintNoRestrictedImports(rule) => rule.types_info(),
+            Self::EslintNoRestrictedProperties(rule) => rule.types_info(),
+            Self::EslintNoRestrictedSyntax(rule) => rule.types_info(),
             Self::EslintNoReturnAssign(rule) => rule.types_info(),
             Self::EslintNoScriptUrl(rule) => rule.types_info(),
             Self::EslintNoSelfAssign(rule) => rule.types_info(),
@@ -18016,6 +18062,8 @@ impl RuleEnum {
             Self::EslintNoRegexSpaces(rule) => rule.run_info(),
             Self::EslintNoRestrictedGlobals(rule) => rule.run_info(),
             Self::EslintNoRestrictedImports(rule) => rule.run_info(),
+            Self::EslintNoRestrictedProperties(rule) => rule.run_info(),
+            Self::EslintNoRestrictedSyntax(rule) => rule.run_info(),
             Self::EslintNoReturnAssign(rule) => rule.run_info(),
             Self::EslintNoScriptUrl(rule) => rule.run_info(),
             Self::EslintNoSelfAssign(rule) => rule.run_info(),
@@ -18752,6 +18800,8 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::EslintNoRegexSpaces(EslintNoRegexSpaces::default()),
         RuleEnum::EslintNoRestrictedGlobals(EslintNoRestrictedGlobals::default()),
         RuleEnum::EslintNoRestrictedImports(EslintNoRestrictedImports::default()),
+        RuleEnum::EslintNoRestrictedProperties(EslintNoRestrictedProperties::default()),
+        RuleEnum::EslintNoRestrictedSyntax(EslintNoRestrictedSyntax::default()),
         RuleEnum::EslintNoReturnAssign(EslintNoReturnAssign::default()),
         RuleEnum::EslintNoScriptUrl(EslintNoScriptUrl::default()),
         RuleEnum::EslintNoSelfAssign(EslintNoSelfAssign::default()),

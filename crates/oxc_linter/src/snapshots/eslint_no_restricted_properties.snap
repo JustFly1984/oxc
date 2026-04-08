@@ -1,0 +1,34 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 444
+---
+
+  ⚠ eslint(no-restricted-properties): 'Object.assign' is restricted from being used.
+   ╭─[no_restricted_properties.tsx:1:1]
+ 1 │ Object.assign(target, source)
+   · ─────────────
+   ╰────
+
+  ⚠ eslint(no-restricted-properties): 'Object.assign' is restricted from being used. Use explicit properties.
+   ╭─[no_restricted_properties.tsx:1:1]
+ 1 │ Object.assign(target, source)
+   · ─────────────
+   ╰────
+
+  ⚠ eslint(no-restricted-properties): 'Math.pow' is restricted from being used.
+   ╭─[no_restricted_properties.tsx:1:1]
+ 1 │ Math.pow(2, 3)
+   · ────────
+   ╰────
+
+  ⚠ eslint(no-restricted-properties): 'foo.bar' is restricted from being used. Use baz instead.
+   ╭─[no_restricted_properties.tsx:1:1]
+ 1 │ foo.bar
+   · ───────
+   ╰────
+
+  ⚠ eslint(no-restricted-properties): 'foo.assign' is restricted from being used.
+   ╭─[no_restricted_properties.tsx:1:1]
+ 1 │ foo.assign
+   · ──────────
+   ╰────
