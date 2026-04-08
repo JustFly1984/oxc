@@ -199,10 +199,7 @@ fn build_fix(
         for (i, piece) in pieces.iter().enumerate() {
             result.push_str(&indent);
             result.push_str(piece);
-            if i < pieces.len() - 1
-                || obj_text.contains(",\n}")
-                || obj_text.contains(",\n }")
-            {
+            if i < pieces.len() - 1 || obj_text.contains(",\n}") || obj_text.contains(",\n }") {
                 result.push(',');
             }
             result.push('\n');

@@ -301,7 +301,8 @@ fn ordered_keys_for_config(
         .filter(|key| seen.insert(key.clone()) && object.contains_key(key))
         .collect::<Vec<_>>();
 
-    let mut remainder = object.keys().map(String::as_str).filter(|key| !seen.contains(*key)).collect::<Vec<_>>();
+    let mut remainder =
+        object.keys().map(String::as_str).filter(|key| !seen.contains(*key)).collect::<Vec<_>>();
     remainder.sort_unstable();
 
     ordered_keys.extend(remainder.into_iter().map(str::to_string));

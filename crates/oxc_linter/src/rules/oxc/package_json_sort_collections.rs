@@ -258,8 +258,7 @@ fn sort_script_groups(keys: Vec<String>) -> Vec<String> {
     let mut group_map = std::collections::BTreeMap::<String, Vec<String>>::new();
 
     for key in keys {
-        let base =
-            key.split_once(':').map_or_else(|| key.clone(), |(head, _)| head.to_string());
+        let base = key.split_once(':').map_or_else(|| key.clone(), |(head, _)| head.to_string());
         group_map.entry(base).or_default().push(key);
     }
 
