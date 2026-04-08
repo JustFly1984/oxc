@@ -1,6 +1,6 @@
 // napi-JS `goatfmt` API entry point
 
-import { format as napiFormat, jsTextToDoc as napiJsTextToDoc } from "./bindings";
+import { format as napiFormat } from "./bindings";
 import {
   resolvePlugins,
   formatFile,
@@ -76,28 +76,6 @@ export async function format(fileName: string, sourceText: string, options?: For
     options ?? {},
     resolvePlugins,
     (options, code) => formatFile({ options, code }),
-    (options, code) => formatEmbeddedCode({ options, code }),
-    (options, texts) => formatEmbeddedDoc({ options, texts }),
-    (options, classes) => sortTailwindClasses({ options, classes }),
-  );
-}
-
-/**
- * Format a JS/TS snippet for Prettier `textToDoc()` plugin flow.
- */
-export async function jsTextToDoc(
-  sourceExt: string,
-  sourceText: string,
-  goatfmtPluginOptionsJson: string,
-  parentContext: string,
-) {
-  return napiJsTextToDoc(
-    sourceExt,
-    sourceText,
-    goatfmtPluginOptionsJson,
-    parentContext,
-    resolvePlugins,
-    (_options, _code) => Promise.reject(/* Unreachable */),
     (options, code) => formatEmbeddedCode({ options, code }),
     (options, texts) => formatEmbeddedDoc({ options, texts }),
     (options, classes) => sortTailwindClasses({ options, classes }),

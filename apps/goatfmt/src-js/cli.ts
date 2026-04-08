@@ -53,10 +53,6 @@ void (async () => {
     await import("./cli/migration/init").then((m) => m.runInit());
     return;
   }
-  if (mode === "migrate:prettier") {
-    await import("./cli/migration/migrate-prettier").then((m) => m.runMigratePrettier());
-    return;
-  }
   if (mode === "migrate:biome") {
     await import("./cli/migration/migrate-biome").then((m) => m.runMigrateBiome());
     return;

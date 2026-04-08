@@ -9,7 +9,7 @@ const goatfmtDirPath = join(import.meta.dirname, ".."),
 
 // Build with tsdown
 console.log("Building with tsdown...");
-execSync("pnpm tsdown", { stdio: "inherit", cwd: goatfmtDirPath });
+execSync("bun --bun tsdown", { stdio: "inherit", cwd: goatfmtDirPath });
 
 // Copy native `.node` files from `src-js`
 console.log("Copying `.node` files...");
