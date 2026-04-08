@@ -1,5 +1,4 @@
 use goat_ast::AstKind;
-use goat_ast::ast::{BindingPattern, VariableDeclarationKind};
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::Span;

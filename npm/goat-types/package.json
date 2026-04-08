@@ -22,8 +22,8 @@
     "types.d.ts"
   ],
   "scripts": {
-    "pub": "npm publish .",
-    "pub:next": "npm publish . --tag next"
+    "pub": "bun publish .",
+    "pub:next": "bun publish . --tag next"
   },
   "publishConfig": {
     "access": "public"

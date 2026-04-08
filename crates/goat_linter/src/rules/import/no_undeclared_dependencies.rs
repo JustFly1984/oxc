@@ -51,7 +51,7 @@ declare_goat_lint!(
 );
 
 impl Rule for NoUndeclaredDependencies {
-    fn run<'a>(&self, node: &AstNode<'a>, ctx: &LintContext<'a>) {
+    fn run<'a>(&self, node: &AstNode<'a>, _ctx: &LintContext<'a>) {
         let source = match node.kind() {
             AstKind::ImportDeclaration(decl) => decl.source.value.as_str(),
             AstKind::ExportNamedDeclaration(decl) => {

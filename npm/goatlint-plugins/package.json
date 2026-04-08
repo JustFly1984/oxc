@@ -1,5 +1,5 @@
 {
-  "name": "@goatlint/plugins",
+  "name": "goatlint-plugins",
   "version": "1.59.0",
   "description": "Plugin utilities for Oxlint",
   "keywords": [
@@ -38,9 +38,9 @@
     }
   },
   "scripts": {
-    "prepublishOnly": "cd ../../apps/goatlint && pnpm run build-js && cp dist-pkg-plugins/* ../../npm/goatlint-plugins/",
-    "pub": "npm publish .",
-    "pub:next": "npm publish . --tag next"
+    "prepublishOnly": "cd ../../apps/goatlint && bun run build-js && cp dist-pkg-plugins/* ../../npm/goatlint-plugins/",
+    "pub": "bun publish .",
+    "pub:next": "bun publish . --tag next"
   },
   "publishConfig": {
     "access": "public"

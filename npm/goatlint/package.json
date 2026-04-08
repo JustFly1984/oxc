@@ -53,9 +53,9 @@
     ]
   },
   "scripts": {
-    "prepublishOnly": "cd ../../apps/goatlint && pnpm run build",
-    "pub": "npm publish .",
-    "pub:next": "npm publish . --tag next"
+    "prepublishOnly": "cd ../../apps/goatlint && bun run build",
+    "pub": "bun publish .",
+    "pub:next": "bun publish . --tag next"
   },
   "publishConfig": {
     "access": "public"

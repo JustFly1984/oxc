@@ -29,9 +29,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "prepublishOnly": "cd ../../apps/goatlint && pnpm run build-js && cp -r dist-pkg-plugin-eslint/. ../../npm/goatlint-plugin-eslint/",
-    "pub": "npm publish .",
-    "pub:next": "npm publish . --tag next"
+    "prepublishOnly": "cd ../../apps/goatlint && bun run build-js && cp -r dist-pkg-plugin-eslint/. ../../npm/goatlint-plugin-eslint/",
+    "pub": "bun publish .",
+    "pub:next": "bun publish . --tag next"
   },
   "publishConfig": {
     "access": "public"
