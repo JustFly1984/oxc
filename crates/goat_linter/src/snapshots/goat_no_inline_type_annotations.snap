@@ -1,0 +1,27 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(no-inline-type-annotations): Use a named type or interface instead of an inline object type.
+   ╭─[no_inline_type_annotations.ts:1:14]
+ 1 │ const props: { title: string } = { title: 'hello' };
+   ·              ─────────────────
+   ╰────
+
+  ⚠ goat(no-inline-type-annotations): Use a named type or interface instead of an inline object type.
+   ╭─[no_inline_type_annotations.ts:1:24]
+ 1 │ function render(props: { title: string; count: number }) { return props.title; }
+   ·                        ────────────────────────────────
+   ╰────
+
+  ⚠ goat(no-inline-type-annotations): Use a named type or interface instead of an inline object type.
+   ╭─[no_inline_type_annotations.ts:1:20]
+ 1 │ const render = (): { title: string } => ({ title: 'hello' });
+   ·                    ─────────────────
+   ╰────
+
+  ⚠ goat(no-inline-type-annotations): Use a named type or interface instead of an inline object type.
+   ╭─[no_inline_type_annotations.ts:1:29]
+ 1 │ type Loader = () => Promise<{ title: string }>;
+   ·                             ─────────────────
+   ╰────

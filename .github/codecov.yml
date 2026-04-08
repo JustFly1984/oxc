@@ -17,5 +17,5 @@ ignore:
   - "tasks"
   - "editor"
   - "napi"
-  - "crates/oxc_diagnostics"
-  - "crates/oxc_napi"
+  - "crates/goat_diagnostics"
+  - "crates/goat_napi"

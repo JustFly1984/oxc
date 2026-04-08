@@ -1,0 +1,57 @@
+[package]
+name = "goat_transformer"
+version = "0.124.0"
+authors.workspace = true
+categories.workspace = true
+edition.workspace = true
+homepage.workspace = true
+include = ["/examples", "/src"]
+keywords.workspace = true
+license.workspace = true
+publish = true
+repository.workspace = true
+rust-version.workspace = true
+description.workspace = true
+
+[lints]
+workspace = true
+
+[lib]
+test = true
+doctest = false
+
+[dependencies]
+goat_allocator = { workspace = true }
+goat_ast = { workspace = true }
+goat_ast_visit = { workspace = true }
+goat_compat = { workspace = true }
+goat_data_structures = { workspace = true, features = [
+  "assert_unchecked",
+  "inline_string",
+  "rope",
+  "slice_iter",
+  "stack",
+] }
+goat_diagnostics = { workspace = true }
+goat_ecmascript = { workspace = true }
+goat_regular_expression = { workspace = true }
+goat_semantic = { workspace = true }
+goat_span = { workspace = true }
+goat_syntax = { workspace = true, features = ["to_js_string"] }
+goat_traverse = { workspace = true }
+
+base64 = { workspace = true }
+compact_str = { workspace = true }
+indexmap = { workspace = true }
+itoa = { workspace = true }
+memchr = { workspace = true }
+rustc-hash = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+sha1 = { workspace = true }
+
+[dev-dependencies]
+insta = { workspace = true }
+goat_codegen = { workspace = true, features = ["sourcemap"] }
+goat_parser = { workspace = true }
+pico-args = { workspace = true }

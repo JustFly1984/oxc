@@ -1,6 +1,6 @@
 # Oxc Parser
 
-See [usage instructions](https://oxc.rs/docs/guide/usage/parser).
+See [usage instructions](https://goatlint.dev/docs/guide/usage/parser).
 
 ## Features
 
@@ -33,10 +33,10 @@ Any deviation would be considered a bug.
 
 ### AST Types
 
-[@oxc-project/types](https://npmx.dev/package/@oxc-project/types) can be used. For example:
+[@goat-project/types](https://npmx.dev/package/@goat-project/types) can be used. For example:
 
 ```typescript
-import { Statement } from "@oxc-project/types";
+import { Statement } from "@goat-project/types";
 ```
 
 ### Visitor

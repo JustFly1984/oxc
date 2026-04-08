@@ -1,0 +1,83 @@
+[package]
+name = "goat"
+version = "0.124.0"
+authors.workspace = true
+categories.workspace = true
+edition.workspace = true
+homepage.workspace = true
+include = ["/src"]
+keywords.workspace = true
+license.workspace = true
+publish = true
+repository.workspace = true
+rust-version.workspace = true
+description.workspace = true
+
+[lints]
+workspace = true
+
+[lib]
+test = false
+doctest = false
+
+[[example]]
+name = "compiler"
+path = "examples/compiler.rs"
+required-features = ["full"]
+
+[dependencies]
+goat_allocator = { workspace = true }
+goat_ast = { workspace = true }
+goat_ast_visit = { workspace = true, optional = true }
+goat_cfg = { workspace = true, optional = true }
+goat_codegen = { workspace = true, optional = true }
+goat_diagnostics = { workspace = true }
+goat_isolated_declarations = { workspace = true, optional = true }
+goat_mangler = { workspace = true, optional = true }
+goat_minifier = { workspace = true, optional = true }
+goat_parser = { workspace = true, features = [] }
+goat_regular_expression = { workspace = true, optional = true }
+goat_semantic = { workspace = true, optional = true }
+goat_span = { workspace = true }
+goat_syntax = { workspace = true }
+goat_transformer = { workspace = true, optional = true }
+goat_transformer_plugins = { workspace = true, optional = true }
+
+[features]
+default = ["regular_expression"]
+
+full = [
+  "codegen",
+  "mangler",
+  "minifier",
+  "semantic",
+  "transformer",
+  "isolated_declarations",
+  "ast_visit",
+  "regular_expression",
+]
+
+semantic = ["goat_semantic"]
+transformer = ["goat_transformer", "goat_transformer_plugins"]
+minifier = ["goat_mangler", "goat_minifier"]
+codegen = ["goat_codegen", "goat_codegen/sourcemap"]
+mangler = ["goat_mangler"]
+cfg = ["goat_cfg", "goat_semantic/cfg"]
+isolated_declarations = ["goat_isolated_declarations"]
+ast_visit = ["goat_ast_visit"]
+regular_expression = ["goat_regular_expression", "goat_parser/regular_expression"]
+
+serialize = [
+  "goat_allocator/from_raw_parts",
+  "goat_ast/serialize",
+  "goat_ast_visit/serialize",
+  "goat_semantic?/serialize",
+  "goat_span/serialize",
+  "goat_syntax/serialize",
+]
+
+# Only for conformance tests
+conformance = ["goat_ast_visit/conformance"]
+
+[package.metadata.docs.rs]
+all-features = true

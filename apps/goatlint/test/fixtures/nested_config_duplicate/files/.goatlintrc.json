@@ -1,0 +1,4 @@
+{
+  "jsPlugins": ["../plugin.ts"],
+  "extends": ["../.goatlintrc.json"]
+}

@@ -6,7 +6,7 @@ on:
 
 jobs:
   close-issues:
-    if: github.repository == 'oxc-project/oxc'
+    if: github.repository == 'goat-project/oxc'
     runs-on: ubuntu-latest
     permissions:
       issues: write

@@ -34,7 +34,7 @@ use super::define_generator;
 ///
 /// This should continue to be blacklisted for now.
 ///
-/// See also: <https://github.com/oxc-project/oxc/issues/11490>
+/// See also: <https://github.com/goat-project/oxc/issues/11490>
 const STRUCTS_BLACK_LIST: &[&str] = &["Span"];
 
 /// Generator for `AstKind`, `AstType`, and related code.
@@ -135,9 +135,9 @@ impl Generator for AstKindGenerator {
             use std::ptr;
 
             ///@@line_break
-            use oxc_allocator::{Address, GetAddress, UnstableAddress};
-            use oxc_span::{GetSpan, Span};
-            use oxc_syntax::node::NodeId;
+            use goat_allocator::{Address, GetAddress, UnstableAddress};
+            use goat_span::{GetSpan, Span};
+            use goat_syntax::node::NodeId;
 
             ///@@line_break
             use crate::ast::*;

@@ -1,0 +1,13 @@
+---
+source: crates/goat_isolated_declarations/tests/mod.rs
+input_file: crates/goat_isolated_declarations/tests/fixtures/readonly-object-as-const.ts
+---
+```
+==================== .D.TS ====================
+
+export declare class ReadonlyObjectAsConst {
+	writableTrue: boolean;
+	readonly objectAsConst: {
+		readonly a: 1;
+	};
+}

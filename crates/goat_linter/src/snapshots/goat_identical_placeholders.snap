@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(identical-placeholders): Placeholders at `greeting` do not match reference locale `/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/i18n_catalog/en/messages.json`.
+   ╭─[identical_placeholders.json:1:13]
+ 1 │ {"greeting":"Bonjour","count":"{count} éléments","simple":"Tableau de bord"}
+   ·             ─────────
+   ╰────
+  help: missing: {name}
+
+  ⚠ goat(identical-placeholders): Placeholders at `greeting` do not match reference locale `/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/i18n_catalog/en/messages.json`.
+   ╭─[identical_placeholders.json:1:13]
+ 1 │ {"greeting":"Bonjour {name} {extra}","count":"{count} éléments","simple":"Tableau de bord"}
+   ·             ────────────────────────
+   ╰────
+  help: extra: {extra}

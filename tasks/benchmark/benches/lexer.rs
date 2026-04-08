@@ -2,16 +2,16 @@ use std::borrow::Cow;
 
 use cow_utils::CowUtils;
 
-use oxc_allocator::Allocator;
-use oxc_ast::ast::*;
-use oxc_ast_visit::Visit;
+use goat_allocator::Allocator;
+use goat_ast::ast::*;
+use goat_ast_visit::Visit;
 use oxc_benchmark::{BenchmarkId, Criterion, criterion_group, criterion_main};
-use oxc_parser::{
+use goat_parser::{
     Parser,
     config::{LexerConfig, NoTokensLexerConfig},
     lexer::{Kind, Lexer},
 };
-use oxc_span::SourceType;
+use goat_span::SourceType;
 use oxc_tasks_common::{TestFile, TestFiles};
 
 fn bench_lexer(criterion: &mut Criterion) {

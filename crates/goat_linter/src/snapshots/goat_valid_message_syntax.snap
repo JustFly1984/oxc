@@ -1,0 +1,31 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(valid-message-syntax): Translation message must be a non-empty string.
+   ╭─[valid_message_syntax.json:1:10]
+ 1 │ {"title":""}
+   ·          ──
+   ╰────
+  help: Use a non-empty string for locale message leaves.
+
+  ⚠ goat(valid-message-syntax): Translation message must be a non-empty string.
+   ╭─[valid_message_syntax.json:1:10]
+ 1 │ {"title":"   "}
+   ·          ─────
+   ╰────
+  help: Use a non-empty string for locale message leaves.
+
+  ⚠ goat(valid-message-syntax): Translation message must be a non-empty string.
+   ╭─[valid_message_syntax.json:1:10]
+ 1 │ {"title":1}
+   ·          ─
+   ╰────
+  help: Use a non-empty string for locale message leaves.
+
+  ⚠ goat(valid-message-syntax): Translation message must be a non-empty string.
+   ╭─[valid_message_syntax.json:1:17]
+ 1 │ {"items":["One",""]}
+   ·                 ──
+   ╰────
+  help: Use a non-empty string for locale message leaves.

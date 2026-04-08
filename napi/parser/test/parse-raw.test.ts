@@ -75,9 +75,9 @@ let benchFixtureUrls = [
   // TypeScript syntax (2.81MB)
   "https://cdn.jsdelivr.net/gh/microsoft/TypeScript@v5.3.3/src/compiler/checker.ts",
   // Real world app tsx (1.0M)
-  "https://cdn.jsdelivr.net/gh/oxc-project/benchmark-files@main/cal.com.tsx",
+  "https://cdn.jsdelivr.net/gh/goat-project/benchmark-files@main/cal.com.tsx",
   // Real world content-heavy app jsx (3K)
-  "https://cdn.jsdelivr.net/gh/oxc-project/benchmark-files@main/RadixUIAdoptionSection.jsx",
+  "https://cdn.jsdelivr.net/gh/goat-project/benchmark-files@main/RadixUIAdoptionSection.jsx",
   // Heavy with classes (554K)
   "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.269/build/pdf.mjs",
   // ES5 (3.9M)
@@ -127,19 +127,19 @@ for (let path of await readdir(ACORN_TEST262_DIR_PATH, { recursive: true })) {
 }
 
 describe.concurrent("test262", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(test262FixturePaths)("%s", (path) => runCaseInWorker(TEST_TYPE_TEST262, path));
 });
 
 describeRangeParent.concurrent("range & parent test262", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(test262FixturePaths)("%s", (path) =>
     runCaseInWorker(TEST_TYPE_TEST262 | TEST_TYPE_RANGE_PARENT, path),
   );
 });
 
 describeTokens.concurrent("tokens test262", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(test262FixturePaths)("%s", (path) =>
     runCaseInWorker(TEST_TYPE_TEST262 | TEST_TYPE_TOKENS, path),
   );
@@ -147,7 +147,7 @@ describeTokens.concurrent("tokens test262", () => {
 
 // Check lazy deserialization doesn't throw
 describeLazy.concurrent("lazy test262", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(test262FixturePaths)("%s", (path) =>
     runCaseInWorker(TEST_TYPE_TEST262 | TEST_TYPE_LAZY, path),
   );
@@ -163,25 +163,25 @@ const jsxFixturePaths = (await readdir(JSX_DIR_PATH, { recursive: true })).filte
 );
 
 describe.concurrent("JSX", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(jsxFixturePaths)("%s", (filename) => runCaseInWorker(TEST_TYPE_JSX, filename));
 });
 
 describeRangeParent.concurrent("range & parent JSX", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(jsxFixturePaths)("%s", (filename) =>
     runCaseInWorker(TEST_TYPE_JSX | TEST_TYPE_RANGE_PARENT, filename),
   );
 });
 
 describeTokens.concurrent("tokens JSX", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(jsxFixturePaths)("%s", (path) => runCaseInWorker(TEST_TYPE_JSX | TEST_TYPE_TOKENS, path));
 });
 
 // Check lazy deserialization doesn't throw
 describeLazy.concurrent("lazy JSX", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(jsxFixturePaths)("%s", (filename) =>
     runCaseInWorker(TEST_TYPE_JSX | TEST_TYPE_LAZY, filename),
   );
@@ -201,25 +201,25 @@ const tsFixturePaths = (await readdir(TS_ESTREE_DIR_PATH, { recursive: true })).
 );
 
 describe.concurrent("TypeScript", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(tsFixturePaths)("%s", (path) => runCaseInWorker(TEST_TYPE_TS, path));
 });
 
 describeRangeParent.concurrent("range & parent TypeScript", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(tsFixturePaths)("%s", (path) =>
     runCaseInWorker(TEST_TYPE_TS | TEST_TYPE_RANGE_PARENT, path),
   );
 });
 
 describeTokens.concurrent("tokens TypeScript", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(tsFixturePaths)("%s", (path) => runCaseInWorker(TEST_TYPE_TS | TEST_TYPE_TOKENS, path));
 });
 
 // Check lazy deserialization doesn't throw
 describeLazy.concurrent("lazy TypeScript", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(tsFixturePaths)("%s", (path) => runCaseInWorker(TEST_TYPE_TS | TEST_TYPE_LAZY, path));
 });
 
@@ -243,9 +243,9 @@ describe.concurrent("edge cases", () => {
     "#!/usr/bin/env node\nlet x;",
     "#!/usr/bin/env node\nlet x;\n// foo",
   ])("%s", (sourceText) => {
-    // oxlint-disable-next-line jest/expect-expect
+    // goatlint-disable-next-line jest/expect-expect
     it("JS", () => runCaseInWorker(TEST_TYPE_INLINE_FIXTURE, { filename: "dummy.js", sourceText }));
-    // oxlint-disable-next-line jest/expect-expect
+    // goatlint-disable-next-line jest/expect-expect
     it("TS", () => runCaseInWorker(TEST_TYPE_INLINE_FIXTURE, { filename: "dummy.ts", sourceText }));
 
     itRangeParent("JS range & parent", () =>
@@ -278,12 +278,12 @@ describe.concurrent("edge cases", () => {
 
 // Test raw transfer output matches standard (via JSON) output for some large files
 describe.concurrent("fixtures", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(benchFixturePaths)("%s", (path) => runCaseInWorker(TEST_TYPE_FIXTURE, path));
 });
 
 describeRangeParent.concurrent("range & parent fixtures", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(benchFixturePaths)("%s", (path) =>
     runCaseInWorker(TEST_TYPE_FIXTURE | TEST_TYPE_RANGE_PARENT, path),
   );
@@ -291,7 +291,7 @@ describeRangeParent.concurrent("range & parent fixtures", () => {
 
 // Check lazy deserialization doesn't throw
 describeLazy.concurrent("lazy fixtures", () => {
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it.each(benchFixturePaths)("%s", (path) =>
     runCaseInWorker(TEST_TYPE_FIXTURE | TEST_TYPE_LAZY, path),
   );
@@ -322,7 +322,7 @@ describe.concurrent("`parse`", () => {
     expect(programRaw).toEqual(programStandard);
   });
 
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it("processes multiple files", async () => {
     await testMultiple(4);
   });
@@ -330,7 +330,7 @@ describe.concurrent("`parse`", () => {
   // This is primarily testing the queuing mechanism.
   // At least on Mac OS, this test does not cause out-of-memory without the queue implemented,
   // but the test doesn't complete in a reasonable time (I gave up waiting after 20 minutes).
-  // oxlint-disable-next-line jest/expect-expect
+  // goatlint-disable-next-line jest/expect-expect
   it("does not exhaust memory when called huge number of times in succession", async () => {
     await testMultiple(10_000);
   });

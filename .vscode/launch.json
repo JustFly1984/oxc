@@ -10,9 +10,9 @@
         "env": {
           "RUSTFLAGS": "-g"
         },
-        "args": ["build", "--bin=oxlint", "--package=oxlint"],
+        "args": ["build", "--bin=goatlint", "--package=goatlint"],
         "filter": {
-          "name": "oxlint",
+          "name": "goatlint",
           "kind": "bin"
         }
       }

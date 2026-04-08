@@ -83,7 +83,7 @@
 //!
 //! ## Other notes
 //!
-//! See also: <https://github.com/oxc-project/oxc/issues/4790>
+//! See also: <https://github.com/goat-project/oxc/issues/4790>
 
 use std::{
     cell::Cell,
@@ -94,13 +94,13 @@ use std::{
 use indexmap::IndexMap;
 use rustc_hash::FxBuildHasher;
 
-use oxc_allocator::{Allocator, CloneIn};
-use oxc_ast::ast::*;
-use oxc_ast_visit::{Visit, walk};
-use oxc_diagnostics::OxcDiagnostic;
-use oxc_semantic::{Scoping, SemanticBuilder};
-use oxc_span::CompactStr;
-use oxc_syntax::{
+use goat_allocator::{Allocator, CloneIn};
+use goat_ast::ast::*;
+use goat_ast_visit::{Visit, walk};
+use goat_diagnostics::GoatDiagnostic;
+use goat_semantic::{Scoping, SemanticBuilder};
+use goat_span::CompactStr;
+use goat_syntax::{
     reference::{ReferenceFlags, ReferenceId},
     scope::{ScopeFlags, ScopeId},
     symbol::SymbolId,
@@ -112,7 +112,7 @@ type FxIndexMap<K, V> = IndexMap<K, V, FxBuildHasher>;
 pub fn check_semantic_after_transform(
     scoping_after_transform: &Scoping,
     program: &Program,
-) -> Option<Vec<OxcDiagnostic>> {
+) -> Option<Vec<GoatDiagnostic>> {
     let mut errors = Errors::default();
 
     let source_type = program.source_type;
@@ -163,7 +163,7 @@ pub fn check_semantic_after_transform(
 }
 
 /// Check all AST nodes have scope, symbol and reference IDs
-pub fn check_semantic_ids(program: &Program) -> Option<Vec<OxcDiagnostic>> {
+pub fn check_semantic_ids(program: &Program) -> Option<Vec<GoatDiagnostic>> {
     let mut errors = Errors::default();
     SemanticIdsCollector::new(&mut errors).collect(program);
     errors.get()
@@ -261,12 +261,12 @@ impl<T: Copy> Copy for Pair<T> {}
 
 /// Errors collection
 #[derive(Default)]
-struct Errors(Vec<OxcDiagnostic>);
+struct Errors(Vec<GoatDiagnostic>);
 
 impl Errors {
     /// Add an error string
     fn push<S: AsRef<str>>(&mut self, message: S) {
-        self.0.push(OxcDiagnostic::error(message.as_ref().trim().to_string()));
+        self.0.push(GoatDiagnostic::error(message.as_ref().trim().to_string()));
     }
 
     /// Add an error for a mismatch between a pair of values, with IDs
@@ -310,7 +310,7 @@ rebuilt        : {value_rebuilt}
     }
 
     /// Get errors
-    fn get(self) -> Option<Vec<OxcDiagnostic>> {
+    fn get(self) -> Option<Vec<GoatDiagnostic>> {
         if self.0.is_empty() { None } else { Some(self.0) }
     }
 }

@@ -1,7 +1,7 @@
-use oxc_allocator::Allocator;
+use goat_allocator::Allocator;
 use oxc_benchmark::{BenchmarkId, Criterion, black_box, criterion_group, criterion_main};
-use oxc_parser::Parser;
-use oxc_semantic::SemanticBuilder;
+use goat_parser::Parser;
+use goat_semantic::SemanticBuilder;
 use oxc_tasks_common::TestFiles;
 
 fn bench_semantic(criterion: &mut Criterion) {

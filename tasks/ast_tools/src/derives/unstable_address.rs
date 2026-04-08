@@ -18,12 +18,12 @@ impl Derive for DeriveUnstableAddress {
     }
 
     fn crate_name(&self) -> &'static str {
-        "oxc_allocator"
+        "goat_allocator"
     }
 
     fn prelude(&self) -> TokenStream {
         quote! {
-            use oxc_allocator::UnstableAddress;
+            use goat_allocator::UnstableAddress;
         }
     }
 

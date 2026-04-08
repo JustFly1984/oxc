@@ -115,7 +115,7 @@ fn generate_imports() -> TokenStream {
             utils::PossibleJestNode,
             AstNode
         };
-        use oxc_semantic::AstTypesBitset;
+        use goat_semantic::AstTypesBitset;
     }
 }
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Publish an npm package only if its version is not already on the registry.
 # Usage: bash .github/scripts/publish-if-needed.sh <pkg_dir> [publish_flags...]
-# Example: bash .github/scripts/publish-if-needed.sh npm/oxlint --provenance --access public --no-git-checks
+# Example: bash .github/scripts/publish-if-needed.sh npm/goatlint --provenance --access public --no-git-checks
 
 set -euo pipefail
 

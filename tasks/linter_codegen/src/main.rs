@@ -43,7 +43,7 @@ pub fn generate_rule_runner_impls() -> io::Result<()> {
     let root = project_root::get_project_root()
         .map_err(|e| std::io::Error::other(format!("could not find project root: {e}")))?;
 
-    let rules_file_contents = fs::read_to_string(root.join("crates/oxc_linter/src/rules.rs"))?;
+    let rules_file_contents = fs::read_to_string(root.join("crates/goat_linter/src/rules.rs"))?;
     let rule_entries = get_all_rules(&rules_file_contents);
 
     let member_expression_kinds =
@@ -54,10 +54,10 @@ pub fn generate_rule_runner_impls() -> io::Result<()> {
 
     let mut out = String::new();
     out.push_str("// Auto-generated code, DO NOT EDIT DIRECTLY!\n");
-    out.push_str("// To regenerate: `cargo run -p oxc_linter_codegen`\n\n");
+    out.push_str("// To regenerate: `cargo run -p goat_linter_codegen`\n\n");
     out.push_str("#![allow(clippy::needless_pass_by_value)]\n\n");
-    out.push_str("use oxc_ast::AstType;\n");
-    out.push_str("use oxc_semantic::AstTypesBitset;\n\n");
+    out.push_str("use goat_ast::AstType;\n");
+    out.push_str("use goat_semantic::AstTypesBitset;\n\n");
     out.push_str("use crate::rule::{RuleRunner, RuleRunFunctionsImplemented};\n\n");
 
     for rule in &rule_entries {
@@ -112,7 +112,7 @@ impl RuleRunner for crate::rules::{plugin_module}::{rule_module}::{rule_struct} 
 
     let formatted_out = rust_fmt(&out);
 
-    let target_path = root.join("crates/oxc_linter/src/generated/rule_runner_impls.rs");
+    let target_path = root.join("crates/goat_linter/src/generated/rule_runner_impls.rs");
     fs::write(&target_path, formatted_out)?;
     println!("Generated {} impls into {}", rule_entries.len(), target_path.display());
 
@@ -127,13 +127,13 @@ pub fn generate_rules_enum_file() -> io::Result<()> {
     let root = project_root::get_project_root()
         .map_err(|e| std::io::Error::other(format!("could not find project root: {e}")))?;
 
-    let rules_file_contents = fs::read_to_string(root.join("crates/oxc_linter/src/rules.rs"))?;
+    let rules_file_contents = fs::read_to_string(root.join("crates/goat_linter/src/rules.rs"))?;
     let rule_entries = get_all_rules(&rules_file_contents);
 
     let out = rules_enum::generate_rules_enum(&rule_entries);
     let formatted_out = rust_fmt(&out);
 
-    let target_path = root.join("crates/oxc_linter/src/generated/rules_enum.rs");
+    let target_path = root.join("crates/goat_linter/src/generated/rules_enum.rs");
     fs::write(&target_path, &formatted_out)?;
     println!(
         "Generated RuleEnum with {} variants into {}",

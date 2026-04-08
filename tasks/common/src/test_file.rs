@@ -1,6 +1,6 @@
 use std::fmt;
 
-use oxc_span::SourceType;
+use goat_span::SourceType;
 
 use crate::{project_root, request::agent};
 
@@ -38,7 +38,7 @@ impl TestFiles {
         Self {
             files: [
                 // Small JSX (61L / 2.46KB)
-                "https://cdn.jsdelivr.net/gh/oxc-project/benchmark-files@main/RadixUIAdoptionSection.jsx",
+                "https://cdn.jsdelivr.net/gh/goat-project/benchmark-files@main/RadixUIAdoptionSection.jsx",
                 // Small TS (191L / 8.23KB)
                 "https://cdn.jsdelivr.net/gh/vuejs/core@v3.5.24/packages/compiler-core/src/errors.ts",
                 // Medium TSX (389L / 11.7KB)
@@ -62,9 +62,9 @@ impl TestFiles {
     pub fn minimal() -> Self {
         Self {
             files: [
-                "https://cdn.jsdelivr.net/gh/oxc-project/benchmark-files@main/RadixUIAdoptionSection.jsx",
+                "https://cdn.jsdelivr.net/gh/goat-project/benchmark-files@main/RadixUIAdoptionSection.jsx",
                 "https://cdn.jsdelivr.net/npm/react@17.0.2/cjs/react.development.js",
-                "https://cdn.jsdelivr.net/gh/oxc-project/benchmark-files@main/cal.com.tsx",
+                "https://cdn.jsdelivr.net/gh/goat-project/benchmark-files@main/cal.com.tsx",
                 "https://cdn.jsdelivr.net/gh/microsoft/TypeScript@v5.3.3/src/compiler/binder.ts",
             ].into_iter().map(TestFile::new).collect(),
         }
@@ -76,9 +76,9 @@ impl TestFiles {
                 // TypeScript syntax (2.81MB)
                 "https://cdn.jsdelivr.net/gh/microsoft/TypeScript@v5.3.3/src/compiler/checker.ts",
                 // Real world app tsx (1.0M)
-                "https://cdn.jsdelivr.net/gh/oxc-project/benchmark-files@main/cal.com.tsx",
+                "https://cdn.jsdelivr.net/gh/goat-project/benchmark-files@main/cal.com.tsx",
                 // Real world content-heavy app jsx (3K)
-                "https://cdn.jsdelivr.net/gh/oxc-project/benchmark-files@main/RadixUIAdoptionSection.jsx",
+                "https://cdn.jsdelivr.net/gh/goat-project/benchmark-files@main/RadixUIAdoptionSection.jsx",
                 // Heavy with classes (554K)
                 "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.269/build/pdf.mjs",
                 // ES5 (6.7M)

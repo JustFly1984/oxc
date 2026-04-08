@@ -81,8 +81,8 @@ impl Generator for AstBuilderGenerator {
             use std::cell::Cell;
 
             ///@@line_break
-            use oxc_allocator::{Allocator, Box, IntoIn, Vec};
-            use oxc_syntax::{
+            use goat_allocator::{Allocator, Box, IntoIn, Vec};
+            use goat_syntax::{
                 comment_node::CommentNodeId,
                 node::NodeId,
                 scope::ScopeId,
@@ -91,7 +91,7 @@ impl Generator for AstBuilderGenerator {
             };
 
             ///@@line_break
-            use oxc_span::{Ident, Str};
+            use goat_span::{Ident, Str};
 
             ///@@line_break
             use crate::{AstBuilder, ast::*};

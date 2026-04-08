@@ -2,7 +2,7 @@
 
 Oxc is a high-performance JavaScript/TypeScript toolchain written in Rust containing:
 
-- Parser (JS/TS with AST), Linter (oxlint), Formatter (oxfmt), Transformer, Minifier
+- Parser (JS/TS with AST), Linter (goatlint), Formatter (goatfmt), Transformer, Minifier
 
 ## AI Usage Policy for Contributors
 
@@ -19,8 +19,8 @@ All AI-generated code must be thoroughly reviewed, tested, and understood by the
 Rust workspace with key directories:
 
 - `crates/` - Core functionality (start here when exploring)
-- `apps/` - Application binaries (oxlint, oxfmt)
-  - When working on `oxfmt`, refer to `./apps/oxfmt/AGENTS.md`
+- `apps/` - Application binaries (goatlint, goatfmt)
+  - When working on `goatfmt`, refer to `./apps/goatfmt/AGENTS.md`
 - `napi/` - Node.js bindings
 - `npm/` - npm packages
 - `tasks/` - Development tools/automation
@@ -30,19 +30,19 @@ Avoid editing `generated` subdirectories.
 
 ### Core Crates
 
-- `oxc_parser` - JS/TS parser
-- `oxc_ast` - AST definitions/utilities
-- `oxc_semantic` - Semantic analysis/symbols/scopes
-- `oxc_linter` - Linting engine/rules
-- `oxc_formatter` - Code formatting (Prettier-like)
-- `oxc_transformer` - Code transformation (Babel-like)
-- `oxc_minifier` - Code minification
-- `oxc_codegen` - Code generation
-- `oxc_isolated_declarations` - TypeScript declaration generation
-- `oxc_diagnostics` - Error reporting
-- `oxc_traverse` - AST traversal utilities
-- `oxc_allocator` - Memory management
-- `oxc_language_server` - LSP server for editor integration
+- `goat_parser` - JS/TS parser
+- `goat_ast` - AST definitions/utilities
+- `goat_semantic` - Semantic analysis/symbols/scopes
+- `goat_linter` - Linting engine/rules
+- `goat_formatter` - Code formatting (Prettier-like)
+- `goat_transformer` - Code transformation (Babel-like)
+- `goat_minifier` - Code minification
+- `goat_codegen` - Code generation
+- `goat_isolated_declarations` - TypeScript declaration generation
+- `goat_diagnostics` - Error reporting
+- `goat_traverse` - AST traversal utilities
+- `goat_allocator` - Memory management
+- `goat_language_server` - LSP server for editor integration
 - `oxc` - Main crate
 
 ## Development Commands
@@ -65,9 +65,9 @@ just conformance  # Run conformance tests
 just ready        # Run all checks (use after commits)
 cargo lintgen     # Regenerate linter rules enum and impls after adding/modifying rules
 # Crate-specific updates
-just ast          # Update generated files (oxc_ast changes)
-just minsize      # Update size snapshots (oxc_minifier changes)
-just allocs       # Update allocation snapshots (oxc_parser changes)
+just ast          # Update generated files (goat_ast changes)
+just minsize      # Update size snapshots (goat_minifier changes)
+just allocs       # Update allocation snapshots (goat_parser changes)
 
 # Useful shortcuts
 just watch "command"  # Watch files and re-run command
@@ -84,9 +84,9 @@ Run crate examples for quick testing and debugging:
 cargo run -p <crate_name> --example <example_name> -- [args]
 
 # Common examples:
-cargo run -p oxc_parser --example parser -- test.js
-cargo run -p oxc_linter --example linter -- src/
-cargo run -p oxc_transformer --example transformer -- input.js
+cargo run -p goat_parser --example parser -- test.js
+cargo run -p goat_linter --example linter -- src/
+cargo run -p goat_transformer --example transformer -- input.js
 cargo run -p oxc --example compiler --features="full" -- test.js
 ```
 
@@ -96,16 +96,16 @@ Modify examples in `crates/<crate_name>/examples/` to test specific scenarios.
 
 ### Key Locations
 
-- AST: Start with `oxc_ast`, use `oxc_ast_visit` for traversal
-- Linting rules: `crates/oxc_linter/src/rules/` (visitor pattern)
-- Parser: `crates/oxc_parser/src/lib.rs`, lexer in `src/lexer/`
+- AST: Start with `goat_ast`, use `goat_ast_visit` for traversal
+- Linting rules: `crates/goat_linter/src/rules/` (visitor pattern)
+- Parser: `crates/goat_parser/src/lib.rs`, lexer in `src/lexer/`
 - Tests: Co-located with source, integration in `tests/`, uses `insta` for snapshots
 
 ### Conventions
 
-- Use `oxc_allocator` for memory management
+- Use `goat_allocator` for memory management
 - Follow rustfmt config in `.rustfmt.toml`
-- Use `oxc_diagnostics` for errors with source locations
+- Use `goat_diagnostics` for errors with source locations
 - Performance-critical: avoid unnecessary allocations
 
 ## Common Tasks
@@ -121,7 +121,7 @@ Modify examples in `crates/<crate_name>/examples/` to test specific scenarios.
 ### Parser Changes
 
 1. Research and test grammar changes thoroughly
-2. Update AST definitions in `oxc_ast` if needed
+2. Update AST definitions in `goat_ast` if needed
 3. Ensure existing tests pass
 4. Add tests for new features
 
@@ -161,14 +161,14 @@ pnpm test                                    # Test all Node.js bindings
 
 Each crate follows distinct testing patterns:
 
-#### oxc_parser
+#### goat_parser
 
 - **Conformance only** via `tasks/coverage`
 - **Command**: `cargo coverage -- parser`
 - **Suites**: Test262, Babel, TypeScript
 - **Special**: `just allocs` for allocation tracking
 
-#### oxc_linter
+#### goat_linter
 
 - **Inline tests** in rule files (`src/rules/**/*.rs`)
 - **Pattern**: Use `Tester` helper with pass/fail cases
@@ -181,14 +181,14 @@ fn test() {
 }
 ```
 
-#### oxc_formatter
+#### goat_formatter
 
 - **Prettier conformance** only (no unit tests)
 - **Command**: `cargo run -p oxc_prettier_conformance`
 - **Debug**: Add `-- --filter <name>`
 - Compares output with Prettier's snapshots
 
-#### oxc_minifier
+#### goat_minifier
 
 - **Unit tests** in `tests/` subdirectories:
   - `ecmascript/` - Operations
@@ -196,7 +196,7 @@ fn test() {
   - `mangler/` - Name mangling
 - **Size tracking**: `just minsize`
 
-#### oxc_transformer
+#### goat_transformer
 
 - **Multiple approaches**:
   - Unit tests: `tests/integrations/`
@@ -205,40 +205,40 @@ fn test() {
 - **Commands**:
 
 ```bash
-cargo test -p oxc_transformer                    # Unit tests
+cargo test -p goat_transformer                    # Unit tests
 cargo run -p oxc_transform_conformance          # Conformance
 just test-transform --filter <path>             # Filter tests
 ```
 
-#### oxc_codegen
+#### goat_codegen
 
 - **Integration tests** in `tests/integration/`
 - Test files: `js.rs`, `ts.rs`, `sourcemap.rs`, `comments.rs`
 
-#### oxc_isolated_declarations
+#### goat_isolated_declarations
 
 - **Snapshot testing** with `insta`
 - Input: `tests/fixtures/*.{ts,tsx}`
 - Output: `tests/snapshots/*.snap`
 - Update: `cargo insta review`
 
-#### oxc_semantic
+#### goat_semantic
 
 - **Multiple testing approaches**:
   - **Conformance tests** (`tests/conformance/`) - Contract-as-code tests for symbols and identifier references
   - **Integration tests** (`tests/integration/`) - Tests for scopes, symbols, modules, classes, CFG
   - **Snapshot tests** (`tests/main.rs`) - Verifies scoping data correctness (scope trees, bindings, symbols, references) using `insta` snapshots from `fixtures/`
   - **Coverage tests** - Via `tasks/coverage` using Test262, Babel, TypeScript suites
-- **Command**: `cargo test -p oxc_semantic`
+- **Command**: `cargo test -p goat_semantic`
 - **Update snapshots**: `cargo insta review`
 
 #### Other Crates
 
-- **oxc_traverse**: AST traversal - `cargo test -p oxc_traverse`
-- **oxc_ecmascript**: ECMAScript operations - `cargo test -p oxc_ecmascript`
-- **oxc_regular_expression**: Regex parsing - `cargo test -p oxc_regular_expression`
-- **oxc_syntax**: Syntax utilities - `cargo test -p oxc_syntax`
-- **oxc_language_server**: Editor integration - `cargo test -p oxc_language_server`
+- **goat_traverse**: AST traversal - `cargo test -p goat_traverse`
+- **goat_ecmascript**: ECMAScript operations - `cargo test -p goat_ecmascript`
+- **goat_regular_expression**: Regex parsing - `cargo test -p goat_regular_expression`
+- **goat_syntax**: Syntax utilities - `cargo test -p goat_syntax`
+- **goat_language_server**: Editor integration - `cargo test -p goat_language_server`
 
 ### Conformance Testing Foundation
 
@@ -321,4 +321,4 @@ Tests are TypeScript files in each package's `test/` directory.
 
 ---
 
-For human contributors see `CONTRIBUTING.md` and [oxc.rs](https://oxc.rs/docs/contribute/introduction.html)
+For human contributors see `CONTRIBUTING.md` and [goatlint.dev](https://goatlint.dev/docs/contribute/introduction.html)

@@ -500,7 +500,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - b8414db napi/transform: Support enabling `removeClassFieldsWithoutInitializer` (#10581) (Dunqing)
 - 42ca96a transformer, napi/transform: Deprecate `allowDeclareFields` option (#10584) (Dunqing)
 - 6bff64e transformer/typescript: Support `removeClassFieldsWithoutInitializer` option (#10576) (Dunqing)
-- 1962bc6 transformer_plugins: Split out `oxc_transformer_plugins` crate (#10617) (Boshen)
+- 1962bc6 transformer_plugins: Split out `goat_transformer_plugins` crate (#10617) (Boshen)
 
 ### Documentation
 
@@ -513,7 +513,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - b8414db napi/transform: Support enabling `removeClassFieldsWithoutInitializer` (#10581) (Dunqing)
 - 42ca96a transformer, napi/transform: Deprecate `allowDeclareFields` option (#10584) (Dunqing)
 - 6bff64e transformer/typescript: Support `removeClassFieldsWithoutInitializer` option (#10576) (Dunqing)
-- 1962bc6 transformer_plugins: Split out `oxc_transformer_plugins` crate (#10617) (Boshen)
+- 1962bc6 transformer_plugins: Split out `goat_transformer_plugins` crate (#10617) (Boshen)
 
 ### Documentation
 
@@ -572,7 +572,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Refactor
 
-- 961b95d napi: Move common code to `oxc_napi` (#9875) (Boshen)
+- 961b95d napi: Move common code to `goat_napi` (#9875) (Boshen)
 
 ### Testing
 
@@ -587,7 +587,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Refactor
 
-- 961b95d napi: Move common code to `oxc_napi` (#9875) (Boshen)
+- 961b95d napi: Move common code to `goat_napi` (#9875) (Boshen)
 
 ### Testing
 
@@ -687,7 +687,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Features
 
-- fef82ff transformer/helper-loader: Replace `@babel/runtime` with `@oxc-project/runtime` (#9059) (Dunqing)
+- fef82ff transformer/helper-loader: Replace `@babel/runtime` with `@goat-project/runtime` (#9059) (Dunqing)
 
 ## [0.49.0] - 2025-02-10
 
@@ -742,7 +742,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Bug Fixes
 
-- 245d7d9 oxc_transformer: Alias `es2015` to `es6` (#7673) (Kevin Deng 三咲智子)
+- 245d7d9 goat_transformer: Alias `es2015` to `es6` (#7673) (Kevin Deng 三咲智子)
 
 ### Testing
 
@@ -753,8 +753,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Features
 
 - 5864352 napi/transform: Add `TransformerOptions::assumptions` (#7601) (翠 / green)
-- 771c698 oxc: Remove `oxc_napi` crate (#7634) (Boshen)
-- bd977cf oxc: Add `oxc_napi` crate (#7612) (Boshen)
+- 771c698 oxc: Remove `goat_napi` crate (#7634) (Boshen)
+- bd977cf oxc: Add `goat_napi` crate (#7612) (Boshen)
 
 ### Bug Fixes
 
@@ -762,11 +762,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Refactor
 
-- b4f3812 oxc_napi: Remove `source_map` - moved to its crate (#7614) (Boshen)
+- b4f3812 goat_napi: Remove `source_map` - moved to its crate (#7614) (Boshen)
 
 ## [0.38.0] - 2024-11-26
 
-- bb2c0c2 transformer: [**BREAKING**] Return `String` as error instead of OxcDiagnostic (#7424) (Boshen)
+- bb2c0c2 transformer: [**BREAKING**] Return `String` as error instead of GoatDiagnostic (#7424) (Boshen)
 
 ### Features
 

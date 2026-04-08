@@ -6,19 +6,19 @@
     "babel",
     "javascript",
     "jsx",
-    "oxc",
+    "goat",
     "transform",
     "transformer",
     "tsx",
     "typescript"
   ],
-  "homepage": "https://oxc.rs/docs/guide/usage/transformer",
-  "bugs": "https://github.com/oxc-project/oxc/issues",
+  "homepage": "https://goatlint.dev/docs/guide/usage/transformer",
+  "bugs": "https://github.com/goat-project/oxc/issues",
   "license": "MIT",
   "author": "Boshen and oxc contributors",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oxc-project/oxc.git",
+    "url": "git+https://github.com/goat-project/oxc.git",
     "directory": "napi/transform"
   },
   "funding": {

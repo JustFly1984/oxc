@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(package-json-require-type): package.json should declare a `type` field.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:1]
+ 1 │ {"name":"demo"}
+   · ─
+   ╰────
+  help: Add `"type": "module"` or `"type": "commonjs"` to package.json.
+
+  ⚠ goat(package-json-require-type): package.json should declare a `type` field.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:1]
+ 1 │ {"version":"1.0.0"}
+   · ─
+   ╰────
+  help: Add `"type": "module"` or `"type": "commonjs"` to package.json.

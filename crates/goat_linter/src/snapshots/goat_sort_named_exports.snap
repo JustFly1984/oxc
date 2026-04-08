@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(sort-named-exports): Named export specifiers should be sorted alphabetically.
+   ╭─[sort_named_exports.tsx:1:13]
+ 1 │ export { z, a, m };
+   ·             ─
+   ╰────
+  help: Replace `export { z, a, m };` with `export { a, m, z }`.
+
+  ⚠ goat(sort-named-exports): Named export specifiers should be sorted alphabetically.
+   ╭─[sort_named_exports.tsx:1:13]
+ 1 │ export { b, a };
+   ·             ─
+   ╰────
+  help: Replace `export { b, a };` with `export { a, b }`.

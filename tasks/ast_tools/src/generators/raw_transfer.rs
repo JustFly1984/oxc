@@ -8,15 +8,15 @@ use proc_macro2::TokenStream;
 use quote::quote;
 use rustc_hash::FxHashSet;
 
-use oxc_allocator::Allocator;
-use oxc_ast::{
+use goat_allocator::Allocator;
+use goat_ast::{
     AstBuilder,
     ast::{
         Expression, LogicalOperator, ObjectExpression, ObjectPropertyKind, Program, PropertyKind,
     },
 };
-use oxc_ast_visit::{VisitMut, walk_mut};
-use oxc_span::SPAN;
+use goat_ast_visit::{VisitMut, walk_mut};
+use goat_span::SPAN;
 
 use crate::{
     ALLOCATOR_CRATE_PATH, Generator, NAPI_PARSER_PACKAGE_PATH, OXLINT_APP_PATH,
@@ -43,7 +43,7 @@ const STR_LEN_OFFSET: u32 = 8;
 const MALLOC_RESERVED_SIZE: u32 = 16;
 
 /// Size of `ChunkFooter` struct.
-/// Code in `oxc_allocator` crate checks that this is correct.
+/// Code in `goat_allocator` crate checks that this is correct.
 const CHUNK_FOOTER_SIZE: u32 = 48;
 
 /// Minimum alignment requirement for end of `Allocator`'s chunk
@@ -259,7 +259,7 @@ fn generate_deserializers(
     // Type definition for deserialize variants (parser)
     #[rustfmt::skip]
     let code_type_definition_parser = "
-        import type * as ESTree from '@oxc-project/types';
+        import type * as ESTree from '@goat-project/types';
 
         type BufferWithArrays = Uint8Array & {
             int32: Int32Array;

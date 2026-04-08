@@ -9,7 +9,7 @@ use oxc::{
     semantic::SemanticBuilder,
     span::SourceType,
 };
-use oxc_napi::{Comment, OxcError, convert_utf8_to_utf16, get_source_type};
+use goat_napi::{Comment, OxcError, convert_utf8_to_utf16, get_source_type};
 
 mod convert;
 mod types;

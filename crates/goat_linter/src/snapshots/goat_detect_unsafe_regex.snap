@@ -1,0 +1,31 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(detect-unsafe-regex): Unsafe regular expression: potential ReDoS vulnerability
+   ╭─[detect_unsafe_regex.tsx:1:12]
+ 1 │ const re = /(a+)+$/
+   ·            ────────
+   ╰────
+  help: Avoid regular expressions with nested quantifiers or overlapping alternations that can cause catastrophic backtracking. Simplify the regex or use a linear-time regex engine.
+
+  ⚠ goat(detect-unsafe-regex): Unsafe regular expression: potential ReDoS vulnerability
+   ╭─[detect_unsafe_regex.tsx:1:12]
+ 1 │ const re = /([a-zA-Z]+)*$/
+   ·            ───────────────
+   ╰────
+  help: Avoid regular expressions with nested quantifiers or overlapping alternations that can cause catastrophic backtracking. Simplify the regex or use a linear-time regex engine.
+
+  ⚠ goat(detect-unsafe-regex): Unsafe regular expression: potential ReDoS vulnerability
+   ╭─[detect_unsafe_regex.tsx:1:12]
+ 1 │ const re = /(a+){2,}/
+   ·            ──────────
+   ╰────
+  help: Avoid regular expressions with nested quantifiers or overlapping alternations that can cause catastrophic backtracking. Simplify the regex or use a linear-time regex engine.
+
+  ⚠ goat(detect-unsafe-regex): Unsafe regular expression: potential ReDoS vulnerability
+   ╭─[detect_unsafe_regex.tsx:1:12]
+ 1 │ const re = new RegExp("(a+)+$")
+   ·            ────────────────────
+   ╰────
+  help: Avoid regular expressions with nested quantifiers or overlapping alternations that can cause catastrophic backtracking. Simplify the regex or use a linear-time regex engine.

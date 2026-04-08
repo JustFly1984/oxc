@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(no-nested-components): Component definition inside another component
+   ╭─[no_nested_components.tsx:1:39]
+ 1 │ function ParentComponent() { function ChildComponent() { return <div />; } return <ChildComponent />; }
+   ·                                       ──────────────
+   ╰────
+  help: Move the component definition outside of the parent component. Nested component definitions cause the component to be recreated on every render, destroying its state.
+
+  ⚠ goat(no-nested-components): Component definition inside another component
+   ╭─[no_nested_components.tsx:1:36]
+ 1 │ function ParentComponent() { const ChildComponent = () => <div />; return <ChildComponent />; }
+   ·                                    ──────────────
+   ╰────
+  help: Move the component definition outside of the parent component. Nested component definitions cause the component to be recreated on every render, destroying its state.

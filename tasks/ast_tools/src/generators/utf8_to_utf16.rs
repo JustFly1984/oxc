@@ -42,7 +42,7 @@ impl Generator for Utf8ToUtf16ConverterGenerator {
 /// * `FormalParameters` where span can include a `TSThisParameter` which is visited before it.
 /// * `TSGlobalDeclaration` which has a separate `Span` for `global` keyword.
 ///
-/// Delegate to the custom visitors for these types in `oxc_ast_visit/src/utf8_to_utf16/visit.rs`,
+/// Delegate to the custom visitors for these types in `goat_ast_visit/src/utf8_to_utf16/visit.rs`,
 /// which ensure `convert_offset` is always called with offsets in ascending order.
 fn generate(schema: &Schema, codegen: &Codegen) -> TokenStream {
     let estree_derive_id = codegen.get_derive_id_by_name("ESTree");
@@ -74,8 +74,8 @@ fn generate(schema: &Schema, codegen: &Codegen) -> TokenStream {
             return None;
         }
 
-        // Skip types in `oxc_syntax` and `napi/parser` crates. They don't appear in ESTree AST.
-        if matches!(struct_def.file(schema).krate(), "oxc_syntax" | "napi/parser") {
+        // Skip types in `goat_syntax` and `napi/parser` crates. They don't appear in ESTree AST.
+        if matches!(struct_def.file(schema).krate(), "goat_syntax" | "napi/parser") {
             return None;
         }
 
@@ -85,8 +85,8 @@ fn generate(schema: &Schema, codegen: &Codegen) -> TokenStream {
     });
 
     quote! {
-        use oxc_ast::ast::*;
-        use oxc_syntax::scope::ScopeFlags;
+        use goat_ast::ast::*;
+        use goat_syntax::scope::ScopeFlags;
 
         ///@@line_break
         use crate::{

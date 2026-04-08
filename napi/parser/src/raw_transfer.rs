@@ -15,8 +15,8 @@ use oxc::{
     ast_visit::utf8_to_utf16::Utf8ToUtf16,
     semantic::SemanticBuilder,
 };
-use oxc_estree_tokens::{ESTreeTokenOptions, update_tokens};
-use oxc_napi::get_source_type;
+use goat_estree_tokens::{ESTreeTokenOptions, update_tokens};
+use goat_napi::get_source_type;
 
 use crate::{
     AstType, ParserOptions, get_ast_type, parse_impl,

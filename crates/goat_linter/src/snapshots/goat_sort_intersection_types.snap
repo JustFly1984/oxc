@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(sort-intersection-types): Intersection types should be sorted alphabetically.
+   ╭─[sort_intersection_types.ts:1:10]
+ 1 │ type T = C & A & B;
+   ·          ─
+   ╰────
+  help: Replace `C & A & B` with `A & B & C`.
+
+  ⚠ goat(sort-intersection-types): Intersection types should be sorted alphabetically.
+   ╭─[sort_intersection_types.ts:1:10]
+ 1 │ type T = Z & A;
+   ·          ─
+   ╰────
+  help: Replace `Z & A` with `A & Z`.

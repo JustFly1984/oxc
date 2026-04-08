@@ -1,5 +1,5 @@
 //! Create documentation pages for each rule. Pages are printed as Markdown and
-//! get added to the oxc.rs website.
+//! get added to the goatlint.dev website.
 //! You can test/run this task with `just website ../website`,
 //! assuming you have cloned the oxc website repo next to the oxc repo.
 
@@ -9,7 +9,7 @@ use std::{
 };
 
 use itertools::Itertools;
-use oxc_linter::{LintPlugins, table::RuleTableRow};
+use goat_linter::{LintPlugins, table::RuleTableRow};
 use schemars::{
     JsonSchema, SchemaGenerator,
     schema::{InstanceType, Schema, SchemaObject, SingleOrVec},
@@ -228,7 +228,7 @@ const source = `{}`;{}
 fn rule_source(rule: &RuleTableRow) -> String {
     use project_root::get_project_root;
     use std::sync::OnceLock;
-    const LINT_RULES_DIR: &str = "crates/oxc_linter/src/rules";
+    const LINT_RULES_DIR: &str = "crates/goat_linter/src/rules";
     static ROOT: OnceLock<PathBuf> = OnceLock::new();
     let root = ROOT.get_or_init(|| get_project_root().unwrap());
 
@@ -242,7 +242,7 @@ fn rule_source(rule: &RuleTableRow) -> String {
     }
 
     format!(
-        "https://github.com/oxc-project/oxc/blob/${{ data }}/crates/oxc_linter/src/rules/{rule_path}"
+        "https://github.com/goat-project/oxc/blob/${{ data }}/crates/goat_linter/src/rules/{rule_path}"
     )
 }
 
@@ -253,8 +253,8 @@ fn rule_source(rule: &RuleTableRow) -> String {
 fn tsgolint_rule_source(rule: &RuleTableRow) -> String {
     let rule_name = rule.name.replace('-', "_");
     let rule_path = format!("{rule_name}/{rule_name}.go");
-    // Result: https://github.com/oxc-project/tsgolint/blob/main/internal/rules/prefer_reduce_type_parameter/prefer_reduce_type_parameter.go
-    format!("https://github.com/oxc-project/tsgolint/blob/main/internal/rules/{rule_path}")
+    // Result: https://github.com/goat-project/tsgolint/blob/main/internal/rules/prefer_reduce_type_parameter/prefer_reduce_type_parameter.go
+    format!("https://github.com/goat-project/tsgolint/blob/main/internal/rules/{rule_path}")
 }
 
 /// Returns the normalized plugin name.

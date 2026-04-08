@@ -1,4 +1,4 @@
-//! Generator for `ancestor.rs` in `oxc_traverse` crate.
+//! Generator for `ancestor.rs` in `goat_traverse` crate.
 //!
 //! Generates:
 //! * `AncestorType` enum — `#[repr(u16)]` with auto-incrementing discriminants
@@ -213,9 +213,9 @@ pub fn generate_ancestor(schema: &Schema) -> TokenStream {
         use std::{cell::Cell, marker::PhantomData, mem::offset_of};
 
         ///@@line_break
-        use oxc_allocator::{Address, Box, GetAddress, Vec};
-        use oxc_ast::ast::*;
-        use oxc_syntax::{node::NodeId, scope::ScopeId};
+        use goat_allocator::{Address, Box, GetAddress, Vec};
+        use goat_ast::ast::*;
+        use goat_syntax::{node::NodeId, scope::ScopeId};
 
         ///@@line_break
         /// Type of [`Ancestor`].
@@ -281,8 +281,8 @@ pub fn generate_ancestor(schema: &Schema) -> TokenStream {
 /// Check if a field is "visited" - i.e. its innermost type is an AST type with a visitor.
 ///
 /// This corresponds to the JS logic: `field.innerTypeName in types`.
-/// The JS scripts only consider types from `crates/oxc_ast/src/ast/{js,jsx,literal,ts}.rs`,
-/// so we filter to types in the `oxc_ast` crate with import path starting with `::ast::`.
+/// The JS scripts only consider types from `crates/goat_ast/src/ast/{js,jsx,literal,ts}.rs`,
+/// so we filter to types in the `goat_ast` crate with import path starting with `::ast::`.
 fn field_is_visited(field: &FieldDef, schema: &Schema) -> bool {
     let inner_type = field.type_def(schema).innermost_type(schema);
     if let Some(inner_type) = inner_type.as_struct_or_enum() {
@@ -292,7 +292,7 @@ fn field_is_visited(field: &FieldDef, schema: &Schema) -> bool {
     }
 }
 
-/// Check if a type is an AST type (from `oxc_ast::ast::*`) with a visitor.
+/// Check if a type is an AST type (from `goat_ast::ast::*`) with a visitor.
 pub fn is_ast_type_with_visitor(type_def: StructOrEnum<'_>, schema: &Schema) -> bool {
     match type_def {
         StructOrEnum::Struct(s) => s.visit.has_visitor() && is_ast_file(s.file(schema)),
@@ -302,7 +302,7 @@ pub fn is_ast_type_with_visitor(type_def: StructOrEnum<'_>, schema: &Schema) -> 
 
 /// Check if a file is one of the AST definition files.
 fn is_ast_file(file: &crate::schema::File) -> bool {
-    file.krate() == "oxc_ast" && file.import_path().starts_with("::ast::")
+    file.krate() == "goat_ast" && file.import_path().starts_with("::ast::")
 }
 
 /// Determine the visited fields of a struct (reusable by walk.rs).

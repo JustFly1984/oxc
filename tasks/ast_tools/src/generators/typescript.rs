@@ -29,7 +29,7 @@ impl Generator for TypescriptGenerator {
         let code = generate_ts_type_defs(schema, codegen);
 
         let standard_code = amend_standard_types(&code);
-        let oxlint_code = amend_oxlint_types(&code);
+        let goatlint_code = amend_goatlint_types(&code);
 
         vec![
             Output::Javascript {
@@ -38,7 +38,7 @@ impl Generator for TypescriptGenerator {
             },
             Output::Javascript {
                 path: format!("{OXLINT_APP_PATH}/src-js/generated/types.d.ts"),
-                code: oxlint_code,
+                code: goatlint_code,
             },
         ]
     }
@@ -462,7 +462,7 @@ fn amend_standard_types(code: &str) -> String {
 }
 
 /// Amend version of types for Oxlint.
-fn amend_oxlint_types(code: &str) -> String {
+fn amend_goatlint_types(code: &str) -> String {
     // Remove `export interface Span`, and instead import local version of same interface,
     // which includes non-optional `range` and `loc` fields.
     static SPAN_REGEX: Lazy<Regex> = lazy_regex!(r"export interface Span \{.+?\}");

@@ -1,6 +1,6 @@
 //! Generator for minifier-local traverse runtime.
 //!
-//! Generates 3 files in `oxc_minifier` crate:
+//! Generates 3 files in `goat_minifier` crate:
 //! * `traverse.rs` - `MinifierTraverse` trait with `enter_*` / `exit_*` methods.
 //! * `walk.rs` - Unsafe `walk_*` functions for AST traversal.
 //! * `ancestor.rs` - Ancestor tracking types and offset constants.

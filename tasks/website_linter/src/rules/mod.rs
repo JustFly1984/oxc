@@ -9,7 +9,7 @@ use std::{
 
 use doc_page::Context;
 use html::HtmlWriter;
-use oxc_linter::{
+use goat_linter::{
     Oxlintrc,
     table::{RuleTable, RuleTableRow},
 };
@@ -38,7 +38,7 @@ Arguments:
 ///   --rule-count /path/to/oxc/website/src/docs/guide/usage
 ///   --git-ref dc9dc03872101c15b0d02f05ce45705565665829
 /// `
-/// <https://oxc.rs/docs/guide/usage/linter/rules.html>
+/// <https://goatlint.dev/docs/guide/usage/linter/rules.html>
 #[expect(clippy::print_stdout)]
 pub fn print_rules(mut args: Arguments) {
     let pwd = PathBuf::from(env::var("PWD").unwrap());
@@ -59,7 +59,7 @@ pub fn print_rules(mut args: Arguments) {
         let rules_json_path = pwd.join(rules_json_path).canonicalize().unwrap();
 
         eprintln!("Rendering rules JSON blob...");
-        let rules_json = oxlint::get_all_rules_json();
+        let rules_json = goatlint::get_all_rules_json();
         fs::write(rules_json_path, rules_json).unwrap();
     }
 

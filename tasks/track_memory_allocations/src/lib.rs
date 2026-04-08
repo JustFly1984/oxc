@@ -6,12 +6,12 @@ use std::{
 use humansize::{DECIMAL, format_size};
 use mimalloc_safe::MiMalloc;
 
-use oxc_allocator::Allocator;
-use oxc_minifier::{CompressOptions, MangleOptions, Minifier, MinifierOptions};
-use oxc_parser::{ParseOptions, Parser};
-use oxc_semantic::SemanticBuilder;
+use goat_allocator::Allocator;
+use goat_minifier::{CompressOptions, MangleOptions, Minifier, MinifierOptions};
+use goat_parser::{ParseOptions, Parser};
+use goat_semantic::SemanticBuilder;
 use oxc_tasks_common::{TestFiles, project_root};
-use oxc_transformer::{TransformOptions, Transformer};
+use goat_transformer::{TransformOptions, Transformer};
 
 use std::alloc::{GlobalAlloc, Layout};
 use std::sync::atomic::{AtomicUsize, Ordering::SeqCst};

@@ -186,7 +186,7 @@ export interface OxcSortImportsOptions {
   /** Pattern prefixes for internal imports */
   internalPattern?: Array<string>
   /**
-   * Groups configuration matching oxfmtrc format.
+   * Groups configuration matching goatfmtrc format.
    * Each element can be a single group name string, an array of group names,
    * or a `{ newlinesBetween: bool }` marker object.
    */

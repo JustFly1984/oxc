@@ -7,12 +7,12 @@ use rustc_hash::FxHashMap;
 use oxc::{
     allocator::{Allocator, FromIn, Vec},
     ast::ast::{Comment, Program},
-    diagnostics::{LabeledSpan, NamedSource, OxcDiagnostic, Severity},
+    diagnostics::{LabeledSpan, NamedSource, GoatDiagnostic, Severity},
     span::{Span, Str, format_str},
     syntax::module_record::{DynamicImport, ExportEntry, ImportEntry, ModuleRecord, NameSpan},
 };
-use oxc_ast_macros::ast;
-use oxc_estree::ESTree;
+use goat_ast_macros::ast;
+use goat_estree::ESTree;
 
 /// The main struct containing all deserializable data in raw transfer.
 #[ast]
@@ -27,9 +27,9 @@ pub struct RawTransferData<'a> {
 
 /// Metadata written to end of buffer.
 ///
-/// Duplicated as `RawTransferMetadata2` in `crates/oxc_linter/src/lib.rs`.
+/// Duplicated as `RawTransferMetadata2` in `crates/goat_linter/src/lib.rs`.
 /// Any changes made here also need to be made there.
-/// `oxc_ast_tools` checks that the 2 copies are identical.
+/// `goat_ast_tools` checks that the 2 copies are identical.
 #[ast]
 pub struct RawTransferMetadata {
     /// Offset of `RawTransferData` within buffer.
@@ -55,7 +55,7 @@ impl RawTransferMetadata {
 // Errors.
 //
 // These types and the `From` / `FromIn` impls mirror the implementation in `types.rs`
-// and `crates/oxc_napi/src/lib.rs`.
+// and `crates/goat_napi/src/lib.rs`.
 // Only difference is that these versions of the types are arena-allocated.
 
 #[ast]
@@ -71,7 +71,7 @@ pub struct Error<'a> {
 
 impl<'a> Error<'a> {
     pub(crate) fn from_diagnostics_in(
-        diagnostics: impl IntoIterator<Item = OxcDiagnostic>,
+        diagnostics: impl IntoIterator<Item = GoatDiagnostic>,
         source_text: &str,
         filename: &str,
         allocator: &'a Allocator,
@@ -87,7 +87,7 @@ impl<'a> Error<'a> {
     }
 
     fn from_diagnostic_in(
-        diagnostic: OxcDiagnostic,
+        diagnostic: GoatDiagnostic,
         named_source: &Arc<NamedSource<String>>,
         allocator: &'a Allocator,
     ) -> Self {

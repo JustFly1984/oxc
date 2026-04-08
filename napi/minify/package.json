@@ -6,18 +6,18 @@
     "javascript",
     "minifier",
     "minify",
-    "oxc",
+    "goat",
     "terser",
     "typescript",
     "uglify"
   ],
-  "homepage": "https://oxc.rs/docs/guide/usage/minifier",
-  "bugs": "https://github.com/oxc-project/oxc/issues",
+  "homepage": "https://goatlint.dev/docs/guide/usage/minifier",
+  "bugs": "https://github.com/goat-project/oxc/issues",
   "license": "MIT",
   "author": "Boshen and oxc contributors",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oxc-project/oxc.git",
+    "url": "git+https://github.com/goat-project/oxc.git",
     "directory": "napi/minify"
   },
   "funding": {

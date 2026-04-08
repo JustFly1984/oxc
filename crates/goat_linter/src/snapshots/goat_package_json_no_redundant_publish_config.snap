@@ -1,0 +1,24 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(package-json-no-redundant-publish-config): `publishConfig.access` is redundant for unscoped packages because they are always public.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:1]
+ 1 │ {"name":"demo","publishConfig":{"access":"public"}}
+   · ─
+   ╰────
+  help: Remove the redundant `publishConfig.access` field.
+
+  ⚠ goat(package-json-no-redundant-publish-config): `publishConfig.access` is redundant for unscoped packages because they are always public.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:1]
+ 1 │ {"name":"demo","publishConfig":{"access":"restricted"}}
+   · ─
+   ╰────
+  help: Remove the redundant `publishConfig.access` field.
+
+  ⚠ goat(package-json-no-redundant-publish-config): `publishConfig.access` is redundant for unscoped packages because they are always public.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:1]
+ 1 │ {"name":"demo","publishConfig":{"access":"public","registry":"https://example.com"}}
+   · ─
+   ╰────
+  help: Remove the redundant `publishConfig.access` field.

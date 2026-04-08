@@ -4,7 +4,7 @@ use oxc::{
     CompilerInterface,
     ast::ast::Program,
     codegen::{CodegenOptions, CodegenReturn, CommentOptions, IndentChar},
-    diagnostics::OxcDiagnostic,
+    diagnostics::GoatDiagnostic,
     parser::ParseOptions,
     span::SourceType,
     transformer::{TransformOptions, TransformerReturn},
@@ -17,7 +17,7 @@ pub struct Driver {
     print_annotation_comments: bool,
     options: TransformOptions,
     printed: String,
-    errors: Vec<OxcDiagnostic>,
+    errors: Vec<GoatDiagnostic>,
 }
 
 impl CompilerInterface for Driver {
@@ -48,7 +48,7 @@ impl CompilerInterface for Driver {
         false
     }
 
-    fn handle_errors(&mut self, errors: Vec<OxcDiagnostic>) {
+    fn handle_errors(&mut self, errors: Vec<GoatDiagnostic>) {
         self.errors.extend(errors);
     }
 
@@ -90,7 +90,7 @@ impl Driver {
         }
     }
 
-    pub fn errors(&mut self) -> Vec<OxcDiagnostic> {
+    pub fn errors(&mut self) -> Vec<GoatDiagnostic> {
         mem::take(&mut self.errors)
     }
 

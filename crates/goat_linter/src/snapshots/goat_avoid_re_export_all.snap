@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(avoid-re-export-all): Avoid re-exporting `*` from a module, it leads to unused imports and prevents treeshaking.
+   ╭─[avoid_re_export_all.ts:1:1]
+ 1 │ export * from "./foo";
+   · ──────────────────────
+   ╰────
+  help: Prefer named re-exports so consumers and bundlers only pull the symbols they need.
+
+  ⚠ goat(avoid-re-export-all): Avoid re-exporting `*` from a module, it leads to unused imports and prevents treeshaking.
+   ╭─[avoid_re_export_all.ts:1:1]
+ 1 │ export * as foo from "./foo";
+   · ─────────────────────────────
+   ╰────
+  help: Prefer named re-exports so consumers and bundlers only pull the symbols they need.

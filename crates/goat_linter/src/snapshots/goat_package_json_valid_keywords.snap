@@ -1,0 +1,31 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(package-json-valid-keywords): The `keywords` field in package.json must be an array of non-empty strings.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:13]
+ 1 │ {"keywords":"lint"}
+   ·             ──────
+   ╰────
+  help: Use an array of keyword strings for package discoverability.
+
+  ⚠ goat(package-json-valid-keywords): The `keywords` field in package.json must be an array of non-empty strings.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:13]
+ 1 │ {"keywords":1}
+   ·             ─
+   ╰────
+  help: Use an array of keyword strings for package discoverability.
+
+  ⚠ goat(package-json-valid-keywords): The `keywords` field in package.json must be an array of non-empty strings.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:21]
+ 1 │ {"keywords":["lint",""]}
+   ·                     ──
+   ╰────
+  help: Use an array of keyword strings for package discoverability.
+
+  ⚠ goat(package-json-valid-keywords): The `keywords` field in package.json must be an array of non-empty strings.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:21]
+ 1 │ {"keywords":["lint",1]}
+   ·                     ─
+   ╰────
+  help: Use an array of keyword strings for package discoverability.

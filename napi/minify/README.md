@@ -1,8 +1,8 @@
 # Oxc Minify
 
-See [usage instructions](https://oxc.rs/docs/guide/usage/minifier).
+See [usage instructions](https://goatlint.dev/docs/guide/usage/minifier).
 
-This is alpha software and may yield incorrect results, feel free to [submit a bug report](https://github.com/oxc-project/oxc/issues/new?assignees=&labels=C-bug&projects=&template=bug_report.md).
+This is alpha software and may yield incorrect results, feel free to [submit a bug report](https://github.com/goat-project/oxc/issues/new?assignees=&labels=C-bug&projects=&template=bug_report.md).
 
 ### Performance and Compression Size
 
@@ -71,7 +71,7 @@ console.log(result.map);
 
 `oxc-minify` makes some assumptions about the source code.
 
-See https://github.com/oxc-project/oxc/blob/main/crates/oxc_minifier/README.md#assumptions for details.
+See https://github.com/goat-project/oxc/blob/main/crates/goat_minifier/README.md#assumptions for details.
 
 ### Supports WASM
 

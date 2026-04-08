@@ -41,14 +41,14 @@ impl Generator for ESTreeVisitGenerator {
     fn generate_many(&self, _schema: &Schema, codegen: &Codegen) -> Vec<Output> {
         let Codes {
             walk_parser,
-            walk_oxlint,
+            walk_goatlint,
             walk_dts_parser,
-            walk_dts_oxlint,
+            walk_dts_goatlint,
             visitor_keys,
             type_ids_map_parser,
-            type_ids_map_oxlint,
+            type_ids_map_goatlint,
             visitor_type_parser,
-            visitor_type_oxlint,
+            visitor_type_goatlint,
         } = generate(codegen);
 
         vec![
@@ -74,11 +74,11 @@ impl Generator for ESTreeVisitGenerator {
             },
             Output::Javascript {
                 path: format!("{OXLINT_APP_PATH}/src-js/generated/walk.js"),
-                code: walk_oxlint,
+                code: walk_goatlint,
             },
             Output::Javascript {
                 path: format!("{OXLINT_APP_PATH}/src-js/generated/walk.d.ts"),
-                code: walk_dts_oxlint,
+                code: walk_dts_goatlint,
             },
             Output::Javascript {
                 // This file is also valid as TS
@@ -88,11 +88,11 @@ impl Generator for ESTreeVisitGenerator {
             Output::Javascript {
                 // This file is also valid as TS
                 path: format!("{OXLINT_APP_PATH}/src-js/generated/type_ids.ts"),
-                code: type_ids_map_oxlint,
+                code: type_ids_map_goatlint,
             },
             Output::Javascript {
                 path: format!("{OXLINT_APP_PATH}/src-js/generated/visitor.d.ts"),
-                code: visitor_type_oxlint,
+                code: visitor_type_goatlint,
             },
         ]
     }
@@ -101,14 +101,14 @@ impl Generator for ESTreeVisitGenerator {
 /// Output code.
 struct Codes {
     walk_parser: String,
-    walk_oxlint: String,
+    walk_goatlint: String,
     walk_dts_parser: String,
-    walk_dts_oxlint: String,
+    walk_dts_goatlint: String,
     visitor_keys: String,
     type_ids_map_parser: String,
-    type_ids_map_oxlint: String,
+    type_ids_map_goatlint: String,
     visitor_type_parser: String,
-    visitor_type_oxlint: String,
+    visitor_type_goatlint: String,
 }
 
 /// Details of a node's name and visitor keys.
@@ -386,9 +386,9 @@ fn generate(codegen: &Codegen) -> Codes {
         {walk_fns}
     ");
 
-    // Create 2 walker variants for parser and oxlint, by setting `ANCESTORS` const,
+    // Create 2 walker variants for parser and goatlint, by setting `ANCESTORS` const,
     // and running through minifier to shake out irrelevant code
-    let [walk_parser, walk_oxlint] = generate_variants!(&walk, ["ANCESTORS"]);
+    let [walk_parser, walk_goatlint] = generate_variants!(&walk, ["ANCESTORS"]);
 
     let leaf_nodes_count = leaf_nodes_count.unwrap();
 
@@ -492,15 +492,15 @@ fn generate(codegen: &Codegen) -> Codes {
         /* END_IF */
     ");
 
-    // Create 2 type ID map variants for parser and oxlint, by setting `LINTER` const,
+    // Create 2 type ID map variants for parser and goatlint, by setting `LINTER` const,
     // and running through minifier to shake out irrelevant code
-    let [type_ids_map_parser, type_ids_map_oxlint] = generate_variants!(&type_ids_map, ["LINTER"]);
+    let [type_ids_map_parser, type_ids_map_goatlint] = generate_variants!(&type_ids_map, ["LINTER"]);
 
     // Versions of `visitor.d.ts` for parser and Oxlint import ESTree types from different places.
     // Oxlint version also allows any arbitrary properties (selectors).
     #[rustfmt::skip]
     let visitor_type_parser = format!("
-        import * as ESTree from '@oxc-project/types';
+        import * as ESTree from '@goat-project/types';
 
         export interface VisitorObject {{
             {visitor_type}
@@ -508,11 +508,11 @@ fn generate(codegen: &Codegen) -> Codes {
     ");
 
     #[rustfmt::skip]
-    let visitor_type_oxlint = format!("
+    let visitor_type_goatlint = format!("
         import type * as ESTree from './types.d.ts';
 
         // To understand why we need the \"Bivariance hack\", see: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/20219
-        // For downsides, see: https://github.com/oxc-project/oxc/issues/18154#issuecomment-4012955607
+        // For downsides, see: https://github.com/goat-project/oxc/issues/18154#issuecomment-4012955607
         type BivarianceHackHandler<Handler extends (...args: any) => any> = {{
             bivarianceHack(...args: Parameters<Handler>): ReturnType<Handler>;
         }}[\"bivarianceHack\"];
@@ -534,7 +534,7 @@ fn generate(codegen: &Codegen) -> Codes {
     // - `{ enter, exit }` object (non-leaf node visitor)
     #[rustfmt::skip]
     let walk_dts_parser = "
-        import type * as ESTree from '@oxc-project/types';
+        import type * as ESTree from '@goat-project/types';
 
         type VisitFn = (node: ESTree.Node) => void;
         type EnterExit = { enter: VisitFn; exit: VisitFn };
@@ -543,13 +543,13 @@ fn generate(codegen: &Codegen) -> Codes {
         export declare function walkProgram(program: ESTree.Program, visitors: CompiledVisitors): void;
     ".to_string();
 
-    // For oxlint, the visitors parameter is a compiled visitor array, not a VisitorObject.
+    // For goatlint, the visitors parameter is a compiled visitor array, not a VisitorObject.
     // The compiled visitor is an array indexed by node type ID, where each entry is either:
     // - `null` (no visitor for this node type)
     // - A function (leaf node visitor)
     // - `{ enter, exit }` object (non-leaf node visitor)
     #[rustfmt::skip]
-    let walk_dts_oxlint = "
+    let walk_dts_goatlint = "
         import type { Node, Program } from './types.d.ts';
         import type { VisitFn, EnterExit } from '../plugins/visitor.ts';
 
@@ -561,14 +561,14 @@ fn generate(codegen: &Codegen) -> Codes {
 
     Codes {
         walk_parser,
-        walk_oxlint,
+        walk_goatlint,
         walk_dts_parser,
-        walk_dts_oxlint,
+        walk_dts_goatlint,
         visitor_keys,
         type_ids_map_parser,
-        type_ids_map_oxlint,
+        type_ids_map_goatlint,
         visitor_type_parser,
-        visitor_type_oxlint,
+        visitor_type_goatlint,
     }
 }
 
@@ -595,7 +595,7 @@ impl SelectorClasses {
 
     /// If AST node name matches 1 or more selector classes, add its node type ID to lists for those classes.
     ///
-    /// The method replicates the logic in `matchesSelectorClass` in `apps/oxlint/src-js/plugins/selector.ts`.
+    /// The method replicates the logic in `matchesSelectorClass` in `apps/goatlint/src-js/plugins/selector.ts`.
     /// Must be kept in sync.
     fn add(&mut self, node_name: &str, node_id: NodeId) {
         // Function types are also declarations / expressions / patterns
@@ -620,7 +620,7 @@ impl SelectorClasses {
                 || node_name == "MetaProperty" =>
             {
                 // `Identifier` nodes are only members of these classes if their `parent` is not a `MetaProperty`.
-                // That is handled in `analyzeSelector` in `apps/oxlint/src-js/plugins/selector.ts`.
+                // That is handled in `analyzeSelector` in `apps/goatlint/src-js/plugins/selector.ts`.
                 self.expression.push(node_id);
                 // Expressions are also patterns
                 self.pattern.push(node_id);

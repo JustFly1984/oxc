@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(no-unknown-files): File does not match any configured element pattern.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/boundaries-app/src/routes/public/known.ts:1:1]
+ 1 │ export const value = 1;
+   · ▲
+   ╰────
+  help: Move the file into a configured architectural element or extend `boundaries/elements`.
+
+  ⚠ goat(no-unknown-files): File does not match any configured element pattern.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/boundaries-app/src/routes/public/known.ts:1:1]
+ 1 │ export const value = 1;
+   · ▲
+   ╰────
+  help: Move the file into a configured architectural element or extend `boundaries/elements`.

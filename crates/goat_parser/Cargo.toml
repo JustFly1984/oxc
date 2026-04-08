@@ -1,0 +1,53 @@
+[package]
+name = "goat_parser"
+version = "0.124.0"
+authors.workspace = true
+categories.workspace = true
+edition.workspace = true
+homepage.workspace = true
+include = ["/examples", "/src"]
+keywords.workspace = true
+license.workspace = true
+publish = true
+repository.workspace = true
+rust-version.workspace = true
+description.workspace = true
+
+[lints]
+workspace = true
+
+[lib]
+
+[dependencies]
+goat_allocator = { workspace = true }
+goat_ast = { workspace = true }
+goat_data_structures = { workspace = true, features = ["assert_unchecked", "fieldless_enum"] }
+goat_diagnostics = { workspace = true }
+goat_ecmascript = { workspace = true }
+goat_regular_expression = { workspace = true, optional = true }
+goat_span = { workspace = true }
+goat_syntax = { workspace = true }
+
+bitflags = { workspace = true }
+cow-utils = { workspace = true }
+num-bigint = { workspace = true }
+num-traits = { workspace = true }
+rustc-hash = { workspace = true }
+seq-macro = { workspace = true }
+
+memchr = { workspace = true }
+
+[dev-dependencies]
+goat_ast = { workspace = true, features = ["serialize"] }
+goat_ast_visit = { workspace = true, features = ["serialize"] }
+pico-args = { workspace = true }
+
+[features]
+default = ["regular_expression"]
+# Parse regex
+regular_expression = ["dep:goat_regular_expression"]
+# Feature to enable mutation of tokens.
+# Should not ordinarily be enabled. Only used by ESTree tokens conversion.
+mutate_tokens = []
+# Expose Lexer for benchmarks
+benchmarking = []

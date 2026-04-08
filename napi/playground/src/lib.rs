@@ -15,7 +15,7 @@ use oxc::{
     ast::ast::Program,
     ast_visit::Visit,
     codegen::{Codegen, CodegenOptions, CommentOptions, LegalComment},
-    diagnostics::OxcDiagnostic,
+    diagnostics::GoatDiagnostic,
     isolated_declarations::{IsolatedDeclarations, IsolatedDeclarationsOptions},
     mangler::{MangleOptions, MangleOptionsKeepNames},
     minifier::{CompressOptions, Minifier, MinifierOptions, MinifierReturn},
@@ -28,19 +28,19 @@ use oxc::{
     syntax::reference::ReferenceFlags,
     transformer::{TransformOptions, Transformer},
 };
-use oxc_formatter::{
+use goat_formatter::{
     ArrowParentheses, AttributePosition, BracketSameLine, BracketSpacing, CustomGroupDefinition,
     Expand, FormatOptions, Formatter, GroupEntry, ImportModifier, ImportSelector, IndentStyle,
     IndentWidth, LineEnding, LineWidth, QuoteProperties, QuoteStyle, Semicolons,
     SortImportsOptions, SortOrder, TrailingCommas, default_groups, default_internal_patterns,
     get_parse_options,
 };
-use oxc_linter::{
+use goat_linter::{
     ConfigStore, ConfigStoreBuilder, ContextSubHost, ExternalPluginStore, LintOptions, Linter,
     ModuleRecord, Oxlintrc,
 };
-use oxc_napi::{Comment, OxcError, convert_utf8_to_utf16};
-use oxc_transformer_plugins::{
+use goat_napi::{Comment, OxcError, convert_utf8_to_utf16};
+use goat_transformer_plugins::{
     InjectGlobalVariables, InjectGlobalVariablesConfig, InjectImport, ReplaceGlobalDefines,
     ReplaceGlobalDefinesConfig,
 };
@@ -64,7 +64,7 @@ pub struct Oxc {
     pub formatter_formatted_text: String,
     pub formatter_ir_text: String,
     comments: Vec<Comment>,
-    diagnostics: Vec<OxcDiagnostic>,
+    diagnostics: Vec<GoatDiagnostic>,
     source_text: String,
 }
 
@@ -293,7 +293,7 @@ impl Oxc {
             .and_then(|target| {
                 TransformOptions::from_target(target)
                     .map_err(|err| {
-                        self.diagnostics.push(OxcDiagnostic::error(err));
+                        self.diagnostics.push(GoatDiagnostic::error(err));
                     })
                     .ok()
             })
@@ -325,8 +325,8 @@ impl Oxc {
                 if let Some(transform_options) = &options.transformer
                     && let Some(target) = &transform_options.target
                     && let Ok(targets) =
-                        oxc_compat::EngineTargets::from_target(target).map_err(|err| {
-                            self.diagnostics.push(OxcDiagnostic::error(err));
+                        goat_compat::EngineTargets::from_target(target).map_err(|err| {
+                            self.diagnostics.push(GoatDiagnostic::error(err));
                         })
                 {
                     compress_options.target = targets;
@@ -394,10 +394,10 @@ impl Oxc {
             let semantic_ret = SemanticBuilder::new().with_cfg(true).build(program);
             let semantic = semantic_ret.semantic;
             let lint_config = if let Some(config) = &linter_options.config {
-                let oxlintrc = Oxlintrc::from_string(config).unwrap_or_default();
-                let config_builder = ConfigStoreBuilder::from_oxlintrc(
+                let goatlintrc = Oxlintrc::from_string(config).unwrap_or_default();
+                let config_builder = ConfigStoreBuilder::from_goatlintrc(
                     false,
-                    oxlintrc,
+                    goatlintrc,
                     None,
                     &mut external_plugin_store,
                     None,
@@ -543,7 +543,7 @@ impl Oxc {
                 })
                 .unwrap_or_default();
 
-            // Parse groups with inline newlinesBetween markers, matching oxfmtrc format
+            // Parse groups with inline newlinesBetween markers, matching goatfmtrc format
             let (groups, newline_boundary_overrides) =
                 sort_imports_config.groups.as_ref().map_or_else(
                     || (default_groups(), vec![]),

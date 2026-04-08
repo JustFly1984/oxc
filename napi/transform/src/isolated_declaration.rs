@@ -10,7 +10,7 @@ use oxc::{
     parser::Parser,
     span::SourceType,
 };
-use oxc_napi::OxcError;
+use goat_napi::OxcError;
 use oxc_sourcemap::napi::SourceMap;
 
 #[napi(object)]

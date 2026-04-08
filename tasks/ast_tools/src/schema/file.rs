@@ -3,7 +3,7 @@ use itertools::Itertools;
 /// A Rust source file.
 #[derive(Debug)]
 pub struct File {
-    /// Crate file is in e.g. `oxc_ast`
+    /// Crate file is in e.g. `goat_ast`
     pub krate: String,
     /// `true` if file is in a NAPI package, rather than a crate
     #[allow(dead_code, clippy::allow_attributes)]
@@ -16,9 +16,9 @@ impl File {
     /// Create new [`File`] from a source path.
     pub fn new(file_path: &str) -> Self {
         // Convert file path to crate and import path.
-        // `crates/oxc_ast/src/ast/js.rs` -> `oxc_ast`, `::ast::js`.
-        // `crates/oxc_span/src/source_type/mod.rs` -> `oxc_span`, `::source_type`.
-        // `crates/oxc_syntax/src/lib.rs` -> `oxc_syntax`, ``.
+        // `crates/goat_ast/src/ast/js.rs` -> `goat_ast`, `::ast::js`.
+        // `crates/goat_span/src/source_type/mod.rs` -> `goat_span`, `::source_type`.
+        // `crates/goat_syntax/src/lib.rs` -> `goat_syntax`, ``.
         let path = file_path.trim_end_matches(".rs").trim_end_matches("/mod");
 
         let mut parts = path.split('/');
@@ -55,9 +55,9 @@ mod test {
     #[test]
     fn test_file_new() {
         let cases = [
-            ("crates/oxc_ast/src/ast/js.rs", "oxc_ast", "::ast::js", false),
-            ("crates/oxc_span/src/source_type/mod.rs", "oxc_span", "::source_type", false),
-            ("crates/oxc_syntax/src/lib.rs", "oxc_syntax", "", false),
+            ("crates/goat_ast/src/ast/js.rs", "goat_ast", "::ast::js", false),
+            ("crates/goat_span/src/source_type/mod.rs", "goat_span", "::source_type", false),
+            ("crates/goat_syntax/src/lib.rs", "goat_syntax", "", false),
             ("napi/parser/src/blah.rs", "napi/parser", "::blah", true),
             ("napi/parser/src/lib.rs", "napi/parser", "", true),
         ];

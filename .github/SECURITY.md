@@ -1,6 +1,6 @@
 # Security Policy
 
-Please refer to https://oxc.rs/docs/contribute/security.html for our established security practices.
+Please refer to https://goatlint.dev/docs/contribute/security.html for our established security practices.
 
 ## Security contact information
 

@@ -3,19 +3,19 @@ use std::{fs, process::Command};
 use lazy_regex::{Captures, Lazy, Regex, lazy_regex, regex::Replacer};
 use rayon::prelude::*;
 
-use oxc_allocator::Allocator;
-use oxc_ast::{
+use goat_allocator::Allocator;
+use goat_ast::{
     AstBuilder,
     ast::{Expression, Program, UnaryOperator},
 };
-use oxc_ast_visit::{VisitMut, walk_mut};
-use oxc_codegen::Codegen;
-use oxc_minifier::{
+use goat_ast_visit::{VisitMut, walk_mut};
+use goat_codegen::Codegen;
+use goat_minifier::{
     CompressOptions, CompressOptionsKeepNames, Minifier, MinifierOptions, PropertyReadSideEffects,
     TreeShakeOptions,
 };
-use oxc_parser::Parser;
-use oxc_span::SourceType;
+use goat_parser::Parser;
+use goat_span::SourceType;
 
 use crate::{logln, utils::write_it};
 
@@ -27,7 +27,7 @@ pub fn print_javascript(code: &str, generator_path: &str) -> String {
     format(&code)
 }
 
-/// Format JS/TS code with `oxfmt`.
+/// Format JS/TS code with `goatfmt`.
 fn format(source_text: &str) -> String {
     // Create a temporary file with a unique name using timestamp + thread id hash
     let tmp_dir = std::env::temp_dir();
@@ -42,17 +42,17 @@ fn format(source_text: &str) -> String {
     let root_path =
         std::path::Path::new(&std::env::var("CARGO_MANIFEST_DIR").unwrap()).join("..").join("..");
 
-    let oxfmt_bin = if cfg!(windows) { "oxfmt.cmd" } else { "oxfmt" };
-    let oxfmt_path = root_path.join("node_modules").join(".bin").join(oxfmt_bin);
-    let oxfmt_config_path = root_path.join("oxfmtrc.jsonc");
+    let goatfmt_bin = if cfg!(windows) { "goatfmt.cmd" } else { "goatfmt" };
+    let goatfmt_path = root_path.join("node_modules").join(".bin").join(goatfmt_bin);
+    let goatfmt_config_path = root_path.join("goatfmtrc.jsonc");
 
-    // Run oxfmt on the temp file
-    let output = Command::new(oxfmt_path)
+    // Run goatfmt on the temp file
+    let output = Command::new(goatfmt_path)
         .arg("-c")
-        .arg(oxfmt_config_path)
+        .arg(goatfmt_config_path)
         .arg(&tmp_file)
         .output()
-        .expect("Failed to run oxfmt (is it installed?)");
+        .expect("Failed to run goatfmt (is it installed?)");
 
     // Read the formatted content
     let result = if output.status.success() {

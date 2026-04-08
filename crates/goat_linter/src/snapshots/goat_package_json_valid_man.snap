@@ -1,0 +1,38 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(package-json-valid-man): The `man` field in package.json is invalid.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:8]
+ 1 │ {"man":""}
+   ·        ──
+   ╰────
+  help: Use a string or array of strings ending in a manpage section such as `.1` or `.1.gz`.
+
+  ⚠ goat(package-json-valid-man): The `man` field in package.json is invalid.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:8]
+ 1 │ {"man":"./man/demo.md"}
+   ·        ───────────────
+   ╰────
+  help: Use a string or array of strings ending in a manpage section such as `.1` or `.1.gz`.
+
+  ⚠ goat(package-json-valid-man): The `man` field in package.json is invalid.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:8]
+ 1 │ {"man":[]}
+   ·        ──
+   ╰────
+  help: Use a string or array of strings ending in a manpage section such as `.1` or `.1.gz`.
+
+  ⚠ goat(package-json-valid-man): The `man` field in package.json is invalid.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:8]
+ 1 │ {"man":["./man/demo.1","./man/demo.md"]}
+   ·        ────────────────────────────────
+   ╰────
+  help: Use a string or array of strings ending in a manpage section such as `.1` or `.1.gz`.
+
+  ⚠ goat(package-json-valid-man): The `man` field in package.json is invalid.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:8]
+ 1 │ {"man":1}
+   ·        ─
+   ╰────
+  help: Use a string or array of strings ending in a manpage section such as `.1` or `.1.gz`.

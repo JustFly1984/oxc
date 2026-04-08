@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(detect-disable-mustache-escape): Mustache escaping is being disabled
+   ╭─[detect_disable_mustache_escape.tsx:1:19]
+ 1 │ const options = { escapeMarkup: false }
+   ·                   ───────────────────
+   ╰────
+  help: Setting escapeMarkup to false or escape to false disables HTML escaping and can lead to XSS vulnerabilities.
+
+  ⚠ goat(detect-disable-mustache-escape): Mustache escaping is being disabled
+   ╭─[detect_disable_mustache_escape.tsx:1:19]
+ 1 │ const options = { escape: false }
+   ·                   ─────────────
+   ╰────
+  help: Setting escapeMarkup to false or escape to false disables HTML escaping and can lead to XSS vulnerabilities.

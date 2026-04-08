@@ -254,12 +254,12 @@ fn generate_output(
         use std::cell::Cell;
 
         ///@@line_break
-        use oxc_allocator::Vec;
-        use oxc_syntax::scope::{ScopeFlags, ScopeId};
+        use goat_allocator::Vec;
+        use goat_syntax::scope::{ScopeFlags, ScopeId};
 
         ///@@line_break
-        use oxc_ast::ast::*;
-        use oxc_ast::ast_kind::#ast_kind_or_type_ident;
+        use goat_ast::ast::*;
+        use goat_ast::ast_kind::#ast_kind_or_type_ident;
 
         ///@@line_break
         use #walk_mod_ident::*;
@@ -696,7 +696,7 @@ impl VisitBuilder<'_> {
                         for el in it {
                             // For Argument types, directly dispatch to avoid intermediate stack frame
                             match el {
-                                oxc_ast::ast::Argument::SpreadElement(spread) => {
+                                goat_ast::ast::Argument::SpreadElement(spread) => {
                                     visitor.visit_spread_element(spread);
                                 }
                                 _ => {
@@ -711,7 +711,7 @@ impl VisitBuilder<'_> {
                         for el in it {
                             // For Argument types, directly dispatch to avoid intermediate stack frame
                             match el {
-                                oxc_ast::ast::Argument::SpreadElement(spread) => {
+                                goat_ast::ast::Argument::SpreadElement(spread) => {
                                     visitor.visit_spread_element(spread);
                                 }
                                 _ => {

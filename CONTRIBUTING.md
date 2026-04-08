@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to Oxc!
 
-Please check out our [good first issues](https://github.com/oxc-project/oxc/contribute) or ask for guidance on [Discord](https://discord.gg/9uXCAwqQZW).
+Please check out our [good first issues](https://github.com/goat-project/oxc/contribute) or ask for guidance on [Discord](https://discord.gg/9uXCAwqQZW).
 
 We welcome and appreciate any form of contributions.
 
@@ -18,4 +18,4 @@ We encourage the use of AI tools to assist with development, but all contributio
 
 ---
 
-Please see the complete contributing guide on the [website](https://oxc.rs/docs/contribute/introduction.html).
+Please see the complete contributing guide on the [website](https://goatlint.dev/docs/contribute/introduction.html).

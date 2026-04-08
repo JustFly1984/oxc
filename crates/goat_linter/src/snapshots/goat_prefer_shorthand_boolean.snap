@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(prefer-shorthand-boolean): Use shorthand boolean attribute: `disabled` instead of `disabled={true}`
+   ╭─[prefer_shorthand_boolean.tsx:1:12]
+ 1 │ <Component disabled={true} />
+   ·            ───────────────
+   ╰────
+  help: Boolean JSX attributes can use the shorthand form. `<Comp disabled />` is equivalent to `<Comp disabled={true} />`.
+
+  ⚠ goat(prefer-shorthand-boolean): Use shorthand boolean attribute: `readOnly` instead of `readOnly={true}`
+   ╭─[prefer_shorthand_boolean.tsx:1:8]
+ 1 │ <Input readOnly={true} />
+   ·        ───────────────
+   ╰────
+  help: Boolean JSX attributes can use the shorthand form. `<Comp disabled />` is equivalent to `<Comp disabled={true} />`.

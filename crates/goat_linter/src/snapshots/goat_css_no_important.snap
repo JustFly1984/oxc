@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(css-no-important): `!important` used on `color`.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/test.css:1:13]
+ 1 │ .a { color: red !important; }
+   ·             ──────────────
+   ╰────
+  help: Avoid `!important` — it makes styles harder to override and maintain. Use more specific selectors instead.
+
+  ⚠ goat(css-no-important): `!important` used on `font-size`.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/test.css:1:29]
+ 1 │ .a { color: red; font-size: 16px !important; }
+   ·                             ───────────────
+   ╰────
+  help: Avoid `!important` — it makes styles harder to override and maintain. Use more specific selectors instead.

@@ -1,5 +1,5 @@
 [package]
-name = "oxc_minify_napi"
+name = "goat_minify_napi"
 version = "0.124.0"
 authors.workspace = true
 categories.workspace = true
@@ -22,15 +22,15 @@ test = false
 doctest = false
 
 [dependencies]
-oxc_allocator = { workspace = true }
-oxc_codegen = { workspace = true, features = ["sourcemap"] }
-oxc_compat = { workspace = true }
-oxc_diagnostics = { workspace = true }
-oxc_minifier = { workspace = true }
-oxc_napi = { workspace = true }
-oxc_parser = { workspace = true }
+goat_allocator = { workspace = true }
+goat_codegen = { workspace = true, features = ["sourcemap"] }
+goat_compat = { workspace = true }
+goat_diagnostics = { workspace = true }
+goat_minifier = { workspace = true }
+goat_napi = { workspace = true }
+goat_parser = { workspace = true }
 oxc_sourcemap = { workspace = true, features = ["napi"] }
-oxc_span = { workspace = true }
+goat_span = { workspace = true }
 
 napi = { workspace = true }
 napi-derive = { workspace = true }

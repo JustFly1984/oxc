@@ -10,7 +10,7 @@ export default defineConfig({
   },
   plugins: [
     {
-      name: "oxc",
+      name: "goat",
       async load(id) {
         if (!id.endsWith(".ts")) {
           return;

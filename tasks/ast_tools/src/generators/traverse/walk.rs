@@ -1,4 +1,4 @@
-//! Generator for `walk.rs` in `oxc_traverse` crate.
+//! Generator for `walk.rs` in `goat_traverse` crate.
 //!
 //! Generates:
 //! * `walk_ast` entry point
@@ -89,9 +89,9 @@ pub(super) fn generate_walk(schema: &Schema, config: &WalkConfig) -> TokenStream
         use std::{cell::Cell, marker::PhantomData};
 
         ///@@line_break
-        use oxc_allocator::Vec;
-        use oxc_ast::ast::*;
-        use oxc_syntax::scope::ScopeId;
+        use goat_allocator::Vec;
+        use goat_ast::ast::*;
+        use goat_syntax::scope::ScopeId;
 
         ///@@line_break
         #use_code

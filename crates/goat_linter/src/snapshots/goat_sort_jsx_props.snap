@@ -1,0 +1,15 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(sort-jsx-props): JSX props should be sorted alphabetically.
+   ╭─[sort_jsx_props.tsx:1:18]
+ 1 │ <Component z="1" a="2" />
+   ·                  ─────
+   ╰────
+
+  ⚠ goat(sort-jsx-props): JSX props should be sorted alphabetically.
+   ╭─[sort_jsx_props.tsx:1:18]
+ 1 │ <Component c="1" a="2" b="3" />
+   ·                  ─────
+   ╰────

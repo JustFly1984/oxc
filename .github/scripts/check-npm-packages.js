@@ -8,7 +8,7 @@ const path = require("path");
 /**
  * Check npm packages before publishing
  * Usage: node check-npm-packages.js <package_dir_pattern> [root_package_path]
- * Example: node check-npm-packages.js "npm/oxlint*"
+ * Example: node check-npm-packages.js "npm/goatlint*"
  * Example: node check-npm-packages.js "release-dir/*" "napi/parser"
  */
 

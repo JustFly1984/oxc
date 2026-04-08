@@ -75,7 +75,7 @@ impl TestRunner {
 
     /// # Panics
     pub fn run(self) {
-        for (root, name) in &[(packages_root(), "babel"), (oxc_test_root(), "oxc")] {
+        for (root, name) in &[(packages_root(), "babel"), (oxc_test_root(), "goat")] {
             let snapshot = format!("{name}.snap.md");
             let exec_snapshot = format!("{name}_exec.snap.md");
             let fixture_root = fixture_root().join(name);

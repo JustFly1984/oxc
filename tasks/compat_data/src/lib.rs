@@ -5,7 +5,7 @@ use serde::Deserialize;
 use syn::Ident;
 
 use oxc_tasks_common::project_root;
-use oxc_transformer::EngineTargets;
+use goat_transformer::EngineTargets;
 
 #[derive(Debug, Deserialize)]
 struct Item {
@@ -71,7 +71,7 @@ pub fn generate() {
         }
     };
 
-    generate_file("crates/oxc_compat/src/es_features.rs", code);
+    generate_file("crates/goat_compat/src/es_features.rs", code);
 }
 
 fn generate_file(file: &str, token_stream: proc_macro2::TokenStream) {

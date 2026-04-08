@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// oxlint-disable no-console
+// goatlint-disable no-console
 
 /**
  * Generate a dynamic matrix for benchmark jobs based on affected components.

@@ -2190,7 +2190,7 @@ rebuilt        : SymbolId(0): []
 * namespace/mutable-fail/input.ts
 
   ! Namespaces exporting non-const are not supported by Oxc. Change
-  | to const or see: https://oxc.rs/docs/guide/usage/transformer/
+  | to const or see: https://goatlint.dev/docs/guide/usage/transformer/
   | typescript.html#partial-namespace-support
    ,-[tasks/coverage/babel/packages/babel-plugin-transform-typescript/test/fixtures/namespace/mutable-fail/input.ts:2:14]
  1 | namespace N {
@@ -2203,7 +2203,7 @@ rebuilt        : SymbolId(0): []
 * namespace/namespace-flag/input.ts
 
   ! Namespace not marked type-only declare are disabled. To enable and
-  | review caveats see: https://oxc.rs/docs/guide/usage/transformer/
+  | review caveats see: https://goatlint.dev/docs/guide/usage/transformer/
   | typescript.html#partial-namespace-support
    ,-[tasks/coverage/babel/packages/babel-plugin-transform-typescript/test/fixtures/namespace/namespace-flag/input.ts:1:1]
  1 | namespace N {}

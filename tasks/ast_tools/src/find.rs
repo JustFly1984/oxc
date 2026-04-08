@@ -8,11 +8,11 @@ use std::{
 
 use serde_json::Value;
 
-/// Name of `oxc_ast_macros` crate.
-const AST_MACROS_CRATE: &str = "oxc_ast_macros";
+/// Name of `goat_ast_macros` crate.
+const AST_MACROS_CRATE: &str = "goat_ast_macros";
 
-/// Prefix for `oxc_ast` crate source files.
-const AST_FILES_PREFIX: &str = "crates/oxc_ast/src/";
+/// Prefix for `goat_ast` crate source files.
+const AST_FILES_PREFIX: &str = "crates/goat_ast/src/";
 
 /// Files which must appear first in the file list, in this order.
 ///
@@ -25,7 +25,7 @@ const AST_PRIORITY_PATHS: &[&str] =
 
 /// Find all crates and source files containing AST types.
 ///
-/// Runs `cargo metadata` to find all workspace crates that depend on `oxc_ast_macros`,
+/// Runs `cargo metadata` to find all workspace crates that depend on `goat_ast_macros`,
 /// then finds all `.rs` files in their `src` directories (excluding `src/generated`).
 pub fn find_crates_and_files() -> (
     // Crate paths, relative to workspace root
@@ -48,14 +48,14 @@ pub fn find_crates_and_files() -> (
     let metadata: Value =
         serde_json::from_slice(&output.stdout).expect("Failed to parse cargo metadata JSON");
 
-    // Find crates that depend on `oxc_ast_macros`
+    // Find crates that depend on `goat_ast_macros`
     let root_path =
         metadata["workspace_root"].as_str().expect("Missing workspace_root in cargo metadata");
     let root_path = PathBuf::from(root_path);
 
     let packages = metadata["packages"].as_array().expect("Missing packages in cargo metadata");
 
-    // Get paths of crates that depend on `oxc_ast_macros`, and all `.rs` files in those crates
+    // Get paths of crates that depend on `goat_ast_macros`, and all `.rs` files in those crates
     let mut crate_paths = Vec::new();
     let mut file_paths = Vec::new();
 
@@ -86,7 +86,7 @@ pub fn find_crates_and_files() -> (
 
     crate_paths.sort_unstable();
 
-    // Sort file paths: `oxc_ast` crate first (with priority paths at the top),
+    // Sort file paths: `goat_ast` crate first (with priority paths at the top),
     // then remaining files alphabetically.
     #[expect(clippy::items_after_statements)]
     fn rank(path: &str) -> (usize, &str) {

@@ -13,7 +13,7 @@ mod formatter;
 mod get_id;
 mod minifier_traverse;
 #[cfg(feature = "generate-js")]
-mod oxlint_envs;
+mod goatlint_envs;
 #[cfg(feature = "generate-js")]
 mod raw_transfer;
 #[cfg(feature = "generate-js")]
@@ -34,7 +34,7 @@ pub use formatter::{FormatterAstNodesGenerator, FormatterFormatGenerator};
 pub use get_id::GetIdGenerator;
 pub use minifier_traverse::MinifierTraverseGenerator;
 #[cfg(feature = "generate-js")]
-pub use oxlint_envs::OxlintEnvsGenerator;
+pub use goatlint_envs::OxlintEnvsGenerator;
 #[cfg(feature = "generate-js")]
 pub use raw_transfer::RawTransferGenerator;
 #[cfg(feature = "generate-js")]

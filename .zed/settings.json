@@ -1,9 +1,9 @@
 {
   "lsp": {
-    "oxlint": {
+    "goatlint": {
       "initialization_options": {
         "settings": {
-          "configPath": "./oxlintrc.json",
+          "configPath": "./goatlintrc.json",
           "run": "onType",
           "disableNestedConfig": false,
           "fixKind": "safe_fix",
@@ -12,10 +12,10 @@
         }
       }
     },
-    "oxfmt": {
+    "goatfmt": {
       "initialization_options": {
         "settings": {
-          "configPath": "./oxfmtrc.jsonc"
+          "configPath": "./goatfmtrc.jsonc"
         }
       }
     }
@@ -29,7 +29,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -42,7 +42,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -55,7 +55,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -68,7 +68,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -81,7 +81,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         },
         {
@@ -97,7 +97,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -110,7 +110,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -123,7 +123,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -136,7 +136,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -149,7 +149,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -162,7 +162,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -175,7 +175,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -188,7 +188,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -201,7 +201,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -214,7 +214,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -227,7 +227,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]
@@ -240,7 +240,7 @@
       "formatter": [
         {
           "language_server": {
-            "name": "oxfmt"
+            "name": "goatfmt"
           }
         }
       ]

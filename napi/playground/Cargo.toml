@@ -1,5 +1,5 @@
 [package]
-name = "oxc_playground_napi"
+name = "goat_playground_napi"
 version = "0.0.1"
 authors.workspace = true
 categories.workspace = true
@@ -22,7 +22,7 @@ test = false
 doctest = false
 
 [dependencies]
-oxc = { workspace = true, features = [
+goat = { workspace = true, features = [
   "ast_visit",
   "codegen",
   "minifier",
@@ -34,11 +34,11 @@ oxc = { workspace = true, features = [
   "regular_expression",
   "cfg",
 ] }
-oxc_compat = { workspace = true }
-oxc_formatter = { workspace = true }
-oxc_linter = { workspace = true }
-oxc_napi = { workspace = true }
-oxc_transformer_plugins = { workspace = true }
+goat_compat = { workspace = true }
+goat_formatter = { workspace = true }
+goat_linter = { workspace = true }
+goat_napi = { workspace = true }
+goat_transformer_plugins = { workspace = true }
 
 napi = { workspace = true, features = ["async"] }
 napi-derive = { workspace = true }

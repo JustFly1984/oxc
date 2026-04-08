@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(package-json-require-version): package.json should declare a `version` field.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:1]
+ 1 │ {"name":"demo"}
+   · ─
+   ╰────
+  help: Add a package version such as `"version": "1.0.0"`.
+
+  ⚠ goat(package-json-require-version): package.json should declare a `version` field.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:1]
+ 1 │ {"type":"module"}
+   · ─
+   ╰────
+  help: Add a package version such as `"version": "1.0.0"`.

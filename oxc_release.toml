@@ -1,36 +1,36 @@
-# Configuration file for [cargo release oxc](https://github.com/oxc-project/cargo-release-oxc)
+# Configuration file for [cargo release oxc](https://github.com/goat-project/cargo-release-oxc)
 
 # Release `--name crates`
 [[releases]]
 name = "crates"
-root_crate = "oxc"
+root_crate = "goat"
 versioned_files = [
   "Cargo.toml",
   "napi/parser/package.json",
   "napi/transform/package.json",
   "napi/minify/package.json",
-  "npm/oxc-types/package.json",
+  "npm/goat-types/package.json",
   "npm/runtime/package.json",
 ]
 
 [[releases]]
-name = "oxlint"
+name = "goatlint"
 scopes_for_breaking_change = ["lint"]
 versioned_files = [
-  "apps/oxlint/Cargo.toml",
-  "apps/oxlint/package.json",
-  "crates/oxc_linter/Cargo.toml",
-  "npm/oxlint/package.json",
-  "npm/oxlint-plugin-eslint/package.json",
-  "npm/oxlint-plugins/package.json",
+  "apps/goatlint/Cargo.toml",
+  "apps/goatlint/package.json",
+  "crates/goat_linter/Cargo.toml",
+  "npm/goatlint/package.json",
+  "npm/goatlint-plugin-eslint/package.json",
+  "npm/goatlint-plugins/package.json",
 ]
 
 [[releases]]
-name = "oxfmt"
+name = "goatfmt"
 scopes_for_breaking_change = ["format"]
 versioned_files = [
-  "apps/oxfmt/Cargo.toml",
-  "apps/oxfmt/package.json",
-  "crates/oxc_formatter/Cargo.toml",
-  "npm/oxfmt/package.json",
+  "apps/goatfmt/Cargo.toml",
+  "apps/goatfmt/package.json",
+  "crates/goat_formatter/Cargo.toml",
+  "npm/goatfmt/package.json",
 ]

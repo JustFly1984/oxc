@@ -921,6 +921,894 @@ dependencies = [
 ]
 
 [[package]]
+name = "goat"
+version = "0.124.0"
+dependencies = [
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_cfg",
+ "goat_codegen",
+ "goat_diagnostics",
+ "goat_isolated_declarations",
+ "goat_mangler",
+ "goat_minifier",
+ "goat_parser",
+ "goat_regular_expression",
+ "goat_semantic",
+ "goat_span",
+ "goat_syntax",
+ "goat_transformer",
+ "goat_transformer_plugins",
+]
+
+[[package]]
+name = "goat_allocator"
+version = "0.124.0"
+dependencies = [
+ "allocator-api2",
+ "goat_allocator",
+ "goat_ast_macros",
+ "goat_data_structures",
+ "goat_estree",
+ "hashbrown 0.16.1",
+ "rustc-hash",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "goat_ast"
+version = "0.124.0"
+dependencies = [
+ "bitflags",
+ "goat_allocator",
+ "goat_ast_macros",
+ "goat_data_structures",
+ "goat_diagnostics",
+ "goat_estree",
+ "goat_regular_expression",
+ "goat_span",
+ "goat_syntax",
+]
+
+[[package]]
+name = "goat_ast_macros"
+version = "0.124.0"
+dependencies = [
+ "phf",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "goat_ast_tools"
+version = "0.0.0"
+dependencies = [
+ "bitflags",
+ "bpaf",
+ "convert_case",
+ "cow-utils",
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_codegen",
+ "goat_minifier",
+ "goat_parser",
+ "goat_span",
+ "goat_syntax",
+ "indexmap",
+ "itertools",
+ "javascript-globals",
+ "lazy-regex",
+ "oxc_index",
+ "phf",
+ "phf_codegen",
+ "prettyplease",
+ "proc-macro2",
+ "quote",
+ "rayon",
+ "rustc-hash",
+ "serde",
+ "serde_json",
+ "syn",
+ "toml",
+]
+
+[[package]]
+name = "goat_ast_visit"
+version = "0.124.0"
+dependencies = [
+ "goat_allocator",
+ "goat_ast",
+ "goat_span",
+ "goat_syntax",
+]
+
+[[package]]
+name = "goat_benchmark"
+version = "0.0.0"
+dependencies = [
+ "cow-utils",
+ "criterion2",
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_codegen",
+ "goat_estree_tokens",
+ "goat_formatter",
+ "goat_isolated_declarations",
+ "goat_linter",
+ "goat_mangler",
+ "goat_minifier",
+ "goat_parser",
+ "goat_semantic",
+ "goat_span",
+ "goat_tasks_common",
+ "goat_transformer",
+ "rustc-hash",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "goat_cfg"
+version = "0.124.0"
+dependencies = [
+ "bitflags",
+ "goat_syntax",
+ "itertools",
+ "oxc_index",
+ "petgraph",
+ "rustc-hash",
+]
+
+[[package]]
+name = "goat_codegen"
+version = "0.124.0"
+dependencies = [
+ "bitflags",
+ "cow-utils",
+ "dragonbox_ecma",
+ "goat_allocator",
+ "goat_ast",
+ "goat_data_structures",
+ "goat_parser",
+ "goat_semantic",
+ "goat_span",
+ "goat_syntax",
+ "insta",
+ "itoa",
+ "oxc_index",
+ "oxc_sourcemap",
+ "pico-args",
+ "rustc-hash",
+]
+
+[[package]]
+name = "goat_compat"
+version = "0.124.0"
+dependencies = [
+ "cow-utils",
+ "goat_syntax",
+ "oxc-browserslist",
+ "rustc-hash",
+ "serde",
+]
+
+[[package]]
+name = "goat_compat_data"
+version = "0.0.0"
+dependencies = [
+ "goat_tasks_common",
+ "goat_transformer",
+ "prettyplease",
+ "proc-macro2",
+ "quote",
+ "serde",
+ "serde_json",
+ "syn",
+]
+
+[[package]]
+name = "goat_coverage"
+version = "0.0.0"
+dependencies = [
+ "cow-utils",
+ "encoding_rs",
+ "encoding_rs_io",
+ "goat",
+ "goat_estree_tokens",
+ "goat_formatter",
+ "goat_tasks_common",
+ "goat_tasks_transform_checker",
+ "itertools",
+ "lazy-regex",
+ "phf",
+ "pico-args",
+ "rayon",
+ "rustc-hash",
+ "saphyr",
+ "serde",
+ "serde_json",
+ "similar 3.0.0",
+ "walkdir",
+]
+
+[[package]]
+name = "goat_data_structures"
+version = "0.124.0"
+dependencies = [
+ "ropey",
+]
+
+[[package]]
+name = "goat_diagnostics"
+version = "0.124.0"
+dependencies = [
+ "cow-utils",
+ "oxc-miette",
+ "percent-encoding",
+]
+
+[[package]]
+name = "goat_ecmascript"
+version = "0.124.0"
+dependencies = [
+ "cow-utils",
+ "goat_allocator",
+ "goat_ast",
+ "goat_regular_expression",
+ "goat_span",
+ "goat_syntax",
+ "num-bigint",
+ "num-traits",
+]
+
+[[package]]
+name = "goat_estree"
+version = "0.124.0"
+dependencies = [
+ "dragonbox_ecma",
+ "goat_data_structures",
+ "itoa",
+]
+
+[[package]]
+name = "goat_estree_tokens"
+version = "0.124.0"
+dependencies = [
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_data_structures",
+ "goat_estree",
+ "goat_parser",
+ "goat_span",
+ "itoa",
+]
+
+[[package]]
+name = "goat_formatter"
+version = "0.44.0"
+dependencies = [
+ "cow-utils",
+ "fast-glob",
+ "goat_allocator",
+ "goat_ast",
+ "goat_data_structures",
+ "goat_jsdoc",
+ "goat_parser",
+ "goat_semantic",
+ "goat_span",
+ "goat_syntax",
+ "goat_tasks_common",
+ "insta",
+ "itoa",
+ "markdown",
+ "natord",
+ "nodejs-built-in-modules",
+ "phf",
+ "pico-args",
+ "rustc-hash",
+ "serde",
+ "serde_json",
+ "smallvec",
+ "unicode-width",
+]
+
+[[package]]
+name = "goat_isolated_declarations"
+version = "0.124.0"
+dependencies = [
+ "bitflags",
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_codegen",
+ "goat_diagnostics",
+ "goat_ecmascript",
+ "goat_parser",
+ "goat_span",
+ "goat_syntax",
+ "insta",
+ "rustc-hash",
+]
+
+[[package]]
+name = "goat_jsdoc"
+version = "0.124.0"
+dependencies = [
+ "goat_ast",
+ "goat_span",
+ "rustc-hash",
+]
+
+[[package]]
+name = "goat_language_server"
+version = "1.41.0"
+dependencies = [
+ "futures",
+ "papaya",
+ "rustc-hash",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tower-lsp-server",
+ "tracing",
+]
+
+[[package]]
+name = "goat_linter"
+version = "1.59.0"
+dependencies = [
+ "bitflags",
+ "constcat",
+ "convert_case",
+ "cow-utils",
+ "fast-glob",
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_macros",
+ "goat_ast_visit",
+ "goat_cfg",
+ "goat_codegen",
+ "goat_data_structures",
+ "goat_diagnostics",
+ "goat_ecmascript",
+ "goat_estree_tokens",
+ "goat_macros",
+ "goat_parser",
+ "goat_regular_expression",
+ "goat_semantic",
+ "goat_span",
+ "goat_syntax",
+ "icu_segmenter",
+ "ignore",
+ "indexmap",
+ "insta",
+ "itertools",
+ "javascript-globals",
+ "json-strip-comments",
+ "language-tags",
+ "lazy-regex",
+ "markdown",
+ "memchr",
+ "nodejs-built-in-modules",
+ "oxc-schemars",
+ "oxc_index",
+ "oxc_resolver",
+ "papaya",
+ "phf",
+ "rayon",
+ "rust-lapper",
+ "rustc-hash",
+ "self_cell",
+ "serde",
+ "serde_json",
+ "simdutf8",
+ "smallvec",
+ "spdx",
+ "url",
+]
+
+[[package]]
+name = "goat_linter_codegen"
+version = "0.0.0"
+dependencies = [
+ "convert_case",
+ "proc-macro2",
+ "project-root",
+ "quote",
+ "rustc-hash",
+ "syn",
+]
+
+[[package]]
+name = "goat_macros"
+version = "0.0.0"
+dependencies = [
+ "convert_case",
+ "itertools",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "goat_mangler"
+version = "0.124.0"
+dependencies = [
+ "goat_allocator",
+ "goat_ast",
+ "goat_data_structures",
+ "goat_parser",
+ "goat_semantic",
+ "goat_span",
+ "goat_syntax",
+ "itertools",
+ "oxc_index",
+ "rustc-hash",
+]
+
+[[package]]
+name = "goat_minifier"
+version = "0.124.0"
+dependencies = [
+ "cow-utils",
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_codegen",
+ "goat_compat",
+ "goat_data_structures",
+ "goat_ecmascript",
+ "goat_mangler",
+ "goat_parser",
+ "goat_regular_expression",
+ "goat_semantic",
+ "goat_span",
+ "goat_str",
+ "goat_syntax",
+ "goat_traverse",
+ "insta",
+ "itoa",
+ "javascript-globals",
+ "oxc_index",
+ "oxc_sourcemap",
+ "pico-args",
+ "rustc-hash",
+]
+
+[[package]]
+name = "goat_minify_napi"
+version = "0.124.0"
+dependencies = [
+ "goat_allocator",
+ "goat_codegen",
+ "goat_compat",
+ "goat_diagnostics",
+ "goat_minifier",
+ "goat_napi",
+ "goat_parser",
+ "goat_span",
+ "mimalloc-safe",
+ "napi",
+ "napi-build",
+ "napi-derive",
+ "oxc_sourcemap",
+]
+
+[[package]]
+name = "goat_minsize"
+version = "0.0.0"
+dependencies = [
+ "cow-utils",
+ "flate2",
+ "goat_allocator",
+ "goat_codegen",
+ "goat_minifier",
+ "goat_parser",
+ "goat_semantic",
+ "goat_span",
+ "goat_tasks_common",
+ "goat_transformer_plugins",
+ "humansize",
+ "pico-args",
+ "rustc-hash",
+ "similar-asserts",
+]
+
+[[package]]
+name = "goat_napi"
+version = "0.124.0"
+dependencies = [
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_diagnostics",
+ "goat_span",
+ "goat_syntax",
+ "napi",
+ "napi-build",
+ "napi-derive",
+]
+
+[[package]]
+name = "goat_parser"
+version = "0.124.0"
+dependencies = [
+ "bitflags",
+ "cow-utils",
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_data_structures",
+ "goat_diagnostics",
+ "goat_ecmascript",
+ "goat_regular_expression",
+ "goat_span",
+ "goat_syntax",
+ "memchr",
+ "num-bigint",
+ "num-traits",
+ "pico-args",
+ "rustc-hash",
+ "seq-macro",
+]
+
+[[package]]
+name = "goat_parser_napi"
+version = "0.124.0"
+dependencies = [
+ "goat",
+ "goat_ast_macros",
+ "goat_estree",
+ "goat_estree_tokens",
+ "goat_napi",
+ "mimalloc-safe",
+ "napi",
+ "napi-build",
+ "napi-derive",
+ "rustc-hash",
+]
+
+[[package]]
+name = "goat_playground_napi"
+version = "0.0.1"
+dependencies = [
+ "goat",
+ "goat_compat",
+ "goat_formatter",
+ "goat_linter",
+ "goat_napi",
+ "goat_transformer_plugins",
+ "napi",
+ "napi-build",
+ "napi-derive",
+ "rustc-hash",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "goat_prettier_conformance"
+version = "0.0.0"
+dependencies = [
+ "cow-utils",
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_formatter",
+ "goat_parser",
+ "goat_span",
+ "goat_tasks_common",
+ "pico-args",
+ "rustc-hash",
+ "serde_json",
+ "similar 3.0.0",
+ "walkdir",
+]
+
+[[package]]
+name = "goat_regular_expression"
+version = "0.124.0"
+dependencies = [
+ "bitflags",
+ "goat_allocator",
+ "goat_ast_macros",
+ "goat_diagnostics",
+ "goat_span",
+ "insta",
+ "phf",
+ "rustc-hash",
+ "unicode-id-start",
+]
+
+[[package]]
+name = "goat_semantic"
+version = "0.124.0"
+dependencies = [
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_cfg",
+ "goat_diagnostics",
+ "goat_ecmascript",
+ "goat_jsdoc",
+ "goat_parser",
+ "goat_span",
+ "goat_syntax",
+ "insta",
+ "itertools",
+ "memchr",
+ "oxc_index",
+ "rustc-hash",
+ "self_cell",
+ "serde_json",
+]
+
+[[package]]
+name = "goat_span"
+version = "0.124.0"
+dependencies = [
+ "compact_str",
+ "goat_allocator",
+ "goat_ast_macros",
+ "goat_estree",
+ "goat_str",
+ "oxc-miette",
+ "oxc-schemars",
+ "serde",
+]
+
+[[package]]
+name = "goat_str"
+version = "0.124.0"
+dependencies = [
+ "compact_str",
+ "goat_allocator",
+ "goat_estree",
+ "hashbrown 0.16.1",
+ "oxc-schemars",
+ "serde",
+]
+
+[[package]]
+name = "goat_syntax"
+version = "0.124.0"
+dependencies = [
+ "bitflags",
+ "cow-utils",
+ "dragonbox_ecma",
+ "goat_allocator",
+ "goat_ast_macros",
+ "goat_estree",
+ "goat_span",
+ "nonmax",
+ "oxc_index",
+ "phf",
+ "serde",
+ "unicode-id-start",
+]
+
+[[package]]
+name = "goat_tasks_common"
+version = "0.0.0"
+dependencies = [
+ "console",
+ "goat_span",
+ "project-root",
+ "similar 3.0.0",
+ "ureq",
+]
+
+[[package]]
+name = "goat_tasks_transform_checker"
+version = "0.0.0"
+dependencies = [
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_diagnostics",
+ "goat_semantic",
+ "goat_span",
+ "goat_syntax",
+ "indexmap",
+ "rustc-hash",
+]
+
+[[package]]
+name = "goat_track_memory_allocations"
+version = "0.0.0"
+dependencies = [
+ "goat_allocator",
+ "goat_minifier",
+ "goat_parser",
+ "goat_semantic",
+ "goat_tasks_common",
+ "goat_transformer",
+ "humansize",
+ "mimalloc-safe",
+]
+
+[[package]]
+name = "goat_transform_conformance"
+version = "0.0.0"
+dependencies = [
+ "cow-utils",
+ "goat",
+ "goat_tasks_common",
+ "goat_tasks_transform_checker",
+ "indexmap",
+ "pico-args",
+ "walkdir",
+]
+
+[[package]]
+name = "goat_transform_napi"
+version = "0.124.0"
+dependencies = [
+ "goat",
+ "goat_napi",
+ "mimalloc-safe",
+ "napi",
+ "napi-build",
+ "napi-derive",
+ "oxc_sourcemap",
+ "rustc-hash",
+]
+
+[[package]]
+name = "goat_transformer"
+version = "0.124.0"
+dependencies = [
+ "base64",
+ "compact_str",
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_codegen",
+ "goat_compat",
+ "goat_data_structures",
+ "goat_diagnostics",
+ "goat_ecmascript",
+ "goat_parser",
+ "goat_regular_expression",
+ "goat_semantic",
+ "goat_span",
+ "goat_syntax",
+ "goat_traverse",
+ "indexmap",
+ "insta",
+ "itoa",
+ "memchr",
+ "pico-args",
+ "rustc-hash",
+ "serde",
+ "serde_json",
+ "sha1",
+]
+
+[[package]]
+name = "goat_transformer_plugins"
+version = "0.124.0"
+dependencies = [
+ "cow-utils",
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_codegen",
+ "goat_diagnostics",
+ "goat_ecmascript",
+ "goat_minifier",
+ "goat_parser",
+ "goat_semantic",
+ "goat_span",
+ "goat_syntax",
+ "goat_tasks_common",
+ "goat_transformer",
+ "goat_traverse",
+ "insta",
+ "itoa",
+ "oxc_sourcemap",
+ "pico-args",
+ "rustc-hash",
+]
+
+[[package]]
+name = "goat_traverse"
+version = "0.124.0"
+dependencies = [
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_data_structures",
+ "goat_ecmascript",
+ "goat_semantic",
+ "goat_span",
+ "goat_str",
+ "goat_syntax",
+ "itoa",
+ "rustc-hash",
+]
+
+[[package]]
+name = "goatfmt"
+version = "0.44.0"
+dependencies = [
+ "bpaf",
+ "cow-utils",
+ "editorconfig-parser",
+ "fast-glob",
+ "goat_allocator",
+ "goat_ast",
+ "goat_data_structures",
+ "goat_diagnostics",
+ "goat_formatter",
+ "goat_language_server",
+ "goat_napi",
+ "goat_parser",
+ "goat_span",
+ "ignore",
+ "json-strip-comments",
+ "mimalloc-safe",
+ "napi",
+ "napi-build",
+ "napi-derive",
+ "oxc-miette",
+ "oxc-schemars",
+ "oxc-toml",
+ "phf",
+ "rayon",
+ "rustc-hash",
+ "serde",
+ "serde_json",
+ "simdutf8",
+ "sort-package-json",
+ "tokio",
+ "tower-lsp-server",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
+name = "goatlint"
+version = "1.59.0"
+dependencies = [
+ "bpaf",
+ "cow-utils",
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_data_structures",
+ "goat_diagnostics",
+ "goat_estree_tokens",
+ "goat_language_server",
+ "goat_linter",
+ "goat_napi",
+ "goat_parser",
+ "goat_semantic",
+ "goat_span",
+ "ignore",
+ "insta",
+ "lazy-regex",
+ "mimalloc-safe",
+ "napi",
+ "napi-build",
+ "napi-derive",
+ "oxc-miette",
+ "rayon",
+ "rustc-hash",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "tokio",
+ "tower-lsp-server",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "half"
 version = "2.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1604,28 +2492,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c6901729fa79e91a0913333229e9ca5dc725089d1c363b2f4b4760709dc4a52"
 
 [[package]]
-name = "oxc"
-version = "0.124.0"
-dependencies = [
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_cfg",
- "oxc_codegen",
- "oxc_diagnostics",
- "oxc_isolated_declarations",
- "oxc_mangler",
- "oxc_minifier",
- "oxc_parser",
- "oxc_regular_expression",
- "oxc_semantic",
- "oxc_span",
- "oxc_syntax",
- "oxc_transformer",
- "oxc_transformer_plugins",
-]
-
-[[package]]
 name = "oxc-browserslist"
 version = "3.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1685,281 +2551,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "42c447978900c2436dac665912cd298d3f9f6d4cac2551080328729ea52f840f"
 
 [[package]]
-name = "oxc_allocator"
-version = "0.124.0"
-dependencies = [
- "allocator-api2",
- "hashbrown 0.16.1",
- "oxc_allocator",
- "oxc_ast_macros",
- "oxc_data_structures",
- "oxc_estree",
- "rustc-hash",
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "oxc_ast"
-version = "0.124.0"
-dependencies = [
- "bitflags",
- "oxc_allocator",
- "oxc_ast_macros",
- "oxc_data_structures",
- "oxc_diagnostics",
- "oxc_estree",
- "oxc_regular_expression",
- "oxc_span",
- "oxc_syntax",
-]
-
-[[package]]
-name = "oxc_ast_macros"
-version = "0.124.0"
-dependencies = [
- "phf",
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "oxc_ast_tools"
-version = "0.0.0"
-dependencies = [
- "bitflags",
- "bpaf",
- "convert_case",
- "cow-utils",
- "indexmap",
- "itertools",
- "javascript-globals",
- "lazy-regex",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_codegen",
- "oxc_index",
- "oxc_minifier",
- "oxc_parser",
- "oxc_span",
- "oxc_syntax",
- "phf",
- "phf_codegen",
- "prettyplease",
- "proc-macro2",
- "quote",
- "rayon",
- "rustc-hash",
- "serde",
- "serde_json",
- "syn",
- "toml",
-]
-
-[[package]]
-name = "oxc_ast_visit"
-version = "0.124.0"
-dependencies = [
- "oxc_allocator",
- "oxc_ast",
- "oxc_span",
- "oxc_syntax",
-]
-
-[[package]]
-name = "oxc_benchmark"
-version = "0.0.0"
-dependencies = [
- "cow-utils",
- "criterion2",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_codegen",
- "oxc_estree_tokens",
- "oxc_formatter",
- "oxc_isolated_declarations",
- "oxc_linter",
- "oxc_mangler",
- "oxc_minifier",
- "oxc_parser",
- "oxc_semantic",
- "oxc_span",
- "oxc_tasks_common",
- "oxc_transformer",
- "rustc-hash",
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "oxc_cfg"
-version = "0.124.0"
-dependencies = [
- "bitflags",
- "itertools",
- "oxc_index",
- "oxc_syntax",
- "petgraph",
- "rustc-hash",
-]
-
-[[package]]
-name = "oxc_codegen"
-version = "0.124.0"
-dependencies = [
- "bitflags",
- "cow-utils",
- "dragonbox_ecma",
- "insta",
- "itoa",
- "oxc_allocator",
- "oxc_ast",
- "oxc_data_structures",
- "oxc_index",
- "oxc_parser",
- "oxc_semantic",
- "oxc_sourcemap",
- "oxc_span",
- "oxc_syntax",
- "pico-args",
- "rustc-hash",
-]
-
-[[package]]
-name = "oxc_compat"
-version = "0.124.0"
-dependencies = [
- "cow-utils",
- "oxc-browserslist",
- "oxc_syntax",
- "rustc-hash",
- "serde",
-]
-
-[[package]]
-name = "oxc_compat_data"
-version = "0.0.0"
-dependencies = [
- "oxc_tasks_common",
- "oxc_transformer",
- "prettyplease",
- "proc-macro2",
- "quote",
- "serde",
- "serde_json",
- "syn",
-]
-
-[[package]]
-name = "oxc_coverage"
-version = "0.0.0"
-dependencies = [
- "cow-utils",
- "encoding_rs",
- "encoding_rs_io",
- "itertools",
- "lazy-regex",
- "oxc",
- "oxc_estree_tokens",
- "oxc_formatter",
- "oxc_tasks_common",
- "oxc_tasks_transform_checker",
- "phf",
- "pico-args",
- "rayon",
- "rustc-hash",
- "saphyr",
- "serde",
- "serde_json",
- "similar 3.0.0",
- "walkdir",
-]
-
-[[package]]
-name = "oxc_data_structures"
-version = "0.124.0"
-dependencies = [
- "ropey",
-]
-
-[[package]]
-name = "oxc_diagnostics"
-version = "0.124.0"
-dependencies = [
- "cow-utils",
- "oxc-miette",
- "percent-encoding",
-]
-
-[[package]]
-name = "oxc_ecmascript"
-version = "0.124.0"
-dependencies = [
- "cow-utils",
- "num-bigint",
- "num-traits",
- "oxc_allocator",
- "oxc_ast",
- "oxc_regular_expression",
- "oxc_span",
- "oxc_syntax",
-]
-
-[[package]]
-name = "oxc_estree"
-version = "0.124.0"
-dependencies = [
- "dragonbox_ecma",
- "itoa",
- "oxc_data_structures",
-]
-
-[[package]]
-name = "oxc_estree_tokens"
-version = "0.124.0"
-dependencies = [
- "itoa",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_data_structures",
- "oxc_estree",
- "oxc_parser",
- "oxc_span",
-]
-
-[[package]]
-name = "oxc_formatter"
-version = "0.44.0"
-dependencies = [
- "cow-utils",
- "fast-glob",
- "insta",
- "itoa",
- "markdown",
- "natord",
- "nodejs-built-in-modules",
- "oxc_allocator",
- "oxc_ast",
- "oxc_data_structures",
- "oxc_jsdoc",
- "oxc_parser",
- "oxc_semantic",
- "oxc_span",
- "oxc_syntax",
- "oxc_tasks_common",
- "phf",
- "pico-args",
- "rustc-hash",
- "serde",
- "serde_json",
- "smallvec",
- "unicode-width",
-]
-
-[[package]]
 name = "oxc_index"
 version = "4.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1967,313 +2558,6 @@ checksum = "eb3e6120999627ec9703025eab7c9f410ebb7e95557632a8902ca48210416c2b"
 dependencies = [
  "nonmax",
  "serde",
-]
-
-[[package]]
-name = "oxc_isolated_declarations"
-version = "0.124.0"
-dependencies = [
- "bitflags",
- "insta",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_codegen",
- "oxc_diagnostics",
- "oxc_ecmascript",
- "oxc_parser",
- "oxc_span",
- "oxc_syntax",
- "rustc-hash",
-]
-
-[[package]]
-name = "oxc_jsdoc"
-version = "0.124.0"
-dependencies = [
- "oxc_ast",
- "oxc_span",
- "rustc-hash",
-]
-
-[[package]]
-name = "oxc_language_server"
-version = "1.41.0"
-dependencies = [
- "futures",
- "papaya",
- "rustc-hash",
- "serde",
- "serde_json",
- "tokio",
- "tower-lsp-server",
- "tracing",
-]
-
-[[package]]
-name = "oxc_linter"
-version = "1.59.0"
-dependencies = [
- "bitflags",
- "constcat",
- "convert_case",
- "cow-utils",
- "fast-glob",
- "icu_segmenter",
- "ignore",
- "indexmap",
- "insta",
- "itertools",
- "javascript-globals",
- "json-strip-comments",
- "language-tags",
- "lazy-regex",
- "markdown",
- "memchr",
- "nodejs-built-in-modules",
- "oxc-schemars",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_macros",
- "oxc_ast_visit",
- "oxc_cfg",
- "oxc_codegen",
- "oxc_data_structures",
- "oxc_diagnostics",
- "oxc_ecmascript",
- "oxc_estree_tokens",
- "oxc_index",
- "oxc_macros",
- "oxc_parser",
- "oxc_regular_expression",
- "oxc_resolver",
- "oxc_semantic",
- "oxc_span",
- "oxc_syntax",
- "papaya",
- "phf",
- "rayon",
- "rust-lapper",
- "rustc-hash",
- "self_cell",
- "serde",
- "serde_json",
- "simdutf8",
- "smallvec",
- "spdx",
- "url",
-]
-
-[[package]]
-name = "oxc_linter_codegen"
-version = "0.0.0"
-dependencies = [
- "convert_case",
- "proc-macro2",
- "project-root",
- "quote",
- "rustc-hash",
- "syn",
-]
-
-[[package]]
-name = "oxc_macros"
-version = "0.0.0"
-dependencies = [
- "convert_case",
- "itertools",
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "oxc_mangler"
-version = "0.124.0"
-dependencies = [
- "itertools",
- "oxc_allocator",
- "oxc_ast",
- "oxc_data_structures",
- "oxc_index",
- "oxc_parser",
- "oxc_semantic",
- "oxc_span",
- "oxc_syntax",
- "rustc-hash",
-]
-
-[[package]]
-name = "oxc_minifier"
-version = "0.124.0"
-dependencies = [
- "cow-utils",
- "insta",
- "itoa",
- "javascript-globals",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_codegen",
- "oxc_compat",
- "oxc_data_structures",
- "oxc_ecmascript",
- "oxc_index",
- "oxc_mangler",
- "oxc_parser",
- "oxc_regular_expression",
- "oxc_semantic",
- "oxc_sourcemap",
- "oxc_span",
- "oxc_str",
- "oxc_syntax",
- "oxc_traverse",
- "pico-args",
- "rustc-hash",
-]
-
-[[package]]
-name = "oxc_minify_napi"
-version = "0.124.0"
-dependencies = [
- "mimalloc-safe",
- "napi",
- "napi-build",
- "napi-derive",
- "oxc_allocator",
- "oxc_codegen",
- "oxc_compat",
- "oxc_diagnostics",
- "oxc_minifier",
- "oxc_napi",
- "oxc_parser",
- "oxc_sourcemap",
- "oxc_span",
-]
-
-[[package]]
-name = "oxc_minsize"
-version = "0.0.0"
-dependencies = [
- "cow-utils",
- "flate2",
- "humansize",
- "oxc_allocator",
- "oxc_codegen",
- "oxc_minifier",
- "oxc_parser",
- "oxc_semantic",
- "oxc_span",
- "oxc_tasks_common",
- "oxc_transformer_plugins",
- "pico-args",
- "rustc-hash",
- "similar-asserts",
-]
-
-[[package]]
-name = "oxc_napi"
-version = "0.124.0"
-dependencies = [
- "napi",
- "napi-build",
- "napi-derive",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_diagnostics",
- "oxc_span",
- "oxc_syntax",
-]
-
-[[package]]
-name = "oxc_parser"
-version = "0.124.0"
-dependencies = [
- "bitflags",
- "cow-utils",
- "memchr",
- "num-bigint",
- "num-traits",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_data_structures",
- "oxc_diagnostics",
- "oxc_ecmascript",
- "oxc_regular_expression",
- "oxc_span",
- "oxc_syntax",
- "pico-args",
- "rustc-hash",
- "seq-macro",
-]
-
-[[package]]
-name = "oxc_parser_napi"
-version = "0.124.0"
-dependencies = [
- "mimalloc-safe",
- "napi",
- "napi-build",
- "napi-derive",
- "oxc",
- "oxc_ast_macros",
- "oxc_estree",
- "oxc_estree_tokens",
- "oxc_napi",
- "rustc-hash",
-]
-
-[[package]]
-name = "oxc_playground_napi"
-version = "0.0.1"
-dependencies = [
- "napi",
- "napi-build",
- "napi-derive",
- "oxc",
- "oxc_compat",
- "oxc_formatter",
- "oxc_linter",
- "oxc_napi",
- "oxc_transformer_plugins",
- "rustc-hash",
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "oxc_prettier_conformance"
-version = "0.0.0"
-dependencies = [
- "cow-utils",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_formatter",
- "oxc_parser",
- "oxc_span",
- "oxc_tasks_common",
- "pico-args",
- "rustc-hash",
- "serde_json",
- "similar 3.0.0",
- "walkdir",
-]
-
-[[package]]
-name = "oxc_regular_expression"
-version = "0.124.0"
-dependencies = [
- "bitflags",
- "insta",
- "oxc_allocator",
- "oxc_ast_macros",
- "oxc_diagnostics",
- "oxc_span",
- "phf",
- "rustc-hash",
- "unicode-id-start",
 ]
 
 [[package]]
@@ -2316,29 +2600,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "oxc_semantic"
-version = "0.124.0"
-dependencies = [
- "insta",
- "itertools",
- "memchr",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_cfg",
- "oxc_diagnostics",
- "oxc_ecmascript",
- "oxc_index",
- "oxc_jsdoc",
- "oxc_parser",
- "oxc_span",
- "oxc_syntax",
- "rustc-hash",
- "self_cell",
- "serde_json",
-]
-
-[[package]]
 name = "oxc_sourcemap"
 version = "6.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2352,267 +2613,6 @@ dependencies = [
  "rustc-hash",
  "serde",
  "serde_json",
-]
-
-[[package]]
-name = "oxc_span"
-version = "0.124.0"
-dependencies = [
- "compact_str",
- "oxc-miette",
- "oxc-schemars",
- "oxc_allocator",
- "oxc_ast_macros",
- "oxc_estree",
- "oxc_str",
- "serde",
-]
-
-[[package]]
-name = "oxc_str"
-version = "0.124.0"
-dependencies = [
- "compact_str",
- "hashbrown 0.16.1",
- "oxc-schemars",
- "oxc_allocator",
- "oxc_estree",
- "serde",
-]
-
-[[package]]
-name = "oxc_syntax"
-version = "0.124.0"
-dependencies = [
- "bitflags",
- "cow-utils",
- "dragonbox_ecma",
- "nonmax",
- "oxc_allocator",
- "oxc_ast_macros",
- "oxc_estree",
- "oxc_index",
- "oxc_span",
- "phf",
- "serde",
- "unicode-id-start",
-]
-
-[[package]]
-name = "oxc_tasks_common"
-version = "0.0.0"
-dependencies = [
- "console",
- "oxc_span",
- "project-root",
- "similar 3.0.0",
- "ureq",
-]
-
-[[package]]
-name = "oxc_tasks_transform_checker"
-version = "0.0.0"
-dependencies = [
- "indexmap",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_diagnostics",
- "oxc_semantic",
- "oxc_span",
- "oxc_syntax",
- "rustc-hash",
-]
-
-[[package]]
-name = "oxc_track_memory_allocations"
-version = "0.0.0"
-dependencies = [
- "humansize",
- "mimalloc-safe",
- "oxc_allocator",
- "oxc_minifier",
- "oxc_parser",
- "oxc_semantic",
- "oxc_tasks_common",
- "oxc_transformer",
-]
-
-[[package]]
-name = "oxc_transform_conformance"
-version = "0.0.0"
-dependencies = [
- "cow-utils",
- "indexmap",
- "oxc",
- "oxc_tasks_common",
- "oxc_tasks_transform_checker",
- "pico-args",
- "walkdir",
-]
-
-[[package]]
-name = "oxc_transform_napi"
-version = "0.124.0"
-dependencies = [
- "mimalloc-safe",
- "napi",
- "napi-build",
- "napi-derive",
- "oxc",
- "oxc_napi",
- "oxc_sourcemap",
- "rustc-hash",
-]
-
-[[package]]
-name = "oxc_transformer"
-version = "0.124.0"
-dependencies = [
- "base64",
- "compact_str",
- "indexmap",
- "insta",
- "itoa",
- "memchr",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_codegen",
- "oxc_compat",
- "oxc_data_structures",
- "oxc_diagnostics",
- "oxc_ecmascript",
- "oxc_parser",
- "oxc_regular_expression",
- "oxc_semantic",
- "oxc_span",
- "oxc_syntax",
- "oxc_traverse",
- "pico-args",
- "rustc-hash",
- "serde",
- "serde_json",
- "sha1",
-]
-
-[[package]]
-name = "oxc_transformer_plugins"
-version = "0.124.0"
-dependencies = [
- "cow-utils",
- "insta",
- "itoa",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_codegen",
- "oxc_diagnostics",
- "oxc_ecmascript",
- "oxc_minifier",
- "oxc_parser",
- "oxc_semantic",
- "oxc_sourcemap",
- "oxc_span",
- "oxc_syntax",
- "oxc_tasks_common",
- "oxc_transformer",
- "oxc_traverse",
- "pico-args",
- "rustc-hash",
-]
-
-[[package]]
-name = "oxc_traverse"
-version = "0.124.0"
-dependencies = [
- "itoa",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_data_structures",
- "oxc_ecmascript",
- "oxc_semantic",
- "oxc_span",
- "oxc_str",
- "oxc_syntax",
- "rustc-hash",
-]
-
-[[package]]
-name = "oxfmt"
-version = "0.44.0"
-dependencies = [
- "bpaf",
- "cow-utils",
- "editorconfig-parser",
- "fast-glob",
- "ignore",
- "json-strip-comments",
- "mimalloc-safe",
- "napi",
- "napi-build",
- "napi-derive",
- "oxc-miette",
- "oxc-schemars",
- "oxc-toml",
- "oxc_allocator",
- "oxc_ast",
- "oxc_data_structures",
- "oxc_diagnostics",
- "oxc_formatter",
- "oxc_language_server",
- "oxc_napi",
- "oxc_parser",
- "oxc_span",
- "phf",
- "rayon",
- "rustc-hash",
- "serde",
- "serde_json",
- "simdutf8",
- "sort-package-json",
- "tokio",
- "tower-lsp-server",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
-name = "oxlint"
-version = "1.59.0"
-dependencies = [
- "bpaf",
- "cow-utils",
- "ignore",
- "insta",
- "lazy-regex",
- "mimalloc-safe",
- "napi",
- "napi-build",
- "napi-derive",
- "oxc-miette",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_data_structures",
- "oxc_diagnostics",
- "oxc_estree_tokens",
- "oxc_language_server",
- "oxc_linter",
- "oxc_napi",
- "oxc_parser",
- "oxc_semantic",
- "oxc_span",
- "rayon",
- "rustc-hash",
- "serde",
- "serde_json",
- "tempfile",
- "tokio",
- "tower-lsp-server",
- "tracing",
- "tracing-subscriber",
 ]
 
 [[package]]
@@ -2940,15 +2940,15 @@ name = "rulegen"
 version = "0.0.0"
 dependencies = [
  "convert_case",
+ "goat_allocator",
+ "goat_ast",
+ "goat_ast_visit",
+ "goat_parser",
+ "goat_span",
+ "goat_tasks_common",
  "handlebars",
  "insta",
  "lazy-regex",
- "oxc_allocator",
- "oxc_ast",
- "oxc_ast_visit",
- "oxc_parser",
- "oxc_span",
- "oxc_tasks_common",
  "proc-macro2",
  "rustc-hash",
  "serde",
@@ -3831,9 +3831,9 @@ name = "website_formatter"
 version = "0.0.0"
 dependencies = [
  "bpaf",
+ "goatfmt",
  "insta",
  "oxc-schemars",
- "oxfmt",
  "pico-args",
  "project-root",
  "website_common",
@@ -3844,11 +3844,11 @@ name = "website_linter"
 version = "0.0.0"
 dependencies = [
  "bpaf",
+ "goat_linter",
+ "goatlint",
  "insta",
  "itertools",
  "oxc-schemars",
- "oxc_linter",
- "oxlint",
  "pico-args",
  "project-root",
  "website_common",

@@ -1,0 +1,24 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(package-json-valid-type): The `type` field in package.json must be `module` or `commonjs`, not `esm`.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:23]
+ 1 │ {"name":"demo","type":"esm"}
+   ·                       ─────
+   ╰────
+  help: Use a valid Node package type or remove the field.
+
+  ⚠ goat(package-json-valid-type): The `type` field in package.json must be a string.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:23]
+ 1 │ {"name":"demo","type":true}
+   ·                       ────
+   ╰────
+  help: Use `module` or `commonjs` for the package type.
+
+  ⚠ goat(package-json-valid-type): The `type` field in package.json must be a string.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:23]
+ 1 │ {"name":"demo","type":1}
+   ·                       ─
+   ╰────
+  help: Use `module` or `commonjs` for the package type.

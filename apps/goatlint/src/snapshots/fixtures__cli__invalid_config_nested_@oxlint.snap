@@ -1,0 +1,14 @@
+---
+source: apps/goatlint/src/tester.rs
+---
+########## 
+arguments: 
+working directory: fixtures/cli/invalid_config_nested
+----------
+Failed to parse goatlint configuration file at <cwd>/fixtures/cli/invalid_config_nested/invalid/.goatlintrc.json.
+
+  x Failed to parse config with error Error("Unknown plugin: '../invalid/plugin.ts'.", line: 0, column: 0)
+
+----------
+CLI result: InvalidOptionConfig
+----------

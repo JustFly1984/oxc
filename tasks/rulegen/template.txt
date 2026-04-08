@@ -1,6 +1,6 @@
-use oxc_diagnostics::OxcDiagnostic;
-use oxc_macros::declare_oxc_lint;
-use oxc_span::Span;
+use goat_diagnostics::OxcDiagnostic;
+use goat_macros::declare_oxc_lint;
+use goat_span::Span;
 {{#if has_hash_map}}
 use rustc_hash::FxHashMap;
 {{/if}}
@@ -31,7 +31,7 @@ fn {{snake_rule_name}}_diagnostic(span: Span) -> OxcDiagnostic {
 #[derive(Debug, Default, Clone{{#if rule_config_tuple}}, Deserialize, Serialize, JsonSchema{{/if}})]
 pub struct {{pascal_rule_name}}{{#if rule_config_tuple}}{{rule_config_tuple}}{{/if}};
 
-// See <https://github.com/oxc-project/oxc/issues/6050> for documentation details.
+// See <https://github.com/goat-project/oxc/issues/6050> for documentation details.
 declare_oxc_lint!(
     /// ### What it does
     ///

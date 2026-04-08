@@ -2,7 +2,7 @@
 //!
 //! # Overview
 //!
-//! `oxc_ast_tools` is a framework for generating code related to the AST.
+//! `goat_ast_tools` is a framework for generating code related to the AST.
 //!
 //! There are 3 main elements to this crate:
 //!
@@ -38,10 +38,10 @@
 //!
 //! ### Phase 1: Load
 //!
-//! All `.rs` source files in crates which depend on `oxc_ast_macros` crate are read and parsed with [`syn`].
-//! Only crates depending on `oxc_ast_macros` are searched, because that crate provides the `#[ast]` and
+//! All `.rs` source files in crates which depend on `goat_ast_macros` crate are read and parsed with [`syn`].
+//! Only crates depending on `goat_ast_macros` are searched, because that crate provides the `#[ast]` and
 //! `#[ast_meta]` proc macros which this codegen works from. Crates which don't have a dependency
-//! on `oxc_ast_macros` cannot contain these attributes, so there's no point searching for them.
+//! on `goat_ast_macros` cannot contain these attributes, so there's no point searching for them.
 //!
 //! At this stage, only type names and other basic information about types is obtained.
 //! Each type with an `#[ast]` attribute is assigned a [`TypeId`], and a mapping of type name
@@ -110,10 +110,10 @@
 //!
 //! * [`Derive`]s act on a single type at a time (though they also have access to the whole `Schema`).
 //!   [`Derive::derive`] should return a [`TokenStream`] containing an implementation of the trait
-//!   the `Derive` is for. `oxc_ast_tools` combines these into a single output file for each crate.
+//!   the `Derive` is for. `goat_ast_tools` combines these into a single output file for each crate.
 //!
 //! [`Output`]s are converted to [`RawOutput`]s, which includes formatting the generated code
-//! with `rustfmt` or `oxfmt`.
+//! with `rustfmt` or `goatfmt`.
 //!
 //! ### Phase 5: Output
 //!
@@ -157,12 +157,12 @@
 //!
 //! #### Attributes
 //!
-//! `oxc_ast_tools` provides abstractions [`AttrLocation`] and [`AttrPart`] which assist with parsing
+//! `goat_ast_tools` provides abstractions [`AttrLocation`] and [`AttrPart`] which assist with parsing
 //! custom attributes, and are much simpler than `syn`'s types.
 //!
 //! #### Meta types
 //!
-//! Meta types ([`MetaType`]) are types which are not part of the AST, but are used by `oxc_ast_tools`
+//! Meta types ([`MetaType`]) are types which are not part of the AST, but are used by `goat_ast_tools`
 //! in some way, and may also be used in generated output. Tagging a type with `#[ast_meta]` attribute
 //! and then adding further custom attributes to that type is a way to pass ancillary information to a
 //! `Derive` / `Generator`.
@@ -213,32 +213,32 @@ use parse::parse_files;
 use schema::Schema;
 use utils::create_ident;
 
-/// Path to `oxc_allocator` crate
-const ALLOCATOR_CRATE_PATH: &str = "crates/oxc_allocator";
+/// Path to `goat_allocator` crate
+const ALLOCATOR_CRATE_PATH: &str = "crates/goat_allocator";
 
-/// Path to `oxc_ast` crate
-const AST_CRATE_PATH: &str = "crates/oxc_ast";
+/// Path to `goat_ast` crate
+const AST_CRATE_PATH: &str = "crates/goat_ast";
 
-/// Path to `oxc_ast_visit` crate
-const AST_VISIT_CRATE_PATH: &str = "crates/oxc_ast_visit";
+/// Path to `goat_ast_visit` crate
+const AST_VISIT_CRATE_PATH: &str = "crates/goat_ast_visit";
 
-/// Path to `oxc_ast_macros` crate
-const AST_MACROS_CRATE_PATH: &str = "crates/oxc_ast_macros";
+/// Path to `goat_ast_macros` crate
+const AST_MACROS_CRATE_PATH: &str = "crates/goat_ast_macros";
 
-/// Path to `oxc_traverse` crate
-const TRAVERSE_CRATE_PATH: &str = "crates/oxc_traverse";
+/// Path to `goat_traverse` crate
+const TRAVERSE_CRATE_PATH: &str = "crates/goat_traverse";
 
-/// Path to `oxc_minifier` crate
-const MINIFIER_CRATE_PATH: &str = "crates/oxc_minifier";
+/// Path to `goat_minifier` crate
+const MINIFIER_CRATE_PATH: &str = "crates/goat_minifier";
 
 /// Path to write TS type definitions to
-const TYPESCRIPT_DEFINITIONS_PATH: &str = "npm/oxc-types/types.d.ts";
+const TYPESCRIPT_DEFINITIONS_PATH: &str = "npm/goat-types/types.d.ts";
 
 /// Path to NAPI parser package
 const NAPI_PARSER_PACKAGE_PATH: &str = "napi/parser";
 
-/// Path to NAPI oxlint package
-const OXLINT_APP_PATH: &str = "apps/oxlint";
+/// Path to NAPI goatlint package
+const OXLINT_APP_PATH: &str = "apps/goatlint";
 
 /// Path to write AST changes filter list to
 const AST_CHANGES_WATCH_LIST_PATH: &str = ".github/generated/ast_changes_watch_list.yml";
@@ -340,10 +340,10 @@ fn main() {
 
     logln!("All Derives and Generators... Done!");
 
-    // Generate `derived_traits.rs` in `oxc_ast_macros` crate
+    // Generate `derived_traits.rs` in `goat_ast_macros` crate
     outputs.push(generate_proc_macro());
 
-    // Edit `lib.rs` in `oxc_ast_macros` crate.
+    // Edit `lib.rs` in `goat_ast_macros` crate.
     // Skip this step if JS generators are disabled, because those generators may define attributes.
     #[cfg(feature = "generate-js")]
     outputs.push(generate_updated_proc_macro(&codegen));
@@ -366,7 +366,7 @@ fn main() {
     }
 }
 
-/// Generate function for proc macro in `oxc_ast_macros` crate.
+/// Generate function for proc macro in `goat_ast_macros` crate.
 ///
 /// This function translates trait name to path to the trait and any generic params.
 fn generate_proc_macro() -> RawOutput {
@@ -399,7 +399,7 @@ fn generate_proc_macro() -> RawOutput {
         .into_raw(file!())
 }
 
-/// Update the list of helper attributes for `Ast` derive proc macro in `oxc_ast_macros` crate
+/// Update the list of helper attributes for `Ast` derive proc macro in `goat_ast_macros` crate
 /// to include all attrs which generators/derives utilize.
 ///
 /// Unfortunately we can't add a separate generated file for this, as proc macros can only be declared
@@ -411,7 +411,7 @@ fn generate_updated_proc_macro(codegen: &Codegen) -> RawOutput {
     attrs.sort_unstable();
     let attrs = attrs.join(", ");
 
-    // Load `oxc_ast_macros` crate's `lib.rs` file.
+    // Load `goat_ast_macros` crate's `lib.rs` file.
     // Substitute list of used attrs into `#[proc_macro_derive(Ast, attributes(...))]`.
     let path = format!("{AST_MACROS_CRATE_PATH}/src/lib.rs");
     let code = fs::read_to_string(codegen.root_path().join(&path)).unwrap();

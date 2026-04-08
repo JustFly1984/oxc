@@ -1,0 +1,15 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(sort-imports): Import statements should be sorted alphabetically by source.
+   ╭─[sort_imports.tsx:1:20]
+ 1 │ import z from "z"; import a from "a";
+   ·                    ──────────────────
+   ╰────
+
+  ⚠ goat(sort-imports): Import statements should be sorted alphabetically by source.
+   ╭─[sort_imports.tsx:1:20]
+ 1 │ import b from "b"; import a from "a"; import c from "c";
+   ·                    ──────────────────
+   ╰────

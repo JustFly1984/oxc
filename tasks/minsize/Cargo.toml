@@ -1,5 +1,5 @@
 [package]
-name = "oxc_minsize"
+name = "goat_minsize"
 version = "0.0.0"
 edition.workspace = true
 license.workspace = true
@@ -12,19 +12,19 @@ workspace = true
 doctest = false
 
 [[bin]]
-name = "oxc_minsize"
+name = "goat_minsize"
 test = false
 doctest = false
 
 [dependencies]
-oxc_allocator = { workspace = true }
-oxc_codegen = { workspace = true, features = ["sourcemap"] }
-oxc_minifier = { workspace = true }
-oxc_parser = { workspace = true }
-oxc_semantic = { workspace = true }
-oxc_span = { workspace = true }
-oxc_tasks_common = { workspace = true }
-oxc_transformer_plugins = { workspace = true }
+goat_allocator = { workspace = true }
+goat_codegen = { workspace = true, features = ["sourcemap"] }
+goat_minifier = { workspace = true }
+goat_parser = { workspace = true }
+goat_semantic = { workspace = true }
+goat_span = { workspace = true }
+goat_tasks_common = { workspace = true }
+goat_transformer_plugins = { workspace = true }
 
 cow-utils = { workspace = true }
 flate2 = { workspace = true }

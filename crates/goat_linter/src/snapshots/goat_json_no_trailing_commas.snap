@@ -1,0 +1,24 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(json-no-trailing-commas): Trailing comma in JSON
+   ╭─[json_no_trailing_commas.json:1:15]
+ 1 │ {"name": "foo",}
+   ·               ─
+   ╰────
+  help: Remove the trailing comma. Trailing commas are not allowed in JSON.
+
+  ⚠ goat(json-no-trailing-commas): Trailing comma in JSON
+   ╭─[json_no_trailing_commas.json:1:9]
+ 1 │ [1, 2, 3,]
+   ·         ─
+   ╰────
+  help: Remove the trailing comma. Trailing commas are not allowed in JSON.
+
+  ⚠ goat(json-no-trailing-commas): Trailing comma in JSON
+   ╭─[json_no_trailing_commas.json:1:16]
+ 1 │ {"a": 1, "b": 2,}
+   ·                ─
+   ╰────
+  help: Remove the trailing comma. Trailing commas are not allowed in JSON.

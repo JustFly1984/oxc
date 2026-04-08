@@ -14,7 +14,7 @@ use oxc::{
     CompilerInterface,
     allocator::Allocator,
     codegen::{Codegen, CodegenOptions, CodegenReturn},
-    diagnostics::OxcDiagnostic,
+    diagnostics::GoatDiagnostic,
     parser::Parser,
     semantic::{SemanticBuilder, SemanticBuilderReturn},
     span::SourceType,
@@ -27,7 +27,7 @@ use oxc::{
         ReplaceGlobalDefinesConfig,
     },
 };
-use oxc_napi::{OxcError, get_source_type};
+use goat_napi::{OxcError, get_source_type};
 use oxc_sourcemap::napi::SourceMap;
 
 use crate::IsolatedDeclarationsOptions;
@@ -67,7 +67,7 @@ pub struct TransformResult {
     /// Example:
     ///
     /// ```text
-    /// { "_objectSpread": "@oxc-project/runtime/helpers/objectSpread2" }
+    /// { "_objectSpread": "@goat-project/runtime/helpers/objectSpread2" }
     /// ```
     #[napi(ts_type = "Record<string, string>")]
     pub helpers_used: FxHashMap<String, String>,
@@ -111,11 +111,11 @@ pub struct TransformOptions {
     pub assumptions: Option<CompilerAssumptions>,
 
     /// Configure how TypeScript is transformed.
-    /// @see {@link https://oxc.rs/docs/guide/usage/transformer/typescript}
+    /// @see {@link https://goatlint.dev/docs/guide/usage/transformer/typescript}
     pub typescript: Option<TypeScriptOptions>,
 
     /// Configure how TSX and JSX are transformed.
-    /// @see {@link https://oxc.rs/docs/guide/usage/transformer/jsx}
+    /// @see {@link https://goatlint.dev/docs/guide/usage/transformer/jsx}
     #[napi(ts_type = "'preserve' | JsxOptions")]
     pub jsx: Option<Either<String, JsxOptions>>,
 
@@ -130,19 +130,19 @@ pub struct TransformOptions {
     ///
     /// @default `esnext` (No transformation)
     ///
-    /// @see {@link https://oxc.rs/docs/guide/usage/transformer/lowering#target}
+    /// @see {@link https://goatlint.dev/docs/guide/usage/transformer/lowering#target}
     pub target: Option<Either<String, Vec<String>>>,
 
     /// Behaviour for runtime helpers.
     pub helpers: Option<Helpers>,
 
     /// Define Plugin
-    /// @see {@link https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define}
+    /// @see {@link https://goatlint.dev/docs/guide/usage/transformer/global-variable-replacement#define}
     #[napi(ts_type = "Record<string, string>")]
     pub define: Option<FxHashMap<String, String>>,
 
     /// Inject Plugin
-    /// @see {@link https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#inject}
+    /// @see {@link https://goatlint.dev/docs/guide/usage/transformer/global-variable-replacement#inject}
     #[napi(ts_type = "Record<string, string | [string, string]>")]
     pub inject: Option<FxHashMap<String, Either<String, Vec<String>>>>,
 
@@ -150,7 +150,7 @@ pub struct TransformOptions {
     pub decorator: Option<DecoratorOptions>,
 
     /// Third-party plugins to use.
-    /// @see {@link https://oxc.rs/docs/guide/usage/transformer/plugins}
+    /// @see {@link https://goatlint.dev/docs/guide/usage/transformer/plugins}
     pub plugins: Option<PluginsOptions>,
 }
 
@@ -232,7 +232,7 @@ pub struct CompilerAssumptions {
     ///
     /// Otherwise, the output will be:
     /// ```js
-    /// import _defineProperty from "@oxc-project/runtime/helpers/defineProperty";
+    /// import _defineProperty from "@goat-project/runtime/helpers/defineProperty";
     /// class Test {
     ///   constructor() {
     ///     _defineProperty(this, "field", 2);
@@ -402,7 +402,7 @@ impl From<DecoratorOptions> for oxc::transformer::DecoratorOptions {
 
 /// Configure how styled-components are transformed.
 ///
-/// @see {@link https://oxc.rs/docs/guide/usage/transformer/plugins#styled-components}
+/// @see {@link https://goatlint.dev/docs/guide/usage/transformer/plugins#styled-components}
 #[napi(object)]
 #[derive(Default)]
 pub struct StyledComponentsOptions {
@@ -512,7 +512,7 @@ impl From<StyledComponentsOptions> for oxc::transformer::StyledComponentsOptions
 
 /// Configure how TSX and JSX are transformed.
 ///
-/// @see {@link https://oxc.rs/docs/guide/usage/transformer/jsx}
+/// @see {@link https://goatlint.dev/docs/guide/usage/transformer/jsx}
 #[napi(object)]
 pub struct JsxOptions {
     /// Decides which runtime to use.
@@ -667,7 +667,7 @@ pub enum HelperMode {
     /// Example:
     ///
     /// ```js
-    /// import helperName from "@oxc-project/runtime/helpers/helperName";
+    /// import helperName from "@goat-project/runtime/helpers/helperName";
     /// helperName(...arguments);
     /// ```
     #[default]
@@ -717,11 +717,11 @@ struct Compiler {
     inject: Option<InjectGlobalVariablesConfig>,
 
     helpers_used: FxHashMap<String, String>,
-    errors: Vec<OxcDiagnostic>,
+    errors: Vec<GoatDiagnostic>,
 }
 
 impl Compiler {
-    fn new(options: Option<TransformOptions>) -> Result<Self, Vec<OxcDiagnostic>> {
+    fn new(options: Option<TransformOptions>) -> Result<Self, Vec<GoatDiagnostic>> {
         let mut options = options;
 
         let isolated_declaration_options = options
@@ -750,7 +750,7 @@ impl Compiler {
                         Either::A(source) => Ok(InjectImport::default_specifier(&source, &local)),
                         Either::B(v) => {
                             if v.len() != 2 {
-                                return Err(vec![OxcDiagnostic::error(
+                                return Err(vec![GoatDiagnostic::error(
                                     "Inject plugin did not receive a tuple [string, string].",
                                 )]);
                             }
@@ -769,7 +769,7 @@ impl Compiler {
 
         let transform_options = match options {
             Some(options) => oxc::transformer::TransformOptions::try_from(options)
-                .map_err(|err| vec![OxcDiagnostic::error(err)])?,
+                .map_err(|err| vec![GoatDiagnostic::error(err)])?,
             None => oxc::transformer::TransformOptions::default(),
         };
 
@@ -790,7 +790,7 @@ impl Compiler {
 }
 
 impl CompilerInterface for Compiler {
-    fn handle_errors(&mut self, errors: Vec<OxcDiagnostic>) {
+    fn handle_errors(&mut self, errors: Vec<GoatDiagnostic>) {
         self.errors.extend(errors);
     }
 

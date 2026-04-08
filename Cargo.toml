@@ -6,10 +6,10 @@ exclude = ["tasks/lint_rules", "tasks/e2e"]
 [workspace.package]
 authors = ["Boshen <boshenc@gmail.com>", "Oxc contributors"]
 categories = ["compilers", "development-tools", "web-programming"]
-homepage = "https://oxc.rs"
+homepage = "https://goatlint.dev"
 keywords = ["JavaScript", "TypeScript", "linter", "minifier", "parser"]
 license = "MIT"
-repository = "https://github.com/oxc-project/oxc"
+repository = "https://github.com/goat-project/oxc"
 description = "A collection of JavaScript tools written in Rust."
 
 edition = "2024"
@@ -105,47 +105,47 @@ multiple_crate_versions = "allow"
 
 [workspace.dependencies]
 # publish = true
-oxc = { version = "0.124.0", path = "crates/oxc" } # Main entry point
-oxc_allocator = { version = "0.124.0", path = "crates/oxc_allocator" } # Memory management
-oxc_ast = { version = "0.124.0", path = "crates/oxc_ast" } # AST definitions
-oxc_ast_macros = { version = "0.124.0", path = "crates/oxc_ast_macros" } # AST proc macros
-oxc_ast_visit = { version = "0.124.0", path = "crates/oxc_ast_visit" } # AST visitor pattern
-oxc_cfg = { version = "0.124.0", path = "crates/oxc_cfg" } # Control flow graph
-oxc_codegen = { version = "0.124.0", path = "crates/oxc_codegen", default-features = false } # Code generation
-oxc_compat = { version = "0.124.0", path = "crates/oxc_compat" } # Browser compatibility
-oxc_data_structures = { version = "0.124.0", path = "crates/oxc_data_structures" } # Shared data structures
-oxc_diagnostics = { version = "0.124.0", path = "crates/oxc_diagnostics" } # Error reporting
-oxc_ecmascript = { version = "0.124.0", path = "crates/oxc_ecmascript" } # ECMAScript operations
-oxc_estree = { version = "0.124.0", path = "crates/oxc_estree" } # ESTree format
-oxc_estree_tokens = { version = "0.124.0", path = "crates/oxc_estree_tokens" } # ESTree token conversion
-oxc_isolated_declarations = { version = "0.124.0", path = "crates/oxc_isolated_declarations" } # TS declaration generation
-oxc_jsdoc = { version = "0.124.0", path = "crates/oxc_jsdoc" } # JSDoc parsing
-oxc_mangler = { version = "0.124.0", path = "crates/oxc_mangler" } # Name mangling
-oxc_minifier = { version = "0.124.0", path = "crates/oxc_minifier" } # Code minification
-oxc_minify_napi = { version = "0.124.0", path = "napi/minify" } # Node.js minifier binding
-oxc_napi = { version = "0.124.0", path = "crates/oxc_napi" } # NAPI utilities
-oxc_parser = { version = "0.124.0", path = "crates/oxc_parser", features = [
+goat = { version = "0.124.0", path = "crates/goat" } # Main entry point
+goat_allocator = { version = "0.124.0", path = "crates/goat_allocator" } # Memory management
+goat_ast = { version = "0.124.0", path = "crates/goat_ast" } # AST definitions
+goat_ast_macros = { version = "0.124.0", path = "crates/goat_ast_macros" } # AST proc macros
+goat_ast_visit = { version = "0.124.0", path = "crates/goat_ast_visit" } # AST visitor pattern
+goat_cfg = { version = "0.124.0", path = "crates/goat_cfg" } # Control flow graph
+goat_codegen = { version = "0.124.0", path = "crates/goat_codegen", default-features = false } # Code generation
+goat_compat = { version = "0.124.0", path = "crates/goat_compat" } # Browser compatibility
+goat_data_structures = { version = "0.124.0", path = "crates/goat_data_structures" } # Shared data structures
+goat_diagnostics = { version = "0.124.0", path = "crates/goat_diagnostics" } # Error reporting
+goat_ecmascript = { version = "0.124.0", path = "crates/goat_ecmascript" } # ECMAScript operations
+goat_estree = { version = "0.124.0", path = "crates/goat_estree" } # ESTree format
+goat_estree_tokens = { version = "0.124.0", path = "crates/goat_estree_tokens" } # ESTree token conversion
+goat_isolated_declarations = { version = "0.124.0", path = "crates/goat_isolated_declarations" } # TS declaration generation
+goat_jsdoc = { version = "0.124.0", path = "crates/goat_jsdoc" } # JSDoc parsing
+goat_mangler = { version = "0.124.0", path = "crates/goat_mangler" } # Name mangling
+goat_minifier = { version = "0.124.0", path = "crates/goat_minifier" } # Code minification
+goat_minify_napi = { version = "0.124.0", path = "napi/minify" } # Node.js minifier binding
+goat_napi = { version = "0.124.0", path = "crates/goat_napi" } # NAPI utilities
+goat_parser = { version = "0.124.0", path = "crates/goat_parser", features = [
   "regular_expression",
 ] } # JS/TS parser
-oxc_parser_napi = { version = "0.124.0", path = "napi/parser" } # Node.js parser binding
-oxc_regular_expression = { version = "0.124.0", path = "crates/oxc_regular_expression" } # Regex parser
-oxc_semantic = { version = "0.124.0", path = "crates/oxc_semantic" } # Semantic analysis
-oxc_span = { version = "0.124.0", path = "crates/oxc_span" } # Source positions
-oxc_str = { version = "0.124.0", path = "crates/oxc_str" } # String types
-oxc_syntax = { version = "0.124.0", path = "crates/oxc_syntax" } # Syntax utilities
-oxc_transform_napi = { version = "0.124.0", path = "napi/transform" } # Node.js transformer binding
-oxc_transformer = { version = "0.124.0", path = "crates/oxc_transformer" } # Code transformation
-oxc_transformer_plugins = { version = "0.124.0", path = "crates/oxc_transformer_plugins" } # Transformer plugins
-oxc_traverse = { version = "0.124.0", path = "crates/oxc_traverse" } # AST traversal
+goat_parser_napi = { version = "0.124.0", path = "napi/parser" } # Node.js parser binding
+goat_regular_expression = { version = "0.124.0", path = "crates/goat_regular_expression" } # Regex parser
+goat_semantic = { version = "0.124.0", path = "crates/goat_semantic" } # Semantic analysis
+goat_span = { version = "0.124.0", path = "crates/goat_span" } # Source positions
+goat_str = { version = "0.124.0", path = "crates/goat_str" } # String types
+goat_syntax = { version = "0.124.0", path = "crates/goat_syntax" } # Syntax utilities
+goat_transform_napi = { version = "0.124.0", path = "napi/transform" } # Node.js transformer binding
+goat_transformer = { version = "0.124.0", path = "crates/goat_transformer" } # Code transformation
+goat_transformer_plugins = { version = "0.124.0", path = "crates/goat_transformer_plugins" } # Transformer plugins
+goat_traverse = { version = "0.124.0", path = "crates/goat_traverse" } # AST traversal
 
 # publish = false
-oxc_formatter = { path = "crates/oxc_formatter" } # Code formatting
-oxc_language_server = { path = "crates/oxc_language_server", default-features = false } # Language server
-oxc_linter = { path = "crates/oxc_linter" } # Linting engine
-oxc_macros = { path = "crates/oxc_macros" } # Proc macros
-oxc_tasks_common = { path = "tasks/common" } # Task utilities
-oxc_tasks_transform_checker = { path = "tasks/transform_checker" } # Transform validation
-oxlint = { path = "apps/oxlint" } # Linter CLI
+goat_formatter = { path = "crates/goat_formatter" } # Code formatting
+goat_language_server = { path = "crates/goat_language_server", default-features = false } # Language server
+goat_linter = { path = "crates/goat_linter" } # Linting engine
+goat_macros = { path = "crates/goat_macros" } # Proc macros
+goat_tasks_common = { path = "tasks/common" } # Task utilities
+goat_tasks_transform_checker = { path = "tasks/transform_checker" } # Transform validation
+goatlint = { path = "apps/goatlint" } # Linter CLI
 
 # Relaxed version so the user can decide which version to use.
 napi = { version = "3", features = ["tokio_rt"] } # Node.js native bindings
@@ -239,14 +239,14 @@ url = { version = "2.5.8" } # URL parsing
 walkdir = "2.5.0" # Directory traversal
 editorconfig-parser = "0.0.4"
 natord = "1.0.9"
-oxfmt = { path = "apps/oxfmt" }
+goatfmt = { path = "apps/goatfmt" }
 sort-package-json = "0.0.12"
 oxc-toml = "0.14.2"
 unicode-width = "0.2"
 website_common = { path = "tasks/website_common" }
 
 [workspace.metadata.cargo-shear]
-ignored = ["oxc_transform_napi", "oxc_parser_napi", "oxc_minify_napi"]
+ignored = ["goat_transform_napi", "goat_parser_napi", "goat_minify_napi"]
 
 [profile.dev]
 # Disabling debug info speeds up local and CI builds,
@@ -260,14 +260,14 @@ debug = false
 
 [profile.dev.package]
 # Compile macros with some optimizations to make consuming crates build faster
-oxc_macros.opt-level = 1
-oxc_ast_macros.opt-level = 1
+goat_macros.opt-level = 1
+goat_ast_macros.opt-level = 1
 # Compile insta and its dependencies in release mode for faster snapshot tests
 # See: https://insta.rs/docs/quickstart/#optional-faster-runs
 insta.opt-level = 3
 similar.opt-level = 3
 
-[profile.release.package.oxc_playground_napi]
+[profile.release.package.goat_playground_napi]
 opt-level = 'z'
 
 [profile.release]

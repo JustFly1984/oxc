@@ -6,17 +6,17 @@
     "ast",
     "estree",
     "javascript",
-    "oxc",
+    "goat",
     "parser",
     "typescript"
   ],
-  "homepage": "https://oxc.rs/docs/guide/usage/parser",
-  "bugs": "https://github.com/oxc-project/oxc/issues",
+  "homepage": "https://goatlint.dev/docs/guide/usage/parser",
+  "bugs": "https://github.com/goat-project/oxc/issues",
   "license": "MIT",
   "author": "Boshen and oxc contributors",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oxc-project/oxc.git",
+    "url": "git+https://github.com/goat-project/oxc.git",
     "directory": "napi/parser"
   },
   "funding": {
@@ -75,7 +75,7 @@
     "bench": "vitest bench --run ./bench.bench.js"
   },
   "dependencies": {
-    "@oxc-project/types": "workspace:^"
+    "@goat-project/types": "workspace:^"
   },
   "devDependencies": {
     "@codspeed/vitest-plugin": "^5.0.0",

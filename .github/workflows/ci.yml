@@ -22,7 +22,7 @@ jobs:
     runs-on: namespace-profile-linux-x64-default
     steps:
       - uses: taiki-e/checkout-action@7d1e50e93dc4fb3bba58f85018fadf77898aee8b # v1.4.2
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
       - uses: namespacelabs/nscloud-cache-action@a90bb5d4b27522ce881c6e98eebd7d7e6d1653f9 # v1.4.2
         with:
           path: /home/runner/.rustup
@@ -39,8 +39,8 @@ jobs:
     runs-on: ubuntu-24.04-arm
     steps:
       - uses: taiki-e/checkout-action@7d1e50e93dc4fb3bba58f85018fadf77898aee8b # v1.4.2
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
-      - uses: oxc-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
         with:
           save-cache: ${{ github.ref_name == 'main' }}
           cache-key: warm-aarch64
@@ -54,7 +54,7 @@ jobs:
     runs-on: namespace-profile-mac-default
     steps:
       - uses: taiki-e/checkout-action@7d1e50e93dc4fb3bba58f85018fadf77898aee8b # v1.4.2
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
       - uses: namespacelabs/nscloud-cache-action@a90bb5d4b27522ce881c6e98eebd7d7e6d1653f9 # v1.4.2
         with:
           cache: |
@@ -74,7 +74,7 @@ jobs:
       # Unsung heroes of the internet, who led me here to speed up Windows' slowness:
       # https://github.com/actions/cache/issues/752#issuecomment-1847036770
       # https://github.com/astral-sh/uv/blob/502e04200d52de30d3159894833b3db4f0d6644d/.github/workflows/ci.yml#L158
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
       - uses: samypr100/setup-dev-drive@30f0f98ae5636b2b6501e181dfb3631b9974818d # v4.0.0
         with:
           workspace-copy: true
@@ -106,7 +106,7 @@ jobs:
 
       - name: Run tests
         # No need for `cargo ck` because it's already checked in linux
-        # Run `website` tests separately to avoid feature unification problems with `oxlint`
+        # Run `website` tests separately to avoid feature unification problems with `goatlint`
         run: cargo test --all-features
         working-directory: ${{ env.DEV_DRIVE_WORKSPACE }}
         shell: bash
@@ -143,7 +143,7 @@ jobs:
           tool: cross
       # `--lib --bins --tests` to skip doctests which are very slow to run via `cross`.
       # https://github.com/cross-rs/cross/issues/1703
-      - run: cross test --workspace --lib --bins --tests --all-features --exclude oxc_language_server --exclude oxc_linter --exclude oxlint --target armv7-unknown-linux-gnueabihf
+      - run: cross test --workspace --lib --bins --tests --all-features --exclude goat_language_server --exclude goat_linter --exclude goatlint --target armv7-unknown-linux-gnueabihf
 
   test-wasm32-wasip1-threads:
     name: Test wasm32-wasip1-threads
@@ -153,11 +153,11 @@ jobs:
       - uses: ./.github/actions/check-changes
         id: filter
         with:
-          exclude: oxc_linter
+          exclude: goat_linter
           paths: napi/,npm/,apps/,pnpm-lock.yaml,package.json
           token: ${{ secrets.GITHUB_TOKEN }}
           pr-number: ${{ github.event.pull_request.number }}
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
         if: steps.filter.outputs.changed == 'true'
       - uses: namespacelabs/nscloud-cache-action@a90bb5d4b27522ce881c6e98eebd7d7e6d1653f9 # v1.4.2
         if: steps.filter.outputs.changed == 'true'
@@ -192,11 +192,11 @@ jobs:
       - uses: ./.github/actions/check-changes
         id: filter
         with:
-          exclude: oxc_linter,oxc_language_server
-          paths: napi/parser/,napi/minify/,napi/transform/,npm/oxc-types/,npm/runtime/,tasks/e2e/,pnpm-lock.yaml,package.json
+          exclude: goat_linter,goat_language_server
+          paths: napi/parser/,napi/minify/,napi/transform/,npm/goat-types/,npm/runtime/,tasks/e2e/,pnpm-lock.yaml,package.json
           token: ${{ secrets.GITHUB_TOKEN }}
           pr-number: ${{ github.event.pull_request.number }}
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
         if: steps.filter.outputs.changed == 'true'
       - uses: namespacelabs/nscloud-cache-action@a90bb5d4b27522ce881c6e98eebd7d7e6d1653f9 # v1.4.2
         if: steps.filter.outputs.changed == 'true'
@@ -227,7 +227,7 @@ jobs:
         run: |
           git diff --exit-code # Must commit everything
 
-  test-napi-oxlint:
+  test-napi-goatlint:
     name: Test NAPI Oxlint
     runs-on: namespace-profile-linux-x64-default
     steps:
@@ -235,10 +235,10 @@ jobs:
       - uses: ./.github/actions/check-changes
         id: filter
         with:
-          paths: apps/oxlint/,npm/oxlint/,npm/oxlint-plugin-eslint/,npm/oxlint-plugins/,npm/oxc-types/,pnpm-lock.yaml,package.json
+          paths: apps/goatlint/,npm/goatlint/,npm/goatlint-plugin-eslint/,npm/goatlint-plugins/,npm/goat-types/,pnpm-lock.yaml,package.json
           token: ${{ secrets.GITHUB_TOKEN }}
           pr-number: ${{ github.event.pull_request.number }}
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
         if: steps.filter.outputs.changed == 'true'
       - uses: namespacelabs/nscloud-cache-action@a90bb5d4b27522ce881c6e98eebd7d7e6d1653f9 # v1.4.2
         if: steps.filter.outputs.changed == 'true'
@@ -250,13 +250,13 @@ jobs:
       - if: steps.filter.outputs.changed == 'true'
         name: Run tests
         run: |
-          pnpm --filter "./apps/oxlint" build-test
-          pnpm --filter "./apps/oxlint" test
+          pnpm --filter "./apps/goatlint" build-test
+          pnpm --filter "./apps/goatlint" test
       - if: steps.filter.outputs.changed == 'true'
         run: |
           git diff --exit-code # Must commit everything
 
-  test-napi-oxfmt:
+  test-napi-goatfmt:
     name: Test NAPI Oxfmt
     runs-on: namespace-profile-linux-x64-default
     steps:
@@ -264,10 +264,10 @@ jobs:
       - uses: ./.github/actions/check-changes
         id: filter
         with:
-          paths: apps/oxfmt/,npm/oxfmt/,pnpm-lock.yaml,package.json
+          paths: apps/goatfmt/,npm/goatfmt/,pnpm-lock.yaml,package.json
           token: ${{ secrets.GITHUB_TOKEN }}
           pr-number: ${{ github.event.pull_request.number }}
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
         if: steps.filter.outputs.changed == 'true'
       - uses: namespacelabs/nscloud-cache-action@a90bb5d4b27522ce881c6e98eebd7d7e6d1653f9 # v1.4.2
         if: steps.filter.outputs.changed == 'true'
@@ -279,8 +279,8 @@ jobs:
       - if: steps.filter.outputs.changed == 'true'
         name: Run tests
         run: |
-          pnpm --filter "./apps/oxfmt" build-test
-          pnpm --filter "./apps/oxfmt" test
+          pnpm --filter "./apps/goatfmt" build-test
+          pnpm --filter "./apps/goatfmt" test
       - if: steps.filter.outputs.changed == 'true'
         run: |
           git diff --exit-code # Must commit everything
@@ -295,11 +295,11 @@ jobs:
       - uses: ./.github/actions/check-changes
         id: filter
         with:
-          exclude: oxc_linter,oxc_language_server
-          paths: napi/parser/,napi/minify/,napi/transform/,npm/oxc-types/,npm/runtime/,tasks/e2e/,pnpm-lock.yaml,package.json
+          exclude: goat_linter,goat_language_server
+          paths: napi/parser/,napi/minify/,napi/transform/,npm/goat-types/,npm/runtime/,tasks/e2e/,pnpm-lock.yaml,package.json
           token: ${{ secrets.GITHUB_TOKEN }}
           pr-number: ${{ github.event.pull_request.number }}
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
         if: steps.filter.outputs.changed == 'true'
       - uses: samypr100/setup-dev-drive@30f0f98ae5636b2b6501e181dfb3631b9974818d # v4.0.0
         if: steps.filter.outputs.changed == 'true'
@@ -310,7 +310,7 @@ jobs:
           env-mapping: |
             CARGO_HOME,{{ DEV_DRIVE }}/.cargo
             RUSTUP_HOME,{{ DEV_DRIVE }}/.rustup
-      - uses: oxc-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
+      - uses: goat-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
         if: steps.filter.outputs.changed == 'true'
         with:
           cache-key: napi
@@ -340,7 +340,7 @@ jobs:
         run: |
           git diff --exit-code # Must commit everything
 
-  test-napi-oxlint-windows:
+  test-napi-goatlint-windows:
     name: Test NAPI Oxlint (windows)
     runs-on: windows-latest
     if: ${{ github.ref_name == 'main' }}
@@ -350,10 +350,10 @@ jobs:
       - uses: ./.github/actions/check-changes
         id: filter
         with:
-          paths: apps/oxlint/,npm/oxlint/,npm/oxlint-plugin-eslint/,npm/oxlint-plugins/,npm/oxc-types/,pnpm-lock.yaml,package.json
+          paths: apps/goatlint/,npm/goatlint/,npm/goatlint-plugin-eslint/,npm/goatlint-plugins/,npm/goat-types/,pnpm-lock.yaml,package.json
           token: ${{ secrets.GITHUB_TOKEN }}
           pr-number: ${{ github.event.pull_request.number }}
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
         if: steps.filter.outputs.changed == 'true'
       - uses: samypr100/setup-dev-drive@30f0f98ae5636b2b6501e181dfb3631b9974818d # v4.0.0
         if: steps.filter.outputs.changed == 'true'
@@ -364,7 +364,7 @@ jobs:
           env-mapping: |
             CARGO_HOME,{{ DEV_DRIVE }}/.cargo
             RUSTUP_HOME,{{ DEV_DRIVE }}/.rustup
-      - uses: oxc-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
+      - uses: goat-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
         if: steps.filter.outputs.changed == 'true'
         with:
           cache-key: napi
@@ -373,14 +373,14 @@ jobs:
         name: Run tests
         working-directory: ${{ env.DEV_DRIVE_WORKSPACE }}
         run: |
-          pnpm --filter "./apps/oxlint" build-test
-          pnpm --filter "./apps/oxlint" test
+          pnpm --filter "./apps/goatlint" build-test
+          pnpm --filter "./apps/goatlint" test
       - if: steps.filter.outputs.changed == 'true'
         working-directory: ${{ env.DEV_DRIVE_WORKSPACE }}
         run: |
           git diff --exit-code # Must commit everything
 
-  test-napi-oxfmt-windows:
+  test-napi-goatfmt-windows:
     name: Test NAPI Oxfmt (windows)
     runs-on: windows-latest
     if: ${{ github.ref_name == 'main' }}
@@ -390,10 +390,10 @@ jobs:
       - uses: ./.github/actions/check-changes
         id: filter
         with:
-          paths: apps/oxfmt/,npm/oxfmt/,pnpm-lock.yaml,package.json
+          paths: apps/goatfmt/,npm/goatfmt/,pnpm-lock.yaml,package.json
           token: ${{ secrets.GITHUB_TOKEN }}
           pr-number: ${{ github.event.pull_request.number }}
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
         if: steps.filter.outputs.changed == 'true'
       - uses: samypr100/setup-dev-drive@30f0f98ae5636b2b6501e181dfb3631b9974818d # v4.0.0
         if: steps.filter.outputs.changed == 'true'
@@ -404,7 +404,7 @@ jobs:
           env-mapping: |
             CARGO_HOME,{{ DEV_DRIVE }}/.cargo
             RUSTUP_HOME,{{ DEV_DRIVE }}/.rustup
-      - uses: oxc-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
+      - uses: goat-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
         if: steps.filter.outputs.changed == 'true'
         with:
           cache-key: napi
@@ -413,8 +413,8 @@ jobs:
         name: Run tests
         working-directory: ${{ env.DEV_DRIVE_WORKSPACE }}
         run: |
-          pnpm --filter "./apps/oxfmt" build-test
-          pnpm --filter "./apps/oxfmt" test
+          pnpm --filter "./apps/goatfmt" build-test
+          pnpm --filter "./apps/goatfmt" test
       - if: steps.filter.outputs.changed == 'true'
         working-directory: ${{ env.DEV_DRIVE_WORKSPACE }}
         run: |
@@ -434,7 +434,7 @@ jobs:
     runs-on: namespace-profile-linux-x64-default
     steps:
       - uses: taiki-e/checkout-action@7d1e50e93dc4fb3bba58f85018fadf77898aee8b # v1.4.2
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
       - uses: namespacelabs/nscloud-cache-action@a90bb5d4b27522ce881c6e98eebd7d7e6d1653f9 # v1.4.2
         with:
           path: /home/runner/.rustup
@@ -444,8 +444,8 @@ jobs:
       - run: rustup component add clippy
       - run: cargo lint -- -D warnings
       - run: cargo lint --profile dev-no-debug-assertions -- -D warnings
-      - run: pnpm --filter oxlint-app build-js
-      - run: pnpm --filter oxfmt-app build-js
+      - run: pnpm --filter goatlint-app build-js
+      - run: pnpm --filter goatfmt-app build-js
       - run: node --run lint
 
   doc:
@@ -484,7 +484,7 @@ jobs:
         with:
           node-compat-table: false
 
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
         if: steps.filter.outputs.changed == 'true'
 
       - uses: namespacelabs/nscloud-cache-action@a90bb5d4b27522ce881c6e98eebd7d7e6d1653f9 # v1.4.2
@@ -566,7 +566,7 @@ jobs:
         with:
           filters: ".github/generated/ast_changes_watch_list.yml"
 
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
         if: steps.filter.outputs.src == 'true'
 
       - uses: namespacelabs/nscloud-cache-action@a90bb5d4b27522ce881c6e98eebd7d7e6d1653f9 # v1.4.2
@@ -583,7 +583,7 @@ jobs:
       - name: Check AST Changes
         if: steps.filter.outputs.src == 'true'
         run: |
-          cargo run -p oxc_ast_tools
+          cargo run -p goat_ast_tools
           git diff --exit-code ||
           (echo 'AST changes caused the "generated" code to get outdated. Have you forgotten to run the `just ast` command and/or commit generated codes?' && exit 1)
 
@@ -595,7 +595,7 @@ jobs:
       - uses: ./.github/actions/check-changes
         id: filter
         with:
-          packages: oxc_linter
+          packages: goat_linter
           paths: tasks/linter_codegen/
           token: ${{ secrets.GITHUB_TOKEN }}
           pr-number: ${{ github.event.pull_request.number }}

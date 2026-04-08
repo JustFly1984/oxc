@@ -22,7 +22,7 @@ impl Derive for DeriveTakeIn {
     }
 
     fn crate_name(&self) -> &'static str {
-        "oxc_allocator"
+        "goat_allocator"
     }
 
     fn prelude(&self) -> TokenStream {
@@ -30,7 +30,7 @@ impl Derive for DeriveTakeIn {
             #![expect(clippy::elidable_lifetime_names)]
 
             ///@@line_break
-            use oxc_allocator::TakeIn;
+            use goat_allocator::TakeIn;
         }
     }
 

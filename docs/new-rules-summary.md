@@ -11,7 +11,7 @@ This branch adds **39 new linter rules** under the `oxc` plugin, introduces **JS
 ### JSON File Linting Support
 
 - New span-preserving JSON parser (`json_parser.rs`) that maintains exact source positions for all elements
-- JSON files added to partial loader — oxlint can now lint `.json` files directly
+- JSON files added to partial loader — goatlint can now lint `.json` files directly
 - JSON files only run `oxc` plugin rules (ESLint, TypeScript, etc. plugins are skipped)
 
 ### Full Source Text API
@@ -116,7 +116,7 @@ All rules are under the **oxc** plugin in **nursery** category.
 ## Testing
 
 ```bash
-cargo test -p oxc_linter          # 1091 tests pass
-cargo clippy -p oxc_linter        # 0 warnings in new rule files
+cargo test -p goat_linter          # 1091 tests pass
+cargo clippy -p goat_linter        # 0 warnings in new rule files
 cargo lintgen                     # 785 rule variants generated
 ```

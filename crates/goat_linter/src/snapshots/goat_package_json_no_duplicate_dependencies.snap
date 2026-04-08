@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(package-json-no-duplicate-dependencies): `lodash` is listed in both `dependencies` and `devDependencies`.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:57]
+ 1 │ {"dependencies":{"lodash":"^4.17.0"},"devDependencies":{"lodash":"^4.17.0"}}
+   ·                                                         ────────
+   ╰────
+  help: Remove the package from one of the dependency groups.
+
+  ⚠ goat(package-json-no-duplicate-dependencies): `lodash` is listed in both `dependencies` and `devDependencies`.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:75]
+ 1 │ {"dependencies":{"lodash":"^4.17.0","react":"^18.0.0"},"devDependencies":{"lodash":"^4.17.0","vitest":"^1.0.0"}}
+   ·                                                                           ────────
+   ╰────
+  help: Remove the package from one of the dependency groups.

@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(no-prop-types): PropTypes is deprecated
+   ╭─[no_prop_types.tsx:1:11]
+ 1 │ Component.propTypes = { name: PropTypes.string };
+   ·           ─────────
+   ╰────
+  help: Use TypeScript for type checking instead of PropTypes. PropTypes is deprecated since React 15.5.
+
+  ⚠ goat(no-prop-types): PropTypes is deprecated
+   ╭─[no_prop_types.tsx:1:23]
+ 1 │ import PropTypes from 'prop-types';
+   ·                       ────────────
+   ╰────
+  help: Use TypeScript for type checking instead of PropTypes. PropTypes is deprecated since React 15.5.

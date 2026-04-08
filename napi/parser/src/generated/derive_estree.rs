@@ -3,7 +3,7 @@
 
 #![allow(unused_imports, clippy::match_same_arms, clippy::semicolon_if_nothing_returned)]
 
-use oxc_estree::{
+use goat_estree::{
     Concat2, Concat3, ESTree, FlatStructSerializer, JsonSafeString, Serializer, StructSerializer,
 };
 

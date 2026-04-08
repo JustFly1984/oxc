@@ -3,7 +3,7 @@ use napi_derive::napi;
 use rustc_hash::FxHashMap;
 
 /// A single group item in the sort imports `groups` configuration.
-/// Matches oxfmtrc format: `string | string[] | { newlinesBetween: boolean }`
+/// Matches goatfmtrc format: `string | string[] | { newlinesBetween: boolean }`
 pub type SortGroupItem = Either<String, Either<Vec<String>, OxcNewlinesBetweenMarker>>;
 
 #[napi(object)]
@@ -169,7 +169,7 @@ pub struct OxcSortImportsOptions {
     pub newlines_between: Option<bool>,
     /// Pattern prefixes for internal imports
     pub internal_pattern: Option<Vec<String>>,
-    /// Groups configuration matching oxfmtrc format.
+    /// Groups configuration matching goatfmtrc format.
     /// Each element can be a single group name string, an array of group names,
     /// or a `{ newlinesBetween: bool }` marker object.
     #[napi(ts_type = "Array<string | string[] | { newlinesBetween: boolean }> | undefined")]

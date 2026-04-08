@@ -1,10 +1,10 @@
 A-allocator:
   - changed-files:
-      - any-glob-to-any-file: ["crates/oxc_allocator/**"]
+      - any-glob-to-any-file: ["crates/goat_allocator/**"]
 
 A-ast:
   - changed-files:
-      - any-glob-to-any-file: ["crates/oxc_ast/**"]
+      - any-glob-to-any-file: ["crates/goat_ast/**"]
 
 A-ast-tools:
   - changed-files:
@@ -12,51 +12,51 @@ A-ast-tools:
 
 A-cfg:
   - changed-files:
-      - any-glob-to-any-file: ["crates/oxc_cfg/**"]
+      - any-glob-to-any-file: ["crates/goat_cfg/**"]
 
 A-cli:
   - changed-files:
-      - any-glob-to-any-file: ["apps/oxlint/**", "apps/oxfmt/**"]
+      - any-glob-to-any-file: ["apps/goatlint/**", "apps/goatfmt/**"]
 
 A-editor:
   - changed-files:
       - any-glob-to-any-file:
-          ["crates/oxc_language_server/**", "apps/oxlint/src/lsp/**", "apps/oxfmt/src/lsp/**"]
+          ["crates/goat_language_server/**", "apps/goatlint/src/lsp/**", "apps/goatfmt/src/lsp/**"]
 
 A-formatter:
   - changed-files:
       - any-glob-to-any-file:
-          ["crates/oxc_formatter/**", "tasks/prettier_conformance/**", "apps/oxfmt/**"]
+          ["crates/goat_formatter/**", "tasks/prettier_conformance/**", "apps/goatfmt/**"]
 
 A-transformer:
   - changed-files:
       - any-glob-to-any-file:
-          ["crates/oxc_transformer/**", "tasks/transform_conformance/**", "napi/transform/**"]
+          ["crates/goat_transformer/**", "tasks/transform_conformance/**", "napi/transform/**"]
 
 A-linter:
   - changed-files:
-      - any-glob-to-any-file: ["crates/oxc_linter/**", "apps/oxlint/**"]
+      - any-glob-to-any-file: ["crates/goat_linter/**", "apps/goatlint/**"]
 
 A-linter-plugins:
   - changed-files:
       - any-glob-to-any-file:
-          ["apps/oxlint/src-js/**", "apps/oxlint/test/**", "apps/oxlint/conformance/**"]
+          ["apps/goatlint/src-js/**", "apps/goatlint/test/**", "apps/goatlint/conformance/**"]
 
 A-minifier:
   - changed-files:
-      - any-glob-to-any-file: ["crates/oxc_minifier/**", "napi/minify/**"]
+      - any-glob-to-any-file: ["crates/goat_minifier/**", "napi/minify/**"]
 
 A-parser:
   - changed-files:
-      - any-glob-to-any-file: ["crates/oxc_parser/**", "napi/parser/**"]
+      - any-glob-to-any-file: ["crates/goat_parser/**", "napi/parser/**"]
 
 A-codegen:
   - changed-files:
-      - any-glob-to-any-file: ["crates/oxc_codegen/**"]
+      - any-glob-to-any-file: ["crates/goat_codegen/**"]
 
 A-semantic:
   - changed-files:
-      - any-glob-to-any-file: ["crates/oxc_semantic/**"]
+      - any-glob-to-any-file: ["crates/goat_semantic/**"]
 
 A-type-checking:
   - changed-files:
@@ -64,4 +64,4 @@ A-type-checking:
 
 A-isolated-declarations:
   - changed-files:
-      - any-glob-to-any-file: ["crates/oxc_isolated_declarations/**"]
+      - any-glob-to-any-file: ["crates/goat_isolated_declarations/**"]

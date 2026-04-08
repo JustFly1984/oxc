@@ -1,4 +1,4 @@
-//! Generator for `oxc_formatter`.
+//! Generator for `goat_formatter`.
 //!
 
 use proc_macro2::TokenStream;
@@ -81,8 +81,8 @@ impl Generator for FormatterFormatGenerator {
 
         let output = quote! {
             #![expect(clippy::match_same_arms)]
-            use oxc_ast::ast::*;
-            use oxc_span::GetSpan;
+            use goat_ast::ast::*;
+            use goat_span::GetSpan;
 
             ///@@line_break
             use crate::{

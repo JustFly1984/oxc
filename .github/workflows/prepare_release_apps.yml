@@ -14,20 +14,20 @@ concurrency:
 
 jobs:
   prepare:
-    if: github.repository == 'oxc-project/oxc'
+    if: github.repository == 'goat-project/oxc'
     name: Prepare Release
     runs-on: ubuntu-latest
     outputs:
       pull-request-number: ${{ steps.pr.outputs.pull-request-number }}
-      oxlint_version: ${{ steps.run.outputs.OXLINT_VERSION }}
-      oxfmt_version: ${{ steps.run.outputs.OXFMT_VERSION }}
+      goatlint_version: ${{ steps.run.outputs.OXLINT_VERSION }}
+      goatfmt_version: ${{ steps.run.outputs.OXFMT_VERSION }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
           persist-credentials: false
 
-      - uses: oxc-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
+      - uses: goat-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
         with:
           cache-key: warm
           tools: cargo-release-oxc
@@ -36,7 +36,7 @@ jobs:
         id: run
         run: |
           mkdir -p target
-          cargo release-oxc update --release oxlint --release oxfmt
+          cargo release-oxc update --release goatlint --release goatfmt
           echo "OXLINT_VERSION=$(cat ./target/OXLINT_VERSION)" >> $GITHUB_OUTPUT
           echo "OXFMT_VERSION=$(cat ./target/OXFMT_VERSION)" >> $GITHUB_OUTPUT
           {
@@ -47,12 +47,12 @@ jobs:
             cat ./target/OXFMT_CHANGELOG
           } > ./target/PR_BODY.md
 
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
 
       - name: Rebuild NAPI bindings
         run: |
-          pnpm --filter oxlint-app run build-dev
-          pnpm --filter oxfmt-app run build-dev
+          pnpm --filter goatlint-app run build-dev
+          pnpm --filter goatfmt-app run build-dev
 
       - name: Update Cargo.lock
         run: cargo check
@@ -63,8 +63,8 @@ jobs:
           # bot account with PAT required for triggering workflow runs
           # See https://github.com/peter-evans/create-pull-request/blob/main/docs/concepts-guidelines.md#triggering-further-workflow-runs
           token: ${{ secrets.OXC_BOT_PAT }}
-          commit-message: "release(apps): oxlint v${{ steps.run.outputs.OXLINT_VERSION }} && oxfmt v${{ steps.run.outputs.OXFMT_VERSION }}"
-          title: "release(apps): oxlint v${{ steps.run.outputs.OXLINT_VERSION }} && oxfmt v${{ steps.run.outputs.OXFMT_VERSION }}"
+          commit-message: "release(apps): goatlint v${{ steps.run.outputs.OXLINT_VERSION }} && goatfmt v${{ steps.run.outputs.OXFMT_VERSION }}"
+          title: "release(apps): goatlint v${{ steps.run.outputs.OXLINT_VERSION }} && goatfmt v${{ steps.run.outputs.OXFMT_VERSION }}"
           branch: release/apps
           branch-suffix: timestamp
           base: main
@@ -82,42 +82,42 @@ jobs:
       - uses: taiki-e/checkout-action@7d1e50e93dc4fb3bba58f85018fadf77898aee8b # v1.4.2
 
       - uses: peter-evans/create-or-update-comment@e8674b075228eee787fea43ef493e45ece1004c9 # v5.0.0
-        id: comment-oxlint
+        id: comment-goatlint
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ needs.prepare.outputs.pull-request-number }}
           body: |
             Triggering Oxlint Ecosystem CI
-            https://github.com/oxc-project/oxc-ecosystem-ci/actions/workflows/oxlint-ci.yml
+            https://github.com/goat-project/oxc-ecosystem-ci/actions/workflows/goatlint-ci.yml
 
       - uses: peter-evans/create-or-update-comment@e8674b075228eee787fea43ef493e45ece1004c9 # v5.0.0
-        id: comment-oxfmt
+        id: comment-goatfmt
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ needs.prepare.outputs.pull-request-number }}
           body: |
             Triggering Oxfmt Ecosystem CI
-            https://github.com/oxc-project/oxc-ecosystem-ci/actions/workflows/oxfmt-ci.yml
+            https://github.com/goat-project/oxc-ecosystem-ci/actions/workflows/goatfmt-ci.yml
 
       - uses: benc-uk/workflow-dispatch@7a027648b88c2413826b6ddd6c76114894dc5ec4 # v1.3.1
         with:
-          repo: oxc-project/oxc-ecosystem-ci
-          workflow: oxlint-ci.yml
+          repo: goat-project/oxc-ecosystem-ci
+          workflow: goatlint-ci.yml
           token: ${{ secrets.OXC_BOT_PAT }}
           ref: main
-          inputs: '{ "issue-number": "${{ needs.prepare.outputs.pull-request-number }}", "comment-id": "${{ steps.comment-oxlint.outputs.comment-id }}" }'
+          inputs: '{ "issue-number": "${{ needs.prepare.outputs.pull-request-number }}", "comment-id": "${{ steps.comment-goatlint.outputs.comment-id }}" }'
 
       - uses: benc-uk/workflow-dispatch@7a027648b88c2413826b6ddd6c76114894dc5ec4 # v1.3.1
         with:
-          repo: oxc-project/oxc-ecosystem-ci
-          workflow: oxfmt-ci.yml
+          repo: goat-project/oxc-ecosystem-ci
+          workflow: goatfmt-ci.yml
           token: ${{ secrets.OXC_BOT_PAT }}
           ref: main
-          inputs: '{ "issue-number": "${{ needs.prepare.outputs.pull-request-number }}", "comment-id": "${{ steps.comment-oxfmt.outputs.comment-id }}" }'
+          inputs: '{ "issue-number": "${{ needs.prepare.outputs.pull-request-number }}", "comment-id": "${{ steps.comment-goatfmt.outputs.comment-id }}" }'
 
   website:
     needs: prepare
-    name: Update oxc.rs
+    name: Update goatlint.dev
     runs-on: ubuntu-slim
     permissions:
       actions: write
@@ -125,8 +125,8 @@ jobs:
       - uses: taiki-e/checkout-action@7d1e50e93dc4fb3bba58f85018fadf77898aee8b # v1.4.2
       - uses: benc-uk/workflow-dispatch@7a027648b88c2413826b6ddd6c76114894dc5ec4 # v1.3.1
         with:
-          repo: oxc-project/website
+          repo: goat-project/website
           workflow: release.yml
           token: ${{ secrets.OXC_BOT_PAT }}
           ref: main
-          inputs: '{ "issue-number": "${{ needs.prepare.outputs.pull-request-number }}", "version": "${{ needs.prepare.outputs.oxlint_version }}" }'
+          inputs: '{ "issue-number": "${{ needs.prepare.outputs.pull-request-number }}", "version": "${{ needs.prepare.outputs.goatlint_version }}" }'

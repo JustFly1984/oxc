@@ -20,14 +20,14 @@ use std::path::PathBuf;
 use napi::{Either, Task, bindgen_prelude::AsyncTask};
 use napi_derive::napi;
 
-use oxc_allocator::Allocator;
-use oxc_codegen::Codegen;
-use oxc_diagnostics::OxcDiagnostic;
-use oxc_minifier::Minifier;
-use oxc_napi::OxcError;
-use oxc_parser::Parser;
+use goat_allocator::Allocator;
+use goat_codegen::Codegen;
+use goat_diagnostics::GoatDiagnostic;
+use goat_minifier::Minifier;
+use goat_napi::OxcError;
+use goat_parser::Parser;
 use oxc_sourcemap::napi::SourceMap;
-use oxc_span::SourceType;
+use goat_span::SourceType;
 
 pub use crate::options::*;
 
@@ -40,17 +40,17 @@ pub struct MinifyResult {
 }
 
 fn minify_impl(filename: &str, source_text: &str, options: Option<MinifyOptions>) -> MinifyResult {
-    use oxc_codegen::CodegenOptions;
+    use goat_codegen::CodegenOptions;
     let options = options.unwrap_or_default();
 
-    let minifier_options = match oxc_minifier::MinifierOptions::try_from(&options) {
+    let minifier_options = match goat_minifier::MinifierOptions::try_from(&options) {
         Ok(options) => options,
         Err(error) => {
             return MinifyResult {
                 errors: OxcError::from_diagnostics(
                     filename,
                     source_text,
-                    vec![OxcDiagnostic::error(error)],
+                    vec![GoatDiagnostic::error(error)],
                 ),
                 ..MinifyResult::default()
             };

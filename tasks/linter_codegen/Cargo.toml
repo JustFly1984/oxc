@@ -1,5 +1,5 @@
 [package]
-name = "oxc_linter_codegen"
+name = "goat_linter_codegen"
 version = "0.0.0"
 edition.workspace = true
 license.workspace = true
@@ -9,7 +9,7 @@ publish = false
 workspace = true
 
 [[bin]]
-name = "oxc_linter_codegen"
+name = "goat_linter_codegen"
 test = false
 doctest = false
 

@@ -1,4 +1,4 @@
-//! Generator for `oxc_traverse` crate.
+//! Generator for `goat_traverse` crate.
 //!
 //! Generates 3 files:
 //! * `traverse.rs` - `Traverse` trait with `enter_*` / `exit_*` methods.
@@ -128,8 +128,8 @@ pub(super) fn generate_traverse_trait(
     });
 
     quote! {
-        use oxc_allocator::Vec;
-        use oxc_ast::ast::*;
+        use goat_allocator::Vec;
+        use goat_ast::ast::*;
 
         ///@@line_break
         #ctx_use

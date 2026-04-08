@@ -1,7 +1,7 @@
 use napi::Either;
 use napi_derive::napi;
 
-use oxc_compat::EngineTargets;
+use goat_compat::EngineTargets;
 
 #[napi(object)]
 pub struct TreeShakeOptions {
@@ -42,21 +42,21 @@ pub struct TreeShakeOptions {
     pub invalid_import_side_effects: Option<bool>,
 }
 
-impl TryFrom<&TreeShakeOptions> for oxc_minifier::TreeShakeOptions {
+impl TryFrom<&TreeShakeOptions> for goat_minifier::TreeShakeOptions {
     type Error = String;
 
     fn try_from(o: &TreeShakeOptions) -> Result<Self, Self::Error> {
-        let default = oxc_minifier::TreeShakeOptions::default();
-        Ok(oxc_minifier::TreeShakeOptions {
+        let default = goat_minifier::TreeShakeOptions::default();
+        Ok(goat_minifier::TreeShakeOptions {
             annotations: o.annotations.unwrap_or(default.annotations),
             manual_pure_functions: o
                 .manual_pure_functions
                 .clone()
                 .unwrap_or(default.manual_pure_functions),
             property_read_side_effects: match &o.property_read_side_effects {
-                Some(Either::A(false)) => oxc_minifier::PropertyReadSideEffects::None,
-                Some(Either::A(true)) => oxc_minifier::PropertyReadSideEffects::All,
-                Some(Either::B(s)) if s == "always" => oxc_minifier::PropertyReadSideEffects::All,
+                Some(Either::A(false)) => goat_minifier::PropertyReadSideEffects::None,
+                Some(Either::A(true)) => goat_minifier::PropertyReadSideEffects::All,
+                Some(Either::B(s)) if s == "always" => goat_minifier::PropertyReadSideEffects::All,
                 Some(Either::B(s)) => {
                     return Err(format!(
                         "Invalid propertyReadSideEffects value: '{s}'. Expected 'always'."
@@ -136,11 +136,11 @@ pub struct CompressOptions {
     pub treeshake: Option<TreeShakeOptions>,
 }
 
-impl TryFrom<&CompressOptions> for oxc_minifier::CompressOptions {
+impl TryFrom<&CompressOptions> for goat_minifier::CompressOptions {
     type Error = String;
     fn try_from(o: &CompressOptions) -> Result<Self, Self::Error> {
-        let default = oxc_minifier::CompressOptions::default();
-        Ok(oxc_minifier::CompressOptions {
+        let default = goat_minifier::CompressOptions::default();
+        Ok(goat_minifier::CompressOptions {
             target: match &o.target {
                 Some(Either::A(s)) => EngineTargets::from_target(s)?,
                 Some(Either::B(list)) => EngineTargets::from_target_list(list)?,
@@ -151,18 +151,18 @@ impl TryFrom<&CompressOptions> for oxc_minifier::CompressOptions {
             join_vars: o.join_vars.unwrap_or(true),
             sequences: o.sequences.unwrap_or(true),
             unused: match &o.unused {
-                Some(Either::A(true)) => oxc_minifier::CompressOptionsUnused::Remove,
-                Some(Either::A(false)) => oxc_minifier::CompressOptionsUnused::Keep,
+                Some(Either::A(true)) => goat_minifier::CompressOptionsUnused::Remove,
+                Some(Either::A(false)) => goat_minifier::CompressOptionsUnused::Keep,
                 Some(Either::B(s)) => match s.as_str() {
-                    "keep_assign" => oxc_minifier::CompressOptionsUnused::KeepAssign,
+                    "keep_assign" => goat_minifier::CompressOptionsUnused::KeepAssign,
                     _ => return Err(format!("Invalid unused option: `{s}`.")),
                 },
                 None => default.unused,
             },
             keep_names: o.keep_names.as_ref().map(Into::into).unwrap_or_default(),
             treeshake: match &o.treeshake {
-                Some(ts) => oxc_minifier::TreeShakeOptions::try_from(ts)?,
-                None => oxc_minifier::TreeShakeOptions::default(),
+                Some(ts) => goat_minifier::TreeShakeOptions::try_from(ts)?,
+                None => goat_minifier::TreeShakeOptions::default(),
             },
             drop_labels: o
                 .drop_labels
@@ -191,9 +191,9 @@ pub struct CompressOptionsKeepNames {
     pub class: bool,
 }
 
-impl From<&CompressOptionsKeepNames> for oxc_minifier::CompressOptionsKeepNames {
+impl From<&CompressOptionsKeepNames> for goat_minifier::CompressOptionsKeepNames {
     fn from(o: &CompressOptionsKeepNames) -> Self {
-        oxc_minifier::CompressOptionsKeepNames { function: o.function, class: o.class }
+        goat_minifier::CompressOptionsKeepNames { function: o.function, class: o.class }
     }
 }
 
@@ -214,15 +214,15 @@ pub struct MangleOptions {
     pub debug: Option<bool>,
 }
 
-impl From<&MangleOptions> for oxc_minifier::MangleOptions {
+impl From<&MangleOptions> for goat_minifier::MangleOptions {
     fn from(o: &MangleOptions) -> Self {
-        let default = oxc_minifier::MangleOptions::default();
+        let default = goat_minifier::MangleOptions::default();
         Self {
             top_level: o.toplevel,
             keep_names: match &o.keep_names {
-                Some(Either::A(false)) => oxc_minifier::MangleOptionsKeepNames::all_false(),
-                Some(Either::A(true)) => oxc_minifier::MangleOptionsKeepNames::all_true(),
-                Some(Either::B(o)) => oxc_minifier::MangleOptionsKeepNames::from(o),
+                Some(Either::A(false)) => goat_minifier::MangleOptionsKeepNames::all_false(),
+                Some(Either::A(true)) => goat_minifier::MangleOptionsKeepNames::all_true(),
+                Some(Either::B(o)) => goat_minifier::MangleOptionsKeepNames::from(o),
                 None => default.keep_names,
             },
             debug: o.debug.unwrap_or(default.debug),
@@ -243,9 +243,9 @@ pub struct MangleOptionsKeepNames {
     pub class: bool,
 }
 
-impl From<&MangleOptionsKeepNames> for oxc_minifier::MangleOptionsKeepNames {
+impl From<&MangleOptionsKeepNames> for goat_minifier::MangleOptionsKeepNames {
     fn from(o: &MangleOptionsKeepNames) -> Self {
-        oxc_minifier::MangleOptionsKeepNames { function: o.function, class: o.class }
+        goat_minifier::MangleOptionsKeepNames { function: o.function, class: o.class }
     }
 }
 
@@ -263,13 +263,13 @@ impl Default for CodegenOptions {
     }
 }
 
-impl From<&CodegenOptions> for oxc_codegen::CodegenOptions {
+impl From<&CodegenOptions> for goat_codegen::CodegenOptions {
     fn from(o: &CodegenOptions) -> Self {
         if o.remove_whitespace.is_some_and(|b| b) {
-            oxc_codegen::CodegenOptions::minify()
+            goat_codegen::CodegenOptions::minify()
         } else {
             // Need to remove all comments.
-            oxc_codegen::CodegenOptions { minify: false, ..oxc_codegen::CodegenOptions::minify() }
+            goat_codegen::CodegenOptions { minify: false, ..goat_codegen::CodegenOptions::minify() }
         }
     }
 }
@@ -289,20 +289,20 @@ pub struct MinifyOptions {
     pub sourcemap: Option<bool>,
 }
 
-impl TryFrom<&MinifyOptions> for oxc_minifier::MinifierOptions {
+impl TryFrom<&MinifyOptions> for goat_minifier::MinifierOptions {
     type Error = String;
 
     fn try_from(o: &MinifyOptions) -> Result<Self, Self::Error> {
         let compress = match &o.compress {
             Some(Either::A(false)) => None,
-            None | Some(Either::A(true)) => Some(oxc_minifier::CompressOptions::default()),
-            Some(Either::B(o)) => Some(oxc_minifier::CompressOptions::try_from(o)?),
+            None | Some(Either::A(true)) => Some(goat_minifier::CompressOptions::default()),
+            Some(Either::B(o)) => Some(goat_minifier::CompressOptions::try_from(o)?),
         };
         let mangle = match &o.mangle {
             Some(Either::A(false)) => None,
-            None | Some(Either::A(true)) => Some(oxc_minifier::MangleOptions::default()),
-            Some(Either::B(o)) => Some(oxc_minifier::MangleOptions::from(o)),
+            None | Some(Either::A(true)) => Some(goat_minifier::MangleOptions::default()),
+            Some(Either::B(o)) => Some(goat_minifier::MangleOptions::from(o)),
         };
-        Ok(oxc_minifier::MinifierOptions { compress, mangle })
+        Ok(goat_minifier::MinifierOptions { compress, mangle })
     }
 }

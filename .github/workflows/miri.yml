@@ -7,23 +7,23 @@ on:
   pull_request:
     types: [opened, synchronize]
     paths:
-      - "crates/oxc_allocator/**"
-      - "crates/oxc_ast/src/utf8_to_utf16.rs"
-      - "crates/oxc_ast/src/generated/utf8_to_utf16_converter.rs"
-      - "crates/oxc_data_structures/**"
-      - "crates/oxc_parser/**"
-      - "crates/oxc_traverse/**"
+      - "crates/goat_allocator/**"
+      - "crates/goat_ast/src/utf8_to_utf16.rs"
+      - "crates/goat_ast/src/generated/utf8_to_utf16_converter.rs"
+      - "crates/goat_data_structures/**"
+      - "crates/goat_parser/**"
+      - "crates/goat_traverse/**"
       - ".github/workflows/miri.yml"
   push:
     branches:
       - main
     paths:
-      - "crates/oxc_allocator/**"
-      - "crates/oxc_ast/src/utf8_to_utf16.rs"
-      - "crates/oxc_ast/src/generated/utf8_to_utf16_converter.rs"
-      - "crates/oxc_data_structures/**"
-      - "crates/oxc_parser/**"
-      - "crates/oxc_traverse/**"
+      - "crates/goat_allocator/**"
+      - "crates/goat_ast/src/utf8_to_utf16.rs"
+      - "crates/goat_ast/src/generated/utf8_to_utf16_converter.rs"
+      - "crates/goat_data_structures/**"
+      - "crates/goat_parser/**"
+      - "crates/goat_traverse/**"
       - ".github/workflows/miri.yml"
 
 concurrency:
@@ -45,7 +45,7 @@ jobs:
       - uses: ./.github/actions/check-changes
         id: filter
         with:
-          packages: oxc_allocator,oxc_ast,oxc_data_structures,oxc_parser,oxc_transformer
+          packages: goat_allocator,goat_ast,goat_data_structures,goat_parser,goat_transformer
           paths: .github/workflows/miri.yml
           token: ${{ secrets.GITHUB_TOKEN }}
           pr-number: ${{ github.event.pull_request.number }}
@@ -62,9 +62,9 @@ jobs:
           cargo +"${MIRI_TOOLCHAIN}" miri setup
 
       # `--lib --bins --tests` omits doctests, which Miri can't run
-      # https://github.com/oxc-project/oxc/pull/11092
+      # https://github.com/goat-project/oxc/pull/11092
       - name: Test with Miri
         if: steps.filter.outputs.changed == 'true'
         run: |
-          cargo +"${MIRI_TOOLCHAIN}" miri test --lib --bins --tests --all-features -p oxc_allocator -p oxc_ast -p oxc_data_structures
-          cargo +"${MIRI_TOOLCHAIN}" miri test --lib --bins --tests -p oxc_parser -p oxc_transformer
+          cargo +"${MIRI_TOOLCHAIN}" miri test --lib --bins --tests --all-features -p goat_allocator -p goat_ast -p goat_data_structures
+          cargo +"${MIRI_TOOLCHAIN}" miri test --lib --bins --tests -p goat_parser -p goat_transformer

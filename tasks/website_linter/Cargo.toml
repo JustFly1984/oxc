@@ -15,8 +15,8 @@ doctest = false
 [dependencies]
 bpaf = { workspace = true, features = ["docgen"] }
 itertools = { workspace = true }
-oxc_linter = { workspace = true, features = ["ruledocs"] }
-oxlint = { workspace = true }
+goat_linter = { workspace = true, features = ["ruledocs"] }
+goatlint = { workspace = true }
 pico-args = { workspace = true }
 project-root = { workspace = true }
 schemars = { workspace = true }

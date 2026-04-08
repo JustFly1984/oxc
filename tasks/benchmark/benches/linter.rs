@@ -2,14 +2,14 @@ use std::{path::Path, sync::Arc};
 
 use rustc_hash::FxHashMap;
 
-use oxc_allocator::Allocator;
+use goat_allocator::Allocator;
 use oxc_benchmark::{BenchmarkId, Criterion, criterion_group, criterion_main};
-use oxc_linter::{
+use goat_linter::{
     ConfigStore, ConfigStoreBuilder, ContextSubHost, ExternalPluginStore, FixKind, LintOptions,
     Linter, ModuleRecord,
 };
-use oxc_parser::Parser;
-use oxc_semantic::SemanticBuilder;
+use goat_parser::Parser;
+use goat_semantic::SemanticBuilder;
 use oxc_tasks_common::TestFiles;
 
 fn bench_linter(criterion: &mut Criterion) {

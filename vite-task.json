@@ -10,12 +10,12 @@
       "cacheable": true
     },
     "vp:lint": {
-      "dependsOn": ["vp:build-oxlint"],
+      "dependsOn": ["vp:build-goatlint"],
       "command": "pnpm run lint",
       "cacheable": true
     },
-    "vp:build-oxlint": {
-      "command": "pnpm --filter oxlint-app build-js",
+    "vp:build-goatlint": {
+      "command": "pnpm --filter goatlint-app build-js",
       "cacheable": true
     },
     "vp:build-test": {

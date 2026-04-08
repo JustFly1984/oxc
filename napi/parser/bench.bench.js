@@ -16,8 +16,8 @@ import { getVisitorsArr, Visitor } from "./src-js/raw-transfer/visitor.js";
 // Same fixtures as used in Rust parser benchmarks
 let fixtureUrls = [
   "https://cdn.jsdelivr.net/gh/microsoft/TypeScript@v5.3.3/src/compiler/checker.ts",
-  "https://cdn.jsdelivr.net/gh/oxc-project/benchmark-files@main/cal.com.tsx",
-  "https://cdn.jsdelivr.net/gh/oxc-project/benchmark-files@main/RadixUIAdoptionSection.jsx",
+  "https://cdn.jsdelivr.net/gh/goat-project/benchmark-files@main/cal.com.tsx",
+  "https://cdn.jsdelivr.net/gh/goat-project/benchmark-files@main/RadixUIAdoptionSection.jsx",
   "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.269/build/pdf.mjs",
   "https://cdn.jsdelivr.net/npm/antd@4.16.1/dist/antd.js",
 ];
@@ -62,33 +62,33 @@ const fixtures = await Promise.all(
 
 // Run benchmarks
 for (const { filename, code } of fixtures) {
-  // oxlint-disable-next-line jest/valid-title
+  // goatlint-disable-next-line jest/valid-title
   describe(filename, () => {
     benchStandard("parser_napi", () => {
       const ret = parseSync(filename, code);
       // Read returned object's properties to execute getters which deserialize
-      // oxlint-disable-next-line no-unused-vars
+      // goatlint-disable-next-line no-unused-vars
       const { program, comments, module, errors } = ret;
     });
 
     benchRaw("parser_napi_raw", () => {
       const ret = parseSync(filename, code, { experimentalRawTransfer: true });
       // Read returned object's properties to execute getters
-      // oxlint-disable-next-line no-unused-vars
+      // goatlint-disable-next-line no-unused-vars
       const { program, comments, module, errors } = ret;
     });
 
     benchStandard("parser_napi_async", async () => {
       const ret = await parseAsync(filename, code);
       // Read returned object's properties to execute getters which deserialize
-      // oxlint-disable-next-line no-unused-vars
+      // goatlint-disable-next-line no-unused-vars
       const { program, comments, module, errors } = ret;
     });
 
     benchRaw("parser_napi_async_raw", async () => {
       const ret = await parseAsync(filename, code, { experimentalRawTransfer: true });
       // Read returned object's properties to execute getters
-      // oxlint-disable-next-line no-unused-vars
+      // goatlint-disable-next-line no-unused-vars
       const { program, comments, module, errors } = ret;
     });
 
@@ -107,7 +107,7 @@ for (const { filename, code } of fixtures) {
       deserialize(buffer, code, sourceByteLen, true);
     });
 
-    // oxlint-disable-next-line no-unused-vars
+    // goatlint-disable-next-line no-unused-vars
     let debuggerCount = 0;
     const debuggerVisitor = new Visitor({
       DebuggerStatement(_debuggerStmt) {
@@ -115,7 +115,7 @@ for (const { filename, code } of fixtures) {
       },
     });
 
-    // oxlint-disable-next-line no-unused-vars
+    // goatlint-disable-next-line no-unused-vars
     let identCount = 0;
     const identVisitor = new Visitor({
       BindingIdentifier(_ident) {

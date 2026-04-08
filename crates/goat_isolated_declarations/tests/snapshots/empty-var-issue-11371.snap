@@ -1,0 +1,8 @@
+---
+source: crates/goat_isolated_declarations/tests/mod.rs
+input_file: crates/goat_isolated_declarations/tests/fixtures/empty-var-issue-11371.ts
+---
+```
+==================== .D.TS ====================
+
+export {};

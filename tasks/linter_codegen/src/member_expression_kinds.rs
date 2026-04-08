@@ -5,12 +5,12 @@ use crate::{node_type_set::NodeTypeSet, utils::find_impl_function};
 /// Fetches the current list of variants that can be returned by `AstKind::as_member_expression_kind()`.
 /// We read the source file to avoid hardcoding the list here and ensure this will stay updated.
 pub fn get_member_expression_kinds() -> Option<NodeTypeSet> {
-    // Read crates/oxc_ast/src/ast_kind_impl.rs and extract all variants in `as_member_expression_kind` function
+    // Read crates/goat_ast/src/ast_kind_impl.rs and extract all variants in `as_member_expression_kind` function
     let ast_kind_impl_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
         .parent()?
         .parent()?
         .join("crates")
-        .join("oxc_ast")
+        .join("goat_ast")
         .join("src")
         .join("ast_kind_impl.rs");
     let content = std::fs::read_to_string(ast_kind_impl_path).ok()?;

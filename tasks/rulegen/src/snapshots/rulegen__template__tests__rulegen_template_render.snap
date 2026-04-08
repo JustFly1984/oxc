@@ -2,9 +2,9 @@
 source: tasks/rulegen/src/template.rs
 expression: rendered
 ---
-use oxc_diagnostics::OxcDiagnostic;
-use oxc_macros::declare_oxc_lint;
-use oxc_span::Span;
+use goat_diagnostics::GoatDiagnostic;
+use goat_macros::declare_goat_lint;
+use goat_span::Span;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -15,9 +15,9 @@ use crate::{
     AstNode,
 };
 
-fn my_rule_diagnostic(span: Span) -> OxcDiagnostic {
-    // See <https://oxc.rs/docs/contribute/linter/adding-rules.html#diagnostics> for details
-    OxcDiagnostic::warn("Should be an imperative statement about what is wrong.")
+fn my_rule_diagnostic(span: Span) -> GoatDiagnostic {
+    // See <https://goatlint.dev/docs/contribute/linter/adding-rules.html#diagnostics> for details
+    GoatDiagnostic::warn("Should be an imperative statement about what is wrong.")
         .with_help("Should be a command-like statement that tells the user how to fix the issue.")
         .with_label(span)
 }
@@ -32,8 +32,8 @@ struct ConfigObject {
 #[derive(Debug, Default, Clone, Deserialize, Serialize, JsonSchema)]
 pub struct MyRule(ConfigObject);
 
-// See <https://github.com/oxc-project/oxc/issues/6050> for documentation details.
-declare_oxc_lint!(
+// See <https://github.com/goat-project/oxc/issues/6050> for documentation details.
+declare_goat_lint!(
     /// ### What it does
     ///
     /// FIXME: Briefly describe the rule's purpose.
@@ -56,7 +56,7 @@ declare_oxc_lint!(
     MyRule,
     eslint,
     nursery, // TODO: change category to `correctness`, `suspicious`, `pedantic`, `perf`, `restriction`, or `style`
-             // See <https://oxc.rs/docs/contribute/linter.html#rule-category> for details
+             // See <https://goatlint.dev/docs/contribute/linter.html#rule-category> for details
     pending, // TODO: describe fix capabilities. Remove or set to `none` if no fix can be done,
              // keep at 'pending' if you think one could be added but don't know how.
              // Options are 'fix', 'fix_dangerous', 'suggestion', and 'conditional_fix_suggestion'

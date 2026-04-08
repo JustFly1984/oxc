@@ -34,7 +34,7 @@ impl Derive for DeriveDummy {
     }
 
     fn crate_name(&self) -> &'static str {
-        "oxc_allocator"
+        "goat_allocator"
     }
 
     fn prelude(&self) -> TokenStream {
@@ -45,7 +45,7 @@ impl Derive for DeriveDummy {
             use std::cell::Cell;
 
             ///@@line_break
-            use oxc_allocator::{Allocator, Dummy};
+            use goat_allocator::{Allocator, Dummy};
         }
     }
 
@@ -203,7 +203,7 @@ fn generate_impl_for_struct(struct_def: &StructDef, schema: &Schema) -> TokenStr
         let field_ident = field.ident();
         // Special case: node_id uses NodeId::DUMMY instead of Dummy::dummy
         if field.name() == "node_id" {
-            quote!(#field_ident: Cell::new(oxc_syntax::node::NodeId::DUMMY))
+            quote!(#field_ident: Cell::new(goat_syntax::node::NodeId::DUMMY))
         } else {
             quote!(#field_ident: Dummy::dummy(allocator))
         }

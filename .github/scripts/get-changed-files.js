@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// oxlint-disable no-console
+// goatlint-disable no-console
 
 /**
  * Get changed files from GitHub events (pull request or push).
@@ -60,7 +60,7 @@ async function getPrChangedFiles(repository, prNumber) {
   let page = 1;
   let prFiles;
   do {
-    // oxlint-disable-next-line no-await-in-loop -- sequential pagination requires await in loop
+    // goatlint-disable-next-line no-await-in-loop -- sequential pagination requires await in loop
     prFiles = await githubApi(
       `/repos/${repository}/pulls/${prNumber}/files?per_page=${perPage}&page=${page}`,
     );

@@ -1,0 +1,24 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ eslint-plugin-unicorn(no-useless-undefined-initialization): Unnecessary initialization to `undefined`.
+   ╭─[no_useless_undefined_initialization.tsx:1:9]
+ 1 │ let x = undefined;
+   ·         ─────────
+   ╰────
+  help: Remove `= undefined` since `let` and `var` declarations are already `undefined` by default.
+
+  ⚠ eslint-plugin-unicorn(no-useless-undefined-initialization): Unnecessary initialization to `undefined`.
+   ╭─[no_useless_undefined_initialization.tsx:1:9]
+ 1 │ var y = undefined;
+   ·         ─────────
+   ╰────
+  help: Remove `= undefined` since `let` and `var` declarations are already `undefined` by default.
+
+  ⚠ eslint-plugin-unicorn(no-useless-undefined-initialization): Unnecessary initialization to `undefined`.
+   ╭─[no_useless_undefined_initialization.tsx:1:16]
+ 1 │ let a = 1, b = undefined;
+   ·                ─────────
+   ╰────
+  help: Remove `= undefined` since `let` and `var` declarations are already `undefined` by default.

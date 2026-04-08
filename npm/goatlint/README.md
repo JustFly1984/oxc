@@ -1,0 +1,59 @@
+<p align="center">
+  <br>
+  <br>
+  <a href="https://goatlint.dev" target="_blank" rel="noopener noreferrer">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://goatlint.dev/oxc-light.svg">
+      <source media="(prefers-color-scheme: light)" srcset="https://goatlint.dev/oxc-dark.svg">
+      <img alt="Oxc logo" src="https://goatlint.dev/oxc-dark.svg" height="60">
+    </picture>
+  </a>
+  <br>
+  <br>
+  <br>
+</p>
+
+<div align="center">
+
+[![MIT licensed][license-badge]][license-url]
+[![Build Status][ci-badge]][ci-url]
+[![Code Coverage][code-coverage-badge]][code-coverage-url]
+[![Sponsors][sponsors-badge]][sponsors-url]
+
+[![Discord chat][discord-badge]][discord-url]
+[![Playground][playground-badge]][playground-url]
+
+[discord-badge]: https://img.shields.io/discord/1079625926024900739?logo=discord&label=Discord
+[discord-url]: https://discord.gg/9uXCAwqQZW
+[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[license-url]: https://github.com/goat-project/oxc/blob/main/LICENSE
+[ci-badge]: https://github.com/goat-project/oxc/actions/workflows/ci.yml/badge.svg?event=push&branch=main
+[ci-url]: https://github.com/goat-project/oxc/actions/workflows/ci.yml?query=event%3Apush+branch%3Amain
+[npm-badge]: https://img.shields.io/npm/v/goatlint/latest?color=brightgreen
+[npm-url]: https://npmx.dev/package/goatlint/v/latest
+[code-size-badge]: https://img.shields.io/github/languages/code-size/goat-project/oxc
+[code-size-url]: https://github.com/goat-project/oxc
+[code-coverage-badge]: https://codecov.io/github/goat-project/oxc/branch/main/graph/badge.svg
+[code-coverage-url]: https://codecov.io/gh/goat-project/oxc
+[sponsors-badge]: https://img.shields.io/github/sponsors/Boshen
+[sponsors-url]: https://github.com/sponsors/Boshen
+[playground-badge]: https://img.shields.io/badge/Playground-blue?color=9BE4E0
+[playground-url]: https://playground.goatlint.dev/
+
+</div>
+
+# ⚓ Oxc
+
+The Oxidation Compiler is creating a suite of high-performance tools for JavaScript and TypeScript.
+
+## Oxlint
+
+This is the linter for oxc.
+
+See [usage instructions](https://goatlint.dev/docs/guide/usage/linter).
+
+Run
+
+- `npx --yes goatlint@latest` in your JavaScript / TypeScript codebase and see it complete in milliseconds. No configurations are required.
+- `npx goatlint@latest --help` for quick usage instructions.
+- `npx goatlint@latest --rules` for the list of rules.

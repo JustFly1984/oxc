@@ -15,7 +15,7 @@ fix: "conditional_dangerous_fix_or_suggestion"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/eslint/no_unused_vars/mod.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/eslint/no_unused_vars/mod.rs`;
 </script>
 
 <RuleHeader />
@@ -90,7 +90,7 @@ Examples of **incorrect** code for this rule:
 
 ```javascript
 /* no-unused-vars: "error" */
-/* if you have `some_unused_var` defined as a global in .oxlintrc.json */
+/* if you have `some_unused_var` defined as a global in .goatlintrc.json */
 
 // It checks variables you have defined as global
 some_unused_var = 42;
@@ -629,7 +629,7 @@ fix: "none"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/import/namespace.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/import/namespace.rs`;
 </script>
 
 <RuleHeader />
@@ -721,7 +721,7 @@ fix: "none"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/jest/expect_expect.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/jest/expect_expect.rs`;
 </script>
 
 <RuleHeader />
@@ -745,7 +745,7 @@ test('should assert something', () => {});
 ```
 
 This rule is compatible with [eslint-plugin-vitest](https://github.com/vitest-dev/eslint-plugin-vitest/blob/v1.1.9/docs/rules/expect-expect.md),
-to use it, add the following configuration to your `.oxlintrc.json`:
+to use it, add the following configuration to your `.goatlintrc.json`:
 
 ```json
 {
@@ -804,7 +804,7 @@ fix: "none"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/nextjs/no_duplicate_head.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/nextjs/no_duplicate_head.rs`;
 </script>
 
 <RuleHeader />
@@ -883,7 +883,7 @@ fix: "none"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/promise/no_callback_in_promise.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/promise/no_callback_in_promise.rs`;
 </script>
 
 <RuleHeader />
@@ -976,7 +976,7 @@ fix: "none"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/react/no_will_update_set_state.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/react/no_will_update_set_state.rs`;
 </script>
 
 <RuleHeader />
@@ -1047,8 +1047,8 @@ fix: "fixable_suggestion"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/typescript/no_floating_promises.rs`;
-const tsgolintSource = `https://github.com/oxc-project/tsgolint/blob/main/internal/rules/no_floating_promises/no_floating_promises.go`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/typescript/no_floating_promises.rs`;
+const tsgolintSource = `https://github.com/goat-project/tsgolint/blob/main/internal/rules/no_floating_promises/no_floating_promises.go`;
 </script>
 
 <RuleHeader />
@@ -1325,7 +1325,7 @@ fix: "none"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/vue/no_lifecycle_after_await.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/vue/no_lifecycle_after_await.rs`;
 </script>
 
 <RuleHeader />
@@ -1389,7 +1389,7 @@ fix: "pending"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/unicorn/prefer_array_find.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/unicorn/prefer_array_find.rs`;
 </script>
 
 <RuleHeader />
@@ -1440,7 +1440,7 @@ fix: "none"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/oxc/no_barrel_file.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/oxc/no_barrel_file.rs`;
 </script>
 
 <RuleHeader />
@@ -1518,7 +1518,7 @@ fix: "none"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/react/forbid_dom_props.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/react/forbid_dom_props.rs`;
 </script>
 
 <RuleHeader />
@@ -1633,7 +1633,7 @@ fix: "conditional_fix"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/typescript/no_explicit_any.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/typescript/no_explicit_any.rs`;
 </script>
 
 <RuleHeader />
@@ -1726,7 +1726,7 @@ fix: "pending"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/jsdoc/require_returns.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/jsdoc/require_returns.rs`;
 </script>
 
 <RuleHeader />
@@ -1833,7 +1833,7 @@ fix: "none"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/react/rules_of_hooks.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/react/rules_of_hooks.rs`;
 </script>
 
 <RuleHeader />
@@ -1917,7 +1917,7 @@ fix: "pending"
 
 <script setup>
 import { data } from '../version.data.js';
-const source = `https://github.com/oxc-project/oxc/blob/${ data }/crates/oxc_linter/src/rules/typescript/class_literal_property_style.rs`;
+const source = `https://github.com/goat-project/oxc/blob/${ data }/crates/goat_linter/src/rules/typescript/class_literal_property_style.rs`;
 </script>
 
 <RuleHeader />
@@ -1937,7 +1937,7 @@ Examples of **incorrect** code for this rule (default `"fields"`):
 ```ts
 class C {
   get name() {
-    return "oxc";
+    return "goat";
   }
 }
 ```
@@ -1945,7 +1945,7 @@ class C {
 Examples of **correct** code for this rule:
 ```ts
 class C {
-  readonly name = "oxc";
+  readonly name = "goat";
 }
 ```
 

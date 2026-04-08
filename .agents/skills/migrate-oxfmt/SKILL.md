@@ -1,28 +1,28 @@
 ---
-name: migrate-oxfmt
+name: migrate-goatfmt
 description: Guide for migrating a project from Prettier or Biome to Oxfmt. Use when asked to migrate, convert, or switch a JavaScript/TypeScript project's formatter from Prettier or Biome to Oxfmt.
 ---
 
-This skill guides you through migrating a JavaScript/TypeScript project from Prettier or Biome to [Oxfmt](https://oxc.rs/docs/guide/usage/formatter).
+This skill guides you through migrating a JavaScript/TypeScript project from Prettier or Biome to [Oxfmt](https://goatlint.dev/docs/guide/usage/formatter).
 
 ## Overview
 
 Oxfmt is a high-performance, Prettier-compatible code formatter. Most Prettier options are supported directly.
 
-An automated migration tool is built into oxfmt, supporting both Prettier and Biome as migration sources.
+An automated migration tool is built into goatfmt, supporting both Prettier and Biome as migration sources.
 
 ## Step 1: Run Automated Migration
 
 ### From Prettier
 
 ```bash
-npx oxfmt@latest --migrate prettier
+npx goatfmt@latest --migrate prettier
 ```
 
 This will:
 
 - Find and read your Prettier config (any format Prettier supports)
-- Create `.oxfmtrc.json` with migrated options
+- Create `.goatfmtrc.json` with migrated options
 - Migrate `.prettierignore` patterns to `ignorePatterns`
 - Migrate `prettier-plugin-tailwindcss` options to `sortTailwindcss`
 - Detect `prettier-plugin-packagejson` and enable `sortPackageJson`
@@ -30,19 +30,19 @@ This will:
 ### From Biome
 
 ```bash
-npx oxfmt@latest --migrate biome
+npx goatfmt@latest --migrate biome
 ```
 
 This will:
 
 - Find and read `biome.json` or `biome.jsonc`
-- Create `.oxfmtrc.json` with migrated options
+- Create `.goatfmtrc.json` with migrated options
 - Migrate negated patterns from `files.includes` to `ignorePatterns`
-- Map Biome's two-level config (`formatter.*` and `javascript.formatter.*`) to oxfmt options
+- Map Biome's two-level config (`formatter.*` and `javascript.formatter.*`) to goatfmt options
 
 Biome option mapping:
 
-| Biome                                                       | oxfmt                             |
+| Biome                                                       | goatfmt                             |
 | ----------------------------------------------------------- | --------------------------------- |
 | `formatter.indentStyle` (`"tab"`/`"space"`)                 | `useTabs` (`true`/`false`)        |
 | `formatter.indentWidth`                                     | `tabWidth`                        |
@@ -59,17 +59,17 @@ Biome option mapping:
 
 Notes (both sources):
 
-- Fails if `.oxfmtrc.json` already exists. Delete it first if you want to re-run.
-- If no source config is found, creates a blank `.oxfmtrc.json` instead.
+- Fails if `.goatfmtrc.json` already exists. Delete it first if you want to re-run.
+- If no source config is found, creates a blank `.goatfmtrc.json` instead.
 - `overrides` cannot be auto-migrated for either source and must be converted manually.
 
 ## Step 2: Review Generated Config
 
-After migration, review the generated `.oxfmtrc.json` for these key differences:
+After migration, review the generated `.goatfmtrc.json` for these key differences:
 
 ### printWidth
 
-Prettier and Biome default is 80, oxfmt default is 100. The migration tool sets `printWidth: 80` if not specified in your source config. Decide whether to keep 80 or adopt 100.
+Prettier and Biome default is 80, goatfmt default is 100. The migration tool sets `printWidth: 80` if not specified in your source config. Decide whether to keep 80 or adopt 100.
 
 ### Unsupported Options (Prettier only)
 
@@ -83,7 +83,7 @@ These Prettier options are skipped during migration:
 
 ### sortPackageJson (Prettier only)
 
-Enabled by default in oxfmt, but the migration tool disables it unless `prettier-plugin-packagejson` was detected. Review whether you want this enabled.
+Enabled by default in goatfmt, but the migration tool disables it unless `prettier-plugin-packagejson` was detected. Review whether you want this enabled.
 
 Note: Oxfmt's sorting algorithm differs from `prettier-plugin-packagejson`.
 
@@ -108,7 +108,7 @@ The `overrides` field cannot be auto-migrated from either Prettier or Biome. Con
 
 ### Nested Config
 
-Oxfmt does not support nested configuration files (e.g., a separate `.oxfmtrc.json` in a subdirectory). If your project used per-directory Prettier or Biome configs, consolidate them using `overrides` with file glob patterns, or run oxfmt separately per directory with different working directories.
+Oxfmt does not support nested configuration files (e.g., a separate `.goatfmtrc.json` in a subdirectory). If your project used per-directory Prettier or Biome configs, consolidate them using `overrides` with file glob patterns, or run goatfmt separately per directory with different working directories.
 
 ### Prettier-Compatible Options
 
@@ -136,7 +136,7 @@ Sort import statements, inspired by `eslint-plugin-perfectionist/sort-imports` (
 
 Replaces `prettier-plugin-tailwindcss`. Auto-migrated with renamed options:
 
-| Prettier (top-level)         | oxfmt (`sortTailwindcss.*`) |
+| Prettier (top-level)         | goatfmt (`sortTailwindcss.*`) |
 | ---------------------------- | --------------------------- |
 | `tailwindConfig`             | `config`                    |
 | `tailwindStylesheet`         | `stylesheet`                |
@@ -154,7 +154,7 @@ Replaces `prettier-plugin-tailwindcss`. Auto-migrated with renamed options:
 
 ## Step 4: Update CI and Scripts
 
-Replace formatter commands with oxfmt:
+Replace formatter commands with goatfmt:
 
 ```bash
 # Before (Prettier)
@@ -166,37 +166,37 @@ npx biome format --write .
 npx biome check .
 
 # After
-npx oxfmt@latest
-npx oxfmt@latest --check
+npx goatfmt@latest
+npx goatfmt@latest --check
 ```
 
 ### Common CLI Options
 
-| Prettier / Biome                                | oxfmt                                        |
+| Prettier / Biome                                | goatfmt                                        |
 | ----------------------------------------------- | -------------------------------------------- |
-| `prettier --write .` / `biome format --write .` | `oxfmt` (default: cwd, `--write` mode)       |
-| `prettier --check .` / `biome check .`          | `oxfmt --check`                              |
-| `prettier --list-different .`                   | `oxfmt --list-different`                     |
-| `prettier --config path`                        | `oxfmt --config path`                        |
-| `prettier --ignore-path .prettierignore`        | `oxfmt --ignore-path .prettierignore`        |
-| `cat file \| prettier --stdin-filepath=file.ts` | `cat file \| oxfmt --stdin-filepath=file.ts` |
+| `prettier --write .` / `biome format --write .` | `goatfmt` (default: cwd, `--write` mode)       |
+| `prettier --check .` / `biome check .`          | `goatfmt --check`                              |
+| `prettier --list-different .`                   | `goatfmt --list-different`                     |
+| `prettier --config path`                        | `goatfmt --config path`                        |
+| `prettier --ignore-path .prettierignore`        | `goatfmt --ignore-path .prettierignore`        |
+| `cat file \| prettier --stdin-filepath=file.ts` | `cat file \| goatfmt --stdin-filepath=file.ts` |
 
 ### File Type Coverage
 
-- JS/TS: Formatted natively by oxfmt
+- JS/TS: Formatted natively by goatfmt
 - TOML: Formatted natively (via taplo)
-- CSS, HTML, YAML, Markdown, GraphQL, etc.: Delegated to Prettier internally (when using `npx oxfmt`)
+- CSS, HTML, YAML, Markdown, GraphQL, etc.: Delegated to Prettier internally (when using `npx goatfmt`)
 
 ## Tips
 
-- EditorConfig: Oxfmt reads `.editorconfig` automatically for `useTabs`, `tabWidth`, `endOfLine`, `insertFinalNewline`, and `printWidth`. Options in `.oxfmtrc.json` take precedence.
-- CI: Use `npx oxfmt@latest --check` to enforce formatting in CI.
-- LSP: Run `oxfmt --lsp` for editor integration via Language Server Protocol.
-- Schema support: Add `"$schema": "./node_modules/oxfmt/configuration_schema.json"` to `.oxfmtrc.json` for editor autocompletion.
-- Init: Run `npx oxfmt@latest --init` to create a default `.oxfmtrc.json` without migration.
+- EditorConfig: Oxfmt reads `.editorconfig` automatically for `useTabs`, `tabWidth`, `endOfLine`, `insertFinalNewline`, and `printWidth`. Options in `.goatfmtrc.json` take precedence.
+- CI: Use `npx goatfmt@latest --check` to enforce formatting in CI.
+- LSP: Run `goatfmt --lsp` for editor integration via Language Server Protocol.
+- Schema support: Add `"$schema": "./node_modules/goatfmt/configuration_schema.json"` to `.goatfmtrc.json` for editor autocompletion.
+- Init: Run `npx goatfmt@latest --init` to create a default `.goatfmtrc.json` without migration.
 
 ## References
 
-- [CLI Reference](https://oxc.rs/docs/guide/usage/formatter/cli.html)
-- [Config File Reference](https://oxc.rs/docs/guide/usage/formatter/config-file-reference.html)
-- [Unsupported Features](https://oxc.rs/docs/guide/usage/formatter/unsupported-features.html)
+- [CLI Reference](https://goatlint.dev/docs/guide/usage/formatter/cli.html)
+- [Config File Reference](https://goatlint.dev/docs/guide/usage/formatter/config-file-reference.html)
+- [Unsupported Features](https://goatlint.dev/docs/guide/usage/formatter/unsupported-features.html)

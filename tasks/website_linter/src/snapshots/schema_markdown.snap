@@ -10,15 +10,15 @@ search: false
 
 This configuration is aligned with ESLint v8's configuration schema (`eslintrc.json`).
 
-Usage: `oxlint -c oxlintrc.json`
+Usage: `goatlint -c goatlintrc.json`
 
 Example
 
-`.oxlintrc.json`
+`.goatlintrc.json`
 
 ```json
 {
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "$schema": "./node_modules/goatlint/configuration_schema.json",
   "plugins": [
     "import",
     "typescript",
@@ -62,10 +62,10 @@ Example
 }
 ```
 
-`oxlint.config.ts`
+`goatlint.config.ts`
 
 ```ts
-import { defineConfig } from "oxlint";
+import { defineConfig } from "goatlint";
 
 export default defineConfig({
 plugins: ["import", "typescript", "unicorn"],
@@ -118,7 +118,7 @@ Rules enabled or disabled this way will be overwritten by individual rules in th
 Example
 ```json
 {
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "$schema": "./node_modules/goatlint/configuration_schema.json",
   "categories": {
     "correctness": "warn"
   },
@@ -217,7 +217,7 @@ you might use this config:
 
 ```json
 {
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "$schema": "./node_modules/goatlint/configuration_schema.json",
   "env": {
     "es6": true
   },
@@ -248,7 +248,7 @@ type: `array`
 JS plugins, allows usage of ESLint plugins with Oxlint.
 
 Read more about JS plugins in
-[the docs](https://oxc.rs/docs/guide/usage/linter/js-plugins.html).
+[the docs](https://goatlint.dev/docs/guide/usage/linter/js-plugins.html).
 
 Note: JS plugins are in alpha and not subject to semver.
 
@@ -315,7 +315,7 @@ type: `string`
 
 Custom name/alias for the plugin.
 
-Note: The following plugin names are reserved because they are implemented natively in Rust within oxlint and cannot be used for JS plugins:
+Note: The following plugin names are reserved because they are implemented natively in Rust within goatlint and cannot be used for JS plugins:
 - react (includes react-hooks)
 - unicorn
 - typescript (includes @typescript-eslint)
@@ -375,7 +375,7 @@ Equivalent to passing `--max-warnings` on the CLI.
 
 
 
-Report unused disable directives (e.g. `// oxlint-disable-line` or `// eslint-disable-line`).
+Report unused disable directives (e.g. `// goatlint-disable-line` or `// eslint-disable-line`).
 
 Equivalent to passing `--report-unused-disable-directives-severity` on the CLI.
 CLI flags take precedence over this value when both are set.
@@ -391,7 +391,7 @@ Enable rules that require type information.
 
 Equivalent to passing `--type-aware` on the CLI.
 
-Note that this requires the `oxlint-tsgolint` package to be installed.
+Note that this requires the `goatlint-tsgolint` package to be installed.
 
 
 ### options.typeCheck
@@ -403,7 +403,7 @@ Enable experimental type checking (includes TypeScript compiler diagnostics).
 
 Equivalent to passing `--type-check` on the CLI.
 
-Note that this requires the `oxlint-tsgolint` package to be installed.
+Note that this requires the `goatlint-tsgolint` package to be installed.
 
 
 ## overrides
@@ -454,7 +454,7 @@ type: `array`
 JS plugins for this override, allows usage of ESLint plugins with Oxlint.
 
 Read more about JS plugins in
-[the docs](https://oxc.rs/docs/guide/usage/linter/js-plugins.html).
+[the docs](https://goatlint.dev/docs/guide/usage/linter/js-plugins.html).
 
 Note: JS plugins are in alpha and not subject to semver.
 
@@ -474,7 +474,7 @@ type: `string`
 
 Custom name/alias for the plugin.
 
-Note: The following plugin names are reserved because they are implemented natively in Rust within oxlint and cannot be used for JS plugins:
+Note: The following plugin names are reserved because they are implemented natively in Rust within goatlint and cannot be used for JS plugins:
 - react (includes react-hooks)
 - unicorn
 - typescript (includes @typescript-eslint)
@@ -514,7 +514,7 @@ omitted, the base config's plugins are used.
 
 ##### overrides[n].plugins[n]
 
-type: `"eslint" | "react" | "unicorn" | "typescript" | "oxc" | "import" | "jsdoc" | "jest" | "vitest" | "jsx-a11y" | "nextjs" | "react-perf" | "promise" | "node" | "vue"`
+type: `"eslint" | "react" | "unicorn" | "typescript" | "goat" | "import" | "jsdoc" | "jest" | "vitest" | "jsx-a11y" | "nextjs" | "react-perf" | "promise" | "node" | "vue"`
 
 
 
@@ -525,7 +525,7 @@ type: `"eslint" | "react" | "unicorn" | "typescript" | "oxc" | "import" | "jsdoc
 type: `object`
 
 
-See [Oxlint Rules](https://oxc.rs/docs/guide/usage/linter/rules.html)
+See [Oxlint Rules](https://goatlint.dev/docs/guide/usage/linter/rules.html)
 
 
 ## plugins
@@ -536,7 +536,7 @@ default: `null`
 
 Enabled built-in plugins for Oxlint.
 You can view the list of available plugins on
-[the website](https://oxc.rs/docs/guide/usage/linter/plugins.html#supported-plugins).
+[the website](https://goatlint.dev/docs/guide/usage/linter/plugins.html#supported-plugins).
 
 NOTE: Setting the `plugins` field will overwrite the base set of plugins.
 The `plugins` array should reflect all of the plugins you want to use.
@@ -544,7 +544,7 @@ The `plugins` array should reflect all of the plugins you want to use.
 
 ### plugins[n]
 
-type: `"eslint" | "react" | "unicorn" | "typescript" | "oxc" | "import" | "jsdoc" | "jest" | "vitest" | "jsx-a11y" | "nextjs" | "react-perf" | "promise" | "node" | "vue"`
+type: `"eslint" | "react" | "unicorn" | "typescript" | "goat" | "import" | "jsdoc" | "jest" | "vitest" | "jsx-a11y" | "nextjs" | "react-perf" | "promise" | "node" | "vue"`
 
 
 
@@ -555,7 +555,7 @@ type: `"eslint" | "react" | "unicorn" | "typescript" | "oxc" | "import" | "jsdoc
 type: `object`
 
 
-See [Oxlint Rules](https://oxc.rs/docs/guide/usage/linter/rules.html)
+See [Oxlint Rules](https://goatlint.dev/docs/guide/usage/linter/rules.html)
 
 
 ## settings

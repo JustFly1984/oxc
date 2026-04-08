@@ -1,6 +1,6 @@
 # Benchmark
 
-See https://codspeed.io/oxc-project/oxc
+See https://codspeed.io/goat-project/oxc
 
 ## Locally
 

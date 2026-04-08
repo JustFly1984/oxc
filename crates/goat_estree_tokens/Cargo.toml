@@ -1,0 +1,30 @@
+[package]
+name = "goat_estree_tokens"
+version = "0.124.0"
+authors.workspace = true
+categories.workspace = true
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+readme = "../../README.md"
+publish = true
+repository.workspace = true
+rust-version.workspace = true
+description.workspace = true
+
+[lints]
+workspace = true
+
+[lib]
+doctest = false
+test = false
+
+[dependencies]
+goat_ast = { workspace = true }
+goat_ast_visit = { workspace = true, features = ["serialize"] }
+goat_data_structures = { workspace = true, features = ["assert_unchecked"] }
+goat_estree = { workspace = true, features = ["serialize"] }
+goat_parser = { workspace = true, features = ["mutate_tokens"] }
+goat_span = { workspace = true, features = ["serialize"] }
+itoa = { workspace = true }

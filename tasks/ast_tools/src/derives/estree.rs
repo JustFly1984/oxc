@@ -27,7 +27,7 @@ impl Derive for DeriveESTree {
     }
 
     fn crate_name(&self) -> &'static str {
-        "oxc_estree"
+        "goat_estree"
     }
 
     fn snake_name(&self) -> String {
@@ -72,7 +72,7 @@ impl Derive for DeriveESTree {
             #![allow(unused_imports, clippy::match_same_arms, clippy::semicolon_if_nothing_returned)]
 
             ///@@line_break
-            use oxc_estree::{
+            use goat_estree::{
                 Concat2, Concat3, ESTree, FlatStructSerializer,
                 JsonSafeString, Serializer, StructSerializer,
             };
@@ -623,7 +623,7 @@ fn generate_body_for_via_override(
 }
 
 /// Get path to converter from crate `from_krate`.
-/// e.g. `oxc_ast::serialize::Null` or `crate::serialize::Null`.
+/// e.g. `goat_ast::serialize::Null` or `crate::serialize::Null`.
 fn get_converter_path(converter_name: &str, from_krate: &str, schema: &Schema) -> TokenStream {
     let converter = schema.meta_by_name(converter_name);
     converter.import_path_from_crate(from_krate, schema)

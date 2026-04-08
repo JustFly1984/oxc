@@ -1,0 +1,100 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:9]
+ 1 │ var x = a?.b
+   ·         ────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:9]
+ 1 │ var x = a?.[b]
+   ·         ──────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:1]
+ 1 │ foo?.()
+   · ───────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:9]
+ 1 │ var x = ((a?.b)?.c)?.()
+   ·         ───────────────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:10]
+ 1 │ var x = ((a?.b)?.c)?.()
+   ·          ─────────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:11]
+ 1 │ var x = ((a?.b)?.c)?.()
+   ·           ────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:9]
+ 1 │ var x = a/*?.*/?.b
+   ·         ──────────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:9]
+ 1 │ var x = '?.'?.['?.']
+   ·         ────────────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:9]
+ 1 │ var x = '?.'?.['?.']
+   ·         ────────────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:1]
+ 1 │ a?.c?.b<c>
+   · ───────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:1]
+ 1 │ foo?.bar!
+   · ─────────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:1]
+ 1 │ foo?.[bar]!
+   · ───────────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:1]
+ 1 │ x?.f<T>();
+   · ─────────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:1]
+ 1 │ x?.f?.<T>();
+   · ───────────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:1]
+ 1 │ f?.<Q>();
+   · ────────
+   ╰────
+
+  ⚠ goat(no-optional-chaining): Optional chaining is not allowed.
+   ╭─[no_optional_chaining.tsx:1:9]
+ 1 │ var x = a?.b
+   ·         ────
+   ╰────
+  help: Our output target is ES2016, and optional chaining results in verbose helpers and should be avoided.

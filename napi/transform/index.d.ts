@@ -81,7 +81,7 @@ export interface CompilerAssumptions {
    *
    * Otherwise, the output will be:
    * ```js
-   * import _defineProperty from "@oxc-project/runtime/helpers/defineProperty";
+   * import _defineProperty from "@goat-project/runtime/helpers/defineProperty";
    * class Test {
    *   constructor() {
    *     _defineProperty(this, "field", 2);
@@ -132,7 +132,7 @@ export declare const enum HelperMode {
    * Example:
    *
    * ```js
-   * import helperName from "@oxc-project/runtime/helpers/helperName";
+   * import helperName from "@goat-project/runtime/helpers/helperName";
    * helperName(...arguments);
    * ```
    */
@@ -185,7 +185,7 @@ export declare function isolatedDeclarationSync(filename: string, sourceText: st
 /**
  * Configure how TSX and JSX are transformed.
  *
- * @see {@link https://oxc.rs/docs/guide/usage/transformer/jsx}
+ * @see {@link https://goatlint.dev/docs/guide/usage/transformer/jsx}
  */
 export interface JsxOptions {
   /**
@@ -336,7 +336,7 @@ export interface ReactRefreshOptions {
 /**
  * Configure how styled-components are transformed.
  *
- * @see {@link https://oxc.rs/docs/guide/usage/transformer/plugins#styled-components}
+ * @see {@link https://goatlint.dev/docs/guide/usage/transformer/plugins#styled-components}
  */
 export interface StyledComponentsOptions {
   /**
@@ -457,12 +457,12 @@ export interface TransformOptions {
   assumptions?: CompilerAssumptions
   /**
    * Configure how TypeScript is transformed.
-   * @see {@link https://oxc.rs/docs/guide/usage/transformer/typescript}
+   * @see {@link https://goatlint.dev/docs/guide/usage/transformer/typescript}
    */
   typescript?: TypeScriptOptions
   /**
    * Configure how TSX and JSX are transformed.
-   * @see {@link https://oxc.rs/docs/guide/usage/transformer/jsx}
+   * @see {@link https://goatlint.dev/docs/guide/usage/transformer/jsx}
    */
   jsx?: 'preserve' | JsxOptions
   /**
@@ -477,26 +477,26 @@ export interface TransformOptions {
    *
    * @default `esnext` (No transformation)
    *
-   * @see {@link https://oxc.rs/docs/guide/usage/transformer/lowering#target}
+   * @see {@link https://goatlint.dev/docs/guide/usage/transformer/lowering#target}
    */
   target?: string | Array<string>
   /** Behaviour for runtime helpers. */
   helpers?: Helpers
   /**
    * Define Plugin
-   * @see {@link https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define}
+   * @see {@link https://goatlint.dev/docs/guide/usage/transformer/global-variable-replacement#define}
    */
   define?: Record<string, string>
   /**
    * Inject Plugin
-   * @see {@link https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#inject}
+   * @see {@link https://goatlint.dev/docs/guide/usage/transformer/global-variable-replacement#inject}
    */
   inject?: Record<string, string | [string, string]>
   /** Decorator plugin */
   decorator?: DecoratorOptions
   /**
    * Third-party plugins to use.
-   * @see {@link https://oxc.rs/docs/guide/usage/transformer/plugins}
+   * @see {@link https://goatlint.dev/docs/guide/usage/transformer/plugins}
    */
   plugins?: PluginsOptions
 }
@@ -539,7 +539,7 @@ export interface TransformResult {
    * Example:
    *
    * ```text
-   * { "_objectSpread": "@oxc-project/runtime/helpers/objectSpread2" }
+   * { "_objectSpread": "@goat-project/runtime/helpers/objectSpread2" }
    * ```
    */
   helpersUsed: Record<string, string>

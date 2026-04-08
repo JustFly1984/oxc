@@ -1,7 +1,7 @@
 // Auto-generated code, DO NOT EDIT DIRECTLY!
 // To edit this generated file you have to edit `tasks/ast_tools/src/generators/estree_visit.rs`.
 
-import type * as ESTree from "@oxc-project/types";
+import type * as ESTree from "@goat-project/types";
 
 type VisitFn = (node: ESTree.Node) => void;
 type EnterExit = { enter: VisitFn; exit: VisitFn };

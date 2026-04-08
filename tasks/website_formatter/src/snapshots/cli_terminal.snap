@@ -5,8 +5,8 @@ expression: snapshot
 Usage: [-c=PATH] [PATH]...
 
 Mode Options:
-        --init               Initialize `.oxfmtrc.json` with default values
-        --migrate=SOURCE     Migrate configuration to `.oxfmtrc.json` from specified source
+        --init               Initialize `.goatfmtrc.json` with default values
+        --migrate=SOURCE     Migrate configuration to `.goatfmtrc.json` from specified source
                              Available sources: prettier, biome
         --lsp                Start language server protocol (LSP) server
         --stdin-filepath=PATH  Specify the file name to use to infer which parser to use

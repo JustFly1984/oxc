@@ -11,7 +11,7 @@ pub use schema_markdown::{Renderer, Section};
 ///
 /// # Arguments
 /// * `raw_markdown` - The markdown string from bpaf's render_markdown()
-/// * `tool_name` - The name of the tool (e.g., "oxlint", "oxfmt") used to strip the header
+/// * `tool_name` - The name of the tool (e.g., "goatlint", "goatfmt") used to strip the header
 /// * `gitignore_note_anchor` - Optional section header after which to insert the gitignore note
 ///
 /// # Returns

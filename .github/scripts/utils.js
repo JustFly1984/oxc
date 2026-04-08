@@ -2,7 +2,7 @@
  * Common utilities for GitHub Actions scripts
  */
 
-// oxlint-disable no-console
+// goatlint-disable no-console
 
 const { execSync } = require("child_process");
 
@@ -52,7 +52,7 @@ function getCrateDependencies(packages, options = {}) {
   const deps = output
     .split("\n")
     .map((dep) => dep.replace(/\s+\(\*\)$/u, ""))
-    .filter((dep) => dep && dep.includes("oxc") && !pkgs.includes(dep));
+    .filter((dep) => dep && dep.includes("goat") && !pkgs.includes(dep));
 
   if (deps.length === 0) {
     console.error(`Warning: Could not get dependencies for ${pkgs.join(", ")}`);

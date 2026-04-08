@@ -37,7 +37,7 @@ impl Generator for GetIdGenerator {
             .filter_map(|type_def| generate_for_type(type_def, &semantic_id_type_ids, schema));
 
         let output = quote! {
-            use oxc_syntax::{node::NodeId, reference::ReferenceId, scope::ScopeId, symbol::SymbolId};
+            use goat_syntax::{node::NodeId, reference::ReferenceId, scope::ScopeId, symbol::SymbolId};
 
             ///@@line_break
             use crate::ast::*;

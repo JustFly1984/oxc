@@ -24,7 +24,7 @@ impl Derive for DeriveContentEq {
     }
 
     fn crate_name(&self) -> &'static str {
-        "oxc_span"
+        "goat_span"
     }
 
     /// Register that accept `#[content_eq]` attr on structs, enums, or struct fields.
@@ -57,7 +57,7 @@ impl Derive for DeriveContentEq {
             #![allow(clippy::match_same_arms)]
 
             ///@@line_break
-            use oxc_span::ContentEq;
+            use goat_span::ContentEq;
         }
     }
 

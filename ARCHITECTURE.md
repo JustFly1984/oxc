@@ -17,7 +17,7 @@ Oxc (The Oxidation Compiler) is a collection of high-performance JavaScript and 
 ┌─────────────────────────────────────────────────────────────────┐
 │                          Applications                           │
 ├─────────────────────────────────────────────────────────────────┤
-│  oxlint  │  Language Server  │  NAPI Bindings  │  Future Tools  │
+│  goatlint  │  Language Server  │  NAPI Bindings  │  Future Tools  │
 ├─────────────────────────────────────────────────────────────────┤
 │                        Core Libraries                           │
 ├─────────────────────────────────────────────────────────────────┤
@@ -33,21 +33,21 @@ Oxc (The Oxidation Compiler) is a collection of high-performance JavaScript and 
 
 ### 1. Zero-Copy Architecture
 
-The system is built around an arena allocator (`oxc_allocator`) that enables zero-copy operations throughout the compilation pipeline. All AST nodes are allocated in a single arena, eliminating the need for reference counting or garbage collection.
+The system is built around an arena allocator (`goat_allocator`) that enables zero-copy operations throughout the compilation pipeline. All AST nodes are allocated in a single arena, eliminating the need for reference counting or garbage collection.
 
 ### 2. Visitor Pattern
 
-AST traversal is implemented using the visitor pattern (`oxc_ast_visit`) with automatic visitor generation through procedural macros. This ensures type safety and performance while maintaining code clarity.
+AST traversal is implemented using the visitor pattern (`goat_ast_visit`) with automatic visitor generation through procedural macros. This ensures type safety and performance while maintaining code clarity.
 
 ### 3. Shared Infrastructure
 
-Common functionality like error reporting (`oxc_diagnostics`), source positions (`oxc_span`), and syntax definitions (`oxc_syntax`) are shared across all components to ensure consistency.
+Common functionality like error reporting (`goat_diagnostics`), source positions (`goat_span`), and syntax definitions (`goat_syntax`) are shared across all components to ensure consistency.
 
 ## Core Components
 
 ### Foundation Layer
 
-#### oxc_allocator
+#### goat_allocator
 
 - **Purpose**: Arena-based memory allocator for zero-copy operations
 - **Key Features**:
@@ -56,7 +56,7 @@ Common functionality like error reporting (`oxc_diagnostics`), source positions 
   - Enables structural sharing of AST nodes
 - **Dependencies**: None (foundational)
 
-#### oxc_span
+#### goat_span
 
 - **Purpose**: Source position tracking and text manipulation
 - **Key Features**:
@@ -65,32 +65,32 @@ Common functionality like error reporting (`oxc_diagnostics`), source positions 
   - Integration with diagnostic reporting
 - **Dependencies**: None (foundational)
 
-#### oxc_syntax
+#### goat_syntax
 
 - **Purpose**: JavaScript/TypeScript language definitions
 - **Key Features**:
   - Token definitions and keyword mappings
   - Language feature flags and compatibility
   - Shared syntax validation logic
-- **Dependencies**: oxc_span
+- **Dependencies**: goat_span
 
-#### oxc_diagnostics
+#### goat_diagnostics
 
 - **Purpose**: Error reporting and diagnostic infrastructure
 - **Key Features**:
   - Rich error messages with source context
   - Multiple output formats (JSON, pretty-printed)
   - Integration with language server protocol
-- **Dependencies**: oxc_span
+- **Dependencies**: goat_span
 
-#### oxc_ast
+#### goat_ast
 
 - **Purpose**: Abstract Syntax Tree definitions and utilities
 - **Key Features**:
   - Complete JavaScript/TypeScript AST coverage
   - Generated visitor traits for type safety
   - Serialization support for caching
-- **Dependencies**: oxc_allocator, oxc_span, oxc_syntax
+- **Dependencies**: goat_allocator, goat_span, goat_syntax
 
 ##### AST Design Principles
 
@@ -106,25 +106,25 @@ This clear distinction greatly enhances the development experience by aligning m
 
 ### Core Processing Layer
 
-#### oxc_parser
+#### goat_parser
 
 - **Purpose**: JavaScript/TypeScript parsing
 - **Key Features**:
   - Hand-written recursive descent parser
   - Full ES2024+ and TypeScript support
   - Preservation of comments and trivia
-- **Dependencies**: oxc_allocator, oxc_ast, oxc_diagnostics, oxc_span, oxc_syntax
+- **Dependencies**: goat_allocator, goat_ast, goat_diagnostics, goat_span, goat_syntax
 
-#### oxc_semantic
+#### goat_semantic
 
 - **Purpose**: Semantic analysis and symbol resolution
 - **Key Features**:
   - Scope chain construction
   - Symbol table generation
   - Dead code detection
-- **Dependencies**: oxc_ast, oxc_cfg, oxc_diagnostics, oxc_span, oxc_syntax
+- **Dependencies**: goat_ast, goat_cfg, goat_diagnostics, goat_span, goat_syntax
 
-#### oxc_linter
+#### goat_linter
 
 - **Purpose**: ESLint-compatible linting engine
 - **Key Features**:
@@ -132,9 +132,9 @@ This clear distinction greatly enhances the development experience by aligning m
   - Plugin architecture for custom rules
   - Automatic fixing for many rules
   - Configuration compatibility with ESLint
-- **Dependencies**: oxc_ast, oxc_semantic, oxc_diagnostics, oxc_cfg
+- **Dependencies**: goat_ast, goat_semantic, goat_diagnostics, goat_cfg
 
-#### oxc_transformer
+#### goat_transformer
 
 - **Purpose**: Code transformation and transpilation
 - **Key Features**:
@@ -142,9 +142,9 @@ This clear distinction greatly enhances the development experience by aligning m
   - Modern JavaScript feature transpilation
   - React JSX transformation
   - Babel plugin compatibility layer
-- **Dependencies**: oxc_ast, oxc_semantic, oxc_allocator
+- **Dependencies**: goat_ast, goat_semantic, goat_allocator
 
-#### oxc_minifier
+#### goat_minifier
 
 - **Purpose**: Code size optimization
 - **Key Features**:
@@ -152,9 +152,9 @@ This clear distinction greatly enhances the development experience by aligning m
   - Constant folding and propagation
   - Identifier mangling integration
   - Statement and expression optimization
-- **Dependencies**: oxc_ast, oxc_semantic, oxc_mangler
+- **Dependencies**: goat_ast, goat_semantic, goat_mangler
 
-#### oxc_codegen
+#### goat_codegen
 
 - **Purpose**: AST to source code generation
 - **Key Features**:
@@ -162,11 +162,11 @@ This clear distinction greatly enhances the development experience by aligning m
   - Source map generation
   - Comment preservation options
   - Minified and pretty-printed output modes
-- **Dependencies**: oxc_ast, oxc_span
+- **Dependencies**: goat_ast, goat_span
 
 ### Application Layer
 
-#### oxlint (apps/oxlint)
+#### goatlint (apps/goatlint)
 
 - **Purpose**: Command-line linter application
 - **Key Features**:
@@ -174,9 +174,9 @@ This clear distinction greatly enhances the development experience by aligning m
   - Configuration file support
   - Multiple output formats
   - Integration with CI/CD systems
-- **Dependencies**: oxc_linter, oxc_parser, oxc_semantic
+- **Dependencies**: goat_linter, goat_parser, goat_semantic
 
-#### Language Server (oxc_language_server)
+#### Language Server (goat_language_server)
 
 - **Purpose**: LSP implementation for editor integration
 - **Key Features**:
@@ -200,8 +200,8 @@ This clear distinction greatly enhances the development experience by aligning m
 ### Compilation Pipeline
 
 1. **Input**: Source text + configuration
-2. **Lexing/Parsing**: `oxc_parser` → AST + comments
-3. **Semantic Analysis**: `oxc_semantic` → Symbol table + scope info
+2. **Lexing/Parsing**: `goat_parser` → AST + comments
+3. **Semantic Analysis**: `goat_semantic` → Symbol table + scope info
 4. **Processing**: Tool-specific analysis (linting, transformation, etc.)
 5. **Output**: Results (diagnostics, transformed code, etc.)
 
@@ -227,7 +227,7 @@ Source Text → Arena Allocator → AST Nodes → Visitors → Results
 
 #### Parser Performance Implementation
 
-- AST is allocated in a memory arena (oxc_allocator) for fast AST memory allocation and deallocation
+- AST is allocated in a memory arena (goat_allocator) for fast AST memory allocation and deallocation
 - Short strings are inlined by [CompactString](https://crates.io/crates/compact_str)
 - No other heap allocations are done except the above two
 - Scope binding, symbol resolution and some syntax errors are not done in the parser, they are delegated to the semantic analyzer

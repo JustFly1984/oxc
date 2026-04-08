@@ -18,7 +18,7 @@ impl Derive for DeriveGetAddress {
     }
 
     fn crate_name(&self) -> &'static str {
-        "oxc_allocator"
+        "goat_allocator"
     }
 
     fn prelude(&self) -> TokenStream {
@@ -26,7 +26,7 @@ impl Derive for DeriveGetAddress {
             #![expect(clippy::match_same_arms)]
 
             ///@@line_break
-            use oxc_allocator::{Address, GetAddress};
+            use goat_allocator::{Address, GetAddress};
         }
     }
 

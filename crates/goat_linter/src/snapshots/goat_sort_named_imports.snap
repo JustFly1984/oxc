@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(sort-named-imports): Named import specifiers should be sorted alphabetically.
+   ╭─[sort_named_imports.tsx:1:13]
+ 1 │ import { z, a, m } from "mod";
+   ·             ─
+   ╰────
+  help: Replace `import { z, a, m } from "mod";` with `import { a, m, z } from "mod"`.
+
+  ⚠ goat(sort-named-imports): Named import specifiers should be sorted alphabetically.
+   ╭─[sort_named_imports.tsx:1:13]
+ 1 │ import { b, a } from "mod";
+   ·             ─
+   ╰────
+  help: Replace `import { b, a } from "mod";` with `import { a, b } from "mod"`.

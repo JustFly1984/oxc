@@ -8,7 +8,7 @@ use cow_utils::CowUtils;
 use oxc::{
     allocator::Allocator,
     codegen::{Codegen, CodegenOptions, CommentOptions, IndentChar},
-    diagnostics::{NamedSource, OxcDiagnostic},
+    diagnostics::{NamedSource, GoatDiagnostic},
     parser::{ParseOptions, Parser},
     span::{SourceType, VALID_EXTENSIONS},
     transformer::{BabelOptions, HelperLoaderMode, TransformOptions},
@@ -29,7 +29,7 @@ pub struct TestCase {
     options: BabelOptions,
     source_type: SourceType,
     transform_options: Result<TransformOptions, Vec<String>>,
-    pub errors: Vec<OxcDiagnostic>,
+    pub errors: Vec<GoatDiagnostic>,
     pub transformed_code: String,
 }
 
@@ -409,7 +409,7 @@ impl TestCase {
                 self.errors.extend(mismatch_errors);
             }
         } else if let Some(actual_errors) = actual_errors {
-            self.errors.push(OxcDiagnostic::error(actual_errors));
+            self.errors.push(GoatDiagnostic::error(actual_errors));
         }
     }
 
@@ -438,7 +438,7 @@ impl TestCase {
             name = "babel";
             p
         } else if let Ok(p) = self.path.strip_prefix(oxc_test_root()) {
-            name = "oxc";
+            name = "goat";
             p
         } else {
             unreachable!()

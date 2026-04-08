@@ -1,5 +1,5 @@
 [package]
-name = "oxc_benchmark"
+name = "goat_benchmark"
 version = "0.0.0"
 authors.workspace = true
 edition.workspace = true
@@ -60,27 +60,27 @@ name = "parser_napi"
 harness = false
 bench = false
 
-# All `oxc_*` dependencies optional as on CI we build each benchmark separately
+# All `goat_*` dependencies optional as on CI we build each benchmark separately
 # with only the crates it needs, to speed up the builds
 [dependencies]
-oxc_allocator = { workspace = true, optional = true }
-oxc_ast = { workspace = true, optional = true, features = ["serialize"] }
-oxc_ast_visit = { workspace = true, optional = true, features = ["serialize"] }
-oxc_codegen = { workspace = true, optional = true, features = ["sourcemap"] }
-oxc_estree_tokens = { workspace = true, optional = true }
-oxc_formatter = { workspace = true, optional = true }
-oxc_isolated_declarations = { workspace = true, optional = true }
-oxc_linter = { workspace = true, optional = true }
-oxc_mangler = { workspace = true, optional = true }
-oxc_minifier = { workspace = true, optional = true }
-oxc_parser = { workspace = true, features = [
+goat_allocator = { workspace = true, optional = true }
+goat_ast = { workspace = true, optional = true, features = ["serialize"] }
+goat_ast_visit = { workspace = true, optional = true, features = ["serialize"] }
+goat_codegen = { workspace = true, optional = true, features = ["sourcemap"] }
+goat_estree_tokens = { workspace = true, optional = true }
+goat_formatter = { workspace = true, optional = true }
+goat_isolated_declarations = { workspace = true, optional = true }
+goat_linter = { workspace = true, optional = true }
+goat_mangler = { workspace = true, optional = true }
+goat_minifier = { workspace = true, optional = true }
+goat_parser = { workspace = true, features = [
   "benchmarking",
   "regular_expression",
 ], optional = true }
-oxc_semantic = { workspace = true, optional = true }
-oxc_span = { workspace = true, optional = true, features = ["schemars", "serialize"] }
-oxc_tasks_common = { workspace = true, optional = true }
-oxc_transformer = { workspace = true, optional = true }
+goat_semantic = { workspace = true, optional = true }
+goat_span = { workspace = true, optional = true, features = ["schemars", "serialize"] }
+goat_tasks_common = { workspace = true, optional = true }
+goat_transformer = { workspace = true, optional = true }
 
 criterion2 = { workspace = true }
 
@@ -100,30 +100,30 @@ codspeed_napi = ["criterion2/codspeed", "dep:serde", "dep:serde_json"]
 # "compiler" feature includes: lexer, parser, transformer, semantic, minifier, codegen, formatter
 # "linter" feature includes: linter
 compiler = [
-  "dep:oxc_allocator",
-  "dep:oxc_ast",
-  "dep:oxc_ast_visit",
-  "dep:oxc_codegen",
-  "dep:oxc_estree_tokens",
-  "dep:oxc_formatter",
-  "dep:oxc_isolated_declarations",
-  "dep:oxc_mangler",
-  "dep:oxc_minifier",
-  "dep:oxc_parser",
-  "dep:oxc_semantic",
-  "dep:oxc_span",
-  "dep:oxc_tasks_common",
-  "dep:oxc_transformer",
+  "dep:goat_allocator",
+  "dep:goat_ast",
+  "dep:goat_ast_visit",
+  "dep:goat_codegen",
+  "dep:goat_estree_tokens",
+  "dep:goat_formatter",
+  "dep:goat_isolated_declarations",
+  "dep:goat_mangler",
+  "dep:goat_minifier",
+  "dep:goat_parser",
+  "dep:goat_semantic",
+  "dep:goat_span",
+  "dep:goat_tasks_common",
+  "dep:goat_transformer",
   "dep:cow-utils",
 ]
 linter = [
-  "dep:oxc_allocator",
-  "dep:oxc_linter",
-  "dep:oxc_parser",
-  "dep:oxc_semantic",
-  "dep:oxc_span",
-  "dep:oxc_tasks_common",
-  "oxc_semantic/cfg",
+  "dep:goat_allocator",
+  "dep:goat_linter",
+  "dep:goat_parser",
+  "dep:goat_semantic",
+  "dep:goat_span",
+  "dep:goat_tasks_common",
+  "goat_semantic/cfg",
 ]
 
 [dev-dependencies]
@@ -131,21 +131,21 @@ rustc-hash = { workspace = true }
 
 [package.metadata.cargo-shear]
 ignored = [
-  "oxc_allocator",
-  "oxc_ast",
-  "oxc_ast_visit",
-  "oxc_codegen",
-  "oxc_estree_tokens",
-  "oxc_formatter",
-  "oxc_isolated_declarations",
-  "oxc_linter",
-  "oxc_mangler",
-  "oxc_minifier",
-  "oxc_parser",
-  "oxc_semantic",
-  "oxc_span",
-  "oxc_tasks_common",
-  "oxc_transformer",
+  "goat_allocator",
+  "goat_ast",
+  "goat_ast_visit",
+  "goat_codegen",
+  "goat_estree_tokens",
+  "goat_formatter",
+  "goat_isolated_declarations",
+  "goat_linter",
+  "goat_mangler",
+  "goat_minifier",
+  "goat_parser",
+  "goat_semantic",
+  "goat_span",
+  "goat_tasks_common",
+  "goat_transformer",
   "serde",
   "serde_json",
   "cow-utils",

@@ -84,5 +84,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Features
 
-- 951b2d5 npm/runtime: Add `@oxc-project/runtime` package (#8595) (Boshen)
+- 951b2d5 npm/runtime: Add `@goat-project/runtime` package (#8595) (Boshen)
 

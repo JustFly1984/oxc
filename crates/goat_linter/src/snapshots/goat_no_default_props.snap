@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(no-default-props): defaultProps is deprecated
+   ╭─[no_default_props.tsx:1:11]
+ 1 │ Component.defaultProps = { color: 'red' };
+   ·           ────────────
+   ╰────
+  help: Use JavaScript default parameters instead of defaultProps. defaultProps is deprecated since React 18.3.
+
+  ⚠ goat(no-default-props): defaultProps is deprecated
+   ╭─[no_default_props.tsx:1:10]
+ 1 │ MyButton.defaultProps = {};
+   ·          ────────────
+   ╰────
+  help: Use JavaScript default parameters instead of defaultProps. defaultProps is deprecated since React 18.3.

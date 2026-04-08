@@ -1,0 +1,26 @@
+{
+  "name": "@goat-project/types",
+  "version": "0.124.0",
+  "description": "Types for Oxc AST nodes",
+  "keywords": [
+    "AST",
+    "Parser"
+  ],
+  "homepage": "https://goatlint.dev",
+  "bugs": "https://github.com/goat-project/oxc/issues",
+  "license": "MIT",
+  "author": "Boshen and oxc contributors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goat-project/oxc.git",
+    "directory": "npm/goat-types"
+  },
+  "funding": {
+    "url": "https://github.com/sponsors/Boshen"
+  },
+  "files": [
+    "types.d.ts"
+  ],
+  "type": "module",
+  "types": "types.d.ts"
+}

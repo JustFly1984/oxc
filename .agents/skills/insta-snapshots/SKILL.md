@@ -9,8 +9,8 @@ This skill guides you through working with [insta](https://insta.rs) snapshot te
 
 Insta is a snapshot testing library for Rust. Oxc uses it extensively for:
 
-- Linter rule tests (`crates/oxc_linter/src/snapshots/`)
-- Semantic analysis tests (`crates/oxc_semantic/tests/integration/snapshots/`)
+- Linter rule tests (`crates/goat_linter/src/snapshots/`)
+- Semantic analysis tests (`crates/goat_semantic/tests/integration/snapshots/`)
 - Other crate-specific snapshot tests
 
 Snapshots track **expected test outputs** (often failures or errors). When code changes, new snapshots are generated as `.snap.new` files for review.
@@ -81,7 +81,7 @@ git diff <path/to/snapshots/>
 
 ### After fixing a bug or adding new snapshot tests:
 
-1. Run tests: `cargo test -p oxc_linter` (or relevant crate)
+1. Run tests: `cargo test -p goat_linter` (or relevant crate)
 2. Check pending: `cargo insta pending-snapshots`
 3. Read new snapshots to verify they match expected behavior
 4. Accept if correct: `cargo insta accept`
@@ -89,9 +89,9 @@ git diff <path/to/snapshots/>
 
 ### Working with specific test files:
 
-1. Run: `cargo test -p oxc_linter specific_test_name`
+1. Run: `cargo test -p goat_linter specific_test_name`
 2. Read: `cargo insta pending-snapshots` - look for `specific_test_name.snap.new`
-3. Accept: `cargo insta accept -p oxc_linter`
+3. Accept: `cargo insta accept -p goat_linter`
 
 ## Snapshot File Formats
 
@@ -113,22 +113,22 @@ Note that `.snap.md` files are from Vitest, and **not** Insta. They are used in 
 ```bash
 # 1. Make a code change to a linter rule
 # 2. Run tests
-cargo test -p oxc_linter
+cargo test -p goat_linter
 
 # 3. See what changed
 cargo insta pending-snapshots
 
 # 4. Review specific snapshot (using Read tool)
-# Read: crates/oxc_linter/src/snapshots/some_test.snap.new
+# Read: crates/goat_linter/src/snapshots/some_test.snap.new
 
 # 5. Accept if correct
-cargo insta accept -p oxc_linter
+cargo insta accept -p goat_linter
 
 # 6. Verify with git
-git diff crates/oxc_linter/src/snapshots/
+git diff crates/goat_linter/src/snapshots/
 
 # 7. Run tests again to ensure everything passes
-cargo test -p oxc_linter
+cargo test -p goat_linter
 ```
 
 ---

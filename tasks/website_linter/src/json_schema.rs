@@ -1,4 +1,4 @@
-use oxc_linter::Oxlintrc;
+use goat_linter::Oxlintrc;
 use schemars::schema_for;
 use website_common::{Renderer, generate_schema_json};
 
@@ -12,7 +12,7 @@ fn test_schema_json() {
     use project_root::get_project_root;
     use std::fs;
 
-    let path = get_project_root().unwrap().join("npm/oxlint/configuration_schema.json");
+    let path = get_project_root().unwrap().join("npm/goatlint/configuration_schema.json");
     let json = generate_schema_json::<Oxlintrc>();
     let existing_json = fs::read_to_string(&path).unwrap_or_default();
     if existing_json.trim() != json.trim() {

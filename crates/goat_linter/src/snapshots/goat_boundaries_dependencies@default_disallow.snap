@@ -1,0 +1,12 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(boundaries-dependencies): Dependency from `public-routes` to `admin-routes` is not allowed.
+   ╭─[boundaries-app/src/routes/public/explicit.ts:4:40]
+ 3 │         import { publicInfoApi } from "../../api/public/info";
+ 4 │         import { adminDashboard } from "../admin/dashboard";
+   ·                                        ────────────────────
+ 5 │ 
+   ╰────
+  help: Remove the import of `../admin/dashboard` or move the dependency to an allowed architectural layer.

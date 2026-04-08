@@ -9,7 +9,7 @@ use super::{File, FileId, MetaId, Schema, extensions::estree::ESTreeMeta};
 /// Definition for a meta type.
 ///
 /// Meta types are types which are not part of the AST, but are associated with the AST in some way,
-/// and used by `oxc_ast_tools` as "helpers", or used in generated code.
+/// and used by `goat_ast_tools` as "helpers", or used in generated code.
 #[derive(Debug)]
 pub struct MetaType {
     #[expect(dead_code)]
@@ -44,7 +44,7 @@ impl MetaType {
 
     /// Get the import path for this meta type from specified crate.
     ///
-    /// e.g. `crate::serialize::Null` or `oxc_ast::serialize::Null`.
+    /// e.g. `crate::serialize::Null` or `goat_ast::serialize::Null`.
     pub fn import_path_from_crate(&self, from_krate: &str, schema: &Schema) -> TokenStream {
         let file = self.file(schema);
 

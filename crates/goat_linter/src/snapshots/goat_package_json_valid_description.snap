@@ -1,0 +1,24 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(package-json-valid-description): The `description` field in package.json must be a non-empty string.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:16]
+ 1 │ {"description":""}
+   ·                ──
+   ╰────
+  help: Use a descriptive non-empty package description.
+
+  ⚠ goat(package-json-valid-description): The `description` field in package.json must be a non-empty string.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:16]
+ 1 │ {"description":"   "}
+   ·                ─────
+   ╰────
+  help: Use a descriptive non-empty package description.
+
+  ⚠ goat(package-json-valid-description): The `description` field in package.json must be a non-empty string.
+   ╭─[/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/package.json:1:16]
+ 1 │ {"description":1}
+   ·                ─
+   ╰────
+  help: Use a descriptive non-empty package description.

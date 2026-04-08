@@ -14,7 +14,7 @@ pub fn print_yaml(code: &str, generator_path: &str) -> String {
 impl Output {
     /// Generate CI watch list YAML file.
     ///
-    /// This is used in `ast_changes` CI job to skip running `oxc_ast_tools`
+    /// This is used in `ast_changes` CI job to skip running `goat_ast_tools`
     /// unless relevant files have changed.
     ///
     /// The watch list includes:
@@ -22,7 +22,7 @@ impl Output {
     /// * Generated output file paths (excluding those already covered by crate globs)
     /// * `ast_tools` crate itself
     /// * CI workflow file
-    /// * Config files (`Cargo.toml`, `Cargo.lock`, `package.json`, `oxfmtrc.jsonc`)
+    /// * Config files (`Cargo.toml`, `Cargo.lock`, `package.json`, `goatfmtrc.jsonc`)
     ///
     /// `crate_paths` are crates containing AST types (discovered via `cargo metadata`).
     /// `oxc_*` dependency crates of `ast_tools` are also added, since changes to them
@@ -75,7 +75,7 @@ impl Output {
                 "tasks/ast_tools/src/**",
                 ".github/workflows/ci.yml",
                 "package.json",
-                "oxfmtrc.jsonc",
+                "goatfmtrc.jsonc",
                 "Cargo.toml",
                 "Cargo.lock",
             ],

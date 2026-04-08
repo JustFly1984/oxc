@@ -23,7 +23,7 @@ impl Derive for DeriveGetSpan {
     }
 
     fn crate_name(&self) -> &'static str {
-        "oxc_span"
+        "goat_span"
     }
 
     /// Register that accept `#[span]` attr on struct fields.
@@ -50,7 +50,7 @@ impl Derive for DeriveGetSpan {
             #![expect(clippy::match_same_arms)]
 
             ///@@line_break
-            use oxc_span::{Span, GetSpan};
+            use goat_span::{Span, GetSpan};
         }
     }
 
@@ -86,7 +86,7 @@ impl Derive for DeriveGetSpanMut {
 
     /// Get crate trait is defined in.
     fn crate_name(&self) -> &'static str {
-        "oxc_span"
+        "goat_span"
     }
 
     fn prelude(&self) -> TokenStream {
@@ -94,7 +94,7 @@ impl Derive for DeriveGetSpanMut {
             #![expect(clippy::match_same_arms)]
 
             ///@@line_break
-            use oxc_span::{Span, GetSpanMut};
+            use goat_span::{Span, GetSpanMut};
         }
     }
 

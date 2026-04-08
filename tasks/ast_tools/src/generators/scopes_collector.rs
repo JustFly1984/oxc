@@ -243,9 +243,9 @@ fn generate(schema: &Schema) -> TokenStream {
         use std::cell::Cell;
 
         ///@@line_break
-        use oxc_ast::ast::*;
-        use oxc_ast_visit::Visit;
-        use oxc_syntax::scope::{ScopeFlags, ScopeId};
+        use goat_ast::ast::*;
+        use goat_ast_visit::Visit;
+        use goat_syntax::scope::{ScopeFlags, ScopeId};
 
         ///@@line_break
         /// Visitor that locates all child scopes.

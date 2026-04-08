@@ -13,14 +13,14 @@ use humansize::{DECIMAL, format_size};
 use pico_args::Arguments;
 use rustc_hash::FxHashMap;
 
-use oxc_allocator::Allocator;
-use oxc_codegen::{Codegen, CodegenOptions};
-use oxc_minifier::{CompressOptions, MangleOptions, Minifier, MinifierOptions};
-use oxc_parser::Parser;
-use oxc_semantic::SemanticBuilder;
-use oxc_span::SourceType;
+use goat_allocator::Allocator;
+use goat_codegen::{Codegen, CodegenOptions};
+use goat_minifier::{CompressOptions, MangleOptions, Minifier, MinifierOptions};
+use goat_parser::Parser;
+use goat_semantic::SemanticBuilder;
+use goat_span::SourceType;
 use oxc_tasks_common::{TestFile, TestFiles, project_root};
-use oxc_transformer_plugins::{ReplaceGlobalDefines, ReplaceGlobalDefinesConfig};
+use goat_transformer_plugins::{ReplaceGlobalDefines, ReplaceGlobalDefinesConfig};
 
 #[test]
 #[cfg(any(coverage, coverage_nightly))]

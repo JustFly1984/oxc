@@ -1,0 +1,19 @@
+---
+source: apps/goatlint/src/lint.rs
+expression: content
+---
+{
+  "$schema": "./node_modules/goatlint/configuration_schema.json",
+  "plugins": [
+    "typescript",
+    "unicorn",
+    "goat"
+  ],
+  "categories": {
+    "correctness": "error"
+  },
+  "rules": {},
+  "env": {
+    "builtin": true
+  }
+}

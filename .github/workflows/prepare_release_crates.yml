@@ -14,12 +14,12 @@ concurrency:
 
 jobs:
   check:
-    if: github.repository == 'oxc-project/oxc'
+    if: github.repository == 'goat-project/oxc'
     name: Check
     runs-on: ubuntu-latest
     steps:
       - uses: taiki-e/checkout-action@7d1e50e93dc4fb3bba58f85018fadf77898aee8b # v1.4.2
-      - uses: oxc-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
+      - uses: goat-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
         with:
           cache-key: warm
           tools: cargo-release-oxc
@@ -27,7 +27,7 @@ jobs:
       - run: cargo release-oxc publish --release crates --dry-run # zizmor: ignore[use-trusted-publishing]
 
   prepare:
-    if: github.repository == 'oxc-project/oxc'
+    if: github.repository == 'goat-project/oxc'
     name: Prepare Release
     runs-on: ubuntu-latest
     outputs:
@@ -39,7 +39,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - uses: oxc-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
+      - uses: goat-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
         with:
           cache-key: warm
           tools: cargo-release-oxc
@@ -51,7 +51,7 @@ jobs:
           cargo release-oxc update --release crates
           echo "CRATES_VERSION=$(cat ./target/CRATES_VERSION)" >> $GITHUB_OUTPUT
 
-      - uses: oxc-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
+      - uses: goat-project/setup-node@4c26e7cb3605b6bdef5450dacd02c434b10fd8ba # v1.2.0
 
       # Run NAPI-RS build, because NAPI-RS uses version from `package.json` in the bindings file,
       # which is committed to the repo. The version has just been bumped in previous step.
@@ -94,11 +94,11 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ needs.prepare.outputs.pull-request-number }}
-          body: Triggering Monitor Oxc https://github.com/oxc-project/monitor-oxc/actions/workflows/ci.yml
+          body: Triggering Monitor Oxc https://github.com/goat-project/monitor-oxc/actions/workflows/ci.yml
 
       - uses: benc-uk/workflow-dispatch@7a027648b88c2413826b6ddd6c76114894dc5ec4 # v1.3.1
         with:
-          repo: oxc-project/monitor-oxc
+          repo: goat-project/monitor-oxc
           workflow: ci.yml
           token: ${{ secrets.OXC_BOT_PAT }}
           ref: main

@@ -1,15 +1,15 @@
 {
-  // "oxc.path.oxlint": "apps/oxlint/dist/cli.js", // debug with local oxlint build
+  // "oxc.path.goatlint": "apps/goatlint/dist/cli.js", // debug with local goatlint build
   "oxc.typeAware": true,
-  "oxc.configPath": "oxlintrc.json",
+  "oxc.configPath": "goatlintrc.json",
   "oxc.unusedDisableDirectives": "deny",
-  // "oxc.path.oxfmt": "apps/oxfmt/dist/cli.js", // debug with local oxfmt build
-  "oxc.fmt.configPath": "oxfmtrc.jsonc",
+  // "oxc.path.goatfmt": "apps/goatfmt/dist/cli.js", // debug with local goatfmt build
+  "oxc.fmt.configPath": "goatfmtrc.jsonc",
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "file", // oxfmt can only format whole files
+  "editor.formatOnSaveMode": "file", // goatfmt can only format whole files
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "never" // let oxfmt handle import organization
+    "source.organizeImports": "never" // let goatfmt handle import organization
   },
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"

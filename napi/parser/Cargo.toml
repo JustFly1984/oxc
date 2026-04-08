@@ -1,5 +1,5 @@
 [package]
-name = "oxc_parser_napi"
+name = "goat_parser_napi"
 version = "0.124.0"
 authors.workspace = true
 categories.workspace = true
@@ -22,11 +22,11 @@ test = false
 doctest = false
 
 [dependencies]
-oxc = { workspace = true, features = ["ast_visit", "regular_expression", "semantic", "serialize"] }
-oxc_ast_macros = { workspace = true }
-oxc_estree = { workspace = true }
-oxc_estree_tokens = { workspace = true }
-oxc_napi = { workspace = true }
+goat = { workspace = true, features = ["ast_visit", "regular_expression", "semantic", "serialize"] }
+goat_ast_macros = { workspace = true }
+goat_estree = { workspace = true }
+goat_estree_tokens = { workspace = true }
+goat_napi = { workspace = true }
 
 rustc-hash = { workspace = true }
 

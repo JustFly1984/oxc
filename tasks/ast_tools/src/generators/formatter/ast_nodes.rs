@@ -1,4 +1,4 @@
-//! Generator for `oxc_formatter`.
+//! Generator for `goat_formatter`.
 //! Generates the `AstNodes` and `AstNode` types.
 
 use proc_macro2::TokenStream;
@@ -11,7 +11,7 @@ use crate::{
     schema::{Def, EnumDef, FieldDef, Schema, StructDef, TypeDef, TypeId},
 };
 
-const FORMATTER_CRATE_PATH: &str = "crates/oxc_formatter";
+const FORMATTER_CRATE_PATH: &str = "crates/goat_formatter";
 
 pub fn formatter_output_path(file_name: &str) -> String {
     format!("{FORMATTER_CRATE_PATH}/src/ast_nodes/generated/{file_name}.rs")
@@ -114,10 +114,10 @@ impl Generator for FormatterAstNodesGenerator {
         let output = quote! {
             use std::mem::transmute;
             ///@@line_break
-            use oxc_allocator::Vec;
-            use oxc_ast::ast::*;
-            use oxc_span::{GetSpan, Ident};
-            use oxc_syntax::node::NodeId;
+            use goat_allocator::Vec;
+            use goat_ast::ast::*;
+            use goat_span::{GetSpan, Ident};
+            use goat_syntax::node::NodeId;
             ///@@line_break
             use crate::ast_nodes::AstNode;
             use crate::formatter::{

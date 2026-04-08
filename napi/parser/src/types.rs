@@ -2,7 +2,7 @@ use std::mem;
 
 use napi_derive::napi;
 
-use oxc_napi::{Comment, OxcError};
+use goat_napi::{Comment, OxcError};
 
 #[napi(object)]
 #[derive(Default)]
@@ -66,7 +66,7 @@ pub struct ParseResult {
 
 #[napi]
 impl ParseResult {
-    #[napi(getter, ts_return_type = "import(\"@oxc-project/types\").Program")]
+    #[napi(getter, ts_return_type = "import(\"@goat-project/types\").Program")]
     pub fn get_program(&mut self) -> String {
         mem::take(&mut self.program_and_fixes)
     }

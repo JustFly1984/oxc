@@ -1,0 +1,1349 @@
+use std::borrow::Cow;
+
+use goat_ast::ast::REGEXP_FLAGS_LIST;
+use goat_diagnostics::GoatDiagnostic;
+use goat_span::Span;
+
+use crate::modifiers::{Modifier, ModifierKind, ModifierKinds};
+
+trait DiagnosticExt {
+    fn with_allowed_modifier_help(self, allowed: Option<ModifierKinds>) -> Self;
+}
+
+impl DiagnosticExt for GoatDiagnostic {
+    fn with_allowed_modifier_help(self, allowed: Option<ModifierKinds>) -> Self {
+        if let Some(allowed) = allowed {
+            match allowed.count() {
+                0 => self.with_help("No modifiers are allowed here."),
+                1 => self.with_help(format!("Only '{allowed}' modifier is allowed here.")),
+                _ => self.with_help(format!("Allowed modifiers are: {allowed}")),
+            }
+        } else {
+            self
+        }
+    }
+}
+
+#[inline]
+fn ts_error<C, M>(code: C, message: M) -> GoatDiagnostic
+where
+    C: Into<Cow<'static, str>>,
+    M: Into<Cow<'static, str>>,
+{
+    GoatDiagnostic::error(message).with_error_code("TS", code)
+}
+
+#[cold]
+pub fn redeclaration(x0: &str, declare_span: Span, redeclare_span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Identifier `{x0}` has already been declared")).with_labels([
+        declare_span.label(format!("`{x0}` has already been declared here")),
+        redeclare_span.label("It can not be redeclared here"),
+    ])
+}
+
+#[cold]
+pub fn overlong_source() -> GoatDiagnostic {
+    GoatDiagnostic::error("Source length exceeds 4 GiB limit")
+}
+
+#[cold]
+pub fn file_appears_to_be_binary() -> GoatDiagnostic {
+    ts_error("1490", "File appears to be binary.")
+}
+
+#[cold]
+pub fn flow(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Flow is not supported").with_label(span)
+}
+
+#[cold]
+pub fn unexpected_token(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Unexpected token").with_label(span)
+}
+
+#[cold]
+pub fn private_identifier_in_property_name(name: &str, span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Private identifier '#{name}' is not allowed in property names"))
+        .with_label(span)
+}
+
+#[cold]
+pub fn html_comment_in_module(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("HTML comments are not allowed in modules").with_label(span)
+}
+
+#[cold]
+pub fn merge_conflict_marker(
+    start_span: Span,
+    middle_span: Option<Span>,
+    end_span: Option<Span>,
+) -> GoatDiagnostic {
+    let mut diagnostic = GoatDiagnostic::error("Encountered diff marker")
+        .and_label(
+            start_span.primary_label(
+                "between this marker and `=======` is the code that we're merging into",
+            ),
+        )
+        .with_help(
+            "Conflict markers indicate that a merge was started but could not be completed due to \
+         merge conflicts.\n\
+         To resolve a conflict, keep only the code you want and then delete the lines containing \
+         conflict markers.\n\
+         If you're having merge conflicts after pulling new code, the top section is the code you \
+         already had and the bottom section is the remote code.\n\
+         If you're in the middle of a rebase, the top section is the code being rebased onto and \
+         the bottom section is the code coming from the current commit being rebased.\n\
+         If you have nested conflicts, resolve the outermost conflict first.",
+        );
+
+    if let Some(middle) = middle_span {
+        diagnostic = diagnostic
+            .and_label(middle.label("between this marker and `>>>>>>>` is the incoming code"));
+    } else {
+        // Incomplete conflict - missing middle or end markers
+        diagnostic = diagnostic.with_help(
+            "This conflict marker appears to be incomplete (missing `=======` or `>>>>>>>`).\n\
+         Check if the conflict markers were accidentally modified or partially deleted.",
+        );
+    }
+
+    if let Some(end) = end_span {
+        diagnostic = diagnostic.and_label(end.label("this marker concludes the conflict region"));
+    }
+
+    diagnostic
+}
+
+#[cold]
+pub fn jsx_in_non_jsx(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Unexpected JSX expression")
+        .with_label(span)
+        .with_help("JSX syntax is disabled and should be enabled via the parser options")
+}
+
+#[cold]
+pub fn expect_token(x0: &str, x1: &str, span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Expected `{x0}` but found `{x1}`"))
+        .with_label(span.label(format!("`{x0}` expected")))
+}
+
+#[cold]
+pub fn expect_closing(
+    expected_closing: &str,
+    actual: &str,
+    span: Span,
+    opening_span: Span,
+) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Expected `{expected_closing}` but found `{actual}`")).with_labels(
+        [
+            span.primary_label(format!("`{expected_closing}` expected")),
+            opening_span.label("Opened here"),
+        ],
+    )
+}
+
+#[cold]
+pub fn expect_closing_or_separator(
+    expected_closing: &str,
+    expected_separator: &str,
+    actual: &str,
+    span: Span,
+    opening_span: Span,
+) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!(
+        "Expected `{expected_separator}` or `{expected_closing}` but found `{actual}`"
+    ))
+    .with_labels([
+        span.primary_label(format!("`{expected_separator}` or `{expected_closing}` expected")),
+        opening_span.label("Opened here"),
+    ])
+}
+
+#[cold]
+pub fn expect_conditional_alternative(x: &str, span: Span, question_span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Expected `:` but found `{x}`")).with_labels([
+        span.primary_label("`:` expected"),
+        question_span.label("Conditional starts here"),
+    ])
+}
+
+#[cold]
+pub fn unexpected_trailing_comma(name: &'static str, span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("{name} may not have a trailing comma."))
+        .with_label(span)
+        .with_help("Remove the trailing comma here")
+}
+
+#[cold]
+pub fn invalid_escape_sequence(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Invalid escape sequence").with_label(span)
+}
+
+#[cold]
+pub fn unicode_escape_sequence(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Invalid Unicode escape sequence").with_label(span)
+}
+
+#[cold]
+pub fn invalid_character(x0: char, span1: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Invalid Character `{x0}`")).with_label(span1)
+}
+
+#[cold]
+pub fn invalid_number_end(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Invalid characters after number").with_label(span)
+}
+
+#[cold]
+pub fn unterminated_multi_line_comment(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Unterminated multiline comment").with_label(span)
+}
+
+#[cold]
+pub fn unterminated_string(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Unterminated string").with_label(span)
+}
+
+#[cold]
+pub fn reg_exp_flag(x0: char, span1: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Unexpected flag {x0} in regular expression literal"))
+        .with_label(span1)
+        .with_help(format!("The allowed flags are `{REGEXP_FLAGS_LIST}`"))
+}
+
+#[cold]
+pub fn reg_exp_flag_twice(x0: char, span1: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Flag {x0} is mentioned twice in regular expression literal"))
+        .with_label(span1)
+        .with_help("Remove the duplicated flag here")
+}
+
+#[cold]
+pub fn unexpected_end(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Unexpected end of file").with_label(span)
+}
+
+#[cold]
+pub fn unexpected_jsx_end(span: Span, a: char, b: &str) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Unexpected token. Did you mean `{{'{a}'}}` or `&{b};`?"))
+        .with_label(span)
+}
+
+#[cold]
+pub fn unterminated_reg_exp(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Unterminated regular expression").with_label(span)
+}
+
+#[cold]
+pub fn invalid_number(x0: &str, span1: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Invalid Number {x0}")).with_label(span1)
+}
+
+#[cold]
+pub fn escaped_keyword(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Keywords cannot contain escape characters").with_label(span)
+}
+
+#[cold]
+pub fn auto_semicolon_insertion(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(
+        "Expected a semicolon or an implicit semicolon after a statement, but found none",
+    )
+    .with_help("Try inserting a semicolon here")
+    .with_label(span)
+}
+
+#[cold]
+pub fn lineterminator_before_arrow(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Line terminator not permitted before arrow")
+        .with_label(span)
+        .with_help("Remove the line break before here")
+}
+
+#[cold]
+pub fn invalid_destructuring_declaration(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Missing initializer in destructuring declaration")
+        .with_label(span)
+        .with_help("Add an initializer (e.g. ` = undefined`) here")
+}
+
+#[cold]
+pub fn missing_initializer_in_const(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Missing initializer in const declaration")
+        .with_label(span)
+        .with_help("Add an initializer (e.g. ` = undefined`) here")
+}
+
+#[cold]
+pub fn lexical_declaration_single_statement(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Lexical declaration cannot appear in a single-statement context")
+        .with_help("Wrap this declaration in a block statement")
+        .with_label(span)
+}
+
+#[cold]
+pub fn async_function_declaration(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Async functions can only be declared at the top level or inside a block")
+        .with_label(span)
+}
+
+#[cold]
+pub fn generator_function_declaration(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Generators can only be declared at the top level or inside a block")
+        .with_label(span)
+}
+
+#[cold]
+pub fn await_expression(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(
+        "`await` is only allowed within async functions and at the top levels of modules",
+    )
+    .with_label(span)
+    .with_help("Either remove this `await` or add the `async` keyword to the enclosing function")
+}
+
+#[cold]
+pub fn yield_expression(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("A 'yield' expression is only allowed in a generator body.")
+        .with_label(span)
+        .with_help("Either remove this `yield` or change the enclosing function to a generator function (`function*`)")
+}
+
+#[cold]
+pub fn class_declaration(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Invalid class declaration")
+        .with_help("Classes can only be declared at top level or inside a block")
+        .with_label(span)
+}
+
+// 'extends' clause already seen. ts(1172)
+#[cold]
+pub fn extends_clause_already_seen(span: Span) -> GoatDiagnostic {
+    ts_error("1172", "'extends' clause already seen").with_label(span)
+}
+
+// 'extends' clause must precede 'implements' clause. ts(1173)
+#[cold]
+pub fn extends_clause_must_precede_implements(span: Span, implements_span: Span) -> GoatDiagnostic {
+    ts_error("1173", "'extends' clause must precede 'implements' clause")
+        .with_labels([
+            implements_span.label("'implements' clause found here"),
+            span.primary_label("'extends' clause found here"),
+        ])
+        .with_help("Move the 'extends' clause before the 'implements' clause")
+}
+
+// Classes can only extend a single class. ts(1174)
+#[cold]
+pub fn classes_can_only_extend_single_class(span: Span) -> GoatDiagnostic {
+    ts_error("1174", "Classes can only extend a single class.")
+        .with_label(span)
+        .with_help("Remove the extra base class or use interfaces for multiple inheritance")
+}
+
+// 'implements' clause already seen. ts(1175)
+#[cold]
+pub fn implements_clause_already_seen(span: Span, seen_span: Span) -> GoatDiagnostic {
+    ts_error("1175", "'implements' clause already seen")
+        .with_labels([seen_span, span])
+        .with_help("Merge the two 'implements' clauses into one by a ','")
+}
+
+/// A class member cannot have the 'const' keyword. ts(1248)
+#[cold]
+pub fn const_class_member(span: Span) -> GoatDiagnostic {
+    ts_error("1248", "A class member cannot have the 'const' keyword.")
+        .with_help("Did you mean `readonly`?")
+        .with_label(span)
+}
+
+// A required element cannot follow an optional element. ts(1257)
+#[cold]
+pub fn required_element_cannot_follow_optional_element(
+    span: Span,
+    optional_span: Span,
+) -> GoatDiagnostic {
+    ts_error("1257", "A required element cannot follow an optional element.").with_labels([
+        span.label("Required element here"),
+        optional_span.label("Optional element seen here"),
+    ])
+}
+
+/// A rest element cannot follow another rest element. ts(1265)
+#[cold]
+pub fn rest_element_cannot_follow_another_rest_element(
+    seen_span: Span,
+    span: Span,
+) -> GoatDiagnostic {
+    ts_error("1265", "A rest element cannot follow another rest element.")
+        .with_labels([span.label("Second rest element here"), seen_span.label("First seen here")])
+}
+
+/// An optional element cannot follow a rest element. ts(1266)
+#[cold]
+pub fn optional_element_cannot_follow_rest_element(span: Span, rest_span: Span) -> GoatDiagnostic {
+    ts_error("1266", "An optional element cannot follow a rest element.").with_labels([
+        span.label("Optional element here"),
+        rest_span.label("Rest element seen here"),
+    ])
+}
+
+// A type-only import can specify a default import or named bindings, but not both. ts(1363)
+#[cold]
+pub fn type_only_import_default_and_named(specifier_span: Span) -> GoatDiagnostic {
+    ts_error(
+        "1363",
+        "A type-only import can specify a default import or named bindings, but not both.",
+    )
+    .with_label(specifier_span)
+}
+
+#[cold]
+pub fn binding_rest_element_last(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("A rest element must be last in a destructuring pattern").with_label(span)
+}
+
+#[cold]
+pub fn rest_parameter_last(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("A rest parameter must be last in a parameter list").with_label(span)
+}
+
+#[cold]
+pub fn spread_last_element(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Spread must be last element").with_label(span)
+}
+
+#[cold]
+pub fn rest_element_trailing_comma(span: Span) -> GoatDiagnostic {
+    unexpected_trailing_comma("A rest parameter or binding pattern", span)
+}
+
+#[cold]
+pub fn invalid_binding_rest_element(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Invalid rest element")
+        .with_help("Expected identifier in rest element")
+        .with_label(span)
+}
+
+#[cold]
+pub fn a_rest_parameter_cannot_be_optional(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("A rest parameter cannot be optional")
+        .with_label(span)
+        .with_help("Remove this `?`. The default value is an empty array")
+}
+
+#[cold]
+pub fn invalid_assignment(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Cannot assign to this expression").with_label(span)
+}
+
+#[cold]
+pub fn invalid_lhs_assignment(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(
+        "The left-hand side of an assignment expression must be a variable or a property access.",
+    )
+    .with_label(span)
+}
+
+#[cold]
+pub fn new_optional_chain(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Optional chaining cannot appear in the callee of new expressions")
+        .with_label(span)
+}
+
+#[cold]
+pub fn invalid_new_optional_chain(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Invalid optional chain from new expression.").with_label(span)
+}
+
+#[cold]
+pub fn decorator_optional(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Expression must be enclosed in parentheses to be used as a decorator.")
+        .with_label(span)
+}
+
+#[cold]
+pub fn for_loop_async_of(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("The left-hand side of a `for...of` statement may not be `async`")
+        .with_label(span)
+        .with_help("Did you mean to use a for await...of statement?")
+}
+
+pub fn for_loop_let_reserved_word(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("The left-hand side of a `for...of` statement may not start with `let`")
+        .with_label(span)
+}
+
+#[cold]
+pub fn for_await(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("await can only be used in conjunction with `for...of` statements")
+        .with_label(span)
+        .with_help("Did you mean to use a for...of statement?")
+}
+
+#[cold]
+pub fn new_dynamic_import(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Cannot use new with dynamic import")
+        .with_label(span)
+        .with_help("Wrap this with parenthesis")
+}
+
+#[cold]
+pub fn new_super(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("'new super()' is not allowed").with_label(span)
+}
+
+#[cold]
+pub fn private_name_constructor(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Classes can't have an element named '#constructor'").with_label(span)
+}
+
+#[cold]
+pub fn static_prototype(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Classes may not have a static property named 'prototype'")
+        .with_label(span)
+}
+
+#[cold]
+pub fn constructor_getter_setter(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Constructor can't have get/set modifier").with_label(span)
+}
+
+#[cold]
+pub fn constructor_async(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Constructor can't be an async method").with_label(span)
+}
+
+#[cold]
+pub fn optional_accessor_property(span: Span) -> GoatDiagnostic {
+    ts_error("1276", "An 'accessor' property cannot be declared optional.")
+        .with_label(span)
+        .with_help("Remove this `?`")
+}
+
+#[cold]
+pub fn constructor_accessor(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Classes may not have a field named 'constructor'").with_label(span)
+}
+
+#[cold]
+pub fn optional_definite_property(span: Span) -> GoatDiagnostic {
+    // NOTE: could not find an error code when tsc parses this; its parser panics.
+    GoatDiagnostic::error("A property cannot be both optional and definite.")
+        .with_label(span)
+        .with_help("Remove either the `?` or the `!`")
+}
+
+#[cold]
+pub fn identifier_async(x0: &str, span1: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Cannot use `{x0}` as an identifier in an async context"))
+        .with_label(span1)
+}
+
+#[cold]
+pub fn identifier_generator(x0: &str, span1: Span, looks_like_expression: bool) -> GoatDiagnostic {
+    let diagnostic =
+        GoatDiagnostic::error(format!("Cannot use `{x0}` as an identifier in a generator context"))
+            .with_label(span1);
+    if looks_like_expression {
+        diagnostic.with_help(format!(
+            "Wrap this in parentheses if you want to use a `{x0}` expression here"
+        ))
+    } else {
+        diagnostic
+    }
+}
+
+#[cold]
+pub fn identifier_expected(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Identifier expected.").with_label(span)
+}
+
+#[cold]
+pub fn identifier_reserved_word(span: Span, reserved: &str) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!(
+        "Identifier expected. '{reserved}' is a reserved word that cannot be used here."
+    ))
+    .with_label(span)
+}
+
+#[cold]
+pub fn constructor_generator(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Constructor can't be a generator").with_label(span)
+}
+
+#[cold]
+pub fn declare_constructor(span: Span) -> GoatDiagnostic {
+    ts_error("1031", "'declare' modifier cannot appear on a constructor declaration.")
+        .with_label(span)
+}
+
+#[cold]
+pub fn constructor_return_type(span: Span) -> GoatDiagnostic {
+    ts_error("1093", "Type annotation cannot appear on a constructor declaration.").with_label(span)
+}
+
+#[cold]
+pub fn field_constructor(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Classes can't have a field named 'constructor'").with_label(span)
+}
+
+#[cold]
+pub fn export_lone_surrogate(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("An export name cannot include a unicode lone surrogate").with_label(span)
+}
+
+#[cold]
+pub fn export_named_string(x0: &str, x1: &str, span2: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("A string literal cannot be used as an exported binding without `from`")
+        .with_help(format!("Did you mean `export {{ {x0} as {x1} }} from 'some-module'`?"))
+        .with_label(span2)
+}
+
+#[cold]
+pub fn export_reserved_word(x0: &str, x1: &str, span2: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("A reserved word cannot be used as an exported binding without `from`")
+        .with_help(format!("Did you mean `export {{ {x0} as {x1} }} from 'some-module'`?"))
+        .with_label(span2)
+}
+
+#[cold]
+pub fn template_literal(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Bad escape sequence in untagged template literal").with_label(span)
+}
+
+#[cold]
+pub fn empty_parenthesized_expression(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Empty parenthesized expression").with_label(span)
+}
+
+#[cold]
+pub fn illegal_newline(x0: &str, span1: Span, span2: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Illegal newline after {x0}")).with_labels([
+        span1.label(format!("{x0} starts here")),
+        span2.label("A newline is not expected here"),
+    ])
+}
+
+#[cold]
+pub fn optional_chain_tagged_template(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Tagged template expressions are not permitted in an optional chain")
+        .with_label(span)
+}
+
+#[cold]
+pub fn ts_constructor_this_parameter(span: Span) -> GoatDiagnostic {
+    ts_error("2681", "A constructor cannot have a `this` parameter.").with_label(span)
+}
+
+#[cold]
+pub fn ts_constructor_type_parameter(span: Span) -> GoatDiagnostic {
+    ts_error("1092", "Type parameters cannot appear on a constructor declaration")
+        .with_label(span)
+        .with_help("Instead, add type parameters to the class itself")
+}
+
+#[cold]
+pub fn ts_arrow_function_this_parameter(span: Span) -> GoatDiagnostic {
+    ts_error("2730", "An arrow function cannot have a `this` parameter.")
+        .with_label(span)
+        .with_help("Arrow function does not bind `this` and inherits `this` from the outer scope")
+}
+
+#[cold]
+pub fn ts_empty_type_parameter_list(span: Span) -> GoatDiagnostic {
+    ts_error("1098", "Type parameter list cannot be empty.").with_label(span)
+}
+
+#[cold]
+pub fn ts_empty_type_argument_list(span: Span) -> GoatDiagnostic {
+    ts_error("1099", "Type argument list cannot be empty.").with_label(span)
+}
+
+#[cold]
+pub fn ts_instantiation_expression_cannot_be_followed_by_property_access(
+    span: Span,
+) -> GoatDiagnostic {
+    ts_error("1477", "An instantiation expression cannot be followed by a property access.")
+        .with_label(span)
+}
+
+#[cold]
+pub fn ts_string_literal_expected(span: Span) -> GoatDiagnostic {
+    ts_error("1141", "String literal expected.").with_label(span)
+}
+
+#[cold]
+pub fn unexpected_super(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("'super' can only be used with function calls or in property accesses")
+        .with_help("Replace with `super()` or `super.prop` or `super[prop]`")
+        .with_label(span)
+}
+
+#[cold]
+pub fn expect_function_name(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Expected function name")
+        .with_help("Function name is required in function declaration or named export")
+        .with_label(span)
+}
+
+#[cold]
+pub fn expect_catch_finally(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Missing catch or finally clause")
+        .with_label(span)
+        .with_help("Either unwrap this try block or add catch / finally clause")
+}
+
+#[cold]
+pub fn v8_intrinsic_spread_elem(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("V8 runtime calls cannot have spread elements as arguments")
+        .with_label(span)
+}
+
+#[cold]
+pub fn a_set_accessor_cannot_have_a_return_type_annotation(span: Span) -> GoatDiagnostic {
+    ts_error("1095", "A 'set' accessor cannot have a return type annotation.").with_label(span)
+}
+
+#[cold]
+pub fn return_statement_only_in_function_body(span: Span) -> GoatDiagnostic {
+    ts_error("1108", "A 'return' statement can only be used within a function body.")
+        .with_label(span)
+}
+
+#[cold]
+pub fn invalid_identifier_in_using_declaration(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Using declarations may not have binding patterns.").with_label(span)
+}
+
+#[cold]
+pub fn await_using_declaration_not_allowed_in_for_in_statement(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(
+        "The left-hand side of a for...in statement cannot be an await using declaration.",
+    )
+    .with_label(span)
+    .with_help("Did you mean to use a for...of statement?")
+}
+
+#[cold]
+pub fn using_declaration_not_allowed_in_for_in_statement(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(
+        "The left-hand side of a for...in statement cannot be an using declaration.",
+    )
+    .with_label(span)
+    .with_help("Did you mean to use a for...of statement?")
+}
+
+#[cold]
+pub fn using_declarations_must_be_initialized(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Using declarations must have an initializer.")
+        .with_label(span)
+        .with_help("Add an initializer (e.g. ` = undefined`) here")
+}
+
+#[cold]
+pub fn using_declaration_cannot_be_exported(identifier: &str, span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Using declarations cannot be exported directly.")
+        .with_label(span)
+        .with_help(format!("Remove the `export` here and add `export {{ {identifier} }}` as a separate statement to export the declaration"))
+}
+
+#[cold]
+pub fn using_declaration_not_allowed_in_switch_bare_case(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Using declaration cannot appear in the bare case statement.")
+        .with_label(span)
+        .with_help("Wrap this declaration in a block statement")
+}
+
+#[cold]
+pub fn using_declarations_not_allowed_in_ambient_contexts(span: Span) -> GoatDiagnostic {
+    ts_error("1545", "'using' declarations are not allowed in ambient contexts.").with_label(span)
+}
+
+#[cold]
+pub fn await_using_declarations_not_allowed_in_ambient_contexts(span: Span) -> GoatDiagnostic {
+    ts_error("1546", "'await using' declarations are not allowed in ambient contexts.")
+        .with_label(span)
+}
+
+#[cold]
+pub fn jsx_element_no_match(span: Span, span1: Span, name: &str) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Expected corresponding JSX closing tag for '{name}'."))
+        .with_labels([
+            span1.primary_label(format!("Expected `</{name}>`")),
+            span.label("Opened here"),
+        ])
+}
+
+#[cold]
+pub fn jsx_fragment_no_match(opening_span: Span, closing_span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Expected corresponding closing tag for JSX fragment.").with_labels([
+        closing_span.primary_label("Expected `</>`"),
+        opening_span.label("Opened here"),
+    ])
+}
+
+#[cold]
+pub fn cover_initialized_name(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Invalid assignment in object literal")
+.with_help("Did you mean to use a ':'? An '=' can only follow a property name when the containing object literal is part of a destructuring pattern.")
+.with_label(span)
+}
+
+#[cold]
+pub fn duplicate_export(x0: &str, span1: Span, span2: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("Duplicated export '{x0}'")).with_labels([
+        span1.label("Export has already been declared here"),
+        span2.label("It cannot be redeclared here"),
+    ])
+}
+
+#[cold]
+pub fn duplicate_default_export(spans: impl IntoIterator<Item = Span>) -> GoatDiagnostic {
+    ts_error("2528", "A module cannot have multiple default exports.").with_labels(spans)
+}
+
+#[cold]
+pub fn import_meta(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("The only valid meta property for import is import.meta").with_label(span)
+}
+
+#[cold]
+pub fn new_target(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("The only valid meta property for new is new.target").with_label(span)
+}
+
+#[cold]
+pub fn private_in_private(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Unexpected right-hand side of private-in expression").with_label(span)
+}
+
+#[cold]
+pub fn unexpected_private_identifier(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Unexpected private identifier").with_label(span)
+}
+
+#[cold]
+pub fn import_arguments(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Dynamic imports can only accept a module specifier and an optional set of attributes as arguments").with_label(span)
+}
+
+#[cold]
+pub fn rest_element_property_name(span: Span) -> GoatDiagnostic {
+    ts_error("2566", "A rest element cannot have a property name.").with_label(span)
+}
+
+#[cold]
+pub fn a_rest_element_cannot_have_an_initializer(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("A rest element cannot have an initializer.").with_label(span)
+}
+
+#[cold]
+pub fn import_requires_a_specifier(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("import() requires a specifier.").with_label(span)
+}
+
+#[cold]
+pub fn modifier_cannot_be_used_here(
+    modifier: &Modifier,
+    allowed: Option<ModifierKinds>,
+) -> GoatDiagnostic {
+    GoatDiagnostic::error(format!("'{}' modifier cannot be used here.", modifier.kind))
+        .with_label(modifier.span())
+        .with_allowed_modifier_help(allowed)
+}
+
+#[cold]
+pub fn modifier_only_on_property_declaration_or_index_signature(
+    modifier: &Modifier,
+    allowed: Option<ModifierKinds>,
+) -> GoatDiagnostic {
+    ts_error(
+        "1024",
+        format!(
+            "'{}' modifier can only appear on a property declaration or index signature.",
+            modifier.kind
+        ),
+    )
+    .with_label(modifier.span())
+    .with_allowed_modifier_help(allowed)
+}
+
+#[cold]
+pub fn accessibility_modifier_already_seen(modifier: &Modifier) -> GoatDiagnostic {
+    ts_error("1028", "Accessibility modifier already seen.")
+        .with_label(modifier.span())
+        .with_help("Remove the duplicate modifier.")
+}
+
+#[cold]
+pub fn modifier_must_precede_other_modifier(
+    modifier: &Modifier,
+    other_modifier: ModifierKind,
+) -> GoatDiagnostic {
+    ts_error(
+        "1029",
+        format!("'{}' modifier must precede '{}' modifier.", modifier.kind, other_modifier),
+    )
+    .with_label(modifier.span())
+}
+
+#[cold]
+pub fn modifier_already_seen(modifier: &Modifier) -> GoatDiagnostic {
+    ts_error("1030", format!("'{}' modifier already seen.", modifier.kind))
+        .with_label(modifier.span())
+        .with_help("Remove the duplicate modifier.")
+}
+
+pub fn cannot_appear_on_class_elements(
+    modifier: &Modifier,
+    allowed: Option<ModifierKinds>,
+) -> GoatDiagnostic {
+    ts_error(
+        "1031",
+        format!("'{}' modifier cannot appear on class elements of this kind.", modifier.kind),
+    )
+    .with_label(modifier.span())
+    .with_allowed_modifier_help(allowed)
+}
+
+pub fn cannot_appear_on_a_type_member(
+    modifier: &Modifier,
+    allowed: Option<ModifierKinds>,
+) -> GoatDiagnostic {
+    ts_error("1070", format!("'{}' modifier cannot appear on a type member.", modifier.kind))
+        .with_label(modifier.span())
+        .with_allowed_modifier_help(allowed)
+}
+
+#[cold]
+pub fn cannot_appear_on_a_type_parameter(
+    modifier: &Modifier,
+    allowed: Option<ModifierKinds>,
+) -> GoatDiagnostic {
+    ts_error("1273", format!("'{}' modifier cannot be used on a type parameter.", modifier.kind))
+        .with_label(modifier.span())
+        .with_allowed_modifier_help(allowed)
+}
+
+#[cold]
+pub fn a_parameter_cannot_have_question_mark_and_initializer(span: Span) -> GoatDiagnostic {
+    ts_error("1015", "A parameter cannot have a question mark and an initializer.").with_label(span)
+}
+
+#[cold]
+pub fn can_only_appear_on_a_type_parameter_of_a_class_interface_or_type_alias(
+    modifier: ModifierKind,
+    span: Span,
+) -> GoatDiagnostic {
+    ts_error("1274", format!("'{modifier}' modifier can only appear on a type parameter of a class, interface or type alias."))
+        .with_label(span)
+}
+
+pub fn cannot_appear_on_a_parameter(
+    modifier: &Modifier,
+    allowed: Option<ModifierKinds>,
+) -> GoatDiagnostic {
+    ts_error("1090", format!("'{}' modifier cannot appear on a parameter.", modifier.kind))
+        .with_label(modifier.span())
+        .with_allowed_modifier_help(allowed)
+}
+
+#[cold]
+pub fn parameter_property_cannot_be_binding_pattern(span: Span) -> GoatDiagnostic {
+    ts_error("1187", "A parameter property may not be declared using a binding pattern.")
+        .with_label(span)
+}
+
+pub fn cannot_appear_on_an_index_signature(
+    modifier: &Modifier,
+    allowed: Option<ModifierKinds>,
+) -> GoatDiagnostic {
+    ts_error("1071", format!("'{}' modifier cannot appear on an index signature.", modifier.kind))
+        .with_label(modifier.span())
+        .with_allowed_modifier_help(allowed)
+}
+
+pub fn accessor_modifier(modifier: &Modifier, allowed: Option<ModifierKinds>) -> GoatDiagnostic {
+    ts_error(
+        "1243",
+        format!("'accessor' modifier cannot be used with '{}' modifier.", modifier.kind),
+    )
+    .with_label(modifier.span())
+    .with_allowed_modifier_help(allowed.map(|a| a.without(ModifierKind::Accessor)))
+}
+
+#[cold]
+pub fn readonly_in_array_or_tuple_type(span: Span) -> GoatDiagnostic {
+    ts_error("1354", "'readonly' type modifier is only permitted on array and tuple literal types.")
+        .with_label(span)
+}
+
+#[cold]
+pub fn accessibility_modifier_on_private_property(
+    modifier: &Modifier,
+    _allowed: Option<ModifierKinds>,
+) -> GoatDiagnostic {
+    ts_error("18010", "An accessibility modifier cannot be used with a private identifier.")
+        .with_label(modifier.span())
+        .with_help("Private identifiers are enforced at runtime, while accessibility modifiers only affect type checking, so using both is redundant.")
+}
+
+#[cold]
+pub fn type_modifier_on_named_type_import(span: Span) -> GoatDiagnostic {
+    ts_error("2206", "The 'type' modifier cannot be used on a named import when 'import type' is used on its import statement.")
+        .with_label(span)
+        .with_help("Remove this 'type' modifier")
+}
+
+#[cold]
+pub fn type_modifier_on_named_type_export(span: Span) -> GoatDiagnostic {
+    ts_error("2207", "The 'type' modifier cannot be used on a named export when 'export type' is used on its export statement.")
+         .with_label(span)
+         .with_help("Remove this 'type' modifier")
+}
+
+#[cold]
+pub fn computed_property_names_not_allowed_in_enums(span: Span) -> GoatDiagnostic {
+    ts_error("1164", "Computed property names are not allowed in enums.").with_label(span)
+}
+
+#[cold]
+pub fn enum_member_cannot_have_numeric_name(span: Span) -> GoatDiagnostic {
+    ts_error("2452", "An enum member cannot have a numeric name.").with_label(span)
+}
+
+#[cold]
+pub fn index_signature_one_parameter(span: Span) -> GoatDiagnostic {
+    ts_error("1096", "An index signature must have exactly one parameter.").with_label(span)
+}
+
+#[cold]
+pub fn mixed_coalesce(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Logical expressions and coalesce expressions cannot be mixed")
+        .with_help("Wrap either expression by parentheses")
+        .with_label(span)
+}
+
+#[cold]
+pub fn unexpected_exponential(x0: &str, span1: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Unexpected exponentiation expression")
+        .with_help(format!("Wrap {x0} expression in parentheses to enforce operator precedence"))
+        .with_label(span1)
+}
+
+#[cold]
+pub fn import_equals_can_only_be_used_in_typescript_files(span: Span) -> GoatDiagnostic {
+    ts_error("8002", "'import ... =' can only be used in TypeScript files.")
+        .with_label(span)
+        .with_help("TypeScript transforms 'import ... =' to 'const ... ='")
+}
+
+#[cold]
+pub fn index_signature_question_mark(span: Span) -> GoatDiagnostic {
+    ts_error("1019", "An index signature parameter cannot have a question mark.").with_label(span)
+}
+
+#[cold]
+pub fn index_signature_type_annotation(span: Span) -> GoatDiagnostic {
+    ts_error("1021", "An index signature must have a type annotation.").with_label(span)
+}
+
+#[cold]
+pub fn abstract_method_cannot_have_implementation(name: &str, span: Span) -> GoatDiagnostic {
+    ts_error(
+        "1245",
+        format!("Method '{name}' cannot have an implementation because it is marked abstract."),
+    )
+    .with_label(span)
+}
+
+#[cold]
+pub fn abstract_property_cannot_have_initializer(name: &str, span: Span) -> GoatDiagnostic {
+    ts_error(
+        "1267",
+        format!("Property '{name}' cannot have an initializer because it is marked abstract."),
+    )
+    .with_label(span)
+}
+
+#[cold]
+pub fn abstract_accessor_cannot_have_implementation(name: &str, span: Span) -> GoatDiagnostic {
+    ts_error(
+        "1318",
+        format!("Accessor '{name}' cannot have an implementation because it is marked abstract."),
+    )
+    .with_label(span)
+}
+
+#[cold]
+pub fn unexpected_export(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Unexpected export.").with_label(span)
+}
+
+#[cold]
+pub fn decorators_in_export_and_class(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Decorators may not appear after 'export' or 'export default' if they also appear before 'export'.").with_label(span)
+}
+
+#[cold]
+pub fn decorators_are_not_valid_here(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Decorators are not valid here.").with_label(span)
+}
+
+#[cold]
+pub fn decorator_on_overload(span: Span) -> GoatDiagnostic {
+    ts_error("1249", "A decorator can only decorate a method implementation, not an overload.")
+        .with_label(span)
+        .with_help("Move this after all the overloads")
+}
+
+#[cold]
+pub fn as_in_ts(span: Span) -> GoatDiagnostic {
+    ts_error("8016", "Type assertion expressions can only be used in TypeScript files.")
+        .with_label(span)
+}
+
+#[cold]
+pub fn satisfies_in_ts(span: Span) -> GoatDiagnostic {
+    ts_error("8037", "Type satisfaction expressions can only be used in TypeScript files.")
+        .with_label(span)
+}
+
+#[cold]
+pub fn optional_and_rest_tuple_member(span: Span) -> GoatDiagnostic {
+    ts_error("5085", "A tuple member cannot be both optional and rest.").with_label(span)
+}
+
+#[cold]
+pub fn optional_after_tuple_member_name(span: Span) -> GoatDiagnostic {
+    ts_error("5086", "A labeled tuple element is declared as optional with a question mark after the name and before the colon, rather than after the type.").with_label(span)
+}
+
+#[cold]
+pub fn rest_after_tuple_member_name(span: Span) -> GoatDiagnostic {
+    ts_error("5087", "A labeled tuple element is declared as rest with a '...' before the name, rather than before the type.").with_label(span)
+}
+
+#[cold]
+pub fn parameter_modifiers_in_ts(
+    modifier: &Modifier,
+    allowed: Option<ModifierKinds>,
+) -> GoatDiagnostic {
+    ts_error("8012", "Parameter modifiers can only be used in TypeScript files.")
+        .with_label(modifier.span())
+        .with_allowed_modifier_help(allowed)
+}
+
+#[cold]
+pub fn implements_clause_in_ts(span: Span) -> GoatDiagnostic {
+    ts_error("8005", "'implements' clauses can only be used in TypeScript files.").with_label(span)
+}
+
+#[cold]
+pub fn implementation_in_ambient(span: Span) -> GoatDiagnostic {
+    ts_error("1183", "An implementation cannot be declared in ambient contexts.").with_label(span)
+}
+
+#[cold]
+pub fn initializers_not_allowed_in_ambient_contexts(span: Span) -> GoatDiagnostic {
+    ts_error("1039", "Initializers are not allowed in ambient contexts.").with_label(span)
+}
+
+#[cold]
+pub fn interface_implements(span: Span) -> GoatDiagnostic {
+    ts_error("1176", "Interface declaration cannot have 'implements' clause.").with_label(span)
+}
+
+#[cold]
+pub fn interface_extend(span: Span) -> GoatDiagnostic {
+    ts_error(
+        "2499",
+        "An interface can only extend an identifier/qualified-name with optional type arguments.",
+    )
+    .with_label(span)
+}
+
+#[cold]
+pub fn reg_exp_flag_u_and_v(span: Span) -> GoatDiagnostic {
+    ts_error("1502", "The 'u' and 'v' regular expression flags cannot be enabled at the same time")
+        .with_label(span)
+        .with_help("v flag enables additional syntax over u flag")
+}
+
+#[cold]
+pub fn setter_with_parameters(span: Span, parameters_count: usize) -> GoatDiagnostic {
+    ts_error("1049", "A 'set' accessor must have exactly one parameter.")
+        .with_label(span)
+        .with_help(if parameters_count == 0 {
+            "Add a parameter here"
+        } else {
+            "Remove parameters except the first one here"
+        })
+}
+
+#[cold]
+pub fn setter_with_rest_parameter(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("A 'set' accessor cannot have rest parameter.").with_label(span)
+}
+#[cold]
+pub fn setter_with_initializer(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("A 'set' accessor cannot have an initializer.").with_label(span)
+}
+
+#[cold]
+pub fn getter_parameters(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("A 'get' accessor must not have any formal parameters.")
+        .with_label(span)
+        .with_help("Remove these parameters here")
+}
+
+#[cold]
+pub fn setter_with_optional_parameter(span: Span) -> GoatDiagnostic {
+    ts_error("1051", "A 'set' accessor cannot have an optional parameter.").with_label(span)
+}
+
+#[cold]
+pub fn accessor_cannot_have_this_parameter(span: Span) -> GoatDiagnostic {
+    ts_error("2784", "'get' and 'set' accessors cannot declare 'this' parameters.").with_label(span)
+}
+
+#[cold]
+pub fn variable_declarator_definite(span: Span) -> GoatDiagnostic {
+    ts_error(
+        "1263",
+        "Declarations with initializers cannot also have definite assignment assertions.",
+    )
+    .with_label(span)
+}
+
+#[cold]
+pub fn variable_declarator_definite_type_assertion(span: Span) -> GoatDiagnostic {
+    ts_error(
+        "1264",
+        "Declarations with definite assignment assertions must also have type annotations.",
+    )
+    .with_label(span)
+}
+
+#[cold]
+pub fn invalid_assignment_target_default_value_operator(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Only '=' operator can be used for specifying default value.")
+        .with_label(span)
+        .with_help("Replace this operator with `=`.")
+}
+
+#[cold]
+pub fn invalid_rest_assignment_target(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Invalid rest operator's argument.").with_label(span)
+}
+
+#[cold]
+pub fn modifiers_cannot_appear_here(
+    modifier: &Modifier,
+    _: Option<ModifierKinds>,
+) -> GoatDiagnostic {
+    ts_error("1184", "Modifiers cannot appear here.").with_label(modifier.span())
+}
+
+#[cold]
+pub fn expect_function_body(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Expected function body")
+        .with_label(span)
+        .with_help("Add a function body (`{}`).")
+}
+
+#[cold]
+pub fn expect_switch_clause(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Expected switch clause")
+        .with_label(span.label("`case` or `default` clause expected here"))
+        .with_help("If this is intended to be the condition for the switch statement, add `case` before it.")
+}
+
+#[cold]
+pub fn unexpected_optional_declaration(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Optional declaration is not allowed here")
+        .with_label(span)
+        .with_help("Remove the `?`")
+}
+
+#[cold]
+pub fn identifier_expected_after_question_dot(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Identifier expected after '?.'")
+        .with_label(span)
+        .with_help("Add an identifier after '?.'")
+}
+
+#[cold]
+pub fn identifier_expected_jsx_no_hyphen(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Identifiers in JSX cannot contain hyphens")
+        .with_label(span)
+        .with_help("Remove the hyphen from the identifier")
+}
+
+#[cold]
+pub fn jsx_attribute_value_empty_expression(span: Span) -> GoatDiagnostic {
+    ts_error("17000", "JSX attributes must only be assigned a non-empty 'expression'.")
+        .with_label(span)
+}
+
+#[cold]
+pub fn import_attribute_value_must_be_string_literal(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Only string literals are allowed as module attribute values.")
+        .with_label(span)
+        .with_help("Wrap this with quotes")
+}
+
+// TS18058
+#[cold]
+pub fn default_import_not_allowed_in_defer(span: Span) -> GoatDiagnostic {
+    ts_error("18058", "Default imports are not allowed in a deferred import.").with_label(span)
+}
+
+// TS18059
+#[cold]
+pub fn named_import_not_allowed_in_defer(span: Span) -> GoatDiagnostic {
+    ts_error("18059", "Named imports are not allowed in a deferred import.").with_label(span)
+}
+
+#[cold]
+pub fn only_default_import_allowed_in_source_phase(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Only a single default import is allowed in a source phase import.")
+        .with_label(span)
+}
+
+#[cold]
+pub fn ts_import_type_options_expected_with(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Expected 'with' in import type options").with_label(span)
+}
+
+#[cold]
+pub fn ts_import_type_options_invalid_key(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Import attributes keys must be identifier or string literal.")
+        .with_label(span)
+}
+
+#[cold]
+pub fn ts_import_type_options_no_spread(span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::error("Spread elements are not allowed in import type options.").with_label(span)
+}
+
+// This syntax is reserved in files with the .mts or .cts extension. Use an `as` expression instead. ts(7059)
+#[cold]
+pub fn jsx_type_assertion_in_mts_cts(span: Span) -> GoatDiagnostic {
+    ts_error(
+        "7059",
+        "This syntax is reserved in files with the .mts or .cts extension. Use an `as` expression instead.",
+    )
+    .with_label(span)
+}
+
+// This syntax is reserved in files with the .mts or .cts extension. Add a trailing comma or explicit constraint. ts(7060)
+#[cold]
+pub fn jsx_type_parameter_in_mts_cts(span: Span) -> GoatDiagnostic {
+    ts_error(
+        "7060",
+        "This syntax is reserved in files with the .mts or .cts extension. Add a trailing comma or explicit constraint.",
+    )
+    .with_label(span)
+}

@@ -11,7 +11,7 @@ inputs:
   file-url:
     required: false
     type: string
-    description: URL to compare version against (e.g., https://unpkg.com/oxlint@latest/package.json)
+    description: URL to compare version against (e.g., https://unpkg.com/goatlint@latest/package.json)
 
   diff-search:
     required: false

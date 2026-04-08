@@ -23,7 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0).
 
 - 9a622c7 linter/plugins: Lazy deserialize tokens and comments (#20474) (overlookmotel)
 - c6ea0a0 ast: Place `NodeId` field after `Span` in structs (#20584) (overlookmotel)
-- d176ecc napi/parser, oxlint/plugins: Shorten deserializer for `WithClause` (#20575) (overlookmotel)
+- d176ecc napi/parser, goatlint/plugins: Shorten deserializer for `WithClause` (#20575) (overlookmotel)
 
 ## [0.120.0] - 2026-03-16
 
@@ -168,7 +168,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0).
 
 ### 🐛 Bug Fixes
 
-- 2bd3cb6 apps, editors, napi: Fix `oxlint-disable` comments (#16014) (overlookmotel)
+- 2bd3cb6 apps, editors, napi: Fix `goatlint-disable` comments (#16014) (overlookmotel)
 
 ## [0.98.0] - 2025-11-17
 
@@ -202,7 +202,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0).
 
 ### 🐛 Bug Fixes
 
-- 597340e ast-tools: Use oxfmt to format generated code (#15064) (camc314)
+- 597340e ast-tools: Use goatfmt to format generated code (#15064) (camc314)
 - 84b2605 linter/plugins: Remove `parent` property from comments (#14624) (overlookmotel)
 
 ### 🚜 Refactor
@@ -644,24 +644,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0).
 
 ### 🚜 Refactor
 
-- 8717807 napi/oxlint: Make `types.js` importable (#12581) (overlookmotel)
-- f0b1f0d napi/oxlint, napi/parser: Remove source length from `RawTransferMetadata` (#12483) (overlookmotel)
+- 8717807 napi/goatlint: Make `types.js` importable (#12581) (overlookmotel)
+- f0b1f0d napi/goatlint, napi/parser: Remove source length from `RawTransferMetadata` (#12483) (overlookmotel)
 
 ### ⚡ Performance
 
-- 69f8b63 napi/parser, napi/oxlint: Lazy visit: faster check for exit visitor (#12496) (overlookmotel)
+- 69f8b63 napi/parser, napi/goatlint: Lazy visit: faster check for exit visitor (#12496) (overlookmotel)
 
 
 ## [0.79.0] - 2025-07-30
 
 ### 🚜 Refactor
 
-- 8717807 napi/oxlint: Make `types.js` importable (#12581) (overlookmotel)
-- f0b1f0d napi/oxlint, napi/parser: Remove source length from `RawTransferMetadata` (#12483) (overlookmotel)
+- 8717807 napi/goatlint: Make `types.js` importable (#12581) (overlookmotel)
+- f0b1f0d napi/goatlint, napi/parser: Remove source length from `RawTransferMetadata` (#12483) (overlookmotel)
 
 ### ⚡ Performance
 
-- 69f8b63 napi/parser, napi/oxlint: Lazy visit: faster check for exit visitor (#12496) (overlookmotel)
+- 69f8b63 napi/parser, napi/goatlint: Lazy visit: faster check for exit visitor (#12496) (overlookmotel)
 
 
 
@@ -675,7 +675,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0).
 ### 🚜 Refactor
 
 - c5dff1e linter, napi/parser: Add `source_len` field to `RawTransferMetadata` (#12383) (overlookmotel)
-- 5e3b415 linter: Duplicate `RawTransferMetadata` in `oxc_linter` crate (#12382) (overlookmotel)
+- 5e3b415 linter: Duplicate `RawTransferMetadata` in `goat_linter` crate (#12382) (overlookmotel)
 - 319fc3b allocator/fixed-size: Store `alloc_ptr` in the memory block backing the allocator (#12380) (overlookmotel)
 - 8fe1aec ast_tools, allocator, napi/parser: Rename vars (#12379) (overlookmotel)
 
@@ -689,7 +689,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0).
 ### 🚜 Refactor
 
 - c5dff1e linter, napi/parser: Add `source_len` field to `RawTransferMetadata` (#12383) (overlookmotel)
-- 5e3b415 linter: Duplicate `RawTransferMetadata` in `oxc_linter` crate (#12382) (overlookmotel)
+- 5e3b415 linter: Duplicate `RawTransferMetadata` in `goat_linter` crate (#12382) (overlookmotel)
 - 319fc3b allocator/fixed-size: Store `alloc_ptr` in the memory block backing the allocator (#12380) (overlookmotel)
 - 8fe1aec ast_tools, allocator, napi/parser: Rename vars (#12379) (overlookmotel)
 
@@ -1728,7 +1728,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - 6565fc4 napi: Feature gate allocator (#9921) (Boshen)
 - 2cedfe4 napi: Add codeframe to napi error (#9893) (Boshen)
-- a9a47a6 parser: Add regex cargo feature to oxc_parser (#9879) (Toshit)
+- a9a47a6 parser: Add regex cargo feature to goat_parser (#9879) (Toshit)
 - 59c8f71 parser,codegen: Handle lone surrogate in string literal (#9918) (Boshen)
 
 ### Bug Fixes
@@ -1745,7 +1745,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Refactor
 
-- 961b95d napi: Move common code to `oxc_napi` (#9875) (Boshen)
+- 961b95d napi: Move common code to `goat_napi` (#9875) (Boshen)
 - 233c1fc napi/playground: Add JSON.parse wrapper (#9880) (Hiroshi Ogawa)
 
 ### Testing
@@ -1761,7 +1761,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - 6565fc4 napi: Feature gate allocator (#9921) (Boshen)
 - 2cedfe4 napi: Add codeframe to napi error (#9893) (Boshen)
-- a9a47a6 parser: Add regex cargo feature to oxc_parser (#9879) (Toshit)
+- a9a47a6 parser: Add regex cargo feature to goat_parser (#9879) (Toshit)
 - 59c8f71 parser,codegen: Handle lone surrogate in string literal (#9918) (Boshen)
 
 ### Bug Fixes
@@ -1778,7 +1778,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Refactor
 
-- 961b95d napi: Move common code to `oxc_napi` (#9875) (Boshen)
+- 961b95d napi: Move common code to `goat_napi` (#9875) (Boshen)
 - 233c1fc napi/playground: Add JSON.parse wrapper (#9880) (Hiroshi Ogawa)
 
 ### Testing

@@ -8,23 +8,23 @@ search: false
 
 
 ## Usage
- **`oxlint`** \[**`-c`**=_`<./.oxlintrc.json>`_\] \[_`PATH`_\]...
+ **`goatlint`** \[**`-c`**=_`<./.goatlintrc.json>`_\] \[_`PATH`_\]...
 
 ## Basic Configuration
-- **`-c`**, **`--config`**=_`<./.oxlintrc.json>`_ &mdash; 
+- **`-c`**, **`--config`**=_`<./.goatlintrc.json>`_ &mdash; 
   Oxlint configuration file
 * `.json` and `.jsonc` config files are supported in all runtimes
 * JavaScript/TypeScript config files are experimental and require running via Node.js
 * you can use comments in configuration files.
 * tries to be compatible with ESLint v8's format
 
-  If not provided, Oxlint will look for a `.oxlintrc.json`, `.oxlintrc.jsonc`, or `oxlint.config.ts` file in the current working directory.
+  If not provided, Oxlint will look for a `.goatlintrc.json`, `.goatlintrc.jsonc`, or `goatlint.config.ts` file in the current working directory.
 - **`    --tsconfig`**=_`<./tsconfig.json>`_ &mdash; 
   Override the TypeScript config used for import resolution. Oxlint automatically discovers the relevant `tsconfig.json` for each file. Use this only when your project uses a non-standard tsconfig name or location.
 
   ::: warning Avoid using this option. It can cause differences between import resolution, and type-aware linting. Type aware linting **does not** respect this option, and will always discover the appropriate `tsconfig.json` for each file automatically. :::
 - **`    --init`** &mdash; 
-  Initialize oxlint configuration with default values
+  Initialize goatlint configuration with default values
 
 
 
@@ -138,7 +138,7 @@ Arguments:
 
 ## Inline Configuration Comments
 - **`    --report-unused-disable-directives`** &mdash; 
-  Report directive comments like `// oxlint-disable-line`, when no errors would have been reported on that line anyway
+  Report directive comments like `// goatlint-disable-line`, when no errors would have been reported on that line anyway
 - **`    --report-unused-disable-directives-severity`**=_`SEVERITY`_ &mdash; 
   Same as `--report-unused-disable-directives`, but allows you to specify the severity level of the reported errors. Only one of these two options can be used at a time.
 

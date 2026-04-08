@@ -1,0 +1,24 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ goat(identical-keys): JSON keys do not match the reference locale file `/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/i18n_catalog/en/common.json`.
+   ╭─[identical_keys.json:1:1]
+ 1 │ {"actions":{"cancel":"Annuler"},"title":"Tableau de bord"}
+   · ─
+   ╰────
+  help: Missing 1 key(s): actions.save
+
+  ⚠ goat(identical-keys): JSON keys do not match the reference locale file `/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/i18n_catalog/en/common.json`.
+   ╭─[identical_keys.json:1:1]
+ 1 │ {"actions":{"cancel":"Annuler","save":"Enregistrer","submit":"Envoyer"},"title":"Tableau de bord"}
+   · ─
+   ╰────
+  help: Extra 1 key(s): actions.submit
+
+  ⚠ goat(identical-keys): JSON keys do not match the reference locale file `/Users/alexeylyakhov/projects/oxc/crates/goat_linter/fixtures/import/i18n_catalog/en/common.json`.
+   ╭─[identical_keys.json:1:1]
+ 1 │ {"actions":"Annuler","title":"Tableau de bord"}
+   · ─
+   ╰────
+  help: Type mismatches at 1 path(s): actions

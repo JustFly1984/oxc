@@ -1,6 +1,6 @@
 # Oxc Transform
 
-See [usage instructions](https://oxc.rs/docs/guide/usage/transformer).
+See [usage instructions](https://goatlint.dev/docs/guide/usage/transformer).
 
 ## TypeScript and React JSX Transform
 

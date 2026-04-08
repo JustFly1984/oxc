@@ -43,7 +43,7 @@ impl Generator for AssertLayouts {
     }
 
     /// Generate assertions that calculated layouts are correct,
-    /// and struct layout data for `oxc_ast_macros` crate.
+    /// and struct layout data for `goat_ast_macros` crate.
     fn generate_many(&self, schema: &Schema, _codegen: &Codegen) -> Vec<Output> {
         let mut outputs = generate_assertions(schema);
         outputs.push(generate_struct_details(schema));
@@ -734,16 +734,16 @@ fn generate_size_align_assertions(layout: &PlatformLayout, ident: &Ident) -> Tok
 fn template(krate: &str, assertions_64: &TokenStream, assertions_32: &TokenStream) -> TokenStream {
     #[expect(clippy::match_same_arms)]
     let imports = match krate {
-        "oxc_ast" => quote! {
+        "goat_ast" => quote! {
             use crate::ast::*;
         },
-        "oxc_regular_expression" => quote! {
+        "goat_regular_expression" => quote! {
             use crate::ast::*;
         },
-        "oxc_span" => quote! {
+        "goat_span" => quote! {
             use crate::*;
         },
-        "oxc_syntax" => quote! {
+        "goat_syntax" => quote! {
             use nonmax::NonMaxU32;
 
             ///@@line_break
@@ -773,7 +773,7 @@ fn template(krate: &str, assertions_64: &TokenStream, assertions_32: &TokenStrea
         // Some 32-bit platforms have 8-byte alignment for `u64` and `f64`, while others have 4-byte alignment.
         //
         // Skip these assertions on 32-bit platforms where `u64` / `f64` have 4-byte alignment, because
-        // some layout calculations may be incorrect. https://github.com/oxc-project/oxc/issues/13694
+        // some layout calculations may be incorrect. https://github.com/goat-project/oxc/issues/13694
         //
         // At present 32-bit layouts aren't relied on by any code, so it's fine if they're incorrect for now.
         // However, raw transfer will be supported on WASM32 in future, and layout calculations are correct
@@ -791,7 +791,7 @@ fn template(krate: &str, assertions_64: &TokenStream, assertions_32: &TokenStrea
     }
 }
 
-/// Generate struct field orders for `oxc_ast_macros` crate.
+/// Generate struct field orders for `goat_ast_macros` crate.
 ///
 /// `#[ast]` macro will re-order struct fields in order we provide here.
 fn generate_struct_details(schema: &Schema) -> Output {

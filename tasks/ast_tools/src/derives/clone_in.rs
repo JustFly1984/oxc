@@ -28,7 +28,7 @@ impl Derive for DeriveCloneIn {
     }
 
     fn crate_name(&self) -> &'static str {
-        "oxc_allocator"
+        "goat_allocator"
     }
 
     /// Register that accept `#[clone_in]` attr on structs, enums, or struct fields.
@@ -64,7 +64,7 @@ impl Derive for DeriveCloneIn {
             use std::cell::Cell;
 
             ///@@line_break
-            use oxc_allocator::{Allocator, CloneIn};
+            use goat_allocator::{Allocator, CloneIn};
         }
     }
 
@@ -89,7 +89,7 @@ fn derive_struct(struct_def: &StructDef, schema: &Schema) -> TokenStream {
                 let field_ident = field.ident();
                 // Special case: node_id uses Cell::new(NodeId::DUMMY) when cloning
                 if field.name() == "node_id" {
-                    quote!( #field_ident: Cell::new(oxc_syntax::node::NodeId::DUMMY) )
+                    quote!( #field_ident: Cell::new(goat_syntax::node::NodeId::DUMMY) )
                 } else if struct_field_is_default(field, schema) {
                     quote!( #field_ident: Default::default() )
                 } else {

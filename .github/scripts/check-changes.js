@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 
-// oxlint-disable no-console
+// goatlint-disable no-console
 
 /**
  * Generic change detection script for CI jobs.
  *
  * Include mode: checks if changes affect specified crates or their transitive dependencies.
- *   node check-changes.js --packages oxc_minifier --paths tasks/minsize/
+ *   node check-changes.js --packages goat_minifier --paths tasks/minsize/
  *
  * Exclude mode: skips only if ALL changed files belong to excluded crate directories.
- *   node check-changes.js --exclude oxc_linter,oxc_language_server --paths napi/,npm/
+ *   node check-changes.js --exclude goat_linter,goat_language_server --paths napi/,npm/
  *
  * Paths-only mode: run if any changed file matches the given paths (no cargo tree).
- *   node check-changes.js --paths apps/oxlint/,npm/oxlint/,napi/oxlint/
+ *   node check-changes.js --paths apps/goatlint/,npm/goatlint/,napi/goatlint/
  */
 
 const { getChangedFiles } = require("./get-changed-files.js");

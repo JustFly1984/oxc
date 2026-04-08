@@ -9,16 +9,16 @@ use std::{
 
 use convert_case::{Case, Casing};
 use lazy_regex::regex;
-use oxc_allocator::Allocator;
-use oxc_ast::ast::{
+use goat_allocator::Allocator;
+use goat_ast::ast::{
     Argument, ArrayExpression, ArrayExpressionElement, AssignmentTarget, CallExpression,
     Expression, ExpressionStatement, IdentifierName, ObjectExpression, ObjectProperty,
     ObjectPropertyKind, Program, PropertyKey, Statement, StaticMemberExpression, StringLiteral,
     TaggedTemplateExpression, TemplateLiteral,
 };
-use oxc_ast_visit::Visit;
-use oxc_parser::Parser;
-use oxc_span::{GetSpan, SourceType, Span};
+use goat_ast_visit::Visit;
+use goat_parser::Parser;
+use goat_span::{GetSpan, SourceType, Span};
 use oxc_tasks_common::project_root;
 use rustc_hash::{FxHashMap, FxHashSet};
 use serde::Serialize;
@@ -528,7 +528,7 @@ impl<'a> Visit<'a> for State<'a> {
                 if let Some(Expression::ObjectExpression(obj_expr)) = &export_decl
                     .declaration
                     .as_expression()
-                    .map(oxc_ast::ast::Expression::get_inner_expression)
+                    .map(goat_ast::ast::Expression::get_inner_expression)
                 {
                     self.visit_object_expression(obj_expr);
                 }
@@ -642,7 +642,7 @@ impl<'a> Visit<'a> for State<'a> {
 
 fn find_parser_arguments<'a, 'b>(
     mut expr: &'b Expression<'a>,
-) -> Option<&'b oxc_allocator::Vec<'a, Argument<'a>>> {
+) -> Option<&'b goat_allocator::Vec<'a, Argument<'a>>> {
     loop {
         let Expression::CallExpression(call_expr) = expr else { return None };
         let Expression::StaticMemberExpression(static_member_expr) = &call_expr.callee else {
@@ -1378,7 +1378,7 @@ impl TryFrom<&str> for RuleKind {
             "react" => Ok(Self::React),
             "react-perf" => Ok(Self::ReactPerf),
             "jsx-a11y" => Ok(Self::JSXA11y),
-            "oxc" => Ok(Self::Oxc),
+            "goat" => Ok(Self::Oxc),
             "nextjs" => Ok(Self::NextJS),
             "jsdoc" => Ok(Self::JSDoc),
             "n" => Ok(Self::Node),
@@ -1401,7 +1401,7 @@ impl Display for RuleKind {
             Self::React => "eslint-plugin-react",
             Self::ReactPerf => "eslint-plugin-react-perf",
             Self::JSXA11y => "eslint-plugin-jsx-a11y",
-            Self::Oxc => "oxc",
+            Self::Oxc => "goat",
             Self::NextJS => "eslint-plugin-next",
             Self::JSDoc => "eslint-plugin-jsdoc",
             Self::Node => "eslint-plugin-n",
@@ -1654,13 +1654,13 @@ fn generate_rule_runner_impl() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("Generating RuleRunner impl...");
     let output = Command::new("cargo")
-        .args(["run", "-p", "oxc_linter_codegen"])
+        .args(["run", "-p", "goat_linter_codegen"])
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
         .output()?;
 
     if !output.status.success() {
-        return Err("Failed to run oxc_linter_codegen".into());
+        return Err("Failed to run goat_linter_codegen".into());
     }
 
     Ok(())
@@ -1719,21 +1719,21 @@ fn update_test_block(ctx: &Context, rule_kind: RuleKind) -> Result<(), Box<dyn s
 /// Returns the path to the rules directory for a given rule kind.
 fn get_rule_path(rule_kind: RuleKind) -> &'static Path {
     match rule_kind {
-        RuleKind::ESLint => Path::new("crates/oxc_linter/src/rules/eslint"),
-        RuleKind::Jest => Path::new("crates/oxc_linter/src/rules/jest"),
-        RuleKind::Typescript => Path::new("crates/oxc_linter/src/rules/typescript"),
-        RuleKind::Unicorn => Path::new("crates/oxc_linter/src/rules/unicorn"),
-        RuleKind::Import => Path::new("crates/oxc_linter/src/rules/import"),
-        RuleKind::React => Path::new("crates/oxc_linter/src/rules/react"),
-        RuleKind::ReactPerf => Path::new("crates/oxc_linter/src/rules/react_perf"),
-        RuleKind::JSXA11y => Path::new("crates/oxc_linter/src/rules/jsx_a11y"),
-        RuleKind::Oxc => Path::new("crates/oxc_linter/src/rules/oxc"),
-        RuleKind::NextJS => Path::new("crates/oxc_linter/src/rules/nextjs"),
-        RuleKind::JSDoc => Path::new("crates/oxc_linter/src/rules/jsdoc"),
-        RuleKind::Node => Path::new("crates/oxc_linter/src/rules/node"),
-        RuleKind::Promise => Path::new("crates/oxc_linter/src/rules/promise"),
-        RuleKind::Vitest => Path::new("crates/oxc_linter/src/rules/vitest"),
-        RuleKind::Vue => Path::new("crates/oxc_linter/src/rules/vue"),
+        RuleKind::ESLint => Path::new("crates/goat_linter/src/rules/eslint"),
+        RuleKind::Jest => Path::new("crates/goat_linter/src/rules/jest"),
+        RuleKind::Typescript => Path::new("crates/goat_linter/src/rules/typescript"),
+        RuleKind::Unicorn => Path::new("crates/goat_linter/src/rules/unicorn"),
+        RuleKind::Import => Path::new("crates/goat_linter/src/rules/import"),
+        RuleKind::React => Path::new("crates/goat_linter/src/rules/react"),
+        RuleKind::ReactPerf => Path::new("crates/goat_linter/src/rules/react_perf"),
+        RuleKind::JSXA11y => Path::new("crates/goat_linter/src/rules/jsx_a11y"),
+        RuleKind::Oxc => Path::new("crates/goat_linter/src/rules/oxc"),
+        RuleKind::NextJS => Path::new("crates/goat_linter/src/rules/nextjs"),
+        RuleKind::JSDoc => Path::new("crates/goat_linter/src/rules/jsdoc"),
+        RuleKind::Node => Path::new("crates/goat_linter/src/rules/node"),
+        RuleKind::Promise => Path::new("crates/goat_linter/src/rules/promise"),
+        RuleKind::Vitest => Path::new("crates/goat_linter/src/rules/vitest"),
+        RuleKind::Vue => Path::new("crates/goat_linter/src/rules/vue"),
     }
 }
 
@@ -1858,7 +1858,7 @@ fn get_mod_name(rule_kind: RuleKind) -> String {
         RuleKind::Unicorn => "unicorn".into(),
         RuleKind::JSDoc => "jsdoc".into(),
         RuleKind::JSXA11y => "jsx_a11y".into(),
-        RuleKind::Oxc => "oxc".into(),
+        RuleKind::Oxc => "goat".into(),
         RuleKind::NextJS => "nextjs".into(),
         RuleKind::Promise => "promise".into(),
         RuleKind::Vitest => "vitest".into(),
@@ -1878,7 +1878,7 @@ fn get_unsupported_rule_prefix(rule_kind: RuleKind) -> &'static str {
         RuleKind::React => "react",
         RuleKind::ReactPerf => "react-perf",
         RuleKind::JSXA11y => "jsx-a11y",
-        RuleKind::Oxc => "oxc",
+        RuleKind::Oxc => "goat",
         RuleKind::NextJS => "nextjs",
         RuleKind::JSDoc => "jsdoc",
         RuleKind::Node => "n",
@@ -1915,9 +1915,9 @@ fn find_unsupported_rule(kebab_rule: &str, rule_kind: RuleKind) -> Option<(Strin
 }
 
 /// Adds a module definition for the given rule to the `rules.rs` file.
-/// The `RuleEnum` will be regenerated by `oxc_linter_codegen` which is called after this function.
+/// The `RuleEnum` will be regenerated by `goat_linter_codegen` which is called after this function.
 fn add_rules_entry(ctx: &Context, rule_kind: RuleKind) -> Result<(), Box<dyn std::error::Error>> {
-    let rules_path = "crates/oxc_linter/src/rules.rs";
+    let rules_path = "crates/goat_linter/src/rules.rs";
     let mut rules = std::fs::read_to_string(rules_path)?;
 
     let mod_name = get_mod_name(rule_kind);
