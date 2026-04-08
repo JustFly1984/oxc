@@ -1,7 +1,11 @@
+use std::collections::BTreeMap;
+
 use convert_case::{Boundary, Case, Converter};
 use oxc_diagnostics::OxcDiagnostic;
 use oxc_macros::declare_oxc_lint;
 use oxc_span::Span;
+use schemars::JsonSchema;
+use serde::Deserialize;
 
 use crate::{context::LintContext, rule::Rule};
 
@@ -22,9 +26,16 @@ fn filename_naming_convention_diagnostic(
 #[derive(Debug, Default, Clone)]
 pub struct FilenameNamingConvention(Box<FilenameNamingConventionConfig>);
 
-#[derive(Debug, Default, Clone)]
+/// Configuration for filename naming conventions.
+///
+/// First element: a map of glob patterns to case styles (e.g. `{ "**/*.ts": "kebab-case" }`).
+/// Second element (optional): `{ "ignoreMiddleExtensions": true }`.
+#[derive(Debug, Default, Clone, JsonSchema, Deserialize)]
+#[serde(default)]
 pub struct FilenameNamingConventionConfig {
+    #[serde(skip)]
     rules: Vec<(String, NamingConvention)>,
+    #[serde(default, rename = "ignoreMiddleExtensions")]
     ignore_middle_extensions: bool,
 }
 
@@ -42,12 +53,12 @@ enum NamingConvention {
 impl NamingConvention {
     fn from_config_value(value: &str) -> Option<Self> {
         match value {
-            "CAMEL_CASE" => Some(Self::CamelCase),
-            "FLAT_CASE" => Some(Self::FlatCase),
-            "KEBAB_CASE" => Some(Self::KebabCase),
-            "PASCAL_CASE" => Some(Self::PascalCase),
+            "camelCase" | "CAMEL_CASE" => Some(Self::CamelCase),
+            "flatCase" | "FLAT_CASE" => Some(Self::FlatCase),
+            "kebab-case" | "kebab-case" => Some(Self::KebabCase),
+            "PascalCase" | "PASCAL_CASE" => Some(Self::PascalCase),
             "SCREAMING_SNAKE_CASE" => Some(Self::ScreamingSnakeCase),
-            "SNAKE_CASE" => Some(Self::SnakeCase),
+            "snake_case" | "SNAKE_CASE" => Some(Self::SnakeCase),
             _ => None,
         }
     }
@@ -74,12 +85,12 @@ impl NamingConvention {
 
     fn as_config_value(self) -> &'static str {
         match self {
-            Self::CamelCase => "CAMEL_CASE",
-            Self::FlatCase => "FLAT_CASE",
-            Self::KebabCase => "KEBAB_CASE",
-            Self::PascalCase => "PASCAL_CASE",
+            Self::CamelCase => "camelCase",
+            Self::FlatCase => "flatCase",
+            Self::KebabCase => "kebab-case",
+            Self::PascalCase => "PascalCase",
             Self::ScreamingSnakeCase => "SCREAMING_SNAKE_CASE",
-            Self::SnakeCase => "SNAKE_CASE",
+            Self::SnakeCase => "snake_case",
         }
     }
 }
@@ -108,7 +119,8 @@ declare_oxc_lint!(
     FilenameNamingConvention,
     oxc,
     style,
-    none
+    none,
+    config = FilenameNamingConventionConfig
 );
 
 impl Rule for FilenameNamingConvention {
@@ -205,25 +217,25 @@ fn test() {
         test_case(
             "src/core/file-read.ts",
             Some(
-                json!([{ "**/*.{ts,mts,js,mjs}": "KEBAB_CASE" }, { "ignoreMiddleExtensions": true }]),
+                json!([{ "**/*.{ts,mts,js,mjs}": "kebab-case" }, { "ignoreMiddleExtensions": true }]),
             ),
         ),
         test_case(
             "src/core/file-read.test.ts",
             Some(
-                json!([{ "**/*.{ts,mts,js,mjs}": "KEBAB_CASE" }, { "ignoreMiddleExtensions": true }]),
+                json!([{ "**/*.{ts,mts,js,mjs}": "kebab-case" }, { "ignoreMiddleExtensions": true }]),
             ),
         ),
         test_case(
             "scripts/build.mjs",
             Some(
-                json!([{ "**/*.{ts,mts,js,mjs}": "KEBAB_CASE" }, { "ignoreMiddleExtensions": true }]),
+                json!([{ "**/*.{ts,mts,js,mjs}": "kebab-case" }, { "ignoreMiddleExtensions": true }]),
             ),
         ),
         test_case(
             "README.md",
             Some(
-                json!([{ "**/*.{ts,mts,js,mjs}": "KEBAB_CASE" }, { "ignoreMiddleExtensions": true }]),
+                json!([{ "**/*.{ts,mts,js,mjs}": "kebab-case" }, { "ignoreMiddleExtensions": true }]),
             ),
         ),
     ];
@@ -232,25 +244,25 @@ fn test() {
         test_case(
             "src/core/fileRead.ts",
             Some(
-                json!([{ "**/*.{ts,mts,js,mjs}": "KEBAB_CASE" }, { "ignoreMiddleExtensions": true }]),
+                json!([{ "**/*.{ts,mts,js,mjs}": "kebab-case" }, { "ignoreMiddleExtensions": true }]),
             ),
         ),
         test_case(
             "src/core/FileRead.ts",
             Some(
-                json!([{ "**/*.{ts,mts,js,mjs}": "KEBAB_CASE" }, { "ignoreMiddleExtensions": true }]),
+                json!([{ "**/*.{ts,mts,js,mjs}": "kebab-case" }, { "ignoreMiddleExtensions": true }]),
             ),
         ),
         test_case(
             "src/core/fileRead.test.ts",
             Some(
-                json!([{ "**/*.{ts,mts,js,mjs}": "KEBAB_CASE" }, { "ignoreMiddleExtensions": true }]),
+                json!([{ "**/*.{ts,mts,js,mjs}": "kebab-case" }, { "ignoreMiddleExtensions": true }]),
             ),
         ),
         test_case(
             "src/core/file-read.test.ts",
             Some(
-                json!([{ "**/*.{ts,mts,js,mjs}": "KEBAB_CASE" }, { "ignoreMiddleExtensions": false }]),
+                json!([{ "**/*.{ts,mts,js,mjs}": "kebab-case" }, { "ignoreMiddleExtensions": false }]),
             ),
         ),
     ];

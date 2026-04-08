@@ -2,6 +2,8 @@ use convert_case::{Boundary, Case, Converter};
 use oxc_diagnostics::OxcDiagnostic;
 use oxc_macros::declare_oxc_lint;
 use oxc_span::Span;
+use schemars::JsonSchema;
+use serde::Deserialize;
 
 use crate::{context::LintContext, rule::Rule};
 
@@ -18,9 +20,16 @@ fn folder_naming_convention_diagnostic(_span: Span, folder: &str, pattern: &str)
 #[derive(Debug, Default, Clone)]
 pub struct FolderNamingConvention(Box<FolderNamingConventionConfig>);
 
-#[derive(Debug, Default, Clone)]
+/// Configuration for folder naming conventions.
+///
+/// First element: a map of glob patterns to case styles (e.g. `{ "src/**/": "kebab-case" }`).
+/// Second element (optional): `{ "ignoreWords": ["__tests__"] }`.
+#[derive(Debug, Default, Clone, JsonSchema, Deserialize)]
+#[serde(default)]
 pub struct FolderNamingConventionConfig {
+    #[serde(skip)]
     rules: Vec<(String, NamingConvention)>,
+    #[serde(default, rename = "ignoreWords")]
     ignore_words: Vec<String>,
 }
 
@@ -38,12 +47,12 @@ enum NamingConvention {
 impl NamingConvention {
     fn from_config_value(value: &str) -> Option<Self> {
         match value {
-            "CAMEL_CASE" => Some(Self::CamelCase),
-            "FLAT_CASE" => Some(Self::FlatCase),
-            "KEBAB_CASE" => Some(Self::KebabCase),
-            "PASCAL_CASE" => Some(Self::PascalCase),
+            "camelCase" | "CAMEL_CASE" => Some(Self::CamelCase),
+            "flatCase" | "FLAT_CASE" => Some(Self::FlatCase),
+            "kebab-case" | "kebab-case" => Some(Self::KebabCase),
+            "PascalCase" | "PASCAL_CASE" => Some(Self::PascalCase),
             "SCREAMING_SNAKE_CASE" => Some(Self::ScreamingSnakeCase),
-            "SNAKE_CASE" => Some(Self::SnakeCase),
+            "snake_case" | "SNAKE_CASE" => Some(Self::SnakeCase),
             _ => None,
         }
     }
@@ -70,12 +79,12 @@ impl NamingConvention {
 
     fn as_config_value(self) -> &'static str {
         match self {
-            Self::CamelCase => "CAMEL_CASE",
-            Self::FlatCase => "FLAT_CASE",
-            Self::KebabCase => "KEBAB_CASE",
-            Self::PascalCase => "PASCAL_CASE",
+            Self::CamelCase => "camelCase",
+            Self::FlatCase => "flatCase",
+            Self::KebabCase => "kebab-case",
+            Self::PascalCase => "PascalCase",
             Self::ScreamingSnakeCase => "SCREAMING_SNAKE_CASE",
-            Self::SnakeCase => "SNAKE_CASE",
+            Self::SnakeCase => "snake_case",
         }
     }
 }
@@ -104,7 +113,8 @@ declare_oxc_lint!(
     FolderNamingConvention,
     oxc,
     style,
-    none
+    none,
+    config = FolderNamingConventionConfig
 );
 
 impl Rule for FolderNamingConvention {
@@ -234,21 +244,21 @@ fn test() {
     }
 
     let pass = vec![
-        test_case("src/core/file-read.ts", Some(json!([{ "src/**/": "KEBAB_CASE" }]))),
-        test_case("src/core/utils/file-read.ts", Some(json!([{ "src/**/": "KEBAB_CASE" }]))),
+        test_case("src/core/file-read.ts", Some(json!([{ "src/**/": "kebab-case" }]))),
+        test_case("src/core/utils/file-read.ts", Some(json!([{ "src/**/": "kebab-case" }]))),
         test_case(
             "src/features/__tests__/file-read.test.ts",
-            Some(json!([{ "src/**/!(__tests__)/": "KEBAB_CASE" }])),
+            Some(json!([{ "src/**/!(__tests__)/": "kebab-case" }])),
         ),
-        test_case("tests/helpers/file-read.ts", Some(json!([{ "src/**/": "KEBAB_CASE" }]))),
+        test_case("tests/helpers/file-read.ts", Some(json!([{ "src/**/": "kebab-case" }]))),
     ];
 
     let fail = vec![
-        test_case("src/core_utils/file-read.ts", Some(json!([{ "src/**/": "KEBAB_CASE" }]))),
-        test_case("src/core/FeatureFlags/file-read.ts", Some(json!([{ "src/**/": "KEBAB_CASE" }]))),
+        test_case("src/core_utils/file-read.ts", Some(json!([{ "src/**/": "kebab-case" }]))),
+        test_case("src/core/FeatureFlags/file-read.ts", Some(json!([{ "src/**/": "kebab-case" }]))),
         test_case(
             "src/features/BadFolder/file-read.ts",
-            Some(json!([{ "src/**/!(__tests__)/": "KEBAB_CASE" }])),
+            Some(json!([{ "src/**/!(__tests__)/": "kebab-case" }])),
         ),
     ];
 
