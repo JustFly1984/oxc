@@ -1,7 +1,7 @@
 {
   "name": "goatlint",
   "version": "1.59.0",
-  "description": "Linter for the JavaScript Oxidation Compiler",
+  "description": "A fast JavaScript/TypeScript linter - fork of oxlint with additional rules",
   "keywords": [
     "eslint",
     "javascript",
@@ -10,17 +10,14 @@
     "goatlint",
     "typescript"
   ],
-  "homepage": "https://goatlint.dev/docs/guide/usage/linter",
-  "bugs": "https://github.com/goat-project/oxc/issues",
+  "homepage": "https://github.com/JustFly1984/oxc",
+  "bugs": "https://github.com/JustFly1984/oxc/issues",
   "license": "MIT",
-  "author": "Boshen and oxc contributors",
+  "author": "Alexey Lyakhov (fork of oxc by Boshen and contributors)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goat-project/oxc",
+    "url": "git+https://github.com/JustFly1984/oxc",
     "directory": "npm/goatlint"
-  },
-  "funding": {
-    "url": "https://github.com/sponsors/Boshen"
   },
   "bin": {
     "goatlint": "bin/goatlint"
@@ -45,38 +42,23 @@
     },
     "./package.json": "./package.json"
   },
-  "peerDependencies": {
-    "goatlint-tsgolint": ">=0.18.0"
-  },
-  "peerDependenciesMeta": {
-    "goatlint-tsgolint": {
-      "optional": true
-    }
-  },
+  "peerDependencies": {},
+  "peerDependenciesMeta": {},
   "napi": {
     "binaryName": "goatlint",
     "packageName": "@goatlint/binding",
     "targets": [
       "aarch64-apple-darwin",
-      "aarch64-linux-android",
-      "aarch64-pc-windows-msvc",
-      "aarch64-unknown-linux-gnu",
-      "aarch64-unknown-linux-musl",
-      "aarch64-unknown-linux-ohos",
-      "armv7-linux-androideabi",
-      "armv7-unknown-linux-gnueabihf",
-      "armv7-unknown-linux-musleabihf",
-      "i686-pc-windows-msvc",
-      "powerpc64le-unknown-linux-gnu",
-      "riscv64gc-unknown-linux-gnu",
-      "riscv64gc-unknown-linux-musl",
-      "s390x-unknown-linux-gnu",
-      "x86_64-apple-darwin",
-      "x86_64-pc-windows-msvc",
-      "x86_64-unknown-freebsd",
-      "x86_64-unknown-linux-gnu",
-      "x86_64-unknown-linux-musl"
+      "x86_64-apple-darwin"
     ]
+  },
+  "scripts": {
+    "prepublishOnly": "cd ../../apps/goatlint && pnpm run build",
+    "pub": "npm publish .",
+    "pub:next": "npm publish . --tag next"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "engines": {
     "node": "^20.19.0 || >=22.12.0"

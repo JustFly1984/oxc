@@ -37,6 +37,14 @@
       "default": "./index.js"
     }
   },
+  "scripts": {
+    "prepublishOnly": "cd ../../apps/goatlint && pnpm run build-js && cp dist-pkg-plugins/* ../../npm/goatlint-plugins/",
+    "pub": "npm publish .",
+    "pub:next": "npm publish . --tag next"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
   }

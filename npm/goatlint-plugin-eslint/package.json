@@ -28,6 +28,14 @@
   ],
   "type": "module",
   "main": "index.js",
+  "scripts": {
+    "prepublishOnly": "cd ../../apps/goatlint && pnpm run build-js && cp -r dist-pkg-plugin-eslint/. ../../npm/goatlint-plugin-eslint/",
+    "pub": "npm publish .",
+    "pub:next": "npm publish . --tag next"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
   }

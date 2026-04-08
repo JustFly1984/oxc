@@ -39,7 +39,7 @@
     "@arethetypeswrong/core": "catalog:",
     "@babel/code-frame": "^7.28.6",
     "@napi-rs/cli": "catalog:",
-    "@goat-project/types": "^0.124.0",
+    "goatlint-types": "^0.124.0",
     "@type-challenges/utils": "^0.1.1",
     "@types/babel__code-frame": "^7.27.0",
     "@types/esquery": "^1.5.4",
@@ -73,21 +73,7 @@
     "packageName": "@goatlint/binding",
     "targets": [
       "aarch64-apple-darwin",
-      "aarch64-linux-android",
-      "aarch64-pc-windows-msvc",
-      "aarch64-unknown-linux-gnu",
-      "aarch64-unknown-linux-musl",
-      "aarch64-unknown-linux-ohos",
-      "armv7-linux-androideabi",
-      "armv7-unknown-linux-gnueabihf",
-      "armv7-unknown-linux-musleabihf",
-      "i686-pc-windows-msvc",
-      "powerpc64le-unknown-linux-gnu",
-      "x86_64-apple-darwin",
-      "x86_64-pc-windows-msvc",
-      "x86_64-unknown-freebsd",
-      "x86_64-unknown-linux-gnu",
-      "x86_64-unknown-linux-musl"
+      "x86_64-apple-darwin"
     ]
   },
   "engines": {

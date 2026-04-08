@@ -1,7 +1,7 @@
 // Auto-generated code, DO NOT EDIT DIRECTLY!
 // To edit this generated file you have to edit `tasks/ast_tools/src/generators/raw_transfer.rs`.
 
-import type * as ESTree from "@goat-project/types";
+import type * as ESTree from "goatlint-types";
 
 type BufferWithArrays = Uint8Array & {
   int32: Int32Array;

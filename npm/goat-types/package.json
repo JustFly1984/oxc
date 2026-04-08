@@ -1,5 +1,5 @@
 {
-  "name": "@goat-project/types",
+  "name": "goatlint-types",
   "version": "0.124.0",
   "description": "Types for Oxc AST nodes",
   "keywords": [
@@ -21,6 +21,13 @@
   "files": [
     "types.d.ts"
   ],
+  "scripts": {
+    "pub": "npm publish .",
+    "pub:next": "npm publish . --tag next"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "types": "types.d.ts"
 }

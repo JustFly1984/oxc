@@ -1,6 +1,6 @@
 import { parseSync } from "oxc-parser";
 
-import type { Program } from "@goat-project/types";
+import type { Program } from "goatlint-types";
 
 /**
  * Parse code and return the AST.

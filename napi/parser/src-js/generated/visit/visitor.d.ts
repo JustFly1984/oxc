@@ -1,7 +1,7 @@
 // Auto-generated code, DO NOT EDIT DIRECTLY!
 // To edit this generated file you have to edit `tasks/ast_tools/src/generators/estree_visit.rs`.
 
-import * as ESTree from "@goat-project/types";
+import * as ESTree from "goatlint-types";
 
 export interface VisitorObject {
   DebuggerStatement?: (node: ESTree.DebuggerStatement) => void;

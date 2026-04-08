@@ -4,7 +4,7 @@ import { Visitor } from "oxc-parser";
 import { parse } from "./utils.ts";
 
 import type { Plugin } from "rolldown";
-import type * as ESTree from "@goat-project/types";
+import type * as ESTree from "goatlint-types";
 
 // Name of binary search function to inline
 const INLINE_FUNC_NAME = "firstTokenAtOrAfter";

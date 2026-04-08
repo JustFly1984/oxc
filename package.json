@@ -11,10 +11,7 @@
     "lint": "goatlint -c goatlintrc.json --deny-warnings --report-unused-disable-directives"
   },
   "devDependencies": {
-    "@napi-rs/cli": "catalog:",
-    "goatfmt": "^0.44.0",
-    "goatlint": "^1.51.0",
-    "goatlint-tsgolint": "0.20.0"
+    "@napi-rs/cli": "catalog:"
   },
   "packageManager": "pnpm@10.33.0"
 }
