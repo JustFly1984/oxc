@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import { join as pathJoin, relative as pathRelative, dirname } from "node:path";
-import { Visitor } from "oxc-parser";
+import { Visitor } from "goatlint-parser";
 import { parse } from "./utils.ts";
 
 import type { Plugin } from "rolldown";

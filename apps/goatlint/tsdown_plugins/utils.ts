@@ -1,4 +1,4 @@
-import { parseSync } from "oxc-parser";
+import { parseSync } from "goatlint-parser";
 
 import type { Program } from "goatlint-types";
 

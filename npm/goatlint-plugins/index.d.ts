@@ -2429,7 +2429,7 @@ type Node$1 = Program | IdentifierName | IdentifierReference | BindingIdentifier
 //#endregion
 //#region src-js/generated/visitor.d.ts
 // To understand why we need the "Bivariance hack", see: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/20219
-// For downsides, see: https://github.com/goat-project/oxc/issues/18154#issuecomment-4012955607
+// For downsides, see: https://github.com/oxc-project/oxc/issues/18154#issuecomment-4012955607
 type BivarianceHackHandler<Handler extends (...args: any) => any> = {
   bivarianceHack(...args: Parameters<Handler>): ReturnType<Handler>;
 }["bivarianceHack"];
@@ -3091,7 +3091,7 @@ declare function getScope(node: Node$1): Scope;
  * IMPORTANT: At present marking variables as used only affects other JS plugins.
  * It does *not* get communicated to Oxlint's rules which are implemented on Rust side e.g. `no-unused-vars`.
  * This is a known shortcoming, and will be addressed in a future release.
- * https://github.com/goat-project/oxc/issues/20350
+ * https://github.com/oxc-project/oxc/issues/20350
  *
  * @param name - Variable name
  * @param refNode - Reference node. Defaults to `Program` node if not provided.

@@ -18,7 +18,7 @@ async function main() {
     entryPoints: ["./src-js/wasm.js"],
     outfile: "browser-bundle.js",
     alias: {
-      "@oxc-parser/binding-wasm32-wasi": "./src-js/parser.wasi-browser.js",
+      "@goatlint-parser/binding-wasm32-wasi": "./src-js/parser.wasi-browser.js",
     },
     bundle: true,
     platform: "browser",

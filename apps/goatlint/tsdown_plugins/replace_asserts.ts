@@ -1,5 +1,5 @@
 import { join as pathJoin } from "node:path";
-import { Visitor } from "oxc-parser";
+import { Visitor } from "goatlint-parser";
 import { parse } from "./utils.ts";
 
 import type { Plugin } from "rolldown";

@@ -1,1 +1,1 @@
-export * from '@oxc-parser/binding-wasm32-wasi'
+export * from '@goatlint-parser/binding-wasm32-wasi'

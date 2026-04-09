@@ -1,5 +1,5 @@
 {
-  "name": "oxc-minify",
+  "name": "goatlint-minify",
   "version": "0.125.0",
   "description": "Oxc Minifier Node API",
   "keywords": [
@@ -57,7 +57,7 @@
   },
   "napi": {
     "binaryName": "minify",
-    "packageName": "@oxc-minify/binding",
+    "packageName": "@goatlint-minify/binding",
     "targets": [
       "aarch64-apple-darwin",
       "aarch64-linux-android",

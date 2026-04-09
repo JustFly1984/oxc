@@ -1,5 +1,5 @@
 {
-  "name": "oxc-transform",
+  "name": "goatlint-transform",
   "version": "0.125.0",
   "description": "Oxc Transformer Node API",
   "keywords": [
@@ -55,7 +55,7 @@
   },
   "napi": {
     "binaryName": "transform",
-    "packageName": "@oxc-transform/binding",
+    "packageName": "@goatlint-transform/binding",
     "targets": [
       "aarch64-apple-darwin",
       "aarch64-linux-android",

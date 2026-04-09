@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 
-import { transformSync } from "oxc-transform";
+import { transformSync } from "goatlint-transform";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
@@ -18,7 +18,7 @@ export default defineConfig({
         if (!id.includes("nestjs")) {
           return;
         }
-        // Use oxc-transform to transform TypeScript files
+        // Use goatlint-transform to transform TypeScript files
         const resolved = await this.resolve(id);
         if (!resolved) {
           return;

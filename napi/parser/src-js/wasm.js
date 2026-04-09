@@ -1,5 +1,5 @@
-export * from "@oxc-parser/binding-wasm32-wasi";
-import * as bindings from "@oxc-parser/binding-wasm32-wasi";
+export * from "@goatlint-parser/binding-wasm32-wasi";
+import * as bindings from "@goatlint-parser/binding-wasm32-wasi";
 import { wrap } from "./wrap.js";
 
 export async function parse(...args) {

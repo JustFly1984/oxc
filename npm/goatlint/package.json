@@ -71,7 +71,7 @@
   },
   "scripts": {
     "prebuild": "cd ../../apps/goatlint && bun run build",
-    "prepublishOnly": "rm -f dist && cp -r ../../apps/goatlint/dist .",
+    "prepublishOnly": "rm -rf dist && cp -r ../../apps/goatlint/dist .",
     "postpublish": "rm -rf dist && ln -s ../../apps/goatlint/dist dist",
     "pub": "npm publish",
     "pub:next": "npm publish --tag next"

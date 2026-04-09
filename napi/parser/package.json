@@ -1,5 +1,5 @@
 {
-  "name": "oxc-parser",
+  "name": "goatlint-parser",
   "version": "0.125.0",
   "description": "Oxc Parser Node API",
   "keywords": [
@@ -75,7 +75,7 @@
     "bench": "vitest bench --run ./bench.bench.js"
   },
   "dependencies": {
-    "goatlint-types": "workspace:^"
+    "goatlint-types": "^0.125.0"
   },
   "devDependencies": {
     "@codspeed/vitest-plugin": "^5.0.0",
@@ -94,7 +94,7 @@
   "napi": {
     "binaryName": "parser",
     "dtsHeaderFile": "src-js/header.d.ts",
-    "packageName": "@oxc-parser/binding",
+    "packageName": "@goatlint-parser/binding",
     "targets": [
       "aarch64-apple-darwin",
       "aarch64-linux-android",
