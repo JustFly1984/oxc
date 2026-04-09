@@ -14,7 +14,7 @@ use goat_ast::{
     },
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_semantic::NodeId;
 use goat_span::{GetSpan, Span};
 use schemars::JsonSchema;
@@ -39,7 +39,7 @@ pub struct JsxNoUselessFragment {
     allow_expressions: bool,
 }
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// Disallow unnecessary fragments.

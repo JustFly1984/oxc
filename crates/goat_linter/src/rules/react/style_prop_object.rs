@@ -6,7 +6,7 @@ use goat_ast::{
     },
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_span::{CompactStr, GetSpan, Span};
 use schemars::JsonSchema;
 use serde::Deserialize;
@@ -43,7 +43,7 @@ impl std::ops::Deref for StylePropObject {
     }
 }
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// Require that the value of the prop `style` be an object or a variable that is an object.

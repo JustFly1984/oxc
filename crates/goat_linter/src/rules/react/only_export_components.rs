@@ -1,6 +1,6 @@
 use goat_ast::{AstKind, ast::*};
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_semantic::NodeId;
 use goat_span::{GetSpan, Span};
 use rustc_hash::FxHashSet;
@@ -89,7 +89,7 @@ pub struct OnlyExportComponentsConfig {
     check_js: bool,
 }
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// Ensures that modules only **export React components (and related HMR-safe items)** so

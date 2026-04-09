@@ -3,7 +3,7 @@ use goat_ast::{
     ast::{IdentifierReference, JSXElementName, JSXMemberExpression, JSXMemberExpressionObject},
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_span::Span;
 
 use crate::{
@@ -21,7 +21,7 @@ fn jsx_no_undef_diagnostic(ident_name: &str, span: Span) -> GoatDiagnostic {
 #[derive(Debug, Default, Clone)]
 pub struct JsxNoUndef;
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// Disallow undeclared variables in JSX.

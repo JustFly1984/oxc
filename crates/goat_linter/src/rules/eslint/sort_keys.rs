@@ -8,7 +8,7 @@ use goat_ast::{
     ast::{Expression, ObjectExpression, ObjectProperty, ObjectPropertyKind},
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_span::{GetSpan, Span};
 use schemars::JsonSchema;
 use serde::Deserialize;
@@ -66,7 +66,7 @@ fn sort_properties_diagnostic(span: Span) -> GoatDiagnostic {
         .with_label(span)
 }
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// When declaring multiple properties, sorting property names alphabetically makes it easier

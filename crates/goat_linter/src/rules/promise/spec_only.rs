@@ -1,5 +1,5 @@
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_span::{CompactStr, GetSpan, Span};
 use rustc_hash::FxHashSet;
 use schemars::JsonSchema;
@@ -36,7 +36,7 @@ impl std::ops::Deref for SpecOnly {
     }
 }
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// Disallow use of non-standard Promise static methods.

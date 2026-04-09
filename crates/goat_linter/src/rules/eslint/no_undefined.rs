@@ -1,6 +1,6 @@
 use goat_ast::AstKind;
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_span::Span;
 
 use crate::{AstNode, context::LintContext, rule::Rule};
@@ -14,7 +14,7 @@ fn no_undefined_diagnostic(span: Span) -> GoatDiagnostic {
         .with_label(span)
 }
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// Disallow the use of `undefined` as an identifier.

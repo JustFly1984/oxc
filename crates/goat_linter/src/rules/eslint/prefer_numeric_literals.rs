@@ -6,7 +6,7 @@ use goat_ast::{
     },
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_span::Span;
 
 use crate::{
@@ -32,7 +32,7 @@ fn radix_map(base: &str) -> Option<(&'static str, &'static str)> {
     }
 }
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// Disallow `parseInt()` and `Number.parseInt()` in favor of binary, octal, and hexadecimal

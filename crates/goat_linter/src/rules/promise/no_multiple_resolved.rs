@@ -13,7 +13,7 @@ use goat_cfg::{
     },
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_semantic::{Scoping, SymbolId};
 use goat_span::Span;
 use rustc_hash::{FxHashMap, FxHashSet};
@@ -38,7 +38,7 @@ fn potentially_already_resolved_diagnostic(line: usize, span: Span) -> GoatDiagn
 #[derive(Debug, Default, Clone)]
 pub struct NoMultipleResolved;
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// This rule warns of paths that resolve multiple times in executor functions that Promise constructors.

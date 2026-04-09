@@ -7,7 +7,7 @@ use cow_utils::CowUtils;
 use itertools::Itertools;
 use goat_ast::ast::{ImportDeclaration, ImportDeclarationSpecifier, Statement};
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_span::Span;
 use rustc_hash::FxHashSet;
 use schemars::JsonSchema;
@@ -69,7 +69,7 @@ impl std::ops::Deref for SortImports {
     }
 }
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// This rule checks all import declarations and verifies that all imports are first sorted

@@ -1,6 +1,6 @@
 use goat_ast::{AstKind, ast::Expression};
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_span::{GetSpan, Span};
 
 use crate::{
@@ -19,7 +19,7 @@ fn no_set_state_diagnostic(span: Span) -> GoatDiagnostic {
 #[derive(Debug, Default, Clone)]
 pub struct NoSetState;
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// Disallow the usage of `this.setState` in React components.

@@ -1,6 +1,6 @@
 use goat_ast::AstKind;
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_span::Span;
 
 use crate::{
@@ -22,7 +22,7 @@ fn no_unescaped_entities_diagnostic(span: Span, unescaped: char) -> GoatDiagnost
 #[derive(Debug, Default, Clone)]
 pub struct NoUnescapedEntities;
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// This rule prevents characters that you may have meant as JSX escape characters from being accidentally injected as a text node in JSX statements.

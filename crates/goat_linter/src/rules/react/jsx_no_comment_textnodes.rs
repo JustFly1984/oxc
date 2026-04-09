@@ -1,6 +1,6 @@
 use goat_ast::AstKind;
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_span::Span;
 
 use crate::{
@@ -18,7 +18,7 @@ fn jsx_no_comment_textnodes_diagnostic(span: Span) -> GoatDiagnostic {
 #[derive(Debug, Default, Clone)]
 pub struct JsxNoCommentTextnodes;
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// This rule prevents comment strings (e.g. beginning with `//` or `/*`) from being

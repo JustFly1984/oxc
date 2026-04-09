@@ -3,7 +3,7 @@ use goat_ast::{
     ast::{ConditionalExpression, Expression, LogicalExpression, LogicalOperator, UnaryOperator},
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_span::{GetSpan, Span};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -50,7 +50,7 @@ impl Default for JsxNoLeakedRender {
     }
 }
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// Disallow leaked values in JSX.

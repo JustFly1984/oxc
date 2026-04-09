@@ -1,6 +1,6 @@
 use goat_ast::AstKind;
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_oxc_lint;
+use goat_macros::declare_goat_lint;
 use goat_span::{GetSpan, Span};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -37,7 +37,7 @@ enum PreferES6ClassOptionType {
 #[derive(Debug, Default, Clone, Deserialize)]
 pub struct PreferEs6Class(PreferES6ClassOptionType);
 
-declare_oxc_lint!(
+declare_goat_lint!(
     /// ### What it does
     ///
     /// React offers you two ways to create traditional components: using the
