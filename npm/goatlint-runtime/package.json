@@ -2,13 +2,22 @@
   "name": "goatlint-runtime",
   "version": "0.125.0",
   "description": "Oxc's modular runtime helpers",
-  "homepage": "https://goatlint.dev",
+  "homepage": "https://github.com/JustFly1984/oxc",
+  "bugs": "https://github.com/JustFly1984/oxc/issues",
   "license": "MIT",
+  "author": "Alexey Lyakhov (fork of oxc by Boshen and contributors)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/goat-project/oxc.git",
-    "directory": "npm/runtime"
+    "url": "git+https://github.com/JustFly1984/oxc",
+    "directory": "npm/goatlint-runtime"
   },
+  "funding": {
+    "url": "https://github.com/sponsors/JustFly1984"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
   "type": "commonjs",
   "exports": {
     "./helpers/AwaitValue": [
@@ -1055,10 +1064,7 @@
       "./src/helpers/writeOnlyError.js"
     ],
     "./package": "./package.json",
-    "./package.json": "./package.json",
-    "./regenerator": "./regenerator/index.js",
-    "./regenerator/": "./regenerator/",
-    "./regenerator/*.js": "./regenerator/*.js"
+    "./package.json": "./package.json"
   },
   "engines": {
     "node": "^20.19.0 || >=22.12.0"

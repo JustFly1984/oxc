@@ -8,17 +8,17 @@
     "goatlint",
     "plugin"
   ],
-  "homepage": "https://goatlint.dev/docs/guide/usage/linter/js-plugins",
-  "bugs": "https://github.com/goat-project/oxc/issues",
+  "homepage": "https://github.com/JustFly1984/oxc",
+  "bugs": "https://github.com/JustFly1984/oxc/issues",
   "license": "MIT",
-  "author": "Boshen and oxc contributors",
+  "author": "Alexey Lyakhov (fork of oxc by Boshen and contributors)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goat-project/oxc.git",
+    "url": "git+https://github.com/JustFly1984/oxc",
     "directory": "npm/goatlint-plugin-eslint"
   },
   "funding": {
-    "url": "https://github.com/sponsors/Boshen"
+    "url": "https://github.com/sponsors/JustFly1984"
   },
   "files": [
     "index.js",
@@ -28,6 +28,11 @@
   ],
   "type": "module",
   "main": "index.js",
+  "exports": {
+    ".": {
+      "default": "./index.js"
+    }
+  },
   "scripts": {
     "prepublishOnly": "cd ../../apps/goatlint && bun run build-js && cp -r dist-pkg-plugin-eslint/. ../../npm/goatlint-plugin-eslint/",
     "pub": "bun publish .",

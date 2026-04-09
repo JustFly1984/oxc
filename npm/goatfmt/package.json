@@ -10,17 +10,17 @@
     "prettier",
     "typescript"
   ],
-  "homepage": "https://goatlint.dev/docs/guide/usage/formatter",
-  "bugs": "https://github.com/goat-project/oxc/issues",
+  "homepage": "https://github.com/JustFly1984/oxc",
+  "bugs": "https://github.com/JustFly1984/oxc/issues",
   "license": "MIT",
-  "author": "Boshen and oxc contributors",
+  "author": "Alexey Lyakhov (fork of oxc by Boshen and contributors)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goat-project/oxc",
+    "url": "git+https://github.com/JustFly1984/oxc",
     "directory": "npm/goatfmt"
   },
   "funding": {
-    "url": "https://github.com/sponsors/Boshen"
+    "url": "https://github.com/sponsors/JustFly1984"
   },
   "bin": {
     "goatfmt": "bin/goatfmt"
@@ -71,6 +71,7 @@
   },
   "scripts": {
     "prepublishOnly": "cd ../../apps/goatfmt && bun run build",
+    "bench": "vitest bench",
     "pub": "bun publish .",
     "pub:next": "bun publish . --tag next"
   },

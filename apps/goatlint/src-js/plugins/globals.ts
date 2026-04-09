@@ -26,11 +26,14 @@ let globalsJSON: string | null = null;
 export let globals: Readonly<Globals> | null = null;
 export let envs: Readonly<Envs> | null = null;
 
+// Cache: avoid re-parsing identical globals across consecutive files.
+// In CLI mode, most files share the same globals, so this skips JSON.parse + freeze overhead.
+let cachedGlobalsJSON: string | null = null;
+let cachedGlobals: Readonly<Globals> | null = null;
+let cachedEnvs: Readonly<Envs> | null = null;
+
 /**
  * Updates the globals for the file.
- *
- * TODO(perf): Globals are deserialized once per file to accommodate folder level settings,
- * even if the globals haven't changed.
  *
  * @param globalsJSONInput - Globals for the file as JSON
  */
@@ -46,6 +49,14 @@ export function setGlobalsForFile(globalsJSONInput: string): undefined {
 export function initGlobals(): void {
   debugAssertIsNonNull(globalsJSON);
 
+  // If globals JSON is identical to the last file, reuse the cached parsed objects.
+  // The cached objects are already frozen, so they're safe to share across files.
+  if (globalsJSON === cachedGlobalsJSON) {
+    globals = cachedGlobals;
+    envs = cachedEnvs;
+    return;
+  }
+
   ({ globals, envs } = JSON.parse(globalsJSON));
 
   debugAssert(
@@ -59,6 +70,11 @@ export function initGlobals(): void {
 
   Object.freeze(globals);
   Object.freeze(envs);
+
+  // Update cache
+  cachedGlobalsJSON = globalsJSON;
+  cachedGlobals = globals;
+  cachedEnvs = envs;
 }
 
 /**

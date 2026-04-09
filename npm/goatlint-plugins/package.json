@@ -8,17 +8,17 @@
     "goatlint",
     "plugin"
   ],
-  "homepage": "https://goatlint.dev/docs/guide/usage/linter/js-plugins",
-  "bugs": "https://github.com/goat-project/oxc/issues",
+  "homepage": "https://github.com/JustFly1984/oxc",
+  "bugs": "https://github.com/JustFly1984/oxc/issues",
   "license": "MIT",
-  "author": "Boshen and oxc contributors",
+  "author": "Alexey Lyakhov (fork of oxc by Boshen and contributors)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goat-project/oxc.git",
+    "url": "git+https://github.com/JustFly1984/oxc",
     "directory": "npm/goatlint-plugins"
   },
   "funding": {
-    "url": "https://github.com/sponsors/Boshen"
+    "url": "https://github.com/sponsors/JustFly1984"
   },
   "files": [
     "index.js",
@@ -46,6 +46,6 @@
     "access": "public"
   },
   "engines": {
-    "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
+    "node": "^20.19.0 || >=22.12.0"
   }
 }

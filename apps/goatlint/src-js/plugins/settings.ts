@@ -20,11 +20,13 @@ export type Settings = JsonObject;
 let settingsJSON: string | null = null;
 export let settings: Readonly<Settings> | null = null;
 
+// Cache: avoid re-parsing identical settings across consecutive files.
+// In CLI mode, most files share the same settings, so this skips JSON.parse + deepFreeze overhead.
+let cachedSettingsJSON: string | null = null;
+let cachedSettings: Readonly<Settings> | null = null;
+
 /**
  * Updates the settings for the file.
- *
- * TODO(perf): Settings are deserialized once per file to accommodate folder level settings,
- * even if the settings haven't changed.
  *
  * @param settingsJSONInput - Settings for the file as JSON
  */
@@ -37,9 +39,21 @@ export function setSettingsForFile(settingsJSONInput: string): undefined {
  */
 export function initSettings(): undefined {
   debugAssertIsNonNull(settingsJSON);
+
+  // If settings JSON is identical to the last file, reuse the cached parsed object.
+  // The cached object is already deep-frozen, so it's safe to share across files.
+  if (settingsJSON === cachedSettingsJSON) {
+    settings = cachedSettings;
+    return;
+  }
+
   settings = JSON.parse(settingsJSON);
   // Deep freeze the settings object, to prevent any mutation of the settings from plugins
   deepFreezeJsonValue(settings);
+
+  // Update cache
+  cachedSettingsJSON = settingsJSON;
+  cachedSettings = settings;
 }
 
 /**

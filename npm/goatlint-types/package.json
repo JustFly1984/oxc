@@ -6,17 +6,17 @@
     "AST",
     "Parser"
   ],
-  "homepage": "https://goatlint.dev",
-  "bugs": "https://github.com/goat-project/oxc/issues",
+  "homepage": "https://github.com/JustFly1984/oxc",
+  "bugs": "https://github.com/JustFly1984/oxc/issues",
   "license": "MIT",
-  "author": "Boshen and oxc contributors",
+  "author": "Alexey Lyakhov (fork of oxc by Boshen and contributors)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goat-project/oxc.git",
-    "directory": "npm/goat-types"
+    "url": "git+https://github.com/JustFly1984/oxc",
+    "directory": "npm/goatlint-types"
   },
   "funding": {
-    "url": "https://github.com/sponsors/Boshen"
+    "url": "https://github.com/sponsors/JustFly1984"
   },
   "files": [
     "types.d.ts"
@@ -29,5 +29,13 @@
     "access": "public"
   },
   "type": "module",
-  "types": "types.d.ts"
+  "types": "types.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types.d.ts"
+    }
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  }
 }
