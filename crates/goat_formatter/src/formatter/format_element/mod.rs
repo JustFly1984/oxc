@@ -29,7 +29,7 @@ const _: () = {
         // Some 32-bit platforms have 8-byte alignment for `u64` and `f64`, while others have 4-byte alignment.
         //
         // Skip these assertions on 32-bit platforms where `u64` / `f64` have 4-byte alignment, because
-        // some layout calculations may be incorrect. https://github.com/goat-project/oxc/pull/13716
+        // some layout calculations may be incorrect. https://github.com/oxc-project/oxc/pull/13716
         assert!(
             size_of::<FormatElement>() == 24,
             "`FormatElement` size exceeds 24 bytes, expected 24 bytes in 32-bit platforms"
@@ -48,7 +48,7 @@ const _: () = {
         // Some 32-bit platforms have 8-byte alignment for `u64` and `f64`, while others have 4-byte alignment.
         //
         // Skip these assertions on 32-bit platforms where `u64` / `f64` have 4-byte alignment, because
-        // some layout calculations may be incorrect. https://github.com/goat-project/oxc/pull/13716
+        // some layout calculations may be incorrect. https://github.com/oxc-project/oxc/pull/13716
         assert!(
             size_of::<FormatElement>() == 16,
             "`FormatElement` size exceeds 16 bytes, expected 16 bytes in 32-bit platforms"

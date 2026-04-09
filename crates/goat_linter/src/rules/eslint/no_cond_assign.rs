@@ -206,7 +206,7 @@ fn test() {
         ("for (;;) { (obj.key=false) }", Some(serde_json::json!(["always"]))),
         ("while (obj.key) { (obj.key=false) }", Some(serde_json::json!(["always"]))),
         ("do { (obj.key=false) } while (obj.key)", Some(serde_json::json!(["always"]))),
-        // https://github.com/goat-project/oxc/issues/6656
+        // https://github.com/oxc-project/oxc/issues/6656
         (
             "
             if (['a', 'b', 'c', 'd'].includes(value)) newValue = value;

@@ -10,7 +10,7 @@ use napi::Either;
 use napi_derive::napi;
 use serde::Serialize;
 
-use oxc::{
+use goat::{
     allocator::Allocator,
     ast::ast::Program,
     ast_visit::Visit,
@@ -216,7 +216,7 @@ impl Oxc {
         source_text: &'a str,
         source_type: SourceType,
         parser_options: &OxcParserOptions,
-    ) -> (Program<'a>, oxc::syntax::module_record::ModuleRecord<'a>) {
+    ) -> (Program<'a>, goat::syntax::module_record::ModuleRecord<'a>) {
         let parser_options = ParseOptions {
             parse_regular_expression: true,
             allow_return_outside_function: parser_options.allow_return_outside_function,
@@ -235,7 +235,7 @@ impl Oxc {
         run_options: &OxcRunOptions,
         parser_options: &OxcParserOptions,
         control_flow_options: &OxcControlFlowOptions,
-    ) -> oxc::semantic::Semantic<'a> {
+    ) -> goat::semantic::Semantic<'a> {
         let mut semantic_builder = SemanticBuilder::new();
         if run_options.transform {
             // Estimate transformer will triple scopes, symbols, references
@@ -352,7 +352,7 @@ impl Oxc {
         &mut self,
         source_text: &str,
         program: &mut Program<'a>,
-        module_record: &mut oxc::syntax::module_record::ModuleRecord<'a>,
+        module_record: &mut goat::syntax::module_record::ModuleRecord<'a>,
         source_type: SourceType,
     ) {
         self.ir = format!("{:#?}", program.body);

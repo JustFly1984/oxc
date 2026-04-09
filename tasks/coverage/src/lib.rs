@@ -15,8 +15,8 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use oxc::{span::SourceType, transformer::BabelOptions};
-use oxc_tasks_common::{Snapshot, normalize_path, project_root};
+use goat::{span::SourceType, transformer::BabelOptions};
+use goat_tasks_common::{Snapshot, normalize_path, project_root};
 use similar::TextDiff;
 
 pub use driver::Driver;
@@ -224,7 +224,7 @@ fn print_result(r: &CoverageResult) {
 
 fn print_diff(actual: &str, expected: &str) {
     let diff = TextDiff::from_lines(expected, actual);
-    oxc_tasks_common::print_text_diff(&diff);
+    goat_tasks_common::print_text_diff(&diff);
 }
 
 pub fn snapshot_results(name: &str, test_root: &Path, results: &[CoverageResult]) {

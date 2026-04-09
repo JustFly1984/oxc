@@ -16,7 +16,7 @@ use super::context::MayHaveSideEffectsContext;
 /// Invalid patterns like `RegExp("[")` or invalid flags like `RegExp("a", "xyz")` throw SyntaxError,
 /// so they are NOT pure.
 ///
-/// See <https://github.com/goat-project/oxc/issues/18050>
+/// See <https://github.com/oxc-project/oxc/issues/18050>
 pub fn is_valid_regexp(args: &[Argument<'_>]) -> bool {
     // Extract pattern from first argument
     let pattern = match args.first() {

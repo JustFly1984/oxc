@@ -1,6 +1,6 @@
 use std::{fs, path::Path};
 
-use oxc_tasks_common::Snapshot;
+use goat_tasks_common::Snapshot;
 use rustc_hash::{FxHashMap, FxHashSet};
 use walkdir::WalkDir;
 

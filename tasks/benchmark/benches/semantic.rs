@@ -1,8 +1,8 @@
 use goat_allocator::Allocator;
-use oxc_benchmark::{BenchmarkId, Criterion, black_box, criterion_group, criterion_main};
+use goat_benchmark::{BenchmarkId, Criterion, black_box, criterion_group, criterion_main};
 use goat_parser::Parser;
 use goat_semantic::SemanticBuilder;
-use oxc_tasks_common::TestFiles;
+use goat_tasks_common::TestFiles;
 
 fn bench_semantic(criterion: &mut Criterion) {
     let mut group = criterion.benchmark_group("semantic");

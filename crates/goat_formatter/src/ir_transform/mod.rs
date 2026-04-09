@@ -16,8 +16,8 @@
 //! Despite some overhead, sorting the IR allows us to avoid impacting the existing complex code that converts AST to IR.
 //!
 //! For more details, refer to the experimental PR below.
-//! - <https://github.com/goat-project/oxc/pull/14647>
-//! - <https://github.com/goat-project/oxc/pull/14651>
+//! - <https://github.com/oxc-project/oxc/pull/14647>
+//! - <https://github.com/oxc-project/oxc/pull/14651>
 
 mod sort_imports;
 

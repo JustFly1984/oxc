@@ -1,6 +1,6 @@
 /// Macro to inherit enum variants from another enum.
 ///
-/// (for further details see <https://github.com/goat-project/oxc/pull/3115>)
+/// (for further details see <https://github.com/oxc-project/oxc/pull/3115>)
 ///
 /// # Types which can be inherited
 ///

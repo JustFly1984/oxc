@@ -37,7 +37,7 @@ describe("goatlint CLI", { concurrent: process.platform !== "win32" }, () => {
       {
         concurrent: process.platform !== "win32",
         // Windows can be flaky due to memory allocation failures
-        // Ref: https://github.com/goat-project/oxc/issues/19395
+        // Ref: https://github.com/oxc-project/oxc/issues/19395
         retry: process.platform === "win32" ? 2 : 0,
       },
       ({ expect }) => runFixture(fixture, expect),

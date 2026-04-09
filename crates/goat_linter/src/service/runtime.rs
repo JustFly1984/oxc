@@ -555,7 +555,7 @@ impl Runtime {
                 let records = modules_by_path.get(&path).unwrap();
                 assert_eq!(
                     records.len(), requested_module_paths.len(),
-                    "This is an internal logic error. Please file an issue at https://github.com/goat-project/oxc/issues",
+                    "This is an internal logic error. Please file an issue at https://github.com/oxc-project/oxc/issues",
                 );
                 for (record, requested_module_paths) in
                     records.iter().zip(requested_module_paths.into_iter())

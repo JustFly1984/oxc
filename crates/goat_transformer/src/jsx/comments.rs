@@ -15,7 +15,7 @@ use crate::{JsxOptions, JsxRuntime, TransformCtx, TypeScriptOptions};
 ///
 /// The caller should only pass comments before the first statement,
 /// since pragmas are file-level directives. This is aligned with TypeScript and SWC.
-/// <https://github.com/goat-project/oxc/issues/20669>
+/// <https://github.com/oxc-project/oxc/issues/20669>
 ///
 /// The comment does not need to be a JSDoc comment,
 /// otherwise `JSDoc` could be used instead.
@@ -23,7 +23,7 @@ use crate::{JsxOptions, JsxRuntime, TransformCtx, TypeScriptOptions};
 /// Multiple pragmas in a single comment are accepted (aligned with esbuild).
 /// Babel is less liberal - it doesn't accept multiple pragmas in a single line
 /// e.g. `/** @jsx h @jsxRuntime classic */`
-/// <https://github.com/goat-project/oxc/issues/10955>
+/// <https://github.com/oxc-project/oxc/issues/10955>
 pub fn update_options_with_comments(
     comments: &[Comment],
     typescript: &mut TypeScriptOptions,
@@ -113,7 +113,7 @@ fn find_jsx_pragma(mut comment_str: &str) -> Option<(PragmaType, &str, &str)> {
         // We are intentionally stricter here — only checking the immediately preceding byte,
         // which is sufficient for the backtick case without being as strict as Babel's
         // full start-of-line regex.
-        // <https://github.com/goat-project/oxc/issues/20669>
+        // <https://github.com/oxc-project/oxc/issues/20669>
         if at_sign_index > 0 {
             let prev_byte = comment_str.as_bytes()[at_sign_index - 1];
             if !matches!(prev_byte, b' ' | b'\t' | b'\r' | b'\n' | b'*') {

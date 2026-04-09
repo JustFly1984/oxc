@@ -594,7 +594,7 @@ describe("parse", () => {
       });
 
       // This does *not* align with TS-ESLint.
-      // See https://github.com/goat-project/oxc/pull/11193.
+      // See https://github.com/oxc-project/oxc/pull/11193.
       it("TS-ESTree", () => {
         const ret = parseSync("test.ts", 'import.defer("x");');
         expect(ret.errors.length).toBe(0);
@@ -628,7 +628,7 @@ describe("parse", () => {
       });
 
       // This does *not* align with TS-ESLint.
-      // See https://github.com/goat-project/oxc/pull/11193.
+      // See https://github.com/oxc-project/oxc/pull/11193.
       it("TS-ESTree", () => {
         const ret = parseSync("test.ts", 'import.source("x");');
         expect(ret.errors.length).toBe(0);

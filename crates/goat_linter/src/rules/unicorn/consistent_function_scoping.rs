@@ -705,7 +705,7 @@ fn test() {
             }",
             None,
         ),
-        // https://github.com/goat-project/oxc/pull/4948#issuecomment-2295819822
+        // https://github.com/oxc-project/oxc/pull/4948#issuecomment-2295819822
         ("t.throws(() => receiveString(function a() {}), {})", None),
         ("function test () { t.throws(() => receiveString(function a() {}), {}) }", None),
         ("function foo() { let x = new Bar(function b() {}) }", None),

@@ -155,7 +155,7 @@ fn test() {
         "async function foo() {+await +1}",
         "async function foo() {-await-1}",
         "async function foo() {+await -1}",
-        // https://github.com/goat-project/oxc/issues/1718
+        // https://github.com/oxc-project/oxc/issues/1718
         "await await this.assertTotalDocumentCount(expectedFormattedTotalDocCount);",
     ];
 

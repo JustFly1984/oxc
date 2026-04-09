@@ -1868,7 +1868,7 @@ pub struct Function<'a> {
     ///
     /// References:
     /// - v8 blog post about PIFEs: <https://v8.dev/blog/preparser#pife>
-    /// - related PR: <https://github.com/goat-project/oxc/pull/12353>
+    /// - related PR: <https://github.com/oxc-project/oxc/pull/12353>
     pub pife: bool,
 }
 
@@ -2040,7 +2040,7 @@ pub struct ArrowFunctionExpression<'a> {
     ///
     /// References:
     /// - v8 blog post about PIFEs: <https://v8.dev/blog/preparser#pife>
-    /// - introduced PR: <https://github.com/goat-project/oxc/pull/12353>
+    /// - introduced PR: <https://github.com/oxc-project/oxc/pull/12353>
     pub pife: bool,
 }
 

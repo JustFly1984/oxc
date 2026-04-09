@@ -81,7 +81,7 @@ export interface CompilerAssumptions {
    *
    * Otherwise, the output will be:
    * ```js
-   * import _defineProperty from "@goat-project/runtime/helpers/defineProperty";
+   * import _defineProperty from "goatlint-runtime/helpers/defineProperty";
    * class Test {
    *   constructor() {
    *     _defineProperty(this, "field", 2);
@@ -132,7 +132,7 @@ export declare const enum HelperMode {
    * Example:
    *
    * ```js
-   * import helperName from "@goat-project/runtime/helpers/helperName";
+   * import helperName from "goatlint-runtime/helpers/helperName";
    * helperName(...arguments);
    * ```
    */
@@ -539,7 +539,7 @@ export interface TransformResult {
    * Example:
    *
    * ```text
-   * { "_objectSpread": "@goat-project/runtime/helpers/objectSpread2" }
+   * { "_objectSpread": "goatlint-runtime/helpers/objectSpread2" }
    * ```
    */
   helpersUsed: Record<string, string>

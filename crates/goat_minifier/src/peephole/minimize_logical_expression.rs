@@ -232,7 +232,7 @@ impl<'a> PeepholeOptimizations {
 
             // Don't transform `x.y || (x = {}, x.y = 3)` to `x.y ||= (x = {}, 3)` because
             // `||=` evaluates `x.y` (capturing `x`) before the RHS reassigns `x`.
-            // https://github.com/goat-project/oxc/issues/16647
+            // https://github.com/oxc-project/oxc/issues/16647
             if Self::member_object_may_be_mutated(&assignment_expr.left, ctx) {
                 return;
             }

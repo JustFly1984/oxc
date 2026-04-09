@@ -19,7 +19,7 @@ use goat_ast::ast::{
 use goat_ast_visit::Visit;
 use goat_parser::Parser;
 use goat_span::{GetSpan, SourceType, Span};
-use oxc_tasks_common::project_root;
+use goat_tasks_common::project_root;
 use rustc_hash::{FxHashMap, FxHashSet};
 use serde::Serialize;
 
@@ -1482,7 +1482,7 @@ fn main() {
 
     println!("Reading test file from {rule_test_path}");
 
-    let test_body = oxc_tasks_common::agent()
+    let test_body = goat_tasks_common::agent()
         .get(&rule_test_path)
         .call()
         .map(|mut res| res.body_mut().read_to_string());
@@ -1572,7 +1572,7 @@ fn main() {
 
     println!("Reading rule source file from {rule_src_path}");
 
-    let rule_src_body = oxc_tasks_common::agent()
+    let rule_src_body = goat_tasks_common::agent()
         .get(&rule_src_path)
         .call()
         .map(|mut res| res.body_mut().read_to_string());
@@ -1730,13 +1730,14 @@ fn get_rule_path(rule_kind: RuleKind) -> &'static Path {
         RuleKind::React => Path::new("crates/goat_linter/src/rules/react"),
         RuleKind::ReactPerf => Path::new("crates/goat_linter/src/rules/react_perf"),
         RuleKind::JSXA11y => Path::new("crates/goat_linter/src/rules/jsx_a11y"),
-        RuleKind::Oxc => Path::new("crates/goat_linter/src/rules/oxc"),
+        RuleKind::Oxc => Path::new("crates/goat_linter/src/rules/goat"),
         RuleKind::NextJS => Path::new("crates/goat_linter/src/rules/nextjs"),
         RuleKind::JSDoc => Path::new("crates/goat_linter/src/rules/jsdoc"),
         RuleKind::Node => Path::new("crates/goat_linter/src/rules/node"),
         RuleKind::Promise => Path::new("crates/goat_linter/src/rules/promise"),
         RuleKind::Vitest => Path::new("crates/goat_linter/src/rules/vitest"),
         RuleKind::Vue => Path::new("crates/goat_linter/src/rules/vue"),
+        RuleKind::Bun => Path::new("crates/goat_linter/src/rules/bun"),
     }
 }
 

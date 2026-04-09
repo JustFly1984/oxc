@@ -1,6 +1,6 @@
 use std::path::Path;
 
-use oxc::transformer::BabelOptions;
+use goat::transformer::BabelOptions;
 use serde::Deserialize;
 
 use crate::workspace_root;

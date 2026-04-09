@@ -468,7 +468,7 @@ fn test() {
                   }
                   </script>
                   ", None, None, Some(PathBuf::from("test.vue"))),
-                  // https://github.com/goat-project/oxc/issues/18298
+                  // https://github.com/oxc-project/oxc/issues/18298
                       ("
                   <script>
                   import { onMounted } from 'vue';

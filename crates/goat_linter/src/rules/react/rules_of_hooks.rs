@@ -1077,7 +1077,7 @@ fn test() {
         const useSWRFn = immutable ? useSWRImutable : useSWR;
         return useSWRFn(options ? () => ['cloud', options.query.id, options.variables] : null, options ? () => fetcher(options) : null, configWithSuspense);
     };",
-    // https://github.com/goat-project/oxc/issues/6651
+    // https://github.com/oxc-project/oxc/issues/6651
     r"const MyComponent = makeComponent(() => { useHook(); });",
     r"const MyComponent2 = makeComponent(function () { useHook(); });",
     r"const MyComponent4 = makeComponent(function InnerComponent() { useHook(); });",
@@ -1747,9 +1747,9 @@ fn test() {
         //         });
         //     }
         // " ,
-        // https://github.com/goat-project/oxc/issues/6651
+        // https://github.com/oxc-project/oxc/issues/6651
         r"const MyComponent3 = makeComponent(function foo () { useHook(); });",
-        // https://github.com/goat-project/oxc/issues/17961
+        // https://github.com/oxc-project/oxc/issues/17961
         // Invalid because hooks are called inside JSX children render props
         r"
             function Component() {

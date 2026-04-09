@@ -161,9 +161,9 @@ const args = process.argv.slice(2);
 
 // Node.js sets non-TTY `stdio` to non-blocking mode, which causes "Resource temporarily unavailable" errors
 // in language server when passing a lot of data via stdin/stdout.
-// https://github.com/goat-project/oxc/issues/19265
+// https://github.com/oxc-project/oxc/issues/19265
 // See also issue related to this workaround in `goatfmt` CLI:
-// https://github.com/goat-project/oxc/issues/17939
+// https://github.com/oxc-project/oxc/issues/17939
 //
 // As a workaround, if used with pipe, set blocking mode before calling NAPI bindings.
 // See: https://github.com/napi-rs/napi-rs/issues/1630

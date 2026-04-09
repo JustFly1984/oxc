@@ -988,7 +988,7 @@ fn test() {
                   ",
             None,
         ),
-        // TODO: Need fix: https://github.com/goat-project/oxc/issues/3799
+        // TODO: Need fix: https://github.com/oxc-project/oxc/issues/3799
         // (
         //     "
         //       import Foo from 'foo';
@@ -1381,7 +1381,7 @@ fn test() {
             ",
             None,
         ),
-        // TODO: To support decorator in this rule, need <https://github.com/goat-project/oxc/pull/3645>
+        // TODO: To support decorator in this rule, need <https://github.com/oxc-project/oxc/pull/3645>
         // experimentalDecorators: true + emitDecoratorMetadata: true
         // (
         //     "

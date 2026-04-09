@@ -118,7 +118,7 @@ fn test() {
             None,
         ),
         ("/* tslint:disable-line */", "", None),
-        // Issue: <https://github.com/goat-project/oxc/issues/8090>
+        // Issue: <https://github.com/oxc-project/oxc/issues/8090>
         (r"/*tslint:disable*/É", r"É", None),
     ];
 

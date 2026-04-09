@@ -659,7 +659,7 @@ mod test {
 
     /// When a file is explicitly passed as a path and `--no-ignore`
     /// is not present, the ignore file should take precedence.
-    /// See https://github.com/goat-project/oxc/issues/1124
+    /// See https://github.com/oxc-project/oxc/issues/1124
     #[test]
     fn ignore_file_overrides_explicit_args() {
         let args =
@@ -696,14 +696,14 @@ mod test {
     }
 
     #[test]
-    // https://github.com/goat-project/oxc/issues/7406
+    // https://github.com/oxc-project/oxc/issues/7406
     fn ignore_flow_import_plugin_directory() {
         let args = &["--import-plugin", "-A all", "-D no-cycle", "fixtures/cli/flow/"];
         Tester::new().test_and_snapshot(args);
     }
 
     #[test]
-    // https://github.com/goat-project/oxc/issues/9023
+    // https://github.com/oxc-project/oxc/issues/9023
     fn ignore_file_current_dir() {
         let args1 = &[];
         let args2 = &["."];
@@ -713,7 +713,7 @@ mod test {
     }
 
     #[test]
-    // https://github.com/goat-project/oxc/issues/13204
+    // https://github.com/oxc-project/oxc/issues/13204
     fn ignore_pattern_non_glob_syntax() {
         let args1 = &[];
         let args2 = &["."];
@@ -1088,7 +1088,7 @@ mod test {
             .test_and_snapshot(args);
     }
 
-    // Issue: <https://github.com/goat-project/oxc/pull/7566>
+    // Issue: <https://github.com/oxc-project/oxc/pull/7566>
     #[test]
     fn ignore_path_with_relative_files() {
         let args = &[
@@ -1139,7 +1139,7 @@ mod test {
 
     #[test]
     fn test_two_rules_with_same_rule_name_from_different_plugins() {
-        // Issue: <https://github.com/goat-project/oxc/issues/8485>
+        // Issue: <https://github.com/oxc-project/oxc/issues/8485>
         let args = &["-c", ".goatlintrc.json", "test.js"];
         Tester::new()
             .with_cwd("fixtures/cli/two_rules_with_same_rule_name".into())
@@ -1277,7 +1277,7 @@ mod test {
 
     #[test]
     fn test_import_plugin_being_enabled_correctly() {
-        // https://github.com/goat-project/oxc/pull/10597
+        // https://github.com/oxc-project/oxc/pull/10597
         let args = &["--import-plugin", "-D", "import/no-cycle"];
         Tester::new().with_cwd("fixtures/cli/import-cycle".into()).test_and_snapshot(args);
     }
@@ -1357,7 +1357,7 @@ mod test {
     fn test_disable_directive_issue_13311() {
         // Test that exhaustive-deps diagnostics are reported at the dependency array
         // so that disable directives work correctly
-        // Issue: https://github.com/goat-project/oxc/issues/13311
+        // Issue: https://github.com/oxc-project/oxc/issues/13311
         let args = &["test.jsx", "test2.d.ts"];
         Tester::new()
             .with_cwd("fixtures/cli/disable_directive_issue_13311".into())
@@ -1538,7 +1538,7 @@ mod test {
     #[cfg(all(not(target_os = "windows"), not(target_endian = "big")))]
     fn test_tsgolint_rule_options() {
         // Test that rule options are correctly passed to tsgolint
-        // See: https://github.com/goat-project/oxc/issues/16182
+        // See: https://github.com/oxc-project/oxc/issues/16182
         let args = &["--type-aware"];
         Tester::new().with_cwd("fixtures/cli/tsgolint_rule_options".into()).test_and_snapshot(args);
     }

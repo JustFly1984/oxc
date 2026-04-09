@@ -162,7 +162,7 @@ fn test() {
         ("var self = 1", Some(serde_json::json!([{ "builtinGlobals": false }]))),
         ("var globalThis = foo", Some(serde_json::json!([{ "builtinGlobals": false }]))),
         ("var globalThis = foo", Some(serde_json::json!([{ "builtinGlobals": false }]))),
-        // Issue: <https://github.com/goat-project/oxc/issues/10396>
+        // Issue: <https://github.com/oxc-project/oxc/issues/10396>
         ("export function foo(): void; export function foo() { }", None),
         ("function foo(arg: string): void; function foo(arg: number): any {}", None),
     ];
@@ -189,7 +189,7 @@ fn test() {
         ("function f(a, b = 1) { var a; var b;}", None),
         ("function f() { var a; if (test) { var a; } }", None),
         ("for (var a, a;;);", None),
-        // Issue: <https://github.com/goat-project/oxc/issues/10396>
+        // Issue: <https://github.com/oxc-project/oxc/issues/10396>
         ("export function undefined(): void; export function undefined() { }", None),
         ("type foo = 1; export function foo(): void; export function foo() { }", None),
     ];

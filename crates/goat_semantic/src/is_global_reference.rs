@@ -24,7 +24,7 @@ use crate::{ReferenceId, Scoping};
 /// 2. Bundlers like Rolldown don't support `with` statements
 /// 3. The minifier bails out when `with` statements are present
 ///
-/// See: <https://github.com/goat-project/oxc/issues/8365>
+/// See: <https://github.com/oxc-project/oxc/issues/8365>
 pub trait IsGlobalReference {
     /// Returns `true` when this reference has no local symbol binding.
     fn is_global_reference(&self, scoping: &Scoping) -> bool;

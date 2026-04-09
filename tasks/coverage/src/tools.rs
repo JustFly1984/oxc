@@ -7,17 +7,17 @@ use std::{
     sync::Arc,
 };
 
-use oxc::{
+use goat::{
     allocator::Allocator,
     ast_visit::utf8_to_utf16::Utf8ToUtf16,
-    diagnostics::{GraphicalReportHandler, GraphicalTheme, NamedSource, OxcDiagnostic},
+    diagnostics::{GraphicalReportHandler, GraphicalTheme, NamedSource, GoatDiagnostic},
     minifier::CompressOptions,
     parser::{ParseOptions, Parser, ParserReturn, config::RuntimeParserConfig},
     span::{ModuleKind, SourceType, Span},
     transformer::{JsxOptions, JsxRuntime, TransformOptions},
 };
-use oxc_estree_tokens::{ESTreeTokenOptions, to_estree_tokens_pretty_json};
-use oxc_formatter::{
+use goat_estree_tokens::{ESTreeTokenOptions, to_estree_tokens_pretty_json};
+use goat_formatter::{
     ArrowParentheses, AttributePosition, BracketSameLine, BracketSpacing, Expand, FormatOptions,
     Formatter, IndentStyle, IndentWidth, LineEnding, LineWidth, QuoteProperties, QuoteStyle,
     Semicolons, TrailingCommas, get_parse_options,
@@ -133,7 +133,7 @@ pub fn run_parser_babel(files: &[BabelFile]) -> Vec<CoverageResult> {
 /// Check if a diagnostic error is suppressed by a `@ts-ignore` or `@ts-expect-error`
 /// comment on the preceding line.
 fn is_error_suppressed_by_ts_ignore(
-    error: &OxcDiagnostic,
+    error: &GoatDiagnostic,
     source_text: &str,
     ts_ignore_spans: &[Span],
 ) -> bool {

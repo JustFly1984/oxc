@@ -229,7 +229,7 @@ fn closure_compiler_tests() {
     test("tempFunc = templateFunction`template`", true);
     // RegExp is validated using the regex parser to determine if it's pure.
     // Valid patterns are pure, invalid patterns have side effects (throw SyntaxError).
-    // https://github.com/goat-project/oxc/issues/18050
+    // https://github.com/oxc-project/oxc/issues/18050
     test("new RegExp('foobar', 'i')", false); // Valid pattern and flags
     test("new RegExp('foobar', 2)", true); // Non-string flags, can't validate
     test("new RegExp(SomethingWacky(), 'i')", true); // Non-literal pattern, can't validate

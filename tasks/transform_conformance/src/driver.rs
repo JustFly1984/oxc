@@ -1,6 +1,6 @@
 use std::{mem, ops::ControlFlow, path::Path};
 
-use oxc::{
+use goat::{
     CompilerInterface,
     ast::ast::Program,
     codegen::{CodegenOptions, CodegenReturn, CommentOptions, IndentChar},
@@ -9,7 +9,7 @@ use oxc::{
     span::SourceType,
     transformer::{TransformOptions, TransformerReturn},
 };
-use oxc_tasks_transform_checker::check_semantic_after_transform;
+use goat_tasks_transform_checker::check_semantic_after_transform;
 
 pub struct Driver {
     check_semantic: bool,

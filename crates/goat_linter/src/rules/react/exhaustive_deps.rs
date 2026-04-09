@@ -4267,7 +4267,7 @@ export const useTest = () => {
             console.log(foo);
           }, [foo]);
         }",
-        // https://github.com/goat-project/oxc/issues/10319
+        // https://github.com/oxc-project/oxc/issues/10319
         r"import { useEffect } from 'react'
 
         export const Test = () => {
@@ -4283,7 +4283,7 @@ export const useTest = () => {
             <></>
           )
         }",
-        // https://github.com/goat-project/oxc/issues/9788
+        // https://github.com/oxc-project/oxc/issues/9788
         r#"import { useCallback, useEffect } from "react";
 
         function Component({ foo }) {

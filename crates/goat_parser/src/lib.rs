@@ -34,7 +34,7 @@
 //!
 //! # Examples
 //!
-//! <https://github.com/goat-project/oxc/blob/main/crates/goat_parser/examples/parser.rs>
+//! <https://github.com/oxc-project/oxc/blob/main/crates/goat_parser/examples/parser.rs>
 //!
 //! ```rust,ignore
 #![doc = include_str!("../examples/parser.rs")]
@@ -793,7 +793,7 @@ mod test {
             assert_eq!(ret.errors[0].to_string(), "Unexpected token");
         }
         {
-            // https://github.com/goat-project/oxc/issues/12121
+            // https://github.com/oxc-project/oxc/issues/12121
             let source = "interface Props extends %enuProps {}";
             let source_type = SourceType::default().with_typescript(true);
             // Should not panic whether `allow_v8_intrinsics` is set or not.

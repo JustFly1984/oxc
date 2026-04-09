@@ -761,7 +761,7 @@ fn test_fold_bitwise_op_additional() {
     fold_same("x = (2 ** 31 - 1) | 1");
     fold_same("x = (2 ** 31) | 1");
 
-    // https://github.com/goat-project/oxc/issues/7944
+    // https://github.com/oxc-project/oxc/issues/7944
     fold_same("(x - 1) & 1");
     fold_same("(y >> 3) & 7");
     fold("(y & 3) & 7", "y & 3");

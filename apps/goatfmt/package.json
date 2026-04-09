@@ -1,6 +1,6 @@
 {
   "name": "goatfmt-app",
-  "version": "0.44.0",
+  "version": "0.45.0",
   "private": true,
   "description": "Internal development package for goatfmt. For the published package.json template, see `npm/goatfmt/package.json`.",
   "license": "MIT",

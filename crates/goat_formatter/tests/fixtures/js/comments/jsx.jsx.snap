@@ -11,7 +11,7 @@ source: crates/goat_formatter/tests/fixtures/mod.rs
   style={{ /* comment */ overflow: "hidden" /* comment */  }}
 ></div>;
 
-// https://github.com/goat-project/oxc/issues/17226
+// https://github.com/oxc-project/oxc/issues/17226
 someFunction(
   <Component
     value1={{
@@ -36,7 +36,7 @@ someFunction(
   style={{ /* comment */ overflow: "hidden" /* comment */ }}
 ></div>;
 
-// https://github.com/goat-project/oxc/issues/17226
+// https://github.com/oxc-project/oxc/issues/17226
 someFunction(
   <Component
     value1={{
@@ -60,7 +60,7 @@ someFunction(
   style={{ /* comment */ overflow: "hidden" /* comment */ }}
 ></div>;
 
-// https://github.com/goat-project/oxc/issues/17226
+// https://github.com/oxc-project/oxc/issues/17226
 someFunction(
   <Component
     value1={{

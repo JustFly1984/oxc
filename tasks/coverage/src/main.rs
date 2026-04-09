@@ -3,7 +3,7 @@ use std::num::NonZeroUsize;
 use pico_args::Arguments;
 use rayon::ThreadPoolBuilder;
 
-use oxc_coverage::{AppArgs, TestData};
+use goat_coverage::{AppArgs, TestData};
 
 fn main() {
     let mut args = Arguments::from_env();

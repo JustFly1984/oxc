@@ -924,9 +924,9 @@ fn test() {
             }])),
             None,
         ),
-        // Issue: <https://github.com/goat-project/oxc/issues/7849>
+        // Issue: <https://github.com/oxc-project/oxc/issues/7849>
         ("<FilesContext.Provider value={{ addAlert, cwdInfo }} />", None, None),
-        // Issue: <https://github.com/goat-project/oxc/issues/11644>
+        // Issue: <https://github.com/oxc-project/oxc/issues/11644>
         (
             r#"<label>
                 <span>name</span>

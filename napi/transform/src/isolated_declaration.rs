@@ -3,7 +3,7 @@ use std::path::Path;
 use napi::{Task, bindgen_prelude::AsyncTask};
 use napi_derive::napi;
 
-use oxc::{
+use goat::{
     allocator::Allocator,
     codegen::{Codegen, CodegenOptions, CommentOptions},
     isolated_declarations::IsolatedDeclarations,
@@ -34,7 +34,7 @@ pub struct IsolatedDeclarationsOptions {
     pub sourcemap: Option<bool>,
 }
 
-impl From<IsolatedDeclarationsOptions> for oxc::isolated_declarations::IsolatedDeclarationsOptions {
+impl From<IsolatedDeclarationsOptions> for goat::isolated_declarations::IsolatedDeclarationsOptions {
     fn from(options: IsolatedDeclarationsOptions) -> Self {
         Self { strip_internal: options.strip_internal.unwrap_or_default() }
     }
@@ -54,7 +54,7 @@ fn isolated_declaration_impl(
 
     let transformed_ret = IsolatedDeclarations::new(
         &allocator,
-        oxc::isolated_declarations::IsolatedDeclarationsOptions {
+        goat::isolated_declarations::IsolatedDeclarationsOptions {
             strip_internal: options.strip_internal.unwrap_or(false),
         },
     )

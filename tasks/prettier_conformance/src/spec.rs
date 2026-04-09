@@ -1,18 +1,18 @@
 use std::{fs, path::Path, str::FromStr};
 
-use oxc_allocator::Allocator;
-use oxc_ast::ast::{
+use goat_allocator::Allocator;
+use goat_ast::ast::{
     Argument, ArrayExpressionElement, CallExpression, Expression, ObjectPropertyKind,
     VariableDeclarator,
 };
-use oxc_ast_visit::VisitMut;
-use oxc_formatter::{
+use goat_ast_visit::VisitMut;
+use goat_formatter::{
     ArrowParentheses, AttributePosition, BracketSameLine, BracketSpacing, Expand, FormatOptions,
     IndentStyle, IndentWidth, LineEnding, LineWidth, OperatorPosition, QuoteProperties, QuoteStyle,
     Semicolons, TrailingCommas,
 };
-use oxc_parser::Parser;
-use oxc_span::{GetSpan, SourceType};
+use goat_parser::Parser;
+use goat_span::{GetSpan, SourceType};
 
 /// Vec<(key, value)>
 type SnapshotOptions = Vec<(String, String)>;

@@ -232,7 +232,7 @@ fn test() {
         "Object[`hasOwnProperty`][`call`](object, property);",
         "({})['hasOwnProperty']['call'](object, property);",
         "({})[`hasOwnProperty`][`call`](object, property);",
-        // Issue: <https://github.com/goat-project/oxc/issues/7450>
+        // Issue: <https://github.com/oxc-project/oxc/issues/7450>
         "Object.prototype.hasOwnProperty.call(C,x);",
     ];
 
@@ -381,7 +381,7 @@ fn test() {
             "Object.hasOwn(object, property);",
             None,
         ),
-        // Issue: <https://github.com/goat-project/oxc/issues/7450>
+        // Issue: <https://github.com/oxc-project/oxc/issues/7450>
         ("Object.prototype.hasOwnProperty.call(C,x);", " Object.hasOwn(C,x);", None),
     ];
     Tester::new(PreferObjectHasOwn::NAME, PreferObjectHasOwn::PLUGIN, pass, fail)

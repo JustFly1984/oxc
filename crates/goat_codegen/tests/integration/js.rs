@@ -476,7 +476,7 @@ fn pife() {
     test_minify_same("(function(){return0})();");
 }
 
-// followup from https://github.com/goat-project/oxc/pull/6422
+// followup from https://github.com/oxc-project/oxc/pull/6422
 #[test]
 fn in_expr_in_sequence_in_for_loop_init() {
     test(

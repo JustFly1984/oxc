@@ -38,7 +38,7 @@ fn test_vars_simple() {
               });",
             None,
         ),
-        // https://github.com/goat-project/oxc/issues/5391
+        // https://github.com/oxc-project/oxc/issues/5391
         (
             "
             import styled from 'styled-components';
@@ -222,12 +222,12 @@ fn test_vars_self_use() {
 #[test]
 fn test_vars_self_use_js() {
     let pass = vec![
-        // https://github.com/goat-project/oxc/issues/11215
+        // https://github.com/oxc-project/oxc/issues/11215
         "export function promisify() { var fn; function fn() {} return fn; }",
     ];
 
     let fail = vec![
-        // https://github.com/goat-project/oxc/issues/11215
+        // https://github.com/oxc-project/oxc/issues/11215
         "export function promisify() { var fn; function fn() { fn() } }",
     ];
 
@@ -240,7 +240,7 @@ fn test_vars_self_use_js() {
 #[test]
 fn test_vars_discarded_reads() {
     let pass = vec![
-        // https://github.com/goat-project/oxc/pull/4445#issuecomment-2254122889
+        // https://github.com/oxc-project/oxc/pull/4445#issuecomment-2254122889
         "
         (() => {
             const t = import.meta.url,
@@ -282,7 +282,7 @@ fn test_vars_discarded_reads() {
         }
         foo(1)
         ",
-        // https://github.com/goat-project/oxc/issues/10806
+        // https://github.com/oxc-project/oxc/issues/10806
         "export function f1(fn: () => Promise<void>) {
             return async () => (await fn(), 1)
         }",
@@ -291,7 +291,7 @@ fn test_vars_discarded_reads() {
                 return (yield fn(), 1);
             }
         }",
-        // https://github.com/goat-project/oxc/issues/12592
+        // https://github.com/oxc-project/oxc/issues/12592
         "export const Foo = ({ onDismiss }) => {
             const { remove } = useToaster();
             return (
@@ -421,7 +421,7 @@ fn test_vars_destructure() {
             "const { a, ...rest } = obj; console.log(rest)",
             Some(json!( [{ "ignoreRestSiblings": true, "vars": "all" }] )),
         ),
-        // https://github.com/goat-project/oxc/issues/4888
+        // https://github.com/oxc-project/oxc/issues/4888
         (
             "const { text, ...dbEntry } = entry; return doSomething({ ...dbEntry, someOtherProp });",
             Some(json!([{
@@ -443,7 +443,7 @@ fn test_vars_destructure() {
             "const { a: { b }, ...rest } = obj; console.log(rest)",
             Some(json!( [{ "ignoreRestSiblings": true }] )),
         ),
-        // https://github.com/goat-project/oxc/issues/4839
+        // https://github.com/oxc-project/oxc/issues/4839
         (r#"const l="",{e}=r"#, None),
     ];
 
@@ -677,7 +677,7 @@ fn test_functions() {
         foo();
         ",
         "export const Component = () => <button onClick={function onClick(e) { console.log(e) }} />",
-        // https://github.com/goat-project/oxc/pull/4445#issuecomment-2254122889
+        // https://github.com/oxc-project/oxc/pull/4445#issuecomment-2254122889
         "
         Promise.withResolvers ||
             (Promise.withResolvers = function withResolvers<T>() {
@@ -698,7 +698,7 @@ fn test_functions() {
         ",
         "const foo = () => function bar() { }\nfoo()",
         "module.exports.foo = () => function bar() { }",
-        // https://github.com/goat-project/oxc/issues/5406
+        // https://github.com/oxc-project/oxc/issues/5406
         "
         export function log(message: string, ...interpolations: unknown[]): void;
         export function log(message: string, ...interpolations: unknown[]): void {
@@ -1101,7 +1101,7 @@ fn test_arguments() {
         ",
             None,
         ),
-        // https://github.com/goat-project/oxc/issues/15174
+        // https://github.com/oxc-project/oxc/issues/15174
         // Sequence expressions with member expressions in operations with side effects
 
         // UpdateExpression cases
@@ -1352,7 +1352,7 @@ fn test_type_references() {
         "type T = number; console.log(3 as T);",
         "type T = number; console.log(((3) as T));",
         "type T = Record<string, any>; console.log({} as Readonly<T>)",
-        // https://github.com/goat-project/oxc/issues/4494
+        // https://github.com/oxc-project/oxc/issues/4494
         "
         import type { mySchema } from './my-schema';
         function test(arg: ReturnType<typeof mySchema>) {
@@ -1360,7 +1360,7 @@ fn test_type_references() {
         }
         test('');
         ",
-        // https://github.com/goat-project/oxc/pull/4445#issuecomment-2254122889
+        // https://github.com/oxc-project/oxc/pull/4445#issuecomment-2254122889
         "
         type PermissionValues<T> = {
             [K in keyof T]: T[K] extends object ? PermissionValues<T[K]> : T[K];
@@ -1414,7 +1414,7 @@ fn test_type_references() {
         }",
         // FIXME: ambient classes declared using `declare` are not bound by
         // semantic's binder.
-        // https://github.com/goat-project/oxc/blob/a9260cf6d1b83917c7a61b25cabd2d40858b0fff/crates/goat_semantic/src/binder.rs#L105
+        // https://github.com/oxc-project/oxc/blob/a9260cf6d1b83917c7a61b25cabd2d40858b0fff/crates/goat_semantic/src/binder.rs#L105
         // "declare class LinkedList<T> {
         //     next(): LinkedList<T> | undefined;
         // }"

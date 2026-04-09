@@ -6,7 +6,7 @@
  * 2. File context object, shared across all rules.
  *
  * This mirrors ESLint's `RuleContext` and `FileContext` types (with `RuleContext` inheriting from `FileContext`).
- * Some ESLint plugins rely on this 2-layer structure. https://github.com/goat-project/oxc/issues/15325
+ * Some ESLint plugins rely on this 2-layer structure. https://github.com/oxc-project/oxc/issues/15325
  *
  * The difference is that we don't create new file context and rule context objects for each file, but instead reuse
  * the same objects over and over. After plugin loading is complete, no further `Context` objects are created.
@@ -303,7 +303,7 @@ export type LanguageOptions = Readonly<typeof LANGUAGE_OPTIONS>;
 // It has no state, only getters which return other singletons, or global variables.
 //
 // IMPORTANT: Getters must not use `this`, to support wrapped context objects.
-// https://github.com/goat-project/oxc/issues/15325
+// https://github.com/oxc-project/oxc/issues/15325
 //
 // # Deprecated methods
 //
@@ -520,7 +520,7 @@ export function createContext(ruleDetails: RuleDetails): Context {
   //
   // IMPORTANT: `report` must not use `this`, to support wrapped context objects
   // or e.g. `const { report } = context; report(diagnostic);`.
-  // https://github.com/goat-project/oxc/issues/15325
+  // https://github.com/oxc-project/oxc/issues/15325
   return Object.preventExtensions(
     Object.create(FILE_CONTEXT, {
       // Rule ID, in form `<plugin>/<rule>`.

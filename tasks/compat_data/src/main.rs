@@ -2,7 +2,7 @@
 use std::process::Command;
 
 use goat_compat_data::generate;
-use oxc_tasks_common::project_root;
+use goat_tasks_common::project_root;
 
 fn main() {
     let cwd = project_root().join("tasks/compat_data");

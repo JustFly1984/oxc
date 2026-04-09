@@ -19,7 +19,7 @@ use goat_minifier::{CompressOptions, MangleOptions, Minifier, MinifierOptions};
 use goat_parser::Parser;
 use goat_semantic::SemanticBuilder;
 use goat_span::SourceType;
-use oxc_tasks_common::{TestFile, TestFiles, project_root};
+use goat_tasks_common::{TestFile, TestFiles, project_root};
 use goat_transformer_plugins::{ReplaceGlobalDefines, ReplaceGlobalDefinesConfig};
 
 #[test]

@@ -242,7 +242,7 @@ declare_goat_lint!(
     NoMagicNumbers,
     eslint,
     style,
-    pending, // TODO: enforceConst, probably copy from https://github.com/goat-project/oxc/pull/5144
+    pending, // TODO: enforceConst, probably copy from https://github.com/oxc-project/oxc/pull/5144
     config = NoMagicNumbersConfig
 );
 

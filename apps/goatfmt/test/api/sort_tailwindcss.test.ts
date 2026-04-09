@@ -634,7 +634,7 @@ shadow-lg\` : "font-normal"}\`} />;`;
     expect(result.errors).toStrictEqual([]);
   });
 
-  // https://github.com/goat-project/oxc/issues/20397
+  // https://github.com/oxc-project/oxc/issues/20397
   it("should preserve trailing space in ternary inside binary concat", async () => {
     const input = `const A = <div className={"h-fit m-1 w-full " + (flag1 ? "block " : "hidden ") + (flag2 ? "p-2" : "p-4")} />;`;
 
@@ -933,7 +933,7 @@ shadow-lg\` : "font-normal"}\`} />;`;
     expect(result.errors).toStrictEqual([]);
   });
 
-  // Issue: https://github.com/goat-project/oxc/issues/18712
+  // Issue: https://github.com/oxc-project/oxc/issues/18712
   it("should sort classes in object property keys (string literals)", async () => {
     // Object keys with class names should be sorted like other strings
     const input = `const A = <div className={cn({ 'p-[2px] elevation-elevated-selected': true })}>Hello</div>;`;

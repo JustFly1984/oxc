@@ -29,7 +29,7 @@
 //!
 //! ### With Nullish Coalescing
 //!
-//! > While using the [nullish-coalescing-operator](https://github.com/goat-project/oxc/blob/main/crates/goat_transformer/src/es2020/nullish_coalescing_operator.rs) plugin (included in `preset-env``)
+//! > While using the [nullish-coalescing-operator](https://github.com/oxc-project/oxc/blob/main/crates/goat_transformer/src/es2020/nullish_coalescing_operator.rs) plugin (included in `preset-env``)
 //!
 //! Input:
 //! ```js

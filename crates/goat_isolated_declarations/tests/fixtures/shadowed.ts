@@ -15,7 +15,7 @@ namespace Module {
 }
 export type ModuleType = Module;
 
-// https://github.com/goat-project/oxc/issues/10996
+// https://github.com/oxc-project/oxc/issues/10996
 // Variable emit should not be dropped when variable is shadowed as a type name
 // and the type is part of a class implements interface
 export interface Thing<T> {}

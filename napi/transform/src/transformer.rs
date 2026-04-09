@@ -10,7 +10,7 @@ use napi::{Either, Task, bindgen_prelude::AsyncTask};
 use napi_derive::napi;
 use rustc_hash::FxHashMap;
 
-use oxc::{
+use goat::{
     CompilerInterface,
     allocator::Allocator,
     codegen::{Codegen, CodegenOptions, CodegenReturn},
@@ -67,7 +67,7 @@ pub struct TransformResult {
     /// Example:
     ///
     /// ```text
-    /// { "_objectSpread": "@goat-project/runtime/helpers/objectSpread2" }
+    /// { "_objectSpread": "goatlint-runtime/helpers/objectSpread2" }
     /// ```
     #[napi(ts_type = "Record<string, string>")]
     pub helpers_used: FxHashMap<String, String>,
@@ -154,7 +154,7 @@ pub struct TransformOptions {
     pub plugins: Option<PluginsOptions>,
 }
 
-impl TryFrom<TransformOptions> for oxc::transformer::TransformOptions {
+impl TryFrom<TransformOptions> for goat::transformer::TransformOptions {
     type Error = String;
 
     fn try_from(options: TransformOptions) -> Result<Self, Self::Error> {
@@ -168,22 +168,22 @@ impl TryFrom<TransformOptions> for oxc::transformer::TransformOptions {
             assumptions: options.assumptions.map(Into::into).unwrap_or_default(),
             typescript: options
                 .typescript
-                .map(oxc::transformer::TypeScriptOptions::from)
+                .map(goat::transformer::TypeScriptOptions::from)
                 .unwrap_or_default(),
             decorator: options
                 .decorator
-                .map(oxc::transformer::DecoratorOptions::from)
+                .map(goat::transformer::DecoratorOptions::from)
                 .unwrap_or_default(),
             jsx: match options.jsx {
                 Some(Either::A(s)) => {
                     if s == "preserve" {
-                        oxc::transformer::JsxOptions::disable()
+                        goat::transformer::JsxOptions::disable()
                     } else {
                         return Err(format!("Invalid jsx option: `{s}`."));
                     }
                 }
-                Some(Either::B(options)) => oxc::transformer::JsxOptions::from(options),
-                None => oxc::transformer::JsxOptions::enable(),
+                Some(Either::B(options)) => goat::transformer::JsxOptions::from(options),
+                None => goat::transformer::JsxOptions::enable(),
             },
             env,
             proposals: ProposalOptions::default(),
@@ -192,7 +192,7 @@ impl TryFrom<TransformOptions> for oxc::transformer::TransformOptions {
                 .map_or_else(HelperLoaderOptions::default, HelperLoaderOptions::from),
             plugins: options
                 .plugins
-                .map(oxc::transformer::PluginsOptions::from)
+                .map(goat::transformer::PluginsOptions::from)
                 .unwrap_or_default(),
         })
     }
@@ -232,7 +232,7 @@ pub struct CompilerAssumptions {
     ///
     /// Otherwise, the output will be:
     /// ```js
-    /// import _defineProperty from "@goat-project/runtime/helpers/defineProperty";
+    /// import _defineProperty from "goatlint-runtime/helpers/defineProperty";
     /// class Test {
     ///   constructor() {
     ///     _defineProperty(this, "field", 2);
@@ -247,9 +247,9 @@ pub struct CompilerAssumptions {
     pub set_public_class_fields: Option<bool>,
 }
 
-impl From<CompilerAssumptions> for oxc::transformer::CompilerAssumptions {
+impl From<CompilerAssumptions> for goat::transformer::CompilerAssumptions {
     fn from(value: CompilerAssumptions) -> Self {
-        let ops = oxc::transformer::CompilerAssumptions::default();
+        let ops = goat::transformer::CompilerAssumptions::default();
         Self {
             ignore_function_length: value
                 .ignore_function_length
@@ -334,10 +334,10 @@ pub struct TypeScriptOptions {
     pub rewrite_import_extensions: Option<Either<bool, String>>,
 }
 
-impl From<TypeScriptOptions> for oxc::transformer::TypeScriptOptions {
+impl From<TypeScriptOptions> for goat::transformer::TypeScriptOptions {
     fn from(options: TypeScriptOptions) -> Self {
-        let ops = oxc::transformer::TypeScriptOptions::default();
-        oxc::transformer::TypeScriptOptions {
+        let ops = goat::transformer::TypeScriptOptions::default();
+        goat::transformer::TypeScriptOptions {
             jsx_pragma: options.jsx_pragma.map(Into::into).unwrap_or(ops.jsx_pragma),
             jsx_pragma_frag: options.jsx_pragma_frag.map(Into::into).unwrap_or(ops.jsx_pragma_frag),
             only_remove_type_imports: options
@@ -391,9 +391,9 @@ pub struct DecoratorOptions {
     pub emit_decorator_metadata: Option<bool>,
 }
 
-impl From<DecoratorOptions> for oxc::transformer::DecoratorOptions {
+impl From<DecoratorOptions> for goat::transformer::DecoratorOptions {
     fn from(options: DecoratorOptions) -> Self {
-        oxc::transformer::DecoratorOptions {
+        goat::transformer::DecoratorOptions {
             legacy: options.legacy.unwrap_or_default(),
             emit_decorator_metadata: options.emit_decorator_metadata.unwrap_or_default(),
         }
@@ -475,21 +475,21 @@ pub struct PluginsOptions {
     pub tagged_template_escape: Option<bool>,
 }
 
-impl From<PluginsOptions> for oxc::transformer::PluginsOptions {
+impl From<PluginsOptions> for goat::transformer::PluginsOptions {
     fn from(options: PluginsOptions) -> Self {
-        oxc::transformer::PluginsOptions {
+        goat::transformer::PluginsOptions {
             styled_components: options
                 .styled_components
-                .map(oxc::transformer::StyledComponentsOptions::from),
+                .map(goat::transformer::StyledComponentsOptions::from),
             tagged_template_transform: options.tagged_template_escape.unwrap_or(false),
         }
     }
 }
 
-impl From<StyledComponentsOptions> for oxc::transformer::StyledComponentsOptions {
+impl From<StyledComponentsOptions> for goat::transformer::StyledComponentsOptions {
     fn from(options: StyledComponentsOptions) -> Self {
-        let ops = oxc::transformer::StyledComponentsOptions::default();
-        oxc::transformer::StyledComponentsOptions {
+        let ops = goat::transformer::StyledComponentsOptions::default();
+        goat::transformer::StyledComponentsOptions {
             display_name: options.display_name.unwrap_or(ops.display_name),
             file_name: options.file_name.unwrap_or(ops.file_name),
             ssr: options.ssr.unwrap_or(ops.ssr),
@@ -573,10 +573,10 @@ pub struct JsxOptions {
     pub refresh: Option<Either<bool, ReactRefreshOptions>>,
 }
 
-impl From<JsxOptions> for oxc::transformer::JsxOptions {
+impl From<JsxOptions> for goat::transformer::JsxOptions {
     fn from(options: JsxOptions) -> Self {
-        let ops = oxc::transformer::JsxOptions::default();
-        oxc::transformer::JsxOptions {
+        let ops = goat::transformer::JsxOptions::default();
+        goat::transformer::JsxOptions {
             runtime: match options.runtime.as_deref() {
                 Some("classic") => JsxRuntime::Classic,
                 /* "automatic" */ _ => JsxRuntime::Automatic,
@@ -590,8 +590,8 @@ impl From<JsxOptions> for oxc::transformer::JsxOptions {
             use_built_ins: None,
             use_spread: None,
             refresh: options.refresh.and_then(|value| match value {
-                Either::A(b) => b.then(oxc::transformer::ReactRefreshOptions::default),
-                Either::B(options) => Some(oxc::transformer::ReactRefreshOptions::from(options)),
+                Either::A(b) => b.then(goat::transformer::ReactRefreshOptions::default),
+                Either::B(options) => Some(goat::transformer::ReactRefreshOptions::from(options)),
             }),
             ..Default::default()
         }
@@ -613,10 +613,10 @@ pub struct ReactRefreshOptions {
     pub emit_full_signatures: Option<bool>,
 }
 
-impl From<ReactRefreshOptions> for oxc::transformer::ReactRefreshOptions {
+impl From<ReactRefreshOptions> for goat::transformer::ReactRefreshOptions {
     fn from(options: ReactRefreshOptions) -> Self {
-        let ops = oxc::transformer::ReactRefreshOptions::default();
-        oxc::transformer::ReactRefreshOptions {
+        let ops = goat::transformer::ReactRefreshOptions::default();
+        goat::transformer::ReactRefreshOptions {
             refresh_reg: options.refresh_reg.unwrap_or(ops.refresh_reg),
             refresh_sig: options.refresh_sig.unwrap_or(ops.refresh_sig),
             emit_full_signatures: options.emit_full_signatures.unwrap_or(ops.emit_full_signatures),
@@ -635,9 +635,9 @@ pub struct ArrowFunctionsOptions {
     pub spec: Option<bool>,
 }
 
-impl From<ArrowFunctionsOptions> for oxc::transformer::ArrowFunctionsOptions {
+impl From<ArrowFunctionsOptions> for goat::transformer::ArrowFunctionsOptions {
     fn from(options: ArrowFunctionsOptions) -> Self {
-        oxc::transformer::ArrowFunctionsOptions { spec: options.spec.unwrap_or_default() }
+        goat::transformer::ArrowFunctionsOptions { spec: options.spec.unwrap_or_default() }
     }
 }
 
@@ -647,9 +647,9 @@ pub struct Es2015Options {
     pub arrow_function: Option<ArrowFunctionsOptions>,
 }
 
-impl From<Es2015Options> for oxc::transformer::ES2015Options {
+impl From<Es2015Options> for goat::transformer::ES2015Options {
     fn from(options: Es2015Options) -> Self {
-        oxc::transformer::ES2015Options { arrow_function: options.arrow_function.map(Into::into) }
+        goat::transformer::ES2015Options { arrow_function: options.arrow_function.map(Into::into) }
     }
 }
 
@@ -667,7 +667,7 @@ pub enum HelperMode {
     /// Example:
     ///
     /// ```js
-    /// import helperName from "@goat-project/runtime/helpers/helperName";
+    /// import helperName from "goatlint-runtime/helpers/helperName";
     /// helperName(...arguments);
     /// ```
     #[default]
@@ -702,8 +702,8 @@ impl From<HelperMode> for HelperLoaderMode {
 
 #[derive(Default)]
 struct Compiler {
-    transform_options: oxc::transformer::TransformOptions,
-    isolated_declaration_options: Option<oxc::isolated_declarations::IsolatedDeclarationsOptions>,
+    transform_options: goat::transformer::TransformOptions,
+    isolated_declaration_options: Option<goat::isolated_declarations::IsolatedDeclarationsOptions>,
 
     sourcemap: bool,
 
@@ -728,7 +728,7 @@ impl Compiler {
             .as_ref()
             .and_then(|o| o.typescript.as_ref())
             .and_then(|o| o.declaration)
-            .map(oxc::isolated_declarations::IsolatedDeclarationsOptions::from);
+            .map(goat::isolated_declarations::IsolatedDeclarationsOptions::from);
 
         let sourcemap = options.as_ref().and_then(|o| o.sourcemap).unwrap_or_default();
 
@@ -768,9 +768,9 @@ impl Compiler {
             .map(InjectGlobalVariablesConfig::new);
 
         let transform_options = match options {
-            Some(options) => oxc::transformer::TransformOptions::try_from(options)
+            Some(options) => goat::transformer::TransformOptions::try_from(options)
                 .map_err(|err| vec![GoatDiagnostic::error(err)])?,
-            None => oxc::transformer::TransformOptions::default(),
+            None => goat::transformer::TransformOptions::default(),
         };
 
         Ok(Self {
@@ -798,13 +798,13 @@ impl CompilerInterface for Compiler {
         self.sourcemap
     }
 
-    fn transform_options(&self) -> Option<&oxc::transformer::TransformOptions> {
+    fn transform_options(&self) -> Option<&goat::transformer::TransformOptions> {
         Some(&self.transform_options)
     }
 
     fn isolated_declaration_options(
         &self,
-    ) -> Option<oxc::isolated_declarations::IsolatedDeclarationsOptions> {
+    ) -> Option<goat::isolated_declarations::IsolatedDeclarationsOptions> {
         self.isolated_declaration_options
     }
 
@@ -829,8 +829,8 @@ impl CompilerInterface for Compiler {
     #[expect(deprecated)]
     fn after_transform(
         &mut self,
-        _program: &mut oxc::ast::ast::Program<'_>,
-        transformer_return: &mut oxc::transformer::TransformerReturn,
+        _program: &mut goat::ast::ast::Program<'_>,
+        transformer_return: &mut goat::transformer::TransformerReturn,
     ) -> ControlFlow<()> {
         self.helpers_used = transformer_return
             .helpers_used

@@ -380,7 +380,7 @@ fn test() {
                   ",
             Some(serde_json::json!(["type"])),
         ),
-        // Issue: <https://github.com/goat-project/oxc/issues/7552>
+        // Issue: <https://github.com/oxc-project/oxc/issues/7552>
         ("declaretype S={}", Some(serde_json::json!(["interface"]))),
         ("declareinterface S {}", Some(serde_json::json!(["type"]))),
         ("export declaretype S={}", Some(serde_json::json!(["interface"]))),
@@ -535,7 +535,7 @@ export declare type Test = {
             ",
             Some(serde_json::json!(["type"])),
         ),
-        // Issue: <https://github.com/goat-project/oxc/issues/7552>
+        // Issue: <https://github.com/oxc-project/oxc/issues/7552>
         ("declaretype S={}", "declareinterface S {}", Some(serde_json::json!(["interface"]))),
         ("declareinterface S {}", "declaretype S = {}", Some(serde_json::json!(["type"]))),
         (

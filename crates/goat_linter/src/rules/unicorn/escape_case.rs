@@ -210,7 +210,7 @@ fn test() {
         r#"const foo = new RegExp("/\u{1D306}/", "u")"#,
         r#"const foo = new RegExp("/\ca/")"#,
         r#"const foo = new RegExp("/\cA/")"#,
-        // Issue: <https://github.com/goat-project/oxc/issues/9583>
+        // Issue: <https://github.com/oxc-project/oxc/issues/9583>
         r"const foo = e`\u`;",
     ];
 

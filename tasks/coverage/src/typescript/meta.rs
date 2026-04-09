@@ -6,10 +6,10 @@ use itertools::Itertools;
 use lazy_regex::{Lazy, Regex, lazy_regex};
 use rustc_hash::{FxHashMap, FxHashSet};
 
-use oxc::{
+use goat::{
     allocator::Allocator,
     codegen::Codegen,
-    diagnostics::{NamedSource, OxcDiagnostic},
+    diagnostics::{NamedSource, GoatDiagnostic},
     parser::Parser,
     span::{SourceType, Span},
 };
@@ -400,7 +400,7 @@ pub struct Baseline {
     pub original: String,
     pub original_diagnostic: Vec<String>,
     pub oxc_printed: String,
-    pub oxc_diagnostics: Vec<OxcDiagnostic>,
+    pub oxc_diagnostics: Vec<GoatDiagnostic>,
 }
 
 impl Baseline {

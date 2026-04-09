@@ -959,7 +959,7 @@ fn test() {
             Some(json!(["ignorePackages", { "js": "never", "ts": "never" }])),
         ),
         // Configuration inheritance: per-extension configs inherit from first arg unless
-        // explicitly overridden. See https://github.com/goat-project/oxc/issues/12220
+        // explicitly overridden. See https://github.com/oxc-project/oxc/issues/12220
         (
             r"
                 import { A } from './something';
@@ -1304,7 +1304,7 @@ fn test() {
             Some(json!([{ "json": "always", "js": "never", "jsx": "never" }])),
         ),
         (r#"import "./bar.coffee""#, Some(json!(["never", { "js": "always", "jsx": "always" }]))),
-        // https://github.com/goat-project/oxc/issues/12220
+        // https://github.com/oxc-project/oxc/issues/12220
         (
             r"
                 import { B } from './something.ts';

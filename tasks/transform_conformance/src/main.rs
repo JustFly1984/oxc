@@ -1,4 +1,4 @@
-use oxc_transform_conformance::{TestRunner, TestRunnerOptions};
+use goat_transform_conformance::{TestRunner, TestRunnerOptions};
 use pico_args::Arguments;
 
 fn main() {

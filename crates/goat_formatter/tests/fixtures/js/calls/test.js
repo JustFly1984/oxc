@@ -29,7 +29,7 @@ expect(content)
 })`)
 
 
-// https://github.com/goat-project/oxc/issues/16521
+// https://github.com/oxc-project/oxc/issues/16521
 string().required().test('foobarbazqux', async (value, { createError }) => {
   //
 })
@@ -46,7 +46,7 @@ global().longcalllongcall().property
     //
   })
 
-// https://github.com/goat-project/oxc/issues/17272
+// https://github.com/oxc-project/oxc/issues/17272
 test.fixme("C[TBD] Create automation - Priority changes triggers action @regression-standalone-qa-env @regression @automations-squad", async ({
   page: _page,
 }, testInfo) => {

@@ -134,7 +134,7 @@ fn test() {
               import * as baz from './other-module.ts'",
             Some(serde_json::json!([{ "ignore": ["*.js", "*.ts"] }])),
         ),
-        // https://github.com/goat-project/oxc/issues/21011
+        // https://github.com/oxc-project/oxc/issues/21011
         (
             r"import * as schema from 'src/db/schema'",
             Some(serde_json::json!([{ "ignore": ["*schema"] }])),

@@ -155,7 +155,7 @@ pub fn is_identifier_name(name: &str) -> bool {
 /// Otherwise `({ 'x・': 0 })` gets converted to `({ x・: 0 })`, which breaks in Unicode 4.1 to
 /// 15.
 ///
-/// <https://github.com/goat-project/unicode-id-start/pull/3>
+/// <https://github.com/oxc-project/unicode-id-start/pull/3>
 pub fn is_identifier_name_patched(name: &str) -> bool {
     is_identifier_name_impl::<true>(name)
 }

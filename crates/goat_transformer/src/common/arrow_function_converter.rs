@@ -509,7 +509,7 @@ impl<'a> ArrowFunctionConverter<'a> {
         // TODO(improve-on-babel): We create a new UID for every scope. This is pointless, as only one
         // `this` can be in scope at a time. We could create a single `_this` UID and reuse it in each
         // scope. But this does not match output for some of Babel's test cases.
-        // <https://github.com/goat-project/oxc/pull/5840>
+        // <https://github.com/oxc-project/oxc/pull/5840>
         let this_var = self.this_var_stack.last_or_init(|| {
             let target_scope_id = ctx
                 .scoping()

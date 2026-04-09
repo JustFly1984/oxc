@@ -1,6 +1,6 @@
 use pico_args::Arguments;
 
-use oxc_prettier_conformance::{
+use goat_prettier_conformance::{
     TestRunner,
     jsdoc::JsdocTestRunner,
     options::{TestLanguage, TestRunnerOptions},

@@ -109,7 +109,7 @@ impl Rule for NoNamedAsDefault {
 /// because they refer to the same value.
 ///
 /// See <https://github.com/import-js/eslint-plugin-import/pull/3032>
-/// and <https://github.com/goat-project/oxc/issues/19099>
+/// and <https://github.com/oxc-project/oxc/issues/19099>
 fn default_and_named_are_same_reexport(remote_module_record: &ModuleRecord, name: &str) -> bool {
     // Find the default re-export entry.
     // Only re-exports like `export { foo as default }` are found here.

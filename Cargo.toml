@@ -105,38 +105,38 @@ multiple_crate_versions = "allow"
 
 [workspace.dependencies]
 # publish = true
-goat = { version = "0.124.0", path = "crates/goat" } # Main entry point
-goat_allocator = { version = "0.124.0", path = "crates/goat_allocator" } # Memory management
-goat_ast = { version = "0.124.0", path = "crates/goat_ast" } # AST definitions
-goat_ast_macros = { version = "0.124.0", path = "crates/goat_ast_macros" } # AST proc macros
-goat_ast_visit = { version = "0.124.0", path = "crates/goat_ast_visit" } # AST visitor pattern
-goat_cfg = { version = "0.124.0", path = "crates/goat_cfg" } # Control flow graph
-goat_codegen = { version = "0.124.0", path = "crates/goat_codegen", default-features = false } # Code generation
-goat_compat = { version = "0.124.0", path = "crates/goat_compat" } # Browser compatibility
-goat_data_structures = { version = "0.124.0", path = "crates/goat_data_structures" } # Shared data structures
-goat_diagnostics = { version = "0.124.0", path = "crates/goat_diagnostics" } # Error reporting
-goat_ecmascript = { version = "0.124.0", path = "crates/goat_ecmascript" } # ECMAScript operations
-goat_estree = { version = "0.124.0", path = "crates/goat_estree" } # ESTree format
-goat_estree_tokens = { version = "0.124.0", path = "crates/goat_estree_tokens" } # ESTree token conversion
-goat_isolated_declarations = { version = "0.124.0", path = "crates/goat_isolated_declarations" } # TS declaration generation
-goat_jsdoc = { version = "0.124.0", path = "crates/goat_jsdoc" } # JSDoc parsing
-goat_mangler = { version = "0.124.0", path = "crates/goat_mangler" } # Name mangling
-goat_minifier = { version = "0.124.0", path = "crates/goat_minifier" } # Code minification
-goat_minify_napi = { version = "0.124.0", path = "napi/minify" } # Node.js minifier binding
-goat_napi = { version = "0.124.0", path = "crates/goat_napi" } # NAPI utilities
-goat_parser = { version = "0.124.0", path = "crates/goat_parser", features = [
+goat = { version = "0.125.0", path = "crates/goat" } # Main entry point
+goat_allocator = { version = "0.125.0", path = "crates/goat_allocator" } # Memory management
+goat_ast = { version = "0.125.0", path = "crates/goat_ast" } # AST definitions
+goat_ast_macros = { version = "0.125.0", path = "crates/goat_ast_macros" } # AST proc macros
+goat_ast_visit = { version = "0.125.0", path = "crates/goat_ast_visit" } # AST visitor pattern
+goat_cfg = { version = "0.125.0", path = "crates/goat_cfg" } # Control flow graph
+goat_codegen = { version = "0.125.0", path = "crates/goat_codegen", default-features = false } # Code generation
+goat_compat = { version = "0.125.0", path = "crates/goat_compat" } # Browser compatibility
+goat_data_structures = { version = "0.125.0", path = "crates/goat_data_structures" } # Shared data structures
+goat_diagnostics = { version = "0.125.0", path = "crates/goat_diagnostics" } # Error reporting
+goat_ecmascript = { version = "0.125.0", path = "crates/goat_ecmascript" } # ECMAScript operations
+goat_estree = { version = "0.125.0", path = "crates/goat_estree" } # ESTree format
+goat_estree_tokens = { version = "0.125.0", path = "crates/goat_estree_tokens" } # ESTree token conversion
+goat_isolated_declarations = { version = "0.125.0", path = "crates/goat_isolated_declarations" } # TS declaration generation
+goat_jsdoc = { version = "0.125.0", path = "crates/goat_jsdoc" } # JSDoc parsing
+goat_mangler = { version = "0.125.0", path = "crates/goat_mangler" } # Name mangling
+goat_minifier = { version = "0.125.0", path = "crates/goat_minifier" } # Code minification
+goat_minify_napi = { version = "0.125.0", path = "napi/minify" } # Node.js minifier binding
+goat_napi = { version = "0.125.0", path = "crates/goat_napi" } # NAPI utilities
+goat_parser = { version = "0.125.0", path = "crates/goat_parser", features = [
   "regular_expression",
 ] } # JS/TS parser
-goat_parser_napi = { version = "0.124.0", path = "napi/parser" } # Node.js parser binding
-goat_regular_expression = { version = "0.124.0", path = "crates/goat_regular_expression" } # Regex parser
-goat_semantic = { version = "0.124.0", path = "crates/goat_semantic" } # Semantic analysis
-goat_span = { version = "0.124.0", path = "crates/goat_span" } # Source positions
-goat_str = { version = "0.124.0", path = "crates/goat_str" } # String types
-goat_syntax = { version = "0.124.0", path = "crates/goat_syntax" } # Syntax utilities
-goat_transform_napi = { version = "0.124.0", path = "napi/transform" } # Node.js transformer binding
-goat_transformer = { version = "0.124.0", path = "crates/goat_transformer" } # Code transformation
-goat_transformer_plugins = { version = "0.124.0", path = "crates/goat_transformer_plugins" } # Transformer plugins
-goat_traverse = { version = "0.124.0", path = "crates/goat_traverse" } # AST traversal
+goat_parser_napi = { version = "0.125.0", path = "napi/parser" } # Node.js parser binding
+goat_regular_expression = { version = "0.125.0", path = "crates/goat_regular_expression" } # Regex parser
+goat_semantic = { version = "0.125.0", path = "crates/goat_semantic" } # Semantic analysis
+goat_span = { version = "0.125.0", path = "crates/goat_span" } # Source positions
+goat_str = { version = "0.125.0", path = "crates/goat_str" } # String types
+goat_syntax = { version = "0.125.0", path = "crates/goat_syntax" } # Syntax utilities
+goat_transform_napi = { version = "0.125.0", path = "napi/transform" } # Node.js transformer binding
+goat_transformer = { version = "0.125.0", path = "crates/goat_transformer" } # Code transformation
+goat_transformer_plugins = { version = "0.125.0", path = "crates/goat_transformer_plugins" } # Transformer plugins
+goat_traverse = { version = "0.125.0", path = "crates/goat_traverse" } # AST traversal
 
 # publish = false
 goat_formatter = { path = "crates/goat_formatter" } # Code formatting

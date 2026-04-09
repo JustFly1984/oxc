@@ -294,7 +294,7 @@ fn test() {
         ("/foo$/.test(`x${y}`)", r"`x${y}`.endsWith('foo')"),
         ("/^foo/.test(String(x))", r"String(x).startsWith('foo')"),
         ("/foo$/.test(String(x))", r"String(x).endsWith('foo')"),
-        // https://github.com/goat-project/oxc/issues/10523
+        // https://github.com/oxc-project/oxc/issues/10523
         (
             r"const makePosix = str => /^\\\\\?\\/.test(str)",
             r"const makePosix = str => str.startsWith('\\\\?\\')",

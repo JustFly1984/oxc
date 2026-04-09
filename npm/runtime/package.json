@@ -1,6 +1,6 @@
 {
-  "name": "@goat-project/runtime",
-  "version": "0.124.0",
+  "name": "goatlint-runtime",
+  "version": "0.125.0",
   "description": "Oxc's modular runtime helpers",
   "homepage": "https://goatlint.dev",
   "license": "MIT",

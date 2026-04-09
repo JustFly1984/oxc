@@ -371,7 +371,7 @@ mod test {
         assert_eq!(ret1.to_string(), ret2.to_string());
     }
 
-    /// Test for <https://github.com/goat-project/oxc/issues/13660>
+    /// Test for <https://github.com/oxc-project/oxc/issues/13660>
     /// Unicode escapes in string literals should be detected as CharacterKind::UnicodeEscape
     #[test]
     fn unicode_escape_in_string_literal() {

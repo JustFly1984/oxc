@@ -54,7 +54,7 @@ bitflags! {
     /// x = _temp;
     /// ```
     ///
-    /// See <https://github.com/goat-project/oxc/issues/5165#issuecomment-2488333549> for a runtime test
+    /// See <https://github.com/oxc-project/oxc/issues/5165#issuecomment-2488333549> for a runtime test
     /// to determine Read/Write operations in a code snippet.
     ///
     /// ## Value as Type

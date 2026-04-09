@@ -3089,7 +3089,7 @@ fn test() {
                 serde_json::json!([{ "paths": [{ "name": "foo", "message": "foo is forbidden, use bar instead" }] }]),
             ),
         ),
-        // https://github.com/goat-project/oxc/issues/10984
+        // https://github.com/oxc-project/oxc/issues/10984
         (
             r"import 'foo'",
             Some(

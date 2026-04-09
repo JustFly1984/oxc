@@ -146,7 +146,7 @@ impl<'a> PeepholeOptimizations {
                                     )
                                     // Don't transform `x.y != null || (x = {}, x.y = 3)` to `x.y ??= (x = {}, 3)` because
                                     // `??=` evaluates `x.y` (capturing `x`) before the RHS reassigns `x`.
-                                    // https://github.com/goat-project/oxc/pull/16802#discussion_r2619369597
+                                    // https://github.com/oxc-project/oxc/pull/16802#discussion_r2619369597
                                     && !Self::member_object_may_be_mutated(&assignment_expr.left, ctx)
                                 {
                                     assignment_expr.span = *logical_span;

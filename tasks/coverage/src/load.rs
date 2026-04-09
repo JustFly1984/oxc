@@ -9,7 +9,7 @@ use cow_utils::CowUtils;
 
 use encoding_rs::UTF_16LE;
 use encoding_rs_io::DecodeReaderBytesBuilder;
-use oxc::{span::SourceType, transformer::BabelOptions};
+use goat::{span::SourceType, transformer::BabelOptions};
 use rayon::prelude::*;
 use walkdir::WalkDir;
 

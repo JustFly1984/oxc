@@ -479,7 +479,7 @@ fn test() {
         "array.filter().at(0)",
         "array.filter(foo, thisArgument, extraArgument).at(0)",
         "array.filter(...foo).at(0)",
-        // goat-project/oxc#12399
+        // oxc-project/oxc#12399
         "{a.pop!()}",
     ];
 
@@ -669,7 +669,7 @@ fn test() {
                 )
                 // comment 6
                 ;",
-        // goat-project/oxc#12399
+        // oxc-project/oxc#12399
         "array.filter(foo).pop!()",
         "array.filter(foo)?.pop()",
     ];

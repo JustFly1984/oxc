@@ -21,12 +21,12 @@ void (async () => {
   // See: https://github.com/napi-rs/napi-rs/issues/1630
   //
   // stdout: Writing large formatted output via `--stdin-filepath` can overflow the pipe buffer.
-  // https://github.com/goat-project/oxc/issues/17939 (observed on macOS)
+  // https://github.com/oxc-project/oxc/issues/17939 (observed on macOS)
   // @ts-expect-error: `_handle` is an internal API
   if (!process.stdout.isTTY) process.stdout._handle?.setBlocking?.(true);
   // stdin: In LSP mode (`--lsp`), VSCode communicates via stdin/stdout pipes.
   // Rust reads stdin expecting blocking I/O, but non-blocking mode returns `EAGAIN` (os error 11).
-  // https://github.com/goat-project/oxc/issues/20285
+  // https://github.com/oxc-project/oxc/issues/20285
   // @ts-expect-error: `_handle` is an internal API
   if (!process.stdin.isTTY) process.stdin._handle?.setBlocking?.(true);
 

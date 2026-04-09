@@ -1,11 +1,11 @@
 use std::path::{Path, PathBuf};
 
 use goat_allocator::Allocator;
-use oxc_benchmark::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use goat_benchmark::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use goat_codegen::{Codegen, CodegenOptions};
 use goat_parser::Parser;
 use goat_semantic::SemanticBuilder;
-use oxc_tasks_common::TestFiles;
+use goat_tasks_common::TestFiles;
 use goat_transformer::{TransformOptions, Transformer};
 
 fn bench_codegen(criterion: &mut Criterion) {

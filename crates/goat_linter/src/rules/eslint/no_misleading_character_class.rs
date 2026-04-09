@@ -462,7 +462,7 @@ fn test() {
             r#"RegExp(`[\uD83D\uDC4D]`) // Backslash + "uD83D" + Backslash + "uDC4D""#,
             Some(serde_json::json!([{ "allowEscape": true }])),
         ),
-        // https://github.com/goat-project/oxc/issues/19090
+        // https://github.com/oxc-project/oxc/issues/19090
         (r"/[\u200c\u200d\p{ID_Continue}.]/u", None),
         // Separate character classes should not trigger warnings for cross-class sequences
         (r"/[\u200c][\u200d][a]/", None),
@@ -603,7 +603,7 @@ fn test() {
         // (r#"new RegExp(`${"[👍🇯🇵]"}[😊]`);"#, None),
         // references from variables
         // (r#"const pattern = "[👍]"; new RegExp(pattern);"#, None),
-        // flag overrides, see goat-project/oxc#13436
+        // flag overrides, see oxc-project/oxc#13436
         // ("RegExp(/[a👍z]/u, '');", None),
         ("RegExp(/[👍]/)", None),
         ("RegExp(/[👍]/, 'i');", None),
@@ -637,7 +637,7 @@ fn test() {
             None,
         ),
         ("var r = /[[👶🏻]]/v", None), // { "ecmaVersion": 2024 },
-        // flag overrides, see goat-project/oxc#13436
+        // flag overrides, see oxc-project/oxc#13436
         // ("new RegExp(/^[👍]$/v, '')", None), // { "ecmaVersion": 2024, },
         (r"/[Á]/", Some(serde_json::json!([{ "allowEscape": false }]))),
         (r"/[\\̶]/", Some(serde_json::json!([{ "allowEscape": true }]))),
@@ -656,7 +656,7 @@ fn test() {
         //     r#"const pattern = "[\x41\u0301]"; RegExp(pattern);"#,
         //     Some(serde_json::json!([{ "allowEscape": true }])),
         // ),
-        // https://github.com/goat-project/oxc/issues/19090 -- without u flag it should fail
+        // https://github.com/oxc-project/oxc/issues/19090 -- without u flag it should fail
         // this should not be a `UnicodePropertyEscape`
         (r"/[\u200c\u200d\p{ID_Continue}.]/", None),
     ];

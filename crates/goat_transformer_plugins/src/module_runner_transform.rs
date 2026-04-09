@@ -856,7 +856,7 @@ mod test {
     use goat_parser::Parser;
     use goat_semantic::SemanticBuilder;
     use goat_span::SourceType;
-    use oxc_tasks_common::print_diff_in_terminal;
+    use goat_tasks_common::print_diff_in_terminal;
     use goat_transformer::{JsxRuntime, TransformOptions, Transformer};
 
     use super::ModuleRunnerTransform;

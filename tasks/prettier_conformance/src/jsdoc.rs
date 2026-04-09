@@ -6,16 +6,16 @@ use std::{
 use similar::TextDiff;
 use walkdir::WalkDir;
 
-use oxc_allocator::Allocator;
-use oxc_formatter::{
+use goat_allocator::Allocator;
+use goat_formatter::{
     FormatOptions, Formatter, JsdocOptions, LineWidth, QuoteStyle, enable_jsx_source_type,
     get_parse_options,
 };
-use oxc_parser::Parser;
-use oxc_span::SourceType;
+use goat_parser::Parser;
+use goat_span::SourceType;
 
 fn root() -> PathBuf {
-    oxc_tasks_common::project_root().join("tasks").join("prettier_conformance")
+    goat_tasks_common::project_root().join("tasks").join("prettier_conformance")
 }
 
 fn fixtures_root() -> PathBuf {
@@ -176,7 +176,7 @@ impl JsdocTestRunner {
                 println!("PASS: {rel_path}");
             } else {
                 println!("FAIL: {rel_path} (similarity: {ratio:.1}%)");
-                oxc_tasks_common::print_text_diff(&diff);
+                goat_tasks_common::print_text_diff(&diff);
                 println!();
             }
         }
@@ -231,15 +231,15 @@ impl JsdocTestRunner {
         }
         if json.get("single_line_when_possible").and_then(serde_json::Value::as_bool) == Some(false)
         {
-            options.comment_line_strategy = oxc_formatter::CommentLineStrategy::Multiline;
+            options.comment_line_strategy = goat_formatter::CommentLineStrategy::Multiline;
         }
         if let Some(strategy) =
             json.get("comment_line_strategy").and_then(serde_json::Value::as_str)
         {
             options.comment_line_strategy = match strategy {
-                "multiline" => oxc_formatter::CommentLineStrategy::Multiline,
-                "keep" => oxc_formatter::CommentLineStrategy::Keep,
-                _ => oxc_formatter::CommentLineStrategy::SingleLine,
+                "multiline" => goat_formatter::CommentLineStrategy::Multiline,
+                "keep" => goat_formatter::CommentLineStrategy::Keep,
+                _ => goat_formatter::CommentLineStrategy::SingleLine,
             };
         }
         if json.get("description_with_dot").and_then(serde_json::Value::as_bool) == Some(true) {
@@ -255,8 +255,8 @@ impl JsdocTestRunner {
         }
         if let Some(style) = json.get("line_wrapping_style").and_then(serde_json::Value::as_str) {
             options.line_wrapping_style = match style {
-                "balance" => oxc_formatter::LineWrappingStyle::Balance,
-                _ => oxc_formatter::LineWrappingStyle::Greedy,
+                "balance" => goat_formatter::LineWrappingStyle::Balance,
+                _ => goat_formatter::LineWrappingStyle::Greedy,
             };
         }
         if json.get("description_tag").and_then(serde_json::Value::as_bool) == Some(true) {

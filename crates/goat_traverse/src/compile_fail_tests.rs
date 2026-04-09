@@ -6,7 +6,7 @@
 //! These tests were originally implemented using `trybuild` crate,
 //! but it disproportionately hurt time taken to run tests.
 //! So using `compile_fail` doc tests instead.
-//! <https://github.com/goat-project/oxc/issues/4537>
+//! <https://github.com/oxc-project/oxc/issues/4537>
 
 /**
 ```compile_fail

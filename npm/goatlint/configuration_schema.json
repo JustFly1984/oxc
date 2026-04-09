@@ -383,7 +383,7 @@
         "react",
         "unicorn",
         "typescript",
-        "goat",
+        "oxc",
         "import",
         "jsdoc",
         "jest",
@@ -393,7 +393,10 @@
         "react-perf",
         "promise",
         "node",
-        "vue"
+        "vue",
+        "json",
+        "css",
+        "bun"
       ]
     },
     "LintPlugins": {

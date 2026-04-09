@@ -185,7 +185,7 @@ mod test {
         assert!(!config.files.is_match("src/foo.ts"));
 
         // Test that patterns with "./" prefix are normalized
-        // Fixes https://github.com/goat-project/oxc/issues/18952
+        // Fixes https://github.com/oxc-project/oxc/issues/18952
         let config: OxlintOverride = from_value(json!({
             "files": ["./index.js",],
         }))

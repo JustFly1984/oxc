@@ -53,7 +53,7 @@ const cls = clsx("p-4 flex");
     expect(result.errors).toStrictEqual([]);
   });
 
-  // https://github.com/goat-project/oxc/issues/20084
+  // https://github.com/oxc-project/oxc/issues/20084
   it("should format .vue w/ template literal idempotently (vueIndentScriptAndStyle)", async () => {
     const input = `
 <script setup>

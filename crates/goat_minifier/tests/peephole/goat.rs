@@ -88,7 +88,7 @@ fn fold() {
     test("var x = (-1000000).toString(36)", "var x = (-1e6).toString(36)");
 }
 
-#[test] // https://github.com/goat-project/oxc/issues/4341
+#[test] // https://github.com/oxc-project/oxc/issues/4341
 fn tagged_template() {
     test("(1, o.f)()", "(0, o.f)()");
     test("(1, o.f)``", "(0, o.f)``");

@@ -181,7 +181,7 @@ mod test {
         }
     }
 
-    // Regression test for https://github.com/goat-project/oxc/issues/19588
+    // Regression test for https://github.com/oxc-project/oxc/issues/19588
     // Parser errors with colons in their message (e.g. 'Expected `;` but found `:`')
     // were being truncated to just the character after the first colon.
     #[test]

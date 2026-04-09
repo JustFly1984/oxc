@@ -1407,7 +1407,7 @@ fn test() {
             ",
             None,
         ),
-        // https://github.com/goat-project/oxc/issues/17927
+        // https://github.com/oxc-project/oxc/issues/17927
         // https://github.com/typescript-eslint/typescript-eslint/issues/10746
         // Namespace should not be flagged as unused when shadowed by type parameter
         // but used in a qualified name

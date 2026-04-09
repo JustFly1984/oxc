@@ -219,10 +219,10 @@ fn test() {
         "function foo(Intl) { Intl(); }", // { "ecmaVersion": 2015 },
         "if (foo) { const Intl = 1; Intl(); }", // { "ecmaVersion": 2015 },
         "if (foo) { const Intl = 1; new Intl(); }", // { "ecmaVersion": 2015 }
-        // https://github.com/goat-project/oxc/pull/508#issuecomment-1618850742
+        // https://github.com/oxc-project/oxc/pull/508#issuecomment-1618850742
         "{const Math = () => {}; {let obj = new Math();}}",
         "{const {parse} = JSON;parse('{}')}",
-        // https://github.com/goat-project/oxc/issues/4389
+        // https://github.com/oxc-project/oxc/issues/4389
         r"export const getConfig = getConfig;
         getConfig();",
         // reference test cases

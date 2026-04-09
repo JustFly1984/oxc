@@ -764,7 +764,7 @@ mod test {
 
     #[test]
     fn test_external_rules_preserved_with_overrides() {
-        // reproduction for https://github.com/goat-project/oxc/issues/14504
+        // reproduction for https://github.com/oxc-project/oxc/issues/14504
         // the bug occurred due to a simple omission and the fix was simple.
         // this test is just to communicate what was going wrong and to avoid a regression.
         // i noticed js plugins aren't considered stable yet, so feel free to edit or remove this test
@@ -841,7 +841,7 @@ mod test {
 
     #[test]
     fn test_override_rule_not_reset_by_later_override_with_different_plugins() {
-        // This test reproduces the issue from https://github.com/goat-project/oxc/issues/12859
+        // This test reproduces the issue from https://github.com/oxc-project/oxc/issues/12859
         // When multiple overrides apply to a file and they have different plugins,
         // the later override should not reset rules that were explicitly set in earlier overrides.
 

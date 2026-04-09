@@ -356,7 +356,7 @@ fn test() {
         ("null != null", Some(serde_json::json!(["always", { "null": "never" }]))),
         ("foo === /abc/u", Some(serde_json::json!(["always", { "null": "never" }]))), // { "ecmaVersion": 2015 },
         ("foo === 1n", Some(serde_json::json!(["always", { "null": "never" }]))), // { "ecmaVersion": 2020 }
-        // Originally for issue: <https://github.com/goat-project/oxc/issues/8773>
+        // Originally for issue: <https://github.com/oxc-project/oxc/issues/8773>
         // We previously allowed exclusion of the first value, but that
         // causes difficulties in validation, so let's not.
         ("href != null", Some(json!(["always", { "null": "ignore" }]))),

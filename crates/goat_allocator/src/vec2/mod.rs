@@ -1614,7 +1614,7 @@ impl<'a, T: 'a, A: Alloc> Vec<'a, T, A> {
     /// except by the pointer `other`, and that they are not read after this call.
     #[inline]
     unsafe fn append_elements(&mut self, other: *const [T]) {
-        // See https://github.com/goat-project/oxc/pull/11092 for why this `#[allow]` attribute.
+        // See https://github.com/oxc-project/oxc/pull/11092 for why this `#[allow]` attribute.
         // TODO: Remove this once we bump MSRV and it's no longer required.
         #[allow(clippy::needless_borrow, clippy::allow_attributes)]
         let count = (&*other).len();

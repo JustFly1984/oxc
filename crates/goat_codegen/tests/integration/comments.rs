@@ -20,7 +20,7 @@ fn test_comment_at_top_of_file() {
 #[test]
 fn unit() {
     test_same("<div>{/* Hello */}</div>;\n");
-    // https://github.com/goat-project/oxc/issues/17266
+    // https://github.com/oxc-project/oxc/issues/17266
     test("console.log(<div x={/*before*/ x} />)", "console.log(<div x={/*before*/ x} />);\n");
     test(
         "console.log(<div x={/*before*/ \"y\"} />)",
@@ -142,7 +142,7 @@ this.Book = function(title) {
     /** The title of the book. */
     this.title = title;
 }
-// https://github.com/goat-project/oxc/issues/6006
+// https://github.com/oxc-project/oxc/issues/6006
 export enum DefinitionKind {
   /**
    * Definition is a referenced variable.
@@ -216,15 +216,15 @@ catch (err) /* c8 ignore next */ /* istanbul ignore next */ { handle(err); }",
             // Line comment between catch param and body.
             // NOTE: Line comments after `)` are classified as trailing comments by the parser,
             // so they are not preserved. Use block comments instead.
-            // See: https://github.com/goat-project/oxc/pull/16167#discussion_r2567604139
+            // See: https://github.com/oxc-project/oxc/pull/16167#discussion_r2567604139
             "try { something(); }
 catch (err) // v8 ignore next
 { handle(err); }",
             // Coverage comment before ConditionalExpression alternate
-            // https://github.com/goat-project/oxc/issues/20549
+            // https://github.com/oxc-project/oxc/issues/20549
             "const a = Math.random() ? 1 : /* istanbul ignore next */ 2;",
             // Coverage comment between SwitchStatement cases
-            // https://github.com/goat-project/oxc/issues/20549
+            // https://github.com/oxc-project/oxc/issues/20549
             "switch (Math.random()) {
   case 0.5: break;
   /* istanbul ignore next */
@@ -446,7 +446,7 @@ const builtInSymbols = new Set(
             "(/* @__PURE__ */ Foo()).bar();\n",
             "(/* @__PURE__ */ new Foo())['bar']();\n",
             "(/* @__PURE__ */ Foo())['bar']();\n",
-            // https://github.com/goat-project/oxc/issues/4843
+            // https://github.com/oxc-project/oxc/issues/4843
             r"
 /* #__NO_SIDE_EFFECTS__ */
 const defineSSRCustomElement = /* @__NO_SIDE_EFFECTS__ */ (
@@ -541,7 +541,7 @@ delete /* @__PURE__ */ (() => {})();",
             "const Foo = /* @__PURE__ */ (() => {})()<X>",
             "const Foo = /* @__PURE__ */ <Foo>(() => {})()!",
             "const Foo = /* @__PURE__ */ <Foo>(() => {})()! as X satisfies Y",
-            // https://github.com/goat-project/oxc/issues/17670 - annotation before parenthesized arrow function
+            // https://github.com/oxc-project/oxc/issues/17670 - annotation before parenthesized arrow function
             r"/* @__NO_SIDE_EFFECTS__ */ ((options, extraOptions) => {
   return defineCustomElement(options, extraOptions, hydrate);
 })",

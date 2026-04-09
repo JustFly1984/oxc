@@ -1,6 +1,6 @@
 use rustc_hash::FxHashMap;
 
-use oxc::syntax::module_record::{self, ModuleRecord};
+use goat::syntax::module_record::{self, ModuleRecord};
 
 use crate::types::{
     DynamicImport, EcmaScriptModule, ExportExportName, ExportExportNameKind, ExportImportName,
@@ -77,8 +77,8 @@ impl From<&ModuleRecord<'_>> for EcmaScriptModule {
     }
 }
 
-impl From<&oxc::span::Span> for Span {
-    fn from(span: &oxc::span::Span) -> Self {
+impl From<&goat::span::Span> for Span {
+    fn from(span: &goat::span::Span) -> Self {
         Self { start: span.start, end: span.end }
     }
 }

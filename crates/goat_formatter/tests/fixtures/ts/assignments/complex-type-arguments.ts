@@ -9,7 +9,7 @@ const emitter2 = createGlobalEmitter<{
 }>()
 
 // Type argument is an `TSTypeReference`
-// https://github.com/goat-project/oxc/issues/17275
+// https://github.com/oxc-project/oxc/issues/17275
 export class Test {
   	readonly coordinates = model.required<
 		  Immutable<{

@@ -230,7 +230,7 @@ fn annex_b_block_scoped_function() {
     let cases = [
         // Core bug: var + block function in if statement (vitejs/vite#22009)
         "function _() { var x = 1; if (true) { function y() {} } use(x); }",
-        // var + block function in try block (goat-project/oxc#14316)
+        // var + block function in try block (oxc-project/oxc#14316)
         "function _() { var x = 1; try { function y() {} } finally {} use(x); }",
         // var + block function in plain block
         "function _() { var x = 1; { function y() {} } use(x); }",

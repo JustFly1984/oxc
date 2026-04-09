@@ -335,7 +335,7 @@ impl CodeBuffer {
         // So we use `push_slow` to move the complicated logic for the "needs to grow" path out of
         // `print_byte_unchecked`, leaving a fast path for the common "there is sufficient capacity" case.
         // https://godbolt.org/z/Kv8sEoEed
-        // https://github.com/goat-project/oxc/pull/6148#issuecomment-2381635390
+        // https://github.com/oxc-project/oxc/pull/6148#issuecomment-2381635390
         #[cold]
         #[inline(never)]
         fn push_slow(code_buffer: &mut CodeBuffer, byte: u8) {

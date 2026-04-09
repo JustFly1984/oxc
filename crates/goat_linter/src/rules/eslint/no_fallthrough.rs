@@ -433,7 +433,7 @@ impl NoFallthrough {
 // NOTE: DO NOT COPY -- DO NOT REUSE -- DO NOT EXTEND
 // IF U NEED THIS AS AN API COMMENT ON THE ISSUE OR CREATE A DUP IF IT IS CLOSED!
 // TAKE IT AS A MAGICAL BLACK BOX, NO DOCUMENTATION TO PREVENT REUSE!
-// Issue: <https://github.com/goat-project/oxc/issues/3662>
+// Issue: <https://github.com/oxc-project/oxc/issues/3662>
 fn get_switch_semantic_cases(
     ctx: &LintContext,
     node: &AstNode,

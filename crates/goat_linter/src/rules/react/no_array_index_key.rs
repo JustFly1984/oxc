@@ -305,7 +305,7 @@ fn test() {
             collection.concat(<Hello key={thing.id} />)
           ), []);
         ",
-        // https://github.com/goat-project/oxc/issues/20939
+        // https://github.com/oxc-project/oxc/issues/20939
         r"things.map((thing, index) => (
             <Hello key={getKey(thing.id, index)} />
           ));
@@ -314,7 +314,7 @@ fn test() {
             React.cloneElement(thing, { key: getKey(thing.id, index) })
           ));
         ",
-        // https://github.com/goat-project/oxc/issues/21110
+        // https://github.com/oxc-project/oxc/issues/21110
         r"things.map((thing, index) => (
             <Hello key={`${thing.type + index}`} />
           ));

@@ -912,14 +912,14 @@ export const test = testFn<{name: string}>({name: 'test'});",
 const instance = new MyClass<number>(42);",
             Some(serde_json::json!([{"default":"generic"}])),
         ),
-        // https://github.com/goat-project/oxc/issues/12605
+        // https://github.com/oxc-project/oxc/issues/12605
         ("let a: factories.User[] = [];", Some(serde_json::json!([{"default":"array-simple"}]))),
         ("let a: factories.TT.User[] = [];", Some(serde_json::json!([{"default":"array-simple"}]))),
         (
             "let z: readonly factories.User[] = [];",
             Some(serde_json::json!([{"readonly":"array-simple"}])),
         ),
-        // https://github.com/goat-project/oxc/issues/16897 - satisfies expression
+        // https://github.com/oxc-project/oxc/issues/16897 - satisfies expression
         (
             "const arr = [] as const satisfies ReadonlyArray<string>;",
             Some(serde_json::json!([{"default":"array-simple","readonly":"generic"}])),
@@ -1293,7 +1293,7 @@ const instance = new MyClass<number>(42);",
             "let a: Promise<string[]> = Promise.resolve([]);",
             Some(serde_json::json!([{"default": "generic"}])),
         ),
-        // https://github.com/goat-project/oxc/issues/11568
+        // https://github.com/oxc-project/oxc/issues/11568
         ("type x = Array<number>[]", None),
         ("const arr: Array<Array<number>>[] = [];", None),
         ("export function fn4(arr: Array<number>[]) { return arr; }", None),
@@ -1430,7 +1430,7 @@ export const test8 = testFn<Array<string>, number[]>([]);",
             "let x: ReadonlyArray<(string | number)> = [];",
             Some(serde_json::json!([{"default":"array"}])),
         ),
-        // https://github.com/goat-project/oxc/issues/16897 - satisfies expression
+        // https://github.com/oxc-project/oxc/issues/16897 - satisfies expression
         (
             "const arr = [] as const satisfies readonly string[];",
             Some(serde_json::json!([{"default":"array-simple","readonly":"generic"}])),
@@ -2134,7 +2134,7 @@ export const test9 = testFn<readonly number[]>([]);",
             "let x: readonly (string | number)[] = [];",
             Some(serde_json::json!([{"default":"array"}])),
         ),
-        // https://github.com/goat-project/oxc/issues/16897 - satisfies expression
+        // https://github.com/oxc-project/oxc/issues/16897 - satisfies expression
         (
             "const arr = [] as const satisfies readonly string[];",
             "const arr = [] as const satisfies ReadonlyArray<string>;",

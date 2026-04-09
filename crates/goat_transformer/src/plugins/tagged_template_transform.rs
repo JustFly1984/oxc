@@ -36,7 +36,7 @@
 //! ## References
 //!
 //! - esbuild implementation: <https://github.com/evanw/esbuild/blob/d6427c91edab734da686c4c5d29ed580b08b9fd5/internal/js_parser/js_parser.go#L13894-L13907>
-//! - Issue: <https://github.com/goat-project/oxc/issues/15306>
+//! - Issue: <https://github.com/oxc-project/oxc/issues/15306>
 
 use std::iter;
 

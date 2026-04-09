@@ -205,9 +205,9 @@ fn test() {
             await using x = makeDisposable();
             }
         ", // {                "parser": require(parser("typescript-parsers/no-lone-blocks/await-using")),                "ecmaVersion": 2022            }
-        // Issue: <https://github.com/goat-project/oxc/issues/8515>
+        // Issue: <https://github.com/oxc-project/oxc/issues/8515>
         "try {} catch {}",
-        // Issue: https://github.com/goat-project/oxc/issues/8697
+        // Issue: https://github.com/oxc-project/oxc/issues/8697
         "
             if (foo) {
                 // do nothing

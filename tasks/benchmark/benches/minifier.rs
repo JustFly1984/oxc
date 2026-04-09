@@ -1,13 +1,13 @@
 use std::path::Path;
 
 use goat_allocator::Allocator;
-use oxc_benchmark::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use goat_benchmark::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use goat_mangler::{MangleOptions, MangleOptionsKeepNames, Mangler};
 use goat_minifier::{CompressOptions, Compressor};
 use goat_parser::Parser;
 use goat_semantic::SemanticBuilder;
 use goat_span::SourceType;
-use oxc_tasks_common::TestFiles;
+use goat_tasks_common::TestFiles;
 use goat_transformer::{TransformOptions, Transformer};
 
 fn bench_minifier(criterion: &mut Criterion) {

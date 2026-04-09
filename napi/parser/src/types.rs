@@ -66,7 +66,7 @@ pub struct ParseResult {
 
 #[napi]
 impl ParseResult {
-    #[napi(getter, ts_return_type = "import(\"@goat-project/types\").Program")]
+    #[napi(getter, ts_return_type = "import(\"goatlint-types\").Program")]
     pub fn get_program(&mut self) -> String {
         mem::take(&mut self.program_and_fixes)
     }

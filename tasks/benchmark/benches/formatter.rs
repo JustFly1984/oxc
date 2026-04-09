@@ -1,10 +1,10 @@
 use goat_allocator::Allocator;
-use oxc_benchmark::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use goat_benchmark::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use goat_formatter::{
     FormatOptions, Formatter, JsdocOptions, SortImportsOptions, get_parse_options,
 };
 use goat_parser::Parser;
-use oxc_tasks_common::TestFiles;
+use goat_tasks_common::TestFiles;
 
 fn bench_formatter(criterion: &mut Criterion) {
     let mut group = criterion.benchmark_group("formatter");

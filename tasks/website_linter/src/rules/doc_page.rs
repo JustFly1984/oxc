@@ -242,7 +242,7 @@ fn rule_source(rule: &RuleTableRow) -> String {
     }
 
     format!(
-        "https://github.com/goat-project/oxc/blob/${{ data }}/crates/goat_linter/src/rules/{rule_path}"
+        "https://github.com/oxc-project/oxc/blob/${{ data }}/crates/goat_linter/src/rules/{rule_path}"
     )
 }
 
@@ -253,8 +253,8 @@ fn rule_source(rule: &RuleTableRow) -> String {
 fn tsgolint_rule_source(rule: &RuleTableRow) -> String {
     let rule_name = rule.name.replace('-', "_");
     let rule_path = format!("{rule_name}/{rule_name}.go");
-    // Result: https://github.com/goat-project/tsgolint/blob/main/internal/rules/prefer_reduce_type_parameter/prefer_reduce_type_parameter.go
-    format!("https://github.com/goat-project/tsgolint/blob/main/internal/rules/{rule_path}")
+    // Result: https://github.com/oxc-project/tsgolint/blob/main/internal/rules/prefer_reduce_type_parameter/prefer_reduce_type_parameter.go
+    format!("https://github.com/oxc-project/tsgolint/blob/main/internal/rules/{rule_path}")
 }
 
 /// Returns the normalized plugin name.

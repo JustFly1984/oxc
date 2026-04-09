@@ -1129,7 +1129,7 @@ fn test_fold_logical_expression_to_assignment_expression() {
     test_same("x.y && (a, x.y = 3)");
     test_same("x.y ?? (a, x.y = 3)");
 
-    // https://github.com/goat-project/oxc/issues/16647
+    // https://github.com/oxc-project/oxc/issues/16647
     test_same("var x = {}; x.y || (x = {}, x.y = 3)");
     test_same("var x = { y: 1 }; x.y && (x = {}, x.y = 3)");
     test_same("var x = {}; x.y ?? (x = {}, x.y = 3)");

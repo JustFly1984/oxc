@@ -259,7 +259,7 @@ fn generate_deserializers(
     // Type definition for deserialize variants (parser)
     #[rustfmt::skip]
     let code_type_definition_parser = "
-        import type * as ESTree from '@goat-project/types';
+        import type * as ESTree from 'goatlint-types';
 
         type BufferWithArrays = Uint8Array & {
             int32: Int32Array;

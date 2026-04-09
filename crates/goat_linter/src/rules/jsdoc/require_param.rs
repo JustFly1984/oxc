@@ -795,7 +795,7 @@ fn test() {
 			          return a + b;
 			        }
 			      ", None, None), // {        "parser": typescriptEslintParser,      }
-        // https://github.com/goat-project/oxc/issues/10253
+        // https://github.com/oxc-project/oxc/issues/10253
         ("
             /** @typedef {import('../types.d.ts').FileURL} FileURL */
 
@@ -1444,7 +1444,7 @@ fn test() {
             None,
             None,
         ),
-        // https://github.com/goat-project/oxc/issues/19139#issuecomment-3875380106
+        // https://github.com/oxc-project/oxc/issues/19139#issuecomment-3875380106
         (
             r#"
 			const shikiTransformer: ShikiTransformer = {

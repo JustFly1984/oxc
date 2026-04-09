@@ -206,7 +206,7 @@ use crate::tracking::AllocationStats;
 /// [`Allocator`] references to other tools.
 ///
 /// ```ignore
-/// use oxc::{allocator::Allocator, parser::Parser, span::SourceType};
+/// use goat::{allocator::Allocator, parser::Parser, span::SourceType};
 ///
 /// let allocator = Allocator::default();
 /// let parsed = Parser::new(&allocator, "let x = 1;", SourceType::default());

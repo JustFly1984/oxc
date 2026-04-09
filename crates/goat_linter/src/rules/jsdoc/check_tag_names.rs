@@ -600,7 +600,7 @@ fn test() {
             ])),
             None,
         ),
-        // https://github.com/goat-project/oxc/issues/10910
+        // https://github.com/oxc-project/oxc/issues/10910
         (
           "
           /**
@@ -611,7 +611,7 @@ fn test() {
           Some(serde_json::json!([ { "definedTags": [] } ])),
           None,
       ),
-       // https://github.com/goat-project/oxc/issues/13570
+       // https://github.com/oxc-project/oxc/issues/13570
         (
           "
           /**

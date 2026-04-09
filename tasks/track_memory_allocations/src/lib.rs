@@ -10,7 +10,7 @@ use goat_allocator::Allocator;
 use goat_minifier::{CompressOptions, MangleOptions, Minifier, MinifierOptions};
 use goat_parser::{ParseOptions, Parser};
 use goat_semantic::SemanticBuilder;
-use oxc_tasks_common::{TestFiles, project_root};
+use goat_tasks_common::{TestFiles, project_root};
 use goat_transformer::{TransformOptions, Transformer};
 
 use std::alloc::{GlobalAlloc, Layout};

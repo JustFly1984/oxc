@@ -72,7 +72,7 @@ pub enum CommentContent {
     Pure = 4,
 
     /// `/* #__PURE__ */` that could not be applied (not before a call/new expression)
-    /// <https://github.com/goat-project/oxc/issues/20334>
+    /// <https://github.com/oxc-project/oxc/issues/20334>
     PureNotApplied = 5,
 
     /// `/* #__NO_SIDE_EFFECTS__ */`
@@ -90,7 +90,7 @@ pub enum CommentContent {
 
     /// Code Coverage Ignore
     /// `v8 ignore`, `c8 ignore`, `node:coverage`, `istanbul ignore`
-    /// <https://github.com/goat-project/oxc/issues/10091>
+    /// <https://github.com/oxc-project/oxc/issues/10091>
     CoverageIgnore = 9,
 }
 

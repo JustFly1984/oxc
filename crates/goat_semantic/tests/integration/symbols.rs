@@ -374,7 +374,7 @@ fn test_arrow_explicit_return() {
 
 #[test]
 fn test_tagged_templates() {
-    // https://github.com/goat-project/oxc/issues/5391
+    // https://github.com/oxc-project/oxc/issues/5391
     SemanticTester::tsx(
         "
         import styled from 'styled-components';
@@ -445,7 +445,7 @@ fn test_redeclaration() {
         .test();
 }
 
-// https://github.com/goat-project/oxc/issues/18719
+// https://github.com/oxc-project/oxc/issues/18719
 #[test]
 fn test_function_var_redeclaration_in_module() {
     // Both orderings should produce a redeclaration error in module mode
@@ -453,7 +453,7 @@ fn test_function_var_redeclaration_in_module() {
     SemanticTester::js("var a = ''; function a() {}").has_error("already been declared");
 }
 
-// https://github.com/goat-project/oxc/issues/15961
+// https://github.com/oxc-project/oxc/issues/15961
 #[test]
 fn test_import_value_redeclaration_in_module() {
     // Import + var

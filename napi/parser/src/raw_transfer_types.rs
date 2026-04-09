@@ -4,7 +4,7 @@ use std::sync::Arc;
 
 use rustc_hash::FxHashMap;
 
-use oxc::{
+use goat::{
     allocator::{Allocator, FromIn, Vec},
     ast::ast::{Comment, Program},
     diagnostics::{LabeledSpan, NamedSource, GoatDiagnostic, Severity},

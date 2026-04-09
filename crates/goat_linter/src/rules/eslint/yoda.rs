@@ -858,7 +858,7 @@ fn test() {
         ),
         ("if('a' <= x && x < 1) {}", Some(serde_json::json!(["never", { "exceptRange": true }]))),
         ("if (0 < a && b < max) {}", Some(serde_json::json!(["never", { "exceptRange": true }]))),
-        // Issue: <https://github.com/goat-project/oxc/issues/7714>
+        // Issue: <https://github.com/oxc-project/oxc/issues/7714>
         ("{( t=='' )}", Some(serde_json::json!(["always", { "onlyEquality": true }]))),
     ];
 
@@ -1182,7 +1182,7 @@ fn test() {
             Some(serde_json::json!(["never", { "exceptRange": true }])),
         ),
         ("y>E>1", "1<y>E", Some(serde_json::json!(["always", { "exceptRange": false }]))),
-        // Issue: <https://github.com/goat-project/oxc/issues/7714>
+        // Issue: <https://github.com/oxc-project/oxc/issues/7714>
         (
             "{( t=='' )}",
             "{(  ''==t  )}",

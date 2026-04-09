@@ -229,7 +229,7 @@ fn test() {
             "switch(foo) { default: doSomething(); }",
             Some(serde_json::json!(["avoid"])),
         ),
-        // Issue: https://github.com/goat-project/oxc/issues/8491
+        // Issue: https://github.com/oxc-project/oxc/issues/8491
         (
             "
                 const alpha = 7

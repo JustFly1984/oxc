@@ -4,7 +4,7 @@ use quote::quote;
 use serde::Deserialize;
 use syn::Ident;
 
-use oxc_tasks_common::project_root;
+use goat_tasks_common::project_root;
 use goat_transformer::EngineTargets;
 
 #[derive(Debug, Deserialize)]

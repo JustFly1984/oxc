@@ -30,7 +30,7 @@ describe("--stdin-filepath", () => {
     }).toMatchSnapshot();
   });
 
-  // https://github.com/goat-project/oxc/issues/17939
+  // https://github.com/oxc-project/oxc/issues/17939
   it("should not report `WouldBlock` error on large file piped to wc", async () => {
     const largeFile = await readFile(join(fixturesDir, "parser.ts"), "utf-8");
     const result = await runCliStdin(largeFile, "parser.ts", "wc -l");

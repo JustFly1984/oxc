@@ -9,7 +9,7 @@
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/testing": "^11.0.1",
-    "@goat-project/runtime": "link:../../npm/runtime",
+    "goatlint-runtime": "link:../../npm/runtime",
     "@types/supertest": "^6.0.3",
     "alpinejs": "^3.14.9",
     "antd": "^6.1.1",

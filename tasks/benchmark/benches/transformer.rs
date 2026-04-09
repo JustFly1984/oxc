@@ -1,11 +1,11 @@
 use std::path::Path;
 
 use goat_allocator::Allocator;
-use oxc_benchmark::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use goat_benchmark::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use goat_isolated_declarations::{IsolatedDeclarations, IsolatedDeclarationsOptions};
 use goat_parser::{Parser, ParserReturn};
 use goat_semantic::SemanticBuilder;
-use oxc_tasks_common::{TestFile, TestFiles};
+use goat_tasks_common::{TestFile, TestFiles};
 use goat_transformer::{EnvOptions, TransformOptions, Transformer};
 
 fn bench_transformer(criterion: &mut Criterion) {
@@ -58,7 +58,7 @@ fn bench_isolated_declarations(criterion: &mut Criterion) {
     let mut group = criterion.benchmark_group("isolated-declarations");
 
     let file =
-        TestFile::new("https://cdn.jsdelivr.net/gh/goat-project/benchmark-files@main/vue-id.ts");
+        TestFile::new("https://cdn.jsdelivr.net/gh/oxc-project/benchmark-files@main/vue-id.ts");
 
     let id = BenchmarkId::from_parameter(&file.file_name);
     let source_text = &file.source_text;

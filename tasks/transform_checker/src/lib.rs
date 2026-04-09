@@ -83,7 +83,7 @@
 //!
 //! ## Other notes
 //!
-//! See also: <https://github.com/goat-project/oxc/issues/4790>
+//! See also: <https://github.com/oxc-project/oxc/issues/4790>
 
 use std::{
     cell::Cell,

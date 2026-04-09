@@ -5,7 +5,7 @@ source: crates/goat_formatter/tests/fixtures/mod.rs
 // Arrow functions returning JSX inside JSX expression containers
 // The multiline structure should be preserved when the arrow body is JSX
 
-// https://github.com/goat-project/oxc/issues/18738
+// https://github.com/oxc-project/oxc/issues/18738
 // Arrow returning JSX in attribute callback
 [
   {
@@ -63,7 +63,7 @@ source: crates/goat_formatter/tests/fixtures/mod.rs
 // Arrow functions returning JSX inside JSX expression containers
 // The multiline structure should be preserved when the arrow body is JSX
 
-// https://github.com/goat-project/oxc/issues/18738
+// https://github.com/oxc-project/oxc/issues/18738
 // Arrow returning JSX in attribute callback
 [
   {
@@ -122,7 +122,7 @@ source: crates/goat_formatter/tests/fixtures/mod.rs
 // Arrow functions returning JSX inside JSX expression containers
 // The multiline structure should be preserved when the arrow body is JSX
 
-// https://github.com/goat-project/oxc/issues/18738
+// https://github.com/oxc-project/oxc/issues/18738
 // Arrow returning JSX in attribute callback
 [
   {

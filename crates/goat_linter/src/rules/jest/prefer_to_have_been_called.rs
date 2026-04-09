@@ -20,7 +20,7 @@ fn prefer_to_have_been_called_diagnostic(span: Span) -> GoatDiagnostic {
 #[derive(Debug, Default, Clone)]
 pub struct PreferToHaveBeenCalled;
 
-// See <https://github.com/goat-project/oxc/issues/6050> for documentation details.
+// See <https://github.com/oxc-project/oxc/issues/6050> for documentation details.
 declare_goat_lint!(
     /// ### What it does
     ///

@@ -3,7 +3,7 @@ use std::mem;
 use napi::{Task, bindgen_prelude::AsyncTask};
 use napi_derive::napi;
 
-use oxc::{
+use goat::{
     allocator::Allocator,
     parser::{ParseOptions, Parser, ParserReturn, config::RuntimeParserConfig},
     semantic::SemanticBuilder,

@@ -5,7 +5,7 @@ use std::{
 
 use cow_utils::CowUtils;
 
-use oxc::{
+use goat::{
     allocator::Allocator,
     codegen::{Codegen, CodegenOptions, CommentOptions, IndentChar},
     diagnostics::{NamedSource, GoatDiagnostic},
@@ -13,7 +13,7 @@ use oxc::{
     span::{SourceType, VALID_EXTENSIONS},
     transformer::{BabelOptions, HelperLoaderMode, TransformOptions},
 };
-use oxc_tasks_common::{normalize_path, print_diff_in_terminal, project_root};
+use goat_tasks_common::{normalize_path, print_diff_in_terminal, project_root};
 
 use crate::{
     TestRunnerOptions,

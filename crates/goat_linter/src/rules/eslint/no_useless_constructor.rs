@@ -353,7 +353,7 @@ fn test() {
         // }
         // ",
         // Argument transformation: constructor is not useless when arguments are processed/transformed
-        // https://github.com/goat-project/oxc/issues/17469
+        // https://github.com/oxc-project/oxc/issues/17469
         "class A extends B { constructor(...args) { super(...args.map(x => x)); } }",
         "class A extends B { constructor(...args) { super(...args.filter(x => x)); } }",
         "class A extends B { constructor(...args) { super(...args.slice(1)); } }",

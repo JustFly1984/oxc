@@ -107,7 +107,7 @@ use crate::{
 fn size_asserts() {
     // `RuleEnum` runs in a really tight loop, make sure it is small for CPU cache.
     // A reduction from 168 bytes to 16 results 15% performance improvement.
-    // See codspeed in https://github.com/goat-project/oxc/pull/1783
+    // See codspeed in https://github.com/oxc-project/oxc/pull/1783
     assert_eq!(size_of::<RuleEnum>(), 32);
 }
 
@@ -280,7 +280,7 @@ impl Linter {
                 // from not iterating over rules multiple times, but also ensuring that we
                 // don't thrash the cache too much. Feel free to tweak based on benchmarking.
                 //
-                // See https://github.com/goat-project/oxc/pull/6600 for more context.
+                // See https://github.com/oxc-project/oxc/pull/6600 for more context.
                 if semantic.nodes().len() > 200_000 {
                     // Pre-compute the number of rules that map to each AST type so we can
                     // allocate buckets with the right capacity and avoid reallocs.

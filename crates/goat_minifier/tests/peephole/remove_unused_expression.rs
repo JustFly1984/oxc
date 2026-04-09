@@ -142,7 +142,7 @@ fn test_logical_expression() {
     test_same("v = a != null || (a = b)");
     test("void (x == null && y)", "x ?? y");
 
-    // https://github.com/goat-project/oxc/pull/16802#discussion_r2619369597
+    // https://github.com/oxc-project/oxc/pull/16802#discussion_r2619369597
     // Don't transform to ??= when base object may be mutated, but ?? is safe
     test("var x = {}; x.y != null || (x = {}, x.y = 3)", "var x = {}; x.y ?? (x = {}, x.y = 3)");
     test("var x = {}; x.y == null && (x = {}, x.y = 3)", "var x = {}; x.y ?? (x = {}, x.y = 3)");

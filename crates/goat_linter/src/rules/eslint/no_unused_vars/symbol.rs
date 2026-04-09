@@ -142,7 +142,7 @@ impl<'s, 'a> Symbol<'s, 'a> {
         )
     }
 
-    /// <https://github.com/goat-project/oxc/issues/4739>
+    /// <https://github.com/oxc-project/oxc/issues/4739>
     fn derive_span(&self) -> Span {
         for kind in self.iter_self_and_parents().map(AstNode::kind) {
             match kind {
@@ -156,7 +156,7 @@ impl<'s, 'a> Symbol<'s, 'a> {
         self.scoping().symbol_span(self.id)
     }
 
-    /// <https://github.com/goat-project/oxc/issues/4739>
+    /// <https://github.com/oxc-project/oxc/issues/4739>
     fn clean_binding_id(&self, binding: &BindingPattern) -> Span {
         if binding.is_destructuring_pattern() {
             return self.scoping().symbol_span(self.id);
@@ -222,7 +222,7 @@ impl GetSpan for Symbol<'_, '_> {
     #[inline]
     fn span(&self) -> Span {
         // TODO: un-comment and replace when BindingIdentifier spans are fixed
-        // https://github.com/goat-project/oxc/issues/4739
+        // https://github.com/oxc-project/oxc/issues/4739
 
         // self.symbols().get_span(self.id)
         *self.span.get_or_init(|| self.derive_span())

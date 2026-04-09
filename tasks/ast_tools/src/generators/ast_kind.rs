@@ -34,7 +34,7 @@ use super::define_generator;
 ///
 /// This should continue to be blacklisted for now.
 ///
-/// See also: <https://github.com/goat-project/oxc/issues/11490>
+/// See also: <https://github.com/oxc-project/oxc/issues/11490>
 const STRUCTS_BLACK_LIST: &[&str] = &["Span"];
 
 /// Generator for `AstKind`, `AstType`, and related code.

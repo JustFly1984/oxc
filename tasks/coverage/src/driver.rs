@@ -2,7 +2,7 @@ use std::{ops::ControlFlow, path::PathBuf};
 
 use rustc_hash::FxHashSet;
 
-use oxc::{
+use goat::{
     CompilerInterface,
     allocator::Allocator,
     ast::{
@@ -11,7 +11,7 @@ use oxc::{
     },
     ast_visit::{Visit, walk},
     codegen::{CodegenOptions, CodegenReturn},
-    diagnostics::OxcDiagnostic,
+    diagnostics::GoatDiagnostic,
     minifier::CompressOptions,
     parser::{ParseOptions, ParserReturn},
     regular_expression::{LiteralParser, Options},
@@ -19,7 +19,7 @@ use oxc::{
     span::{ContentEq, SourceType, Span},
     transformer::{TransformOptions, TransformerReturn},
 };
-use oxc_tasks_transform_checker::{check_semantic_after_transform, check_semantic_ids};
+use goat_tasks_transform_checker::{check_semantic_after_transform, check_semantic_ids};
 
 use crate::TestResult;
 
@@ -36,7 +36,7 @@ pub struct Driver {
     pub allow_return_outside_function: bool,
     // results
     pub panicked: bool,
-    pub errors: Vec<OxcDiagnostic>,
+    pub errors: Vec<GoatDiagnostic>,
     pub printed: String,
     pub source_type: Option<SourceType>,
 }
@@ -68,7 +68,7 @@ impl CompilerInterface for Driver {
         })
     }
 
-    fn handle_errors(&mut self, errors: Vec<OxcDiagnostic>) {
+    fn handle_errors(&mut self, errors: Vec<GoatDiagnostic>) {
         self.errors.extend(errors);
     }
 
@@ -81,7 +81,7 @@ impl CompilerInterface for Driver {
             return ControlFlow::Break(());
         }
         if (errors.is_empty() || !*panicked) && program.source_type.is_unambiguous() {
-            self.errors.push(OxcDiagnostic::error("SourceType must not be unambiguous."));
+            self.errors.push(GoatDiagnostic::error("SourceType must not be unambiguous."));
         }
         // Make sure serialization doesn't crash; also for code coverage.
         program.to_estree_ts_json_with_fixes(false);
@@ -120,7 +120,7 @@ impl CompilerInterface for Driver {
 }
 
 impl Driver {
-    pub fn errors(&mut self) -> Vec<OxcDiagnostic> {
+    pub fn errors(&mut self) -> Vec<GoatDiagnostic> {
         std::mem::take(&mut self.errors)
     }
 
@@ -152,7 +152,7 @@ impl Driver {
         for comment in comments {
             if !uniq.insert(comment.span) {
                 self.errors
-                    .push(OxcDiagnostic::error("Duplicate Comment").with_label(comment.span));
+                    .push(GoatDiagnostic::error("Duplicate Comment").with_label(comment.span));
                 return true;
             }
         }
@@ -186,7 +186,7 @@ impl<'a> Visit<'a> for CheckASTNodes<'a> {
     // let Span { start, end, .. } = span;
     // if *end >= *start {
     // self.driver.errors.push(
-    // OxcDiagnostic::error(format!("Span end {end} >= start {start}",)).with_label(*span),
+    // GoatDiagnostic::error(format!("Span end {end} >= start {start}",)).with_label(*span),
     // );
     // }
     // }
@@ -206,19 +206,19 @@ impl<'a> Visit<'a> for CheckASTNodes<'a> {
             Ok(pattern2) => {
                 let printed2 = pattern2.to_string();
                 if !pattern2.content_eq(pattern) {
-                    self.driver.errors.push(OxcDiagnostic::error(format!(
+                    self.driver.errors.push(GoatDiagnostic::error(format!(
                         "Regular Expression content mismatch for `{}`: `{pattern}` == `{pattern2}`",
                         literal.span.source_text(self.source_text)
                     )));
                 }
                 if printed1 != printed2 {
-                    self.driver.errors.push(OxcDiagnostic::error(format!(
+                    self.driver.errors.push(GoatDiagnostic::error(format!(
                         "Regular Expression mismatch: {printed1} {printed2}"
                     )));
                 }
             }
             Err(error) => {
-                self.driver.errors.push(OxcDiagnostic::error(format!(
+                self.driver.errors.push(GoatDiagnostic::error(format!(
                     "Failed to re-parse `{}`, printed as `/{printed1}/{flags}`, {error}",
                     literal.span.source_text(self.source_text),
                 )));

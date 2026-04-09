@@ -16,7 +16,7 @@ source: crates/goat_formatter/tests/fixtures/mod.rs
 )}
 </>
 
-// https://github.com/goat-project/oxc/issues/16180
+// https://github.com/oxc-project/oxc/issues/16180
 {
   const x = (
     <>
@@ -29,7 +29,7 @@ source: crates/goat_formatter/tests/fixtures/mod.rs
   );
 }
 
-// https://github.com/goat-project/oxc/issues/16179
+// https://github.com/oxc-project/oxc/issues/16179
 {
   const x = (
     <>
@@ -42,7 +42,7 @@ source: crates/goat_formatter/tests/fixtures/mod.rs
   );
 }
 
-// https://github.com/goat-project/oxc/issues/16258
+// https://github.com/oxc-project/oxc/issues/16258
 const x = (
   <>
     {x ? (
@@ -54,7 +54,7 @@ const x = (
   </>
 );
 
-// https://github.com/goat-project/oxc/issues/18419
+// https://github.com/oxc-project/oxc/issues/18419
 const Component = () => (
   <div>
     {"error" ? (
@@ -86,7 +86,7 @@ const Component = () => (
   )}
 </>;
 
-// https://github.com/goat-project/oxc/issues/16180
+// https://github.com/oxc-project/oxc/issues/16180
 {
   const x = (
     <>
@@ -99,7 +99,7 @@ const Component = () => (
   );
 }
 
-// https://github.com/goat-project/oxc/issues/16179
+// https://github.com/oxc-project/oxc/issues/16179
 {
   const x = (
     <>
@@ -112,7 +112,7 @@ const Component = () => (
   );
 }
 
-// https://github.com/goat-project/oxc/issues/16258
+// https://github.com/oxc-project/oxc/issues/16258
 const x = (
   <>
     {x ? (
@@ -124,7 +124,7 @@ const x = (
   </>
 );
 
-// https://github.com/goat-project/oxc/issues/18419
+// https://github.com/oxc-project/oxc/issues/18419
 const Component = () => (
   <div>
     {"error" ? (
@@ -155,7 +155,7 @@ const Component = () => (
   )}
 </>;
 
-// https://github.com/goat-project/oxc/issues/16180
+// https://github.com/oxc-project/oxc/issues/16180
 {
   const x = (
     <>
@@ -168,7 +168,7 @@ const Component = () => (
   );
 }
 
-// https://github.com/goat-project/oxc/issues/16179
+// https://github.com/oxc-project/oxc/issues/16179
 {
   const x = (
     <>
@@ -181,7 +181,7 @@ const Component = () => (
   );
 }
 
-// https://github.com/goat-project/oxc/issues/16258
+// https://github.com/oxc-project/oxc/issues/16258
 const x = (
   <>
     {x ? (
@@ -193,7 +193,7 @@ const x = (
   </>
 );
 
-// https://github.com/goat-project/oxc/issues/18419
+// https://github.com/oxc-project/oxc/issues/18419
 const Component = () => (
   <div>
     {"error" ? (

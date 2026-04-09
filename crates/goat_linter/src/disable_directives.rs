@@ -962,7 +962,7 @@ no-debugger
         "
             ),
             // Should not match invalid directives
-            // https://github.com/goat-project/oxc/issues/6041
+            // https://github.com/oxc-project/oxc/issues/6041
             format!(
                 "// {prefix}-disable-lext-nine no-debugger
                 debugger;

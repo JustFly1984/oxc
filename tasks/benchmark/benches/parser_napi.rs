@@ -1,6 +1,6 @@
 use std::{env, fs, path::PathBuf, time::Duration};
 
-use oxc_benchmark::{
+use goat_benchmark::{
     BenchmarkId, Criterion, SamplingMode, black_box, criterion_group, criterion_main,
 };
 use serde::Deserialize;

@@ -3,7 +3,7 @@
 
 use std::path::Path;
 
-use oxc::{
+use goat::{
     allocator::Allocator,
     codegen::{Codegen, CodegenOptions, CommentOptions},
     isolated_declarations::{IsolatedDeclarations, IsolatedDeclarationsOptions},
@@ -148,7 +148,7 @@ fn change_extension(name: &str) -> String {
         .to_string()
 }
 
-fn transpile(path: &Path, source_text: &str) -> (String, Vec<oxc::diagnostics::OxcDiagnostic>) {
+fn transpile(path: &Path, source_text: &str) -> (String, Vec<goat::diagnostics::GoatDiagnostic>) {
     let allocator = Allocator::default();
     let source_type = SourceType::from_path(path).unwrap_or_default();
     let ret = Parser::new(&allocator, source_text, source_type).parse();

@@ -922,7 +922,7 @@ dependencies = [
 
 [[package]]
 name = "goat"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "goat_allocator",
  "goat_ast",
@@ -944,7 +944,7 @@ dependencies = [
 
 [[package]]
 name = "goat_allocator"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "allocator-api2",
  "goat_allocator",
@@ -959,7 +959,7 @@ dependencies = [
 
 [[package]]
 name = "goat_ast"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "bitflags",
  "goat_allocator",
@@ -974,7 +974,7 @@ dependencies = [
 
 [[package]]
 name = "goat_ast_macros"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "phf",
  "proc-macro2",
@@ -1018,7 +1018,7 @@ dependencies = [
 
 [[package]]
 name = "goat_ast_visit"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "goat_allocator",
  "goat_ast",
@@ -1054,7 +1054,7 @@ dependencies = [
 
 [[package]]
 name = "goat_cfg"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "bitflags",
  "goat_syntax",
@@ -1066,7 +1066,7 @@ dependencies = [
 
 [[package]]
 name = "goat_codegen"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "bitflags",
  "cow-utils",
@@ -1088,7 +1088,7 @@ dependencies = [
 
 [[package]]
 name = "goat_compat"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "cow-utils",
  "goat_syntax",
@@ -1138,14 +1138,14 @@ dependencies = [
 
 [[package]]
 name = "goat_data_structures"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "ropey",
 ]
 
 [[package]]
 name = "goat_diagnostics"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "cow-utils",
  "oxc-miette",
@@ -1154,7 +1154,7 @@ dependencies = [
 
 [[package]]
 name = "goat_ecmascript"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "cow-utils",
  "goat_allocator",
@@ -1168,7 +1168,7 @@ dependencies = [
 
 [[package]]
 name = "goat_estree"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "dragonbox_ecma",
  "goat_data_structures",
@@ -1177,7 +1177,7 @@ dependencies = [
 
 [[package]]
 name = "goat_estree_tokens"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "goat_ast",
  "goat_ast_visit",
@@ -1190,7 +1190,7 @@ dependencies = [
 
 [[package]]
 name = "goat_formatter"
-version = "0.44.0"
+version = "0.45.0"
 dependencies = [
  "cow-utils",
  "fast-glob",
@@ -1219,7 +1219,7 @@ dependencies = [
 
 [[package]]
 name = "goat_isolated_declarations"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "bitflags",
  "goat_allocator",
@@ -1237,7 +1237,7 @@ dependencies = [
 
 [[package]]
 name = "goat_jsdoc"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "goat_ast",
  "goat_span",
@@ -1264,7 +1264,7 @@ dependencies = [
 
 [[package]]
 name = "goat_linter"
-version = "1.59.0"
+version = "1.60.0"
 dependencies = [
  "bitflags",
  "constcat",
@@ -1341,7 +1341,7 @@ dependencies = [
 
 [[package]]
 name = "goat_mangler"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "goat_allocator",
  "goat_ast",
@@ -1357,7 +1357,7 @@ dependencies = [
 
 [[package]]
 name = "goat_minifier"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "cow-utils",
  "goat_allocator",
@@ -1386,7 +1386,7 @@ dependencies = [
 
 [[package]]
 name = "goat_minify_napi"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "goat_allocator",
  "goat_codegen",
@@ -1425,7 +1425,7 @@ dependencies = [
 
 [[package]]
 name = "goat_napi"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "goat_ast",
  "goat_ast_visit",
@@ -1439,7 +1439,7 @@ dependencies = [
 
 [[package]]
 name = "goat_parser"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "bitflags",
  "cow-utils",
@@ -1462,7 +1462,7 @@ dependencies = [
 
 [[package]]
 name = "goat_parser_napi"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "goat",
  "goat_ast_macros",
@@ -1515,7 +1515,7 @@ dependencies = [
 
 [[package]]
 name = "goat_regular_expression"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "bitflags",
  "goat_allocator",
@@ -1530,7 +1530,7 @@ dependencies = [
 
 [[package]]
 name = "goat_semantic"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "goat_allocator",
  "goat_ast",
@@ -1553,7 +1553,7 @@ dependencies = [
 
 [[package]]
 name = "goat_span"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "compact_str",
  "goat_allocator",
@@ -1567,7 +1567,7 @@ dependencies = [
 
 [[package]]
 name = "goat_str"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "compact_str",
  "goat_allocator",
@@ -1579,7 +1579,7 @@ dependencies = [
 
 [[package]]
 name = "goat_syntax"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "bitflags",
  "cow-utils",
@@ -1650,7 +1650,7 @@ dependencies = [
 
 [[package]]
 name = "goat_transform_napi"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "goat",
  "goat_napi",
@@ -1664,7 +1664,7 @@ dependencies = [
 
 [[package]]
 name = "goat_transformer"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "base64",
  "compact_str",
@@ -1695,7 +1695,7 @@ dependencies = [
 
 [[package]]
 name = "goat_transformer_plugins"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "cow-utils",
  "goat_allocator",
@@ -1721,7 +1721,7 @@ dependencies = [
 
 [[package]]
 name = "goat_traverse"
-version = "0.124.0"
+version = "0.125.0"
 dependencies = [
  "goat_allocator",
  "goat_ast",
@@ -1738,7 +1738,7 @@ dependencies = [
 
 [[package]]
 name = "goatfmt"
-version = "0.44.0"
+version = "0.45.0"
 dependencies = [
  "bpaf",
  "cow-utils",
@@ -1778,7 +1778,7 @@ dependencies = [
 
 [[package]]
 name = "goatlint"
-version = "1.59.0"
+version = "1.60.0"
 dependencies = [
  "bpaf",
  "cow-utils",

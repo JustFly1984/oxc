@@ -22,12 +22,12 @@
 //!
 //! ### Runtime ([`HelperLoaderMode::Runtime`])
 //!
-//! Uses `@goat-project/runtime` as a dependency, importing helper functions from the runtime.
+//! Uses `goatlint-runtime` as a dependency, importing helper functions from the runtime.
 //!
 //! Generated code example:
 //!
 //! ```js
-//! import helperName from "@goat-project/runtime/helpers/helperName";
+//! import helperName from "goatlint-runtime/helpers/helperName";
 //! helperName(...arguments);
 //! ```
 //!
@@ -110,7 +110,7 @@ pub enum HelperLoaderMode {
     ///
     /// Example output:
     /// ```js
-    /// import helperName from "@goat-project/runtime/helpers/helperName";
+    /// import helperName from "goatlint-runtime/helpers/helperName";
     /// helperName(...arguments);
     /// ```
     #[default]
@@ -122,7 +122,7 @@ pub enum HelperLoaderMode {
 pub struct HelperLoaderOptions {
     #[serde(default = "default_as_module_name")]
     /// The module name to import helper functions from.
-    /// Default: `@goat-project/runtime`
+    /// Default: `goatlint-runtime`
     pub module_name: Cow<'static, str>,
     /// Strategy used to resolve helper calls.
     pub mode: HelperLoaderMode,
@@ -135,7 +135,7 @@ impl Default for HelperLoaderOptions {
 }
 
 fn default_as_module_name() -> Cow<'static, str> {
-    Cow::Borrowed("@goat-project/runtime")
+    Cow::Borrowed("goatlint-runtime")
 }
 
 /// Available helpers.

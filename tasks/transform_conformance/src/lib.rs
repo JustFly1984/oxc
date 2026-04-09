@@ -13,7 +13,7 @@ use std::{
 
 use constants::PLUGINS;
 use indexmap::IndexMap;
-use oxc_tasks_common::{Snapshot, normalize_path, project_root};
+use goat_tasks_common::{Snapshot, normalize_path, project_root};
 use test_case::{TestCase, TestCaseKind};
 use walkdir::WalkDir;
 

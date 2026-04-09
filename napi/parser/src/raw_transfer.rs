@@ -10,7 +10,7 @@ use napi::{
 };
 use napi_derive::napi;
 
-use oxc::{
+use goat::{
     allocator::{Allocator, FromIn, Vec as ArenaVec},
     ast_visit::utf8_to_utf16::Utf8ToUtf16,
     semantic::SemanticBuilder,

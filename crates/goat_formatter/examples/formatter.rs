@@ -22,7 +22,7 @@ use goat_formatter::{
 };
 use goat_parser::Parser;
 use goat_span::SourceType;
-use oxc_tasks_common::print_diff_in_terminal;
+use goat_tasks_common::print_diff_in_terminal;
 use pico_args::Arguments;
 
 /// Format a JavaScript or TypeScript file

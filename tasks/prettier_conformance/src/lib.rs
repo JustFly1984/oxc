@@ -15,10 +15,10 @@ use rustc_hash::FxHashSet;
 use similar::TextDiff;
 use walkdir::WalkDir;
 
-use oxc_allocator::Allocator;
-use oxc_formatter::{FormatOptions, Formatter, enable_jsx_source_type, get_parse_options};
-use oxc_parser::Parser;
-use oxc_span::SourceType;
+use goat_allocator::Allocator;
+use goat_formatter::{FormatOptions, Formatter, enable_jsx_source_type, get_parse_options};
+use goat_parser::Parser;
+use goat_span::SourceType;
 
 use crate::{ignore_list::IGNORE_TESTS, options::TestRunnerOptions, spec::parse_spec};
 
@@ -35,7 +35,7 @@ fn test() {
 }
 
 fn root() -> PathBuf {
-    oxc_tasks_common::project_root().join("tasks").join("prettier_conformance")
+    goat_tasks_common::project_root().join("tasks").join("prettier_conformance")
 }
 
 fn fixtures_root() -> PathBuf {
@@ -281,7 +281,7 @@ impl TestRunner {
                         println!("Passed ✅");
                     } else {
                         println!("Failed ❌");
-                        oxc_tasks_common::print_text_diff(&diff);
+                        goat_tasks_common::print_text_diff(&diff);
                     }
                     println!();
                 }

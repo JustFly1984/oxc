@@ -1,9 +1,9 @@
 use goat_allocator::Allocator;
 use goat_ast_visit::utf8_to_utf16::Utf8ToUtf16;
-use oxc_benchmark::{BenchmarkId, Criterion, black_box, criterion_group, criterion_main};
+use goat_benchmark::{BenchmarkId, Criterion, black_box, criterion_group, criterion_main};
 use goat_estree_tokens::{ESTreeTokenOptionsJS, to_estree_tokens_json};
 use goat_parser::{ParseOptions, Parser, ParserReturn, config::RuntimeParserConfig};
-use oxc_tasks_common::TestFiles;
+use goat_tasks_common::TestFiles;
 
 fn bench_parser(criterion: &mut Criterion) {
     let mut group = criterion.benchmark_group("parser");

@@ -235,7 +235,7 @@ mod tests {
 
     #[test]
     fn test_capture_group_indexing() {
-        // https://github.com/goat-project/oxc/issues/6525
+        // https://github.com/oxc-project/oxc/issues/6525
         let pass = vec![
             r#"const filename = /filename[^;=\n]=((['"]).?\2|[^;\n]*)/;"#,
             r"const r = /([a-z])\1/;",
@@ -273,7 +273,7 @@ mod tests {
             r"new RegExp(`\\u{1F}`)",
             r"new RegExp('\\u{1F}', 'g')",
             r"new RegExp('\\u{1F}', flags)", // unknown flags, we assume no 'u'
-            // https://github.com/goat-project/oxc/issues/6136
+            // https://github.com/oxc-project/oxc/issues/6136
             r"/---\n([\s\S]+?)\n---/",
             r"/import \{((?:.|\n)*)\} from '@romejs\/js-ast';/",
             r"/^\t+/",
@@ -304,7 +304,7 @@ mod tests {
             r"new RegExp(`\\u{1F}`, 'u')",
             r"new RegExp('\\u{1F}', `u`)",
             r"new RegExp('\\u{1F}', 'ugi')",
-            // https://github.com/goat-project/oxc/issues/6136
+            // https://github.com/oxc-project/oxc/issues/6136
             r"/\u{0a}/u",
             r"/\x0a/u",
             r"/\u{0d}/u",

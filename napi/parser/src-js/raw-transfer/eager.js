@@ -80,7 +80,7 @@ function deserialize(buffer, sourceText, sourceByteLen, options) {
 
   // Add a line comment for hashbang if JS.
   // Do not add comment if TS, to match `@typescript-eslint/parser`.
-  // See https://github.com/goat-project/oxc/blob/ea784f5f082e4c53c98afde9bf983afd0b95e44e/napi/parser/src/lib.rs#L106-L130
+  // See https://github.com/oxc-project/oxc/blob/ea784f5f082e4c53c98afde9bf983afd0b95e44e/napi/parser/src/lib.rs#L106-L130
   if (isJs) {
     const { hashbang } = data.program;
     if (hashbang !== null) {

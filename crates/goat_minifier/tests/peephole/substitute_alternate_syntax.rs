@@ -230,7 +230,7 @@ fn test_fold_new_expressions() {
 
     // RegExp is validated using the regex parser to determine if it's pure.
     // Valid patterns can be removed, invalid patterns must be kept.
-    // https://github.com/goat-project/oxc/issues/18050
+    // https://github.com/oxc-project/oxc/issues/18050
     test("new RegExp()", ""); // Valid: empty pattern
     test("new RegExp('a')", ""); // Valid: simple pattern
     test("new RegExp(0)", "RegExp(0)"); // Can't validate non-string literal
@@ -618,7 +618,7 @@ fn test_property_key() {
     );
 
     // Patch KATAKANA MIDDLE DOT and HALFWIDTH KATAKANA MIDDLE DOT
-    // <https://github.com/goat-project/unicode-id-start/pull/3>
+    // <https://github.com/oxc-project/unicode-id-start/pull/3>
     test_same("x = { 'x・': 0 };");
     test_same("x = { 'x･': 0 };");
     test_same("x = y['x・'];");

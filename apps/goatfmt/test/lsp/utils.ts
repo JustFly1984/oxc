@@ -225,7 +225,7 @@ ${formatted2}
 
 // ---
 
-// aligned with https://github.com/goat-project/oxc/blob/7e6c15baaebf206ab540191da0e4e103e4fabf06/apps/goatfmt/src/lsp/options.rs
+// aligned with https://github.com/oxc-project/oxc/blob/7e6c15baaebf206ab540191da0e4e103e4fabf06/apps/goatfmt/src/lsp/options.rs
 type OxfmtLSPConfig = {
   "fmt.configPath"?: string | null;
 };

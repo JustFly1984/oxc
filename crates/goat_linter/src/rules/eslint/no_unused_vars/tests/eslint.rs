@@ -738,7 +738,7 @@ fn test() {
         ("function foo(a) { a++ } foo();", None),
         ("var a = 3; a = a * 5 + 6;", None),
         ("var a = 2, b = 4; a = a * 2 + b;", None),
-        // https://github.com/goat-project/oxc/issues/4436
+        // https://github.com/oxc-project/oxc/issues/4436
         ("function foo(cb) { cb = function(a) { cb(1 + a); }; bar(not_cb); } foo();", None),
         // ("function foo(cb) { cb = function(a) { return cb(1 + a); }(); } foo();", None),
         ("function foo(cb) { cb = (function(a) { cb(1 + a); }, cb); } foo();", None),
@@ -805,7 +805,7 @@ fn test() {
         ), // { "ecmaVersion": 2020 },
         ("let x = 0; 0, x = x+1;", None),                  // { "ecmaVersion": 2020 },
         ("let x = 0; x = x+1, 0;", None),                  // { "ecmaVersion": 2020 },
-        // https://github.com/goat-project/oxc/issues/4437
+        // https://github.com/oxc-project/oxc/issues/4437
         ("let x = 0; foo = ((0, x = x + 1), 0);", None), // { "ecmaVersion": 2020 },
         ("let x = 0; foo = (x = x+1, 0);", None),        // { "ecmaVersion": 2020 },
         ("let x = 0; 0, (1, x=x+1);", None),             // { "ecmaVersion": 2020 },

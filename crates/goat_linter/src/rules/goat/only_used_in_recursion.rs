@@ -688,7 +688,7 @@ fn test() {
                 test(a)
             }
         ",
-        // https://github.com/goat-project/oxc/issues/4817
+        // https://github.com/oxc-project/oxc/issues/4817
         // "
         //     const test = function test(arg0) {
         //         return test(arg0);

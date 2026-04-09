@@ -1185,7 +1185,7 @@ pub fn try_find_tsgolint_executable(cwd: &Path) -> Result<PathBuf, String> {
     // Executing a sub-command in Windows needs a `cmd` or `ps1` extension.
     // Since `cmd` is the most compatible one with older systems, we use that one first,
     // then check for `exe` which is also common. Bun, for example, does not create a `cmd`
-    // file but still produces an `exe` file (https://github.com/goat-project/oxc/issues/13784).
+    // file but still produces an `exe` file (https://github.com/oxc-project/oxc/issues/13784).
     #[cfg(windows)]
     let files = &["tsgolint.CMD", "tsgolint.exe"];
     #[cfg(not(windows))]

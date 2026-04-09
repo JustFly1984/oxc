@@ -37,7 +37,7 @@
 //! [typescript-eslint]: <https://github.com/typescript-eslint/typescript-eslint/tree/v8.9.0/packages/ast-spec>
 //! [ECMAScript spec]: <https://tc39.es/ecma262/>
 //! [tsc]: <https://github.com/microsoft/TypeScript>
-//! [`Traverse`]: <https://github.com/goat-project/oxc/tree/main/crates/goat_traverse>
+//! [`Traverse`]: <https://github.com/oxc-project/oxc/tree/main/crates/goat_traverse>
 //! [`Visit`]: <http://docs.rs/goat_ast_visit>
 //! [`VisitMut`]: <http://docs.rs/goat_ast_visit>
 

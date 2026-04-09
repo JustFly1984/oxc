@@ -5,14 +5,14 @@ use cow_utils::CowUtils;
 use goat_allocator::Allocator;
 use goat_ast::ast::*;
 use goat_ast_visit::Visit;
-use oxc_benchmark::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use goat_benchmark::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use goat_parser::{
     Parser,
     config::{LexerConfig, NoTokensLexerConfig},
     lexer::{Kind, Lexer},
 };
 use goat_span::SourceType;
-use oxc_tasks_common::{TestFile, TestFiles};
+use goat_tasks_common::{TestFile, TestFiles};
 
 fn bench_lexer(criterion: &mut Criterion) {
     let mut group = criterion.benchmark_group("lexer");

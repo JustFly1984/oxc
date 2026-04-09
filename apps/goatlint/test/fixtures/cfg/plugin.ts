@@ -46,7 +46,7 @@ const rule: Rule = {
 
 // Purpose of this 2nd rule is to ensure that all arguments are passed to the CFG event handler functions
 // when 2 event handler functions are merged into a single function.
-// https://github.com/goat-project/oxc/issues/18555
+// https://github.com/oxc-project/oxc/issues/18555
 const rule2: Rule = {
   // @ts-expect-error - TODO: Make the types for CFG events work
   create(_context) {

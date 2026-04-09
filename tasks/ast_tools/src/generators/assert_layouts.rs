@@ -773,7 +773,7 @@ fn template(krate: &str, assertions_64: &TokenStream, assertions_32: &TokenStrea
         // Some 32-bit platforms have 8-byte alignment for `u64` and `f64`, while others have 4-byte alignment.
         //
         // Skip these assertions on 32-bit platforms where `u64` / `f64` have 4-byte alignment, because
-        // some layout calculations may be incorrect. https://github.com/goat-project/oxc/issues/13694
+        // some layout calculations may be incorrect. https://github.com/oxc-project/oxc/issues/13694
         //
         // At present 32-bit layouts aren't relied on by any code, so it's fine if they're incorrect for now.
         // However, raw transfer will be supported on WASM32 in future, and layout calculations are correct

@@ -112,7 +112,7 @@ impl Program<'_> {
 /// In TS AST, set start span to start of first directive or statement.
 /// This is required because unlike Acorn, TS-ESLint excludes whitespace and comments
 /// from the `Program` start span.
-/// See <https://github.com/goat-project/oxc/pull/10134> for more info.
+/// See <https://github.com/oxc-project/oxc/pull/10134> for more info.
 ///
 /// Special case where first statement is an `ExportNamedDeclaration` or `ExportDefaultDeclaration`
 /// exporting a class with decorators, where one of the decorators is before `export`.

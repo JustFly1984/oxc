@@ -1,7 +1,7 @@
 use std::{fs, sync::OnceLock};
 
 use lazy_regex::Regex;
-use oxc_tasks_common::agent;
+use goat_tasks_common::agent;
 
 use crate::workspace_root;
 

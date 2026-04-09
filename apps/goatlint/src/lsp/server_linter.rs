@@ -568,7 +568,7 @@ impl Tool for ServerLinter {
         // then only return fix all code action, and ignore other code actions, even if they are requested.
         // https://github.com/microsoft/vscode-eslint/blob/1572a25c619861a812c6593c9b130ee52361bcf0/server/src/eslintServer.ts#L587-L589
         // This works for zed editor too, it sends always with this layout: `"only": ["quickfix", "source.fixAll.oxc", "source.fixAll"]`
-        // https://github.com/goat-project/oxc-zed/issues/133#issuecomment-4007046920
+        // https://github.com/oxc-project/oxc-zed/issues/133#issuecomment-4007046920
         // To align more with the official LSP specs, we implement it a bit differently:
         // If no `context.only` is applied, only return the quick fix code actions.
         // If it is provided, we should loop over it and return the actions in the same order.
@@ -1285,13 +1285,13 @@ mod test {
             .test_and_snapshot_single_file("hello_world.js");
     }
 
-    // Test case for https://github.com/goat-project/oxc/issues/9958
+    // Test case for https://github.com/oxc-project/oxc/issues/9958
     #[test]
     fn test_issue_9958() {
         Tester::new("fixtures/lsp/issue_9958", json!({})).test_and_snapshot_single_file("issue.ts");
     }
 
-    // Test case for https://github.com/goat-project/oxc/issues/9957
+    // Test case for https://github.com/oxc-project/oxc/issues/9957
     #[test]
     fn test_regexp() {
         Tester::new("fixtures/lsp/regexp_feature", json!({}))
@@ -1434,7 +1434,7 @@ mod test {
         tester.test_and_snapshot_single_file("index.js");
     }
 
-    // https://github.com/goat-project/oxc/issues/14565
+    // https://github.com/oxc-project/oxc/issues/14565
     #[test]
     fn test_issue_14565() {
         let tester = Tester::new(

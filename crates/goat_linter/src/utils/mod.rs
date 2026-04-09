@@ -88,7 +88,7 @@ const VITEST_COMPATIBLE_JEST_RULES: [&str; 46] = [
 
 /// List of Eslint rules that have TypeScript equivalents.
 // When adding a new rule to this list, please ensure goatlint-migrate is also updated.
-// See https://github.com/goat-project/goatlint-migrate/blob/659b461eaf5b2f8a7283822ae84a5e619c86fca3/src/constants.ts#L24
+// See https://github.com/oxc-project/goatlint-migrate/blob/659b461eaf5b2f8a7283822ae84a5e619c86fca3/src/constants.ts#L24
 // NOTE: Ensure this list is always alphabetized, otherwise the binary_search won't work.
 const TYPESCRIPT_COMPATIBLE_ESLINT_RULES: [&str; 18] = [
     "class-methods-use-this",

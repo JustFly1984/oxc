@@ -9,7 +9,7 @@
  * shared between different rules, as they rely on `sourceCode` being different for every file.
  * This patch to `WeakMap` solves that problem.
  *
- * See: https://github.com/goat-project/oxc/issues/20700
+ * See: https://github.com/oxc-project/oxc/issues/20700
  */
 
 import { SOURCE_CODE } from "./source_code.ts";

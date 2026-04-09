@@ -13,7 +13,7 @@
 
 use std::{env, io, path::Path};
 
-use oxc::{Compiler, span::SourceType};
+use goat::{Compiler, span::SourceType};
 
 // Instruction:
 // 1. create a `test.js`

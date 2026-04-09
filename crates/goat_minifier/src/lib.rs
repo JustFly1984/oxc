@@ -42,7 +42,7 @@
 //! - **Peephole Optimizations**: Individual transformation passes
 //! - **Mangler**: Variable renaming for size reduction
 //!
-//! See the [crate documentation](https://github.com/goat-project/oxc/tree/main/crates/goat_minifier) for more details.
+//! See the [crate documentation](https://github.com/oxc-project/oxc/tree/main/crates/goat_minifier) for more details.
 
 mod compressor;
 pub(crate) mod generated;

@@ -386,7 +386,7 @@ fn test() {
             ",
             Some(json!([ { "allowedNames": ["middleware"] } ])),
         ),
-        // https://github.com/goat-project/oxc/issues/6583
+        // https://github.com/oxc-project/oxc/issues/6583
         (
             "
             class B{o(a={}){const attribute=attribute

@@ -247,7 +247,7 @@ fn test() {
         // r"foo.replaceAll(/\r\n\u{1f600}/gv, _)",
         r"foo.replaceAll(/a very very very very very very very very very very very very very very very very very very very very very very very very very very very very very long string/g, _)",
         r#"foo.replace(/(?!a)+/g, "")"#,
-        // https://github.com/goat-project/oxc/issues/1790
+        // https://github.com/oxc-project/oxc/issues/1790
         // report error as `/world/g` can be replaced with string literal
         r#""Hello world".replaceAll(/world/g, 'world!');"#,
     ];

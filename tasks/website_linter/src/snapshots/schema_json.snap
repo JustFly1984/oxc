@@ -387,7 +387,7 @@ expression: json
         "react",
         "unicorn",
         "typescript",
-        "goat",
+        "oxc",
         "import",
         "jsdoc",
         "jest",
@@ -397,7 +397,10 @@ expression: json
         "react-perf",
         "promise",
         "node",
-        "vue"
+        "vue",
+        "json",
+        "css",
+        "bun"
       ]
     },
     "LintPlugins": {

@@ -442,7 +442,7 @@ fn test() {
             Some(serde_json::json!([{"ignore": ["error\\d*"]}])),
         ),
         ("promise.catch(unicorn => {})", Some(serde_json::json!([{"ignore": ["unicorn"]}]))),
-        // https://github.com/goat-project/oxc/issues/12430
+        // https://github.com/oxc-project/oxc/issues/12430
         (
             "try {
                 // some codes

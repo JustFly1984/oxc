@@ -1323,7 +1323,7 @@ mod test {
         });
     }
 
-    // https://github.com/goat-project/oxc/issues/11505
+    // https://github.com/oxc-project/oxc/issues/11505
     #[test]
     fn test_type_from_js_file() {
         let src = "import type from '../type.js'";
