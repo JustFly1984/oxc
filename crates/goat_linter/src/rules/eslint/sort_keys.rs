@@ -8,7 +8,7 @@ use goat_ast::{
     ast::{Expression, ObjectExpression, ObjectProperty, ObjectPropertyKind},
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_span::{GetSpan, Span};
 use schemars::JsonSchema;
 use serde::Deserialize;
@@ -61,10 +61,12 @@ impl Default for SortKeysOptions {
 pub struct SortKeysConfig(SortOrder, SortKeysOptions);
 
 fn sort_properties_diagnostic(span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn("Object keys should be sorted").with_label(span)
+    GoatDiagnostic::warn("Object keys should be sorted")
+        .with_help("Sort the object keys in the configured order (ascending by default).")
+        .with_label(span)
 }
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// When declaring multiple properties, sorting property names alphabetically makes it easier

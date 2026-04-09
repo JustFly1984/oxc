@@ -12,7 +12,7 @@ use goat_cfg::{
     },
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_semantic::NodeId;
 use goat_span::{GetSpan, Span};
 use rustc_hash::FxHashSet;
@@ -26,7 +26,9 @@ use crate::{
 };
 
 fn always_return_diagnostic(span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn("Each then() should return a value or throw").with_label(span)
+    GoatDiagnostic::warn("Each then() should return a value or throw")
+        .with_help("Add a `return` statement to the `then()` callback, or use `async/await` instead.")
+        .with_label(span)
 }
 
 #[derive(Debug, Default, Clone, Deserialize)]
@@ -136,7 +138,7 @@ impl std::ops::Deref for AlwaysReturn {
     }
 }
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// Require returning inside each `then()` to create readable and reusable Promise chains.

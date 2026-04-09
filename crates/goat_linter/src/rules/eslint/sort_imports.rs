@@ -7,7 +7,7 @@ use cow_utils::CowUtils;
 use itertools::Itertools;
 use goat_ast::ast::{ImportDeclaration, ImportDeclarationSpecifier, Statement};
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_span::Span;
 use rustc_hash::FxHashSet;
 use schemars::JsonSchema;
@@ -24,17 +24,21 @@ fn unexpected_syntax_order_diagnostic(
     span: Span,
 ) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!("Expected '{curr_kind}' syntax before '{prev_kind}' syntax."))
+        .with_help("Reorder your import statements so that import types appear in the configured order.")
         .with_label(span)
 }
 
 fn sort_imports_alphabetically_diagnostic(span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn("Imports should be sorted alphabetically.").with_label(span)
+    GoatDiagnostic::warn("Imports should be sorted alphabetically.")
+        .with_help("Sort the import statements alphabetically by their source module.")
+        .with_label(span)
 }
 
 fn sort_members_alphabetically_diagnostic(name: &str, span: Span) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!(
         "Member '{name}' of the import declaration should be sorted alphabetically."
     ))
+    .with_help("Sort the named import members alphabetically within the import declaration.")
     .with_label(span)
 }
 
@@ -65,7 +69,7 @@ impl std::ops::Deref for SortImports {
     }
 }
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// This rule checks all import declarations and verifies that all imports are first sorted

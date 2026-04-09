@@ -6,7 +6,7 @@ use goat_ast::{
     ast::{Expression, JSXElementName, JSXMemberExpression, JSXMemberExpressionObject},
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_span::{CompactStr, Span};
 
 use crate::{
@@ -17,7 +17,9 @@ use crate::{
 };
 
 fn jsx_props_no_spreading_diagnostic(span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn("Prop spreading is forbidden").with_label(span)
+    GoatDiagnostic::warn("Prop spreading is forbidden")
+        .with_help("Pass each prop individually instead of using the spread operator.")
+        .with_label(span)
 }
 
 #[derive(Debug, Clone, Default, PartialEq, Eq, JsonSchema, Deserialize, Serialize)]
@@ -57,7 +59,7 @@ impl std::ops::Deref for JsxPropsNoSpreading {
     }
 }
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// Disallow JSX prop spreading.

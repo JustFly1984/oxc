@@ -3,7 +3,7 @@ use goat_ast::{
     ast::{IdentifierReference, JSXElementName, JSXMemberExpression, JSXMemberExpressionObject},
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_span::Span;
 
 use crate::{
@@ -13,13 +13,15 @@ use crate::{
 };
 
 fn jsx_no_undef_diagnostic(ident_name: &str, span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn(format!("'{ident_name}' is not defined.")).with_label(span)
+    GoatDiagnostic::warn(format!("'{ident_name}' is not defined."))
+        .with_help(format!("Import or define '{ident_name}' before using it in JSX."))
+        .with_label(span)
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct JsxNoUndef;
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// Disallow undeclared variables in JSX.

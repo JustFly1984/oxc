@@ -12,12 +12,25 @@ use crate::{
     utils::{JestFnKind, JestGeneralFnKind, PossibleJestNode, is_type_of_jest_fn_call},
 };
 
+<<<<<<< HEAD:crates/goat_linter/src/rules/jest/no_restricted_jest_methods.rs
 fn restricted_jest_method(method_name: &str, span: Span) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!("Use of `{method_name}` is not allowed")).with_label(span)
 }
 
 fn restricted_jest_method_with_message(message: &str, span: Span) -> GoatDiagnostic {
     GoatDiagnostic::warn(message.to_string()).with_label(span)
+=======
+fn restricted_jest_method(method_name: &str, span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::warn(format!("Use of `{method_name}` is not allowed"))
+        .with_help(format!("Avoid using `jest.{method_name}()` as it has been restricted by project configuration."))
+        .with_label(span)
+}
+
+fn restricted_jest_method_with_message(message: &str, span: Span) -> GoatDiagnostic {
+    GoatDiagnostic::warn(message.to_string())
+        .with_note("This Jest method has been restricted by project configuration.")
+        .with_label(span)
+>>>>>>> 78f47b6305 (feat(linter): add help/notes to diagnostics missing them):crates/oxc_linter/src/rules/jest/no_restricted_jest_methods.rs
 }
 
 #[derive(Debug, Default, Clone)]

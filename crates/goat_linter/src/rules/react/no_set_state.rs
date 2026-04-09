@@ -1,6 +1,6 @@
 use goat_ast::{AstKind, ast::Expression};
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_span::{GetSpan, Span};
 
 use crate::{
@@ -11,13 +11,15 @@ use crate::{
 };
 
 fn no_set_state_diagnostic(span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn("Do not use `setState`.").with_label(span)
+    GoatDiagnostic::warn("Do not use `setState`.")
+        .with_help("Use React hooks (`useState`) in functional components, or consider using an external state management solution.")
+        .with_label(span)
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct NoSetState;
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// Disallow the usage of `this.setState` in React components.

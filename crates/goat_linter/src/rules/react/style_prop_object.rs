@@ -6,7 +6,7 @@ use goat_ast::{
     },
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_span::{CompactStr, GetSpan, Span};
 use schemars::JsonSchema;
 use serde::Deserialize;
@@ -20,7 +20,9 @@ use crate::{
 };
 
 fn style_prop_object_diagnostic(span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn("`style` prop value must be an object.").with_label(span)
+    GoatDiagnostic::warn("`style` prop value must be an object.")
+        .with_help("Pass an object to the `style` prop, e.g., `style={{ color: 'red' }}`.")
+        .with_label(span)
 }
 
 #[derive(Debug, Default, Clone, Deserialize)]
@@ -41,7 +43,7 @@ impl std::ops::Deref for StylePropObject {
     }
 }
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// Require that the value of the prop `style` be an object or a variable that is an object.

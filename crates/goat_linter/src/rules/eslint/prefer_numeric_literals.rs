@@ -6,7 +6,7 @@ use goat_ast::{
     },
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_span::Span;
 
 use crate::{
@@ -16,6 +16,7 @@ use crate::{
 
 fn prefer_numeric_literals_diagnostic(span: Span, prefix_name: &str) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!("Use {prefix_name} literals instead of parseInt()."))
+        .with_help("Replace the parseInt() call with the equivalent numeric literal prefix (0b for binary, 0o for octal, 0x for hexadecimal).")
         .with_label(span)
 }
 
@@ -31,7 +32,7 @@ fn radix_map(base: &str) -> Option<(&'static str, &'static str)> {
     }
 }
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// Disallow `parseInt()` and `Number.parseInt()` in favor of binary, octal, and hexadecimal

@@ -1,6 +1,6 @@
 use goat_ast::{AstKind, ast::*};
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_semantic::NodeId;
 use goat_span::{GetSpan, Span};
 use rustc_hash::FxHashSet;
@@ -14,11 +14,13 @@ use crate::{
 
 fn export_all_components_diagnostic(span: Span) -> GoatDiagnostic {
     GoatDiagnostic::warn("This rule can't verify that `export *` only exports components.")
+        .with_help("Replace `export *` with explicit named exports to ensure only components are exported.")
         .with_label(span)
 }
 
 fn named_export_components_diagnostic(span: Span) -> GoatDiagnostic {
     GoatDiagnostic::warn("Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components.")
+        .with_help("Move non-component exports (constants, functions, types) to a separate file.")
         .with_label(span)
 }
 
@@ -26,21 +28,25 @@ fn anonymous_components_diagnostic(span: Span) -> GoatDiagnostic {
     GoatDiagnostic::warn(
         "Fast refresh can't handle anonymous components. Add a name to your export.",
     )
+    .with_help("Add a name to the component function or variable before exporting it.")
     .with_label(span)
 }
 
 fn local_components_diagnostic(span: Span) -> GoatDiagnostic {
     GoatDiagnostic::warn("Fast refresh only works when a file only exports components. Move your component(s) to a separate file.")
+        .with_help("Move your component(s) to a separate file that only contains component exports.")
         .with_label(span)
 }
 
 fn no_export_diagnostic(span: Span) -> GoatDiagnostic {
     GoatDiagnostic::warn("Fast refresh only works when a file has exports. Move your component(s) to a separate file.")
+        .with_help("Add an export statement for your component(s), or move them to a separate file.")
         .with_label(span)
 }
 
 fn react_context_diagnostic(span: Span) -> GoatDiagnostic {
     GoatDiagnostic::warn("Fast refresh only works when a file only exports components. Move your React context(s) to a separate file.")
+        .with_help("Move your React context(s) to a separate file so that components get their own module.")
         .with_label(span)
 }
 
@@ -83,7 +89,7 @@ pub struct OnlyExportComponentsConfig {
     check_js: bool,
 }
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// Ensures that modules only **export React components (and related HMR-safe items)** so

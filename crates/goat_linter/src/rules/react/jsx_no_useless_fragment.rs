@@ -14,18 +14,22 @@ use goat_ast::{
     },
 };
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_semantic::NodeId;
 use goat_span::{GetSpan, Span};
 use schemars::JsonSchema;
 use serde::Deserialize;
 
 fn needs_more_children(span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn("Fragments should contain more than one child.").with_label(span)
+    GoatDiagnostic::warn("Fragments should contain more than one child.")
+        .with_help("Remove the fragment and render the child directly.")
+        .with_label(span)
 }
 
 fn child_of_html_element(span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn("Passing a fragment to a HTML element is useless.").with_label(span)
+    GoatDiagnostic::warn("Passing a fragment to a HTML element is useless.")
+        .with_help("Remove the fragment and pass the children directly to the HTML element.")
+        .with_label(span)
 }
 
 #[derive(Debug, Default, Clone, JsonSchema, Deserialize)]
@@ -35,7 +39,7 @@ pub struct JsxNoUselessFragment {
     allow_expressions: bool,
 }
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// Disallow unnecessary fragments.

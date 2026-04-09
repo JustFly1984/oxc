@@ -1,6 +1,6 @@
 use goat_ast::AstKind;
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_span::Span;
 
 use crate::{
@@ -14,13 +14,15 @@ static ESCAPED_SINGLE_QUOTE: &str = "&apos; or &lsquo; or &#39; or &rsquo;";
 
 fn no_unescaped_entities_diagnostic(span: Span, unescaped: char) -> GoatDiagnostic {
     let escaped = if unescaped == '"' { ESCAPED_DOUBLE_QUOTE } else { ESCAPED_SINGLE_QUOTE };
-    GoatDiagnostic::warn(format!("`{unescaped}` can be escaped with {escaped}")).with_label(span)
+    GoatDiagnostic::warn(format!("`{unescaped}` can be escaped with {escaped}"))
+        .with_help(format!("Replace `{unescaped}` with the HTML entity {escaped} to avoid ambiguity in JSX."))
+        .with_label(span)
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct NoUnescapedEntities;
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// This rule prevents characters that you may have meant as JSX escape characters from being accidentally injected as a text node in JSX statements.

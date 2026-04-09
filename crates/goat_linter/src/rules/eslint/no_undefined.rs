@@ -1,6 +1,6 @@
 use goat_ast::AstKind;
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_span::Span;
 
 use crate::{AstNode, context::LintContext, rule::Rule};
@@ -9,10 +9,12 @@ use crate::{AstNode, context::LintContext, rule::Rule};
 pub struct NoUndefined;
 
 fn no_undefined_diagnostic(span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn("Unexpected use of `undefined`").with_label(span)
+    GoatDiagnostic::warn("Unexpected use of `undefined`")
+        .with_help("Use `void 0` instead of `undefined`, or avoid referencing `undefined` directly.")
+        .with_label(span)
 }
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// Disallow the use of `undefined` as an identifier.

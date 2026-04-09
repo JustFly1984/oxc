@@ -1,5 +1,5 @@
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_span::{CompactStr, GetSpan, Span};
 use rustc_hash::FxHashSet;
 use schemars::JsonSchema;
@@ -14,6 +14,7 @@ use crate::{
 
 fn spec_only(prop_name: &str, member_span: Span) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!("Avoid using non-standard `Promise.{prop_name}` method."))
+        .with_help(format!("Use a spec-compliant Promise method instead of `Promise.{prop_name}`."))
         .with_label(member_span)
 }
 
@@ -35,7 +36,7 @@ impl std::ops::Deref for SpecOnly {
     }
 }
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// Disallow use of non-standard Promise static methods.

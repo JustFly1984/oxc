@@ -1,6 +1,6 @@
 use goat_ast::AstKind;
 use goat_diagnostics::GoatDiagnostic;
-use goat_macros::declare_goat_lint;
+use goat_macros::declare_oxc_lint;
 use goat_span::Span;
 
 use crate::{
@@ -11,13 +11,14 @@ use crate::{
 
 fn jsx_no_comment_textnodes_diagnostic(span: Span) -> GoatDiagnostic {
     GoatDiagnostic::warn("Comments inside children section of tag should be placed inside braces")
+        .with_help("Wrap the comment in braces: `{/* comment */}`.")
         .with_label(span)
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct JsxNoCommentTextnodes;
 
-declare_goat_lint!(
+declare_oxc_lint!(
     /// ### What it does
     ///
     /// This rule prevents comment strings (e.g. beginning with `//` or `/*`) from being
