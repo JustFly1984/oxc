@@ -27,9 +27,9 @@ mod module;
 
 use babel::BabelOptions;
 pub use env::EnvOptions;
-pub use module::Module;
 pub use goat_compat::{ESFeature, Engine, EngineTargets};
 pub use goat_syntax::es_target::ESTarget;
+pub use module::Module;
 
 /// <https://babel.dev/docs/options>
 #[derive(Debug, Default, Clone)]

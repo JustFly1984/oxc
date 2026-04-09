@@ -1,8 +1,8 @@
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, OnceLock};
 
-use ignore::gitignore::Gitignore;
 use goat_data_structures::rope::Rope;
+use ignore::gitignore::Gitignore;
 use rustc_hash::{FxHashMap, FxHashSet};
 use tower_lsp_server::ls_types::{
     CodeActionContext, CodeActionTriggerKind, DiagnosticOptions, DiagnosticServerCapabilities,
@@ -700,7 +700,9 @@ impl ServerLinter {
         // otherwise it will be too heavy to run linting on every file open or cursor move, which will cause performance issues and a bad user experience.
         // It is most likely that the client already sent a request, where we run the lint process and cache the code actions.
         else if trigger_kind == Some(CodeActionTriggerKind::INVOKED) {
-            let _ = self.run_file(uri, None);
+            if let Err(err) = self.run_file(uri, None) {
+                warn!("Failed to run linter on {uri:?}: {err}");
+            }
             self.code_actions.pin().get(uri).and_then(std::clone::Clone::clone)
         } else {
             None

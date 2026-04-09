@@ -7,7 +7,7 @@ use rustc_hash::FxHashMap;
 use goat::{
     allocator::{Allocator, FromIn, Vec},
     ast::ast::{Comment, Program},
-    diagnostics::{LabeledSpan, NamedSource, GoatDiagnostic, Severity},
+    diagnostics::{GoatDiagnostic, LabeledSpan, NamedSource, Severity},
     span::{Span, Str, format_str},
     syntax::module_record::{DynamicImport, ExportEntry, ImportEntry, ModuleRecord, NameSpan},
 };

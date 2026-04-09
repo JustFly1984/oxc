@@ -71,9 +71,10 @@ impl Rule for NoSvgWithoutTitle {
         if let AstKind::JSXElement(element) = parent.kind() {
             for child in &element.children {
                 if let JSXChild::Element(child_el) = child
-                    && get_element_name(&child_el.opening_element.name) == Some("title") {
-                        return;
-                    }
+                    && get_element_name(&child_el.opening_element.name) == Some("title")
+                {
+                    return;
+                }
             }
         }
 

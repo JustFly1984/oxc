@@ -134,12 +134,11 @@ pub fn expect_closing(
     span: Span,
     opening_span: Span,
 ) -> GoatDiagnostic {
-    GoatDiagnostic::error(format!("Expected `{expected_closing}` but found `{actual}`")).with_labels(
-        [
+    GoatDiagnostic::error(format!("Expected `{expected_closing}` but found `{actual}`"))
+        .with_labels([
             span.primary_label(format!("`{expected_closing}` expected")),
             opening_span.label("Opened here"),
-        ],
-    )
+        ])
 }
 
 #[cold]
@@ -1325,7 +1324,8 @@ pub fn ts_import_type_options_invalid_key(span: Span) -> GoatDiagnostic {
 
 #[cold]
 pub fn ts_import_type_options_no_spread(span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::error("Spread elements are not allowed in import type options.").with_label(span)
+    GoatDiagnostic::error("Spread elements are not allowed in import type options.")
+        .with_label(span)
 }
 
 // This syntax is reserved in files with the .mts or .cts extension. Use an `as` expression instead. ts(7059)

@@ -331,7 +331,11 @@ impl Visit<'_> for ComplexityVisitor {
         walk::walk_call_expression(self, it);
     }
 
-    fn visit_function(&mut self, it: &goat_ast::ast::Function<'_>, flags: goat_semantic::ScopeFlags) {
+    fn visit_function(
+        &mut self,
+        it: &goat_ast::ast::Function<'_>,
+        flags: goat_semantic::ScopeFlags,
+    ) {
         if !self.has_entered_complexity_evaluation {
             self.has_entered_complexity_evaluation = true;
             walk::walk_function(self, it, flags);

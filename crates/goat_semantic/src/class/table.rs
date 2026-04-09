@@ -2,12 +2,12 @@ use std::borrow::Cow;
 
 use rustc_hash::FxHashMap;
 
-use oxc_index::IndexVec;
 use goat_span::{Ident, Span};
 use goat_syntax::{
     class::{ClassId, ElementId, ElementKind},
     node::NodeId,
 };
+use oxc_index::IndexVec;
 
 #[derive(Debug)]
 pub struct Element<'a> {

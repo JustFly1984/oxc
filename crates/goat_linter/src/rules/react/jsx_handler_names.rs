@@ -1,5 +1,4 @@
 use crate::{AstNode, context::LintContext, rule::Rule};
-use lazy_regex::{Regex, RegexBuilder, regex};
 use goat_ast::{
     AstKind,
     ast::{
@@ -11,6 +10,7 @@ use goat_ast::{
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::{CompactStr, Span};
+use lazy_regex::{Regex, RegexBuilder, regex};
 use schemars::JsonSchema;
 use serde_json::Value;
 

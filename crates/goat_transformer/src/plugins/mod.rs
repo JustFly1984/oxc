@@ -2,9 +2,9 @@ mod options;
 mod styled_components;
 mod tagged_template_transform;
 
-pub use options::PluginsOptions;
 use goat_ast::ast::*;
 use goat_traverse::Traverse;
+pub use options::PluginsOptions;
 pub use styled_components::StyledComponentsOptions;
 
 use crate::{

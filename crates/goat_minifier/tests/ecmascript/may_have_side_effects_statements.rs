@@ -1,4 +1,3 @@
-use javascript_globals::GLOBALS_BUILTIN;
 use goat_allocator::Allocator;
 use goat_ast::ast::{Expression, IdentifierReference, Statement};
 use goat_ecmascript::{
@@ -8,6 +7,7 @@ use goat_ecmascript::{
 use goat_minifier::PropertyReadSideEffects;
 use goat_parser::Parser;
 use goat_span::SourceType;
+use javascript_globals::GLOBALS_BUILTIN;
 use rustc_hash::FxHashSet;
 
 struct Ctx {

@@ -15,7 +15,8 @@ use crate::{
 };
 
 fn sort_named_imports_diagnostic(span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn("Named import specifiers should be sorted alphabetically.").with_label(span)
+    GoatDiagnostic::warn("Named import specifiers should be sorted alphabetically.")
+        .with_label(span)
 }
 
 #[derive(Debug, Default, Clone, Copy, Eq, PartialEq, Deserialize, JsonSchema)]

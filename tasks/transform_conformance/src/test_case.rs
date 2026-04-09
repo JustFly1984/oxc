@@ -8,7 +8,7 @@ use cow_utils::CowUtils;
 use goat::{
     allocator::Allocator,
     codegen::{Codegen, CodegenOptions, CommentOptions, IndentChar},
-    diagnostics::{NamedSource, GoatDiagnostic},
+    diagnostics::{GoatDiagnostic, NamedSource},
     parser::{ParseOptions, Parser},
     span::{SourceType, VALID_EXTENSIONS},
     transformer::{BabelOptions, HelperLoaderMode, TransformOptions},

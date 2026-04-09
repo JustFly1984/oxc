@@ -29,7 +29,11 @@ fn one_or_two_argument_required_diagnostic(
     .with_label(span)
 }
 
-fn one_argument_required_diagnostic(span: Span, prop_name: &str, args_len: usize) -> GoatDiagnostic {
+fn one_argument_required_diagnostic(
+    span: Span,
+    prop_name: &str,
+    args_len: usize,
+) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!(
         "`Promise.{prop_name}()` requires 1 argument, but received {args_len}."
     ))

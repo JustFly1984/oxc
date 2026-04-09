@@ -5,7 +5,7 @@
 
 use std::{borrow::Cow, sync::Arc};
 
-use goat_diagnostics::{GraphicalReportHandler, GraphicalTheme, NamedSource, GoatDiagnostic};
+use goat_diagnostics::{GoatDiagnostic, GraphicalReportHandler, GraphicalTheme, NamedSource};
 use goat_semantic::{AstNode, Semantic, SymbolId};
 
 use crate::TestContext;

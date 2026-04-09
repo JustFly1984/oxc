@@ -1,4 +1,3 @@
-use lazy_regex::Regex;
 use goat_ast::{
     AstKind,
     ast::{BindingPattern, Expression, FormalParameter, FormalParameters},
@@ -6,6 +5,7 @@ use goat_ast::{
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::Span;
+use lazy_regex::Regex;
 use schemars::JsonSchema;
 
 use crate::{AstNode, context::LintContext, rule::Rule};
@@ -14,7 +14,9 @@ fn param_names_diagnostic(span: Span, pattern: &str) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!(
         "Promise constructor parameters must be named to match `{pattern}`"
     ))
-    .with_help(format!("Rename the parameters to match the pattern `{pattern}` (e.g., `resolve` and `reject`)."))
+    .with_help(format!(
+        "Rename the parameters to match the pattern `{pattern}` (e.g., `resolve` and `reject`)."
+    ))
     .with_label(span)
 }
 

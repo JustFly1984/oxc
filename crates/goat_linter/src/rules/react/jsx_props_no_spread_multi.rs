@@ -1,8 +1,8 @@
-use itertools::Itertools;
 use goat_ast::{AstKind, ast::JSXAttributeItem};
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::{GetSpan, Span, Str};
+use itertools::Itertools;
 use rustc_hash::FxHashMap;
 
 use crate::{

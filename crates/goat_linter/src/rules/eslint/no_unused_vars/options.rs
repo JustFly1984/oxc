@@ -1,7 +1,7 @@
 use std::{borrow::Cow, ops::Deref};
 
-use lazy_regex::{Regex, RegexBuilder};
 use goat_diagnostics::GoatDiagnostic;
+use lazy_regex::{Regex, RegexBuilder};
 use schemars::JsonSchema;
 use serde::Serialize;
 use serde_json::Value;
@@ -574,7 +574,10 @@ fn parse_unicode_rule(value: Option<&Value>, name: &str) -> IgnorePattern<Regex>
         .unwrap()
 }
 
-fn parse_fix_mode(value: Option<&Value>, name: &str) -> Result<NoUnusedVarsFixMode, GoatDiagnostic> {
+fn parse_fix_mode(
+    value: Option<&Value>,
+    name: &str,
+) -> Result<NoUnusedVarsFixMode, GoatDiagnostic> {
     let Some(value) = value else { return Ok(NoUnusedVarsFixMode::default()) };
     match value {
         Value::String(mode) => match mode.as_str() {

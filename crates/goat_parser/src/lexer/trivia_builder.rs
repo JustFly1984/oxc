@@ -1,6 +1,6 @@
-use memchr::memchr_iter;
 use goat_ast::ast::{Comment, CommentContent, CommentKind, CommentPosition};
 use goat_span::Span;
+use memchr::memchr_iter;
 
 use super::{Kind, Token};
 

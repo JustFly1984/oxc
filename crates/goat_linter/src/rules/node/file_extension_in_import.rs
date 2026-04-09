@@ -79,9 +79,10 @@ fn check_source(ctx: &LintContext<'_>, source: &str, span: Span) {
 
     // Skip if it already has an extension
     if let Some(last_segment) = source.rsplit('/').next()
-        && last_segment.contains('.') {
-            return;
-        }
+        && last_segment.contains('.')
+    {
+        return;
+    }
 
     // Skip directory imports (ending with /)
     if source.ends_with('/') {

@@ -166,11 +166,7 @@ impl ResolvedOptions {
                     trailing_newline: true,
                     variant: *variant,
                 };
-                ResolvedOptions::OxfmtJson {
-                    json_options,
-                    sort_package_json,
-                    insert_final_newline,
-                }
+                ResolvedOptions::OxfmtJson { json_options, sort_package_json, insert_final_newline }
             }
             #[cfg(feature = "napi")]
             FormatFileStrategy::ExternalFormatter { .. } => {
@@ -225,7 +221,13 @@ impl ConfigResolver {
         config_dir: Option<PathBuf>,
         editorconfig: Option<EditorConfig>,
     ) -> Self {
-        Self { raw_config, config_dir, cached_options: None, goatfmtrc_overrides: None, editorconfig }
+        Self {
+            raw_config,
+            config_dir,
+            cached_options: None,
+            goatfmtrc_overrides: None,
+            editorconfig,
+        }
     }
 
     /// Returns the directory containing the config file, if any was loaded.

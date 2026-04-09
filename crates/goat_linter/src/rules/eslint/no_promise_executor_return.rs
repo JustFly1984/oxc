@@ -237,7 +237,10 @@ impl Visit<'_> for ReturnStatementFinder {
         // Skip visiting nested functions - they have their own scope
     }
 
-    fn visit_arrow_function_expression(&mut self, _it: &goat_ast::ast::ArrowFunctionExpression<'_>) {
+    fn visit_arrow_function_expression(
+        &mut self,
+        _it: &goat_ast::ast::ArrowFunctionExpression<'_>,
+    ) {
         // Skip visiting nested arrow functions - they have their own scope
     }
 }

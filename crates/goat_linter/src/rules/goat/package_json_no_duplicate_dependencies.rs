@@ -10,9 +10,11 @@ use crate::{
 };
 
 fn duplicate_dependency_diagnostic(name: &str, span: goat_span::Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn(format!("`{name}` is listed in both `dependencies` and `devDependencies`."))
-        .with_help("Remove the package from one of the dependency groups.")
-        .with_label(span)
+    GoatDiagnostic::warn(format!(
+        "`{name}` is listed in both `dependencies` and `devDependencies`."
+    ))
+    .with_help("Remove the package from one of the dependency groups.")
+    .with_label(span)
 }
 
 #[derive(Debug, Default, Clone)]

@@ -28,8 +28,8 @@ use goat_codegen::{Codegen, CodegenOptions, CodegenReturn, CommentOptions};
 use goat_mangler::MangleOptions;
 use goat_minifier::{CompressOptions, Minifier, MinifierOptions};
 use goat_parser::Parser;
-use oxc_sourcemap::SourcemapVisualizer;
 use goat_span::SourceType;
+use oxc_sourcemap::SourcemapVisualizer;
 
 // Instruction:
 // create a `test.js`,

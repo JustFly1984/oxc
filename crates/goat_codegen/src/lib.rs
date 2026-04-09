@@ -9,7 +9,6 @@ use cow_utils::CowUtils;
 
 use goat_ast::ast::*;
 use goat_data_structures::{code_buffer::CodeBuffer, stack::Stack};
-use oxc_index::IndexVec;
 use goat_semantic::Scoping;
 use goat_span::{CompactStr, GetSpan, Span};
 use goat_syntax::{
@@ -18,6 +17,7 @@ use goat_syntax::{
     operator::{BinaryOperator, UnaryOperator, UpdateOperator},
     precedence::Precedence,
 };
+use oxc_index::IndexVec;
 use rustc_hash::FxHashMap;
 
 mod binary_expr_visitor;

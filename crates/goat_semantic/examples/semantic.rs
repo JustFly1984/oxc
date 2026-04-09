@@ -21,7 +21,7 @@ use std::{env, path::Path, sync::Arc};
 use itertools::Itertools;
 
 use goat_allocator::Allocator;
-use goat_diagnostics::{GraphicalReportHandler, GoatDiagnostic};
+use goat_diagnostics::{GoatDiagnostic, GraphicalReportHandler};
 use goat_parser::Parser;
 use goat_semantic::SemanticBuilder;
 use goat_span::{GetSpan, SourceType};

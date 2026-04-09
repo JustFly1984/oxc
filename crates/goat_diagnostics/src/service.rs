@@ -11,7 +11,7 @@ use percent_encoding::AsciiSet;
 use std::fs::canonicalize as strict_canonicalize;
 
 use crate::{
-    Error, NamedSource, GoatDiagnostic, Severity,
+    Error, GoatDiagnostic, NamedSource, Severity,
     reporter::{DiagnosticReporter, DiagnosticResult},
 };
 

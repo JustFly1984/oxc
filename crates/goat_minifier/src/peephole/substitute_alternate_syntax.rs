@@ -1529,13 +1529,19 @@ impl<'a> PeepholeOptimizations {
             return;
         }
 
-        let strings = array.elements.iter().map(|element| {
-            let Expression::StringLiteral(str) = element.to_expression() else { unreachable!() };
-            str.value.as_str()
-        });
+        let strings: std::vec::Vec<_> = array
+            .elements
+            .iter()
+            .map(|element| {
+                let Expression::StringLiteral(str) = element.to_expression() else {
+                    unreachable!()
+                };
+                str.value.as_str()
+            })
+            .collect();
         let Some(delimiter) = Self::pick_delimiter(&strings) else { return };
 
-        let concatenated_string = strings.collect::<std::vec::Vec<_>>().join(delimiter);
+        let concatenated_string = strings.join(delimiter);
 
         // "str1,str2".split(',')
         *expr = ctx.ast.expression_call_with_pure(
@@ -1562,19 +1568,17 @@ impl<'a> PeepholeOptimizations {
         ctx.state.changed = true;
     }
 
-    fn pick_delimiter<'s>(
-        strings: &(impl Iterator<Item = &'s str> + Clone),
-    ) -> Option<&'static str> {
+    fn pick_delimiter(strings: &[&str]) -> Option<&'static str> {
         // These delimiters are chars that appears a lot in the program
         // therefore probably have a small Huffman encoding.
         const DELIMITERS: [&str; 5] = [".", ",", "(", ")", " "];
 
-        let is_all_length_1 = strings.clone().all(|s| s.len() == 1);
+        let is_all_length_1 = strings.iter().all(|s| s.len() == 1);
         if is_all_length_1 {
             return Some("");
         }
 
-        DELIMITERS.into_iter().find(|&delimiter| strings.clone().all(|s| !s.contains(delimiter)))
+        DELIMITERS.into_iter().find(|&delimiter| strings.iter().all(|s| !s.contains(delimiter)))
     }
 
     pub fn substitute_catch_clause(catch: &mut CatchClause<'a>, ctx: &TraverseCtx<'a>) {
@@ -1627,15 +1631,12 @@ impl<'a> PeepholeOptimizations {
                         .is_some_and(|alt| Self::stmt_has_var_with_name(alt, name))
             }
             Statement::ForStatement(s) => {
-                s.init
-                    .as_ref()
-                    .is_some_and(|init| match init {
-                        ForStatementInit::VariableDeclaration(decl) => {
-                            Self::var_decl_binds_name(decl, name)
-                        }
-                        _ => false,
-                    })
-                    || Self::stmt_has_var_with_name(&s.body, name)
+                s.init.as_ref().is_some_and(|init| match init {
+                    ForStatementInit::VariableDeclaration(decl) => {
+                        Self::var_decl_binds_name(decl, name)
+                    }
+                    _ => false,
+                }) || Self::stmt_has_var_with_name(&s.body, name)
             }
             Statement::ForInStatement(s) => {
                 matches!(&s.left, ForStatementLeft::VariableDeclaration(decl)
@@ -1651,9 +1652,10 @@ impl<'a> PeepholeOptimizations {
             Statement::DoWhileStatement(s) => Self::stmt_has_var_with_name(&s.body, name),
             Statement::LabeledStatement(s) => Self::stmt_has_var_with_name(&s.body, name),
             Statement::WithStatement(s) => Self::stmt_has_var_with_name(&s.body, name),
-            Statement::SwitchStatement(s) => s.cases.iter().any(|case| {
-                case.consequent.iter().any(|s| Self::stmt_has_var_with_name(s, name))
-            }),
+            Statement::SwitchStatement(s) => s
+                .cases
+                .iter()
+                .any(|case| case.consequent.iter().any(|s| Self::stmt_has_var_with_name(s, name))),
             Statement::TryStatement(s) => {
                 s.block.body.iter().any(|s| Self::stmt_has_var_with_name(s, name))
                     || s.handler.as_ref().is_some_and(|h| {

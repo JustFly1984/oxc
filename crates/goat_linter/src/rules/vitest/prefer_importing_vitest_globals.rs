@@ -1,4 +1,3 @@
-use itertools::Itertools;
 use goat_ast::{
     AstKind,
     ast::{BindingPattern, Expression, ImportOrExportKind},
@@ -7,6 +6,7 @@ use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_semantic::AstNode;
 use goat_span::{CompactStr, GetSpan, Span};
+use itertools::Itertools;
 use rustc_hash::FxHashSet;
 
 use crate::{

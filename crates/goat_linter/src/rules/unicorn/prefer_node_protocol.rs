@@ -1,4 +1,3 @@
-use nodejs_built_in_modules::is_nodejs_builtin_module;
 use goat_ast::{
     AstKind,
     ast::{Expression, TSModuleReference},
@@ -6,13 +5,16 @@ use goat_ast::{
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::Span;
+use nodejs_built_in_modules::is_nodejs_builtin_module;
 
 use crate::{AstNode, context::LintContext, rule::Rule};
 
 fn prefer_node_protocol_diagnostic(span: Span, module_name: &str) -> GoatDiagnostic {
-    GoatDiagnostic::warn("Prefer using the `node:` protocol when importing Node.js builtin modules.")
-        .with_help(format!("Prefer `node:{module_name}` over `{module_name}`."))
-        .with_label(span)
+    GoatDiagnostic::warn(
+        "Prefer using the `node:` protocol when importing Node.js builtin modules.",
+    )
+    .with_help(format!("Prefer `node:{module_name}` over `{module_name}`."))
+    .with_label(span)
 }
 
 #[derive(Debug, Default, Clone)]

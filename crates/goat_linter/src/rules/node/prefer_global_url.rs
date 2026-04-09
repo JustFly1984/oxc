@@ -79,10 +79,8 @@ fn test() {
         r#"const fs = require("fs");"#,
     ];
 
-    let fail = vec![
-        r#"const { URL } = require("url");"#,
-        r#"const { URL } = require("node:url");"#,
-    ];
+    let fail =
+        vec![r#"const { URL } = require("url");"#, r#"const { URL } = require("node:url");"#];
 
     Tester::new(PreferGlobalUrl::NAME, PreferGlobalUrl::PLUGIN, pass, fail).test_and_snapshot();
 }

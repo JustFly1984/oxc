@@ -121,11 +121,16 @@ impl Rule for SortObjects {
     }
 }
 
-fn property_key_text(key: &goat_ast::ast::PropertyKey<'_>, ctx: &LintContext<'_>) -> Option<String> {
+fn property_key_text(
+    key: &goat_ast::ast::PropertyKey<'_>,
+    ctx: &LintContext<'_>,
+) -> Option<String> {
     match key {
         goat_ast::ast::PropertyKey::StaticIdentifier(ident) => Some(ident.name.to_string()),
         goat_ast::ast::PropertyKey::StringLiteral(lit) => Some(lit.value.to_string()),
-        goat_ast::ast::PropertyKey::NumericLiteral(lit) => lit.raw.as_ref().map(ToString::to_string),
+        goat_ast::ast::PropertyKey::NumericLiteral(lit) => {
+            lit.raw.as_ref().map(ToString::to_string)
+        }
         _ => {
             // Computed keys — use source text as fallback
             Some(ctx.source_range(key.span()).to_string())

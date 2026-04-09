@@ -1,9 +1,9 @@
 use std::iter::{self, repeat_with};
 
+use goat_syntax::class::ClassId;
 use itertools::Itertools;
 use keep_names::collect_name_symbols;
 use oxc_index::IndexVec;
-use goat_syntax::class::ClassId;
 use rustc_hash::{FxHashMap, FxHashSet};
 
 use base54::{base54, base54_upper_first};

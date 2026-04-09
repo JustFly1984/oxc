@@ -1,4 +1,6 @@
-use goatfmt::cli::{CliRunResult, CliRunner, format_command, init_miette, init_rayon, init_tracing};
+use goatfmt::cli::{
+    CliRunResult, CliRunner, format_command, init_miette, init_rayon, init_tracing,
+};
 
 // Pure Rust CLI entry point.
 // This CLI only supports the basic `Cli` mode.

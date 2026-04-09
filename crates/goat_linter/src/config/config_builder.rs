@@ -192,7 +192,8 @@ impl ConfigStoreBuilder {
 
                 extended_paths.push(path.clone());
 
-                let (extends, extends_paths) = resolve_goatlintrc_config(extends_goatlintrc, false)?;
+                let (extends, extends_paths) =
+                    resolve_goatlintrc_config(extends_goatlintrc, false)?;
 
                 goatlintrc = goatlintrc.merge(extends);
                 extended_paths.extend(extends_paths);

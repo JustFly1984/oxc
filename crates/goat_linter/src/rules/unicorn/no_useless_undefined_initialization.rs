@@ -62,9 +62,10 @@ impl Rule for NoUselessUndefinedInitialization {
             };
 
             if let Expression::Identifier(ident) = init
-                && ident.name == "undefined" {
-                    ctx.diagnostic(no_useless_undefined_initialization_diagnostic(ident.span));
-                }
+                && ident.name == "undefined"
+            {
+                ctx.diagnostic(no_useless_undefined_initialization_diagnostic(ident.span));
+            }
         }
     }
 }

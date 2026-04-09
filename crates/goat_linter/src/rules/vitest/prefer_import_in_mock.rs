@@ -16,7 +16,9 @@ fn prefer_import_in_mock_diagnostic(span: Span, path: &str) -> GoatDiagnostic {
         "Dynamic import improves the type information and IntelliSense. Substitute `{path}` with `import('{path}')`"
     );
 
-    GoatDiagnostic::warn("Mocked modules must be dynamic imported.").with_help(help).with_label(span)
+    GoatDiagnostic::warn("Mocked modules must be dynamic imported.")
+        .with_help(help)
+        .with_label(span)
 }
 
 #[derive(Debug, Default, Clone)]

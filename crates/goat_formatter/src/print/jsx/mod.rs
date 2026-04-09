@@ -7,8 +7,8 @@ pub mod opening_element;
 
 use child_list::{FormatChildrenResult, FormatJsxChildList, JsxChildListLayout};
 use element::AnyJsxTagWithChildren;
-use opening_element::FormatOpeningElement;
 use goat_span::GetSpan;
+use opening_element::FormatOpeningElement;
 
 use crate::{
     AttributePosition, Format,

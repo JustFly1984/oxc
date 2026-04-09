@@ -9,7 +9,7 @@ use rustc_hash::{FxHashMap, FxHashSet};
 use goat::{
     allocator::Allocator,
     codegen::Codegen,
-    diagnostics::{NamedSource, GoatDiagnostic},
+    diagnostics::{GoatDiagnostic, NamedSource},
     parser::Parser,
     span::{SourceType, Span},
 };

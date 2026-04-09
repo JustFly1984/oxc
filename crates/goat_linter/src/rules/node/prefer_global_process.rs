@@ -73,11 +73,7 @@ impl Rule for PreferGlobalProcess {
 fn test() {
     use crate::tester::Tester;
 
-    let pass = vec![
-        "process.exit(1);",
-        "const { env } = process;",
-        r#"const fs = require("fs");"#,
-    ];
+    let pass = vec!["process.exit(1);", "const { env } = process;", r#"const fs = require("fs");"#];
 
     let fail = vec![
         r#"const process = require("process");"#,

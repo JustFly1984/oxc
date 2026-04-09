@@ -31,6 +31,10 @@ pub fn run(_filter: Option<&str>, _detail: bool) {
     // For now, we just start the server and exit
     println!("Runtime tests require async execution - not yet implemented in simplified runner");
 
-    let _ = runtime_process.kill();
-    let _ = runtime_process.wait();
+    if let Err(err) = runtime_process.kill() {
+        eprintln!("Warning: failed to kill runtime process: {err}");
+    }
+    if let Err(err) = runtime_process.wait() {
+        eprintln!("Warning: failed to wait for runtime process: {err}");
+    }
 }

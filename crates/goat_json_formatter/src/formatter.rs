@@ -70,7 +70,14 @@ pub fn format(source: &str, options: Options) -> Result<String, String> {
                     i = j;
                     // Format the container contents
                     i = format_container_contents(
-                        &tokens, i, len, &mut output, &options, depth, eol, is_object,
+                        &tokens,
+                        i,
+                        len,
+                        &mut output,
+                        &options,
+                        depth,
+                        eol,
+                        is_object,
                     );
 
                     // Closing bracket
@@ -253,26 +260,14 @@ fn format_value(
                 write_comment(output, &tokens[ci], options, inner_depth, eol);
             }
 
-            let next_i = format_container_contents(
-                tokens,
-                j,
-                len,
-                output,
-                options,
-                inner_depth,
-                eol,
-                true,
-            );
+            let next_i =
+                format_container_contents(tokens, j, len, output, options, inner_depth, eol, true);
 
             output.push_str(eol);
             write_indent(output, options, depth);
             output.push('}');
 
-            if next_i < len && tokens[next_i] == Token::ObjectEnd {
-                next_i + 1
-            } else {
-                next_i
-            }
+            if next_i < len && tokens[next_i] == Token::ObjectEnd { next_i + 1 } else { next_i }
         }
         Token::ArrayStart => {
             let mut inner_depth = depth;
@@ -308,26 +303,14 @@ fn format_value(
                 write_comment(output, &tokens[ci], options, inner_depth, eol);
             }
 
-            let next_i = format_container_contents(
-                tokens,
-                j,
-                len,
-                output,
-                options,
-                inner_depth,
-                eol,
-                false,
-            );
+            let next_i =
+                format_container_contents(tokens, j, len, output, options, inner_depth, eol, false);
 
             output.push_str(eol);
             write_indent(output, options, depth);
             output.push(']');
 
-            if next_i < len && tokens[next_i] == Token::ArrayEnd {
-                next_i + 1
-            } else {
-                next_i
-            }
+            if next_i < len && tokens[next_i] == Token::ArrayEnd { next_i + 1 } else { next_i }
         }
         _ => {
             write_value(output, &tokens[i]);
@@ -352,7 +335,13 @@ fn write_indent(output: &mut String, options: &Options, depth: usize) {
     }
 }
 
-fn write_comment(output: &mut String, token: &Token<'_>, options: &Options, depth: usize, _eol: &str) {
+fn write_comment(
+    output: &mut String,
+    token: &Token<'_>,
+    options: &Options,
+    depth: usize,
+    _eol: &str,
+) {
     match token {
         Token::LineComment(c) => {
             write_indent(output, options, depth);
@@ -402,10 +391,7 @@ mod tests {
 
     #[test]
     fn test_simple_object() {
-        assert_eq!(
-            fmt(r#"{"a":1,"b":"hello"}"#),
-            "{\n  \"a\": 1,\n  \"b\": \"hello\"\n}\n"
-        );
+        assert_eq!(fmt(r#"{"a":1,"b":"hello"}"#), "{\n  \"a\": 1,\n  \"b\": \"hello\"\n}\n");
     }
 
     #[test]
@@ -451,10 +437,7 @@ mod tests {
     fn test_tabs() {
         let result = format(
             r#"{"a": 1}"#,
-            Options {
-                indent_string: "\t".to_string(),
-                ..Options::default()
-            },
+            Options { indent_string: "\t".to_string(), ..Options::default() },
         )
         .unwrap();
         assert_eq!(result, "{\n\t\"a\": 1\n}\n");
@@ -462,21 +445,15 @@ mod tests {
 
     #[test]
     fn test_crlf() {
-        let result = format(
-            r#"{"a": 1}"#,
-            Options { crlf: true, ..Options::default() },
-        )
-        .unwrap();
+        let result = format(r#"{"a": 1}"#, Options { crlf: true, ..Options::default() }).unwrap();
         assert_eq!(result, "{\r\n  \"a\": 1\r\n}\r\n");
     }
 
     #[test]
     fn test_no_trailing_newline() {
-        let result = format(
-            r#"{"a": 1}"#,
-            Options { trailing_newline: false, ..Options::default() },
-        )
-        .unwrap();
+        let result =
+            format(r#"{"a": 1}"#, Options { trailing_newline: false, ..Options::default() })
+                .unwrap();
         assert_eq!(result, "{\n  \"a\": 1\n}");
     }
 
@@ -487,18 +464,12 @@ mod tests {
 
     #[test]
     fn test_boolean_values() {
-        assert_eq!(
-            fmt(r#"{"t": true, "f": false}"#),
-            "{\n  \"t\": true,\n  \"f\": false\n}\n"
-        );
+        assert_eq!(fmt(r#"{"t": true, "f": false}"#), "{\n  \"t\": true,\n  \"f\": false\n}\n");
     }
 
     #[test]
     fn test_string_escapes() {
-        assert_eq!(
-            fmt(r#"{"a": "hello \"world\""}"#),
-            "{\n  \"a\": \"hello \\\"world\\\"\"\n}\n"
-        );
+        assert_eq!(fmt(r#"{"a": "hello \"world\""}"#), "{\n  \"a\": \"hello \\\"world\\\"\"\n}\n");
     }
 
     #[test]

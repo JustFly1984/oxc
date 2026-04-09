@@ -3,8 +3,8 @@ use crate::{
     context::{ContextHost, LintContext},
     rule::Rule,
 };
-use lazy_regex::{Lazy, Regex, lazy_regex};
 use goat_allocator::{Allocator, Vec};
+use lazy_regex::{Lazy, Regex, lazy_regex};
 
 use goat_ast::{
     AstBuilder, AstKind,
@@ -14,7 +14,7 @@ use goat_ast::{
     },
 };
 use goat_codegen::CodegenOptions;
-use goat_diagnostics::{Error, LabeledSpan, GoatDiagnostic};
+use goat_diagnostics::{Error, GoatDiagnostic, LabeledSpan};
 use goat_macros::declare_goat_lint;
 use goat_semantic::NodeId;
 use goat_span::{GetSpan as _, Span};

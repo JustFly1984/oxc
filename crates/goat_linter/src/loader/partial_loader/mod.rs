@@ -1,5 +1,5 @@
-use memchr::{memmem::Finder, memmem::FinderRev};
 use goat_span::{SourceType, VALID_EXTENSIONS};
+use memchr::{memmem::Finder, memmem::FinderRev};
 
 use crate::loader::JavaScriptSource;
 

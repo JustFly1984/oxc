@@ -1,5 +1,5 @@
-use itertools::Itertools;
 use goat_allocator::{Allocator, BitSet};
+use itertools::Itertools;
 use smallvec::SmallVec;
 
 use goat_ast::{
@@ -14,11 +14,11 @@ use goat_cfg::{
     },
 };
 use goat_diagnostics::GoatDiagnostic;
-use oxc_index::IndexVec;
 use goat_macros::declare_goat_lint;
 use goat_semantic::{NodeId, Reference, ScopeId, SymbolId};
 use goat_span::GetSpan;
 use goat_span::Span;
+use oxc_index::IndexVec;
 
 use crate::{context::LintContext, rule::Rule};
 

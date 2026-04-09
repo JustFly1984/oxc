@@ -53,10 +53,7 @@ impl Rule for PreferBunTest {
                     && let Argument::StringLiteral(arg) = &call_expr.arguments[0]
                     && FLAGGED_TEST_SOURCES.contains(&arg.value.as_str())
                 {
-                    ctx.diagnostic(prefer_bun_test_diagnostic(
-                        call_expr.span,
-                        arg.value.as_str(),
-                    ));
+                    ctx.diagnostic(prefer_bun_test_diagnostic(call_expr.span, arg.value.as_str()));
                 }
             }
             AstKind::ImportDeclaration(import_decl) => {

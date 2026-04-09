@@ -20,9 +20,9 @@ use goat_ast::ast::Program;
 use goat_codegen::{Codegen, CodegenOptions, CodegenReturn};
 use goat_parser::{ParseOptions, Parser};
 use goat_semantic::SemanticBuilder;
-use oxc_sourcemap::SourcemapVisualizer;
 use goat_span::SourceType;
 use goat_transformer_plugins::{ReplaceGlobalDefines, ReplaceGlobalDefinesConfig};
+use oxc_sourcemap::SourcemapVisualizer;
 
 fn main() -> std::io::Result<()> {
     let mut args = Arguments::from_env();

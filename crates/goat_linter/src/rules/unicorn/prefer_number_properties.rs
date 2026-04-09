@@ -17,9 +17,11 @@ use crate::{
 };
 
 fn prefer_number_properties_diagnostic(span: Span, method_name: &str) -> GoatDiagnostic {
-    GoatDiagnostic::warn(format!("Use `Number.{method_name}` instead of the global `{method_name}`"))
-        .with_help(format!("Replace it with `Number.{method_name}`"))
-        .with_label(span)
+    GoatDiagnostic::warn(format!(
+        "Use `Number.{method_name}` instead of the global `{method_name}`"
+    ))
+    .with_help(format!("Replace it with `Number.{method_name}`"))
+    .with_label(span)
 }
 
 #[derive(Debug, Default, Clone, Deserialize)]

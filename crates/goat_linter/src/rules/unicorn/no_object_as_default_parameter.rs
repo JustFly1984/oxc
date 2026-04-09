@@ -9,8 +9,10 @@ use goat_span::Span;
 use crate::{AstNode, context::LintContext, rule::Rule};
 
 fn identifier(span: Span, param: &str) -> GoatDiagnostic {
-    GoatDiagnostic::warn(format!("Do not use an object literal as default for parameter `{param}`."))
-        .with_label(span)
+    GoatDiagnostic::warn(format!(
+        "Do not use an object literal as default for parameter `{param}`."
+    ))
+    .with_label(span)
 }
 
 fn non_identifier(span: Span) -> GoatDiagnostic {

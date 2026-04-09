@@ -92,9 +92,10 @@ fn is_identity_arrow(expr: &Expression) -> bool {
 
     if let Some(stmt) = arrow.body.statements.first()
         && let goat_ast::ast::Statement::ExpressionStatement(expr_stmt) = stmt
-            && let Expression::Identifier(ident) = &expr_stmt.expression {
-                return ident.name == param_id.name;
-            }
+        && let Expression::Identifier(ident) = &expr_stmt.expression
+    {
+        return ident.name == param_id.name;
+    }
 
     false
 }

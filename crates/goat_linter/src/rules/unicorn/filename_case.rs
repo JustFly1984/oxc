@@ -1,9 +1,9 @@
 use convert_case::{Boundary, Case, Converter};
 use cow_utils::CowUtils;
-use lazy_regex::{Regex, RegexBuilder};
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::Span;
+use lazy_regex::{Regex, RegexBuilder};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;

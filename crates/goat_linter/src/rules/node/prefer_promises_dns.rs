@@ -77,10 +77,7 @@ fn test() {
         r#"const fs = require("fs");"#,
     ];
 
-    let fail = vec![
-        r#"const dns = require("dns");"#,
-        r#"const dns = require("node:dns");"#,
-    ];
+    let fail = vec![r#"const dns = require("dns");"#, r#"const dns = require("node:dns");"#];
 
     Tester::new(PreferPromisesDns::NAME, PreferPromisesDns::PLUGIN, pass, fail).test_and_snapshot();
 }

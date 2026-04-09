@@ -1,4 +1,3 @@
-use nodejs_built_in_modules::is_nodejs_builtin_module;
 use goat_ast::{
     AstKind,
     ast::{Argument, Expression},
@@ -6,6 +5,7 @@ use goat_ast::{
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::Span;
+use nodejs_built_in_modules::is_nodejs_builtin_module;
 use rustc_hash::{FxBuildHasher, FxHashMap};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};

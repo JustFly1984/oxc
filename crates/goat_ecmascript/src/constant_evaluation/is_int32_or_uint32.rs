@@ -1,5 +1,5 @@
-use num_traits::ToPrimitive;
 use goat_ast::ast::*;
+use num_traits::ToPrimitive;
 
 use crate::GlobalContext;
 

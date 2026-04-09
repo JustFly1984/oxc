@@ -4,11 +4,11 @@ use std::{
 };
 
 use cow_utils::CowUtils;
-use itertools::Itertools;
 use goat_ast::ast::{ImportDeclaration, ImportDeclarationSpecifier, Statement};
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::Span;
+use itertools::Itertools;
 use rustc_hash::FxHashSet;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -24,7 +24,9 @@ fn unexpected_syntax_order_diagnostic(
     span: Span,
 ) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!("Expected '{curr_kind}' syntax before '{prev_kind}' syntax."))
-        .with_help("Reorder your import statements so that import types appear in the configured order.")
+        .with_help(
+            "Reorder your import statements so that import types appear in the configured order.",
+        )
         .with_label(span)
 }
 

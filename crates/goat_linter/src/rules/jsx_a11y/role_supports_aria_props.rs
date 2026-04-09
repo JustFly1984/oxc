@@ -65,7 +65,12 @@ fn default(span: Span, attr_name: &str, role: &str) -> GoatDiagnostic {
     .with_label(span)
 }
 
-fn is_implicit_diagnostic(span: Span, attr_name: &str, role: &str, el_name: &str) -> GoatDiagnostic {
+fn is_implicit_diagnostic(
+    span: Span,
+    attr_name: &str,
+    role: &str,
+    el_name: &str,
+) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!("The attribute `{attr_name}` is not supported by the role `{role}`. This role is implicit on the element `{el_name}`."))
         .with_help(format!("Try to remove invalid attribute `{attr_name}`."))
         .with_label(span)

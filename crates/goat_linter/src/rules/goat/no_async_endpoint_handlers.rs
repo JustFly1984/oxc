@@ -5,7 +5,7 @@ use goat_ast::{
     AstKind,
     ast::{Argument, ArrowFunctionExpression, Expression, Function},
 };
-use goat_diagnostics::{LabeledSpan, GoatDiagnostic};
+use goat_diagnostics::{GoatDiagnostic, LabeledSpan};
 use goat_macros::declare_goat_lint;
 use goat_span::{CompactStr, Span, Str};
 use rustc_hash::FxHashSet;

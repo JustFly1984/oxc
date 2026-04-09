@@ -1,4 +1,3 @@
-use itertools::Itertools;
 use goat_ast::{
     AstKind,
     ast::{Expression, MemberExpression, VariableDeclarationKind},
@@ -7,6 +6,7 @@ use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_semantic::ScopeId;
 use goat_span::Span;
+use itertools::Itertools;
 
 use crate::{AstNode, ast_util::is_method_call, context::LintContext, rule::Rule};
 

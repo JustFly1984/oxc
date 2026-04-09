@@ -1,4 +1,3 @@
-use itertools::Itertools;
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_regular_expression::{
@@ -6,6 +5,7 @@ use goat_regular_expression::{
     visit::{RegExpAstKind, Visit},
 };
 use goat_span::Span;
+use itertools::Itertools;
 use schemars::JsonSchema;
 use serde::Deserialize;
 

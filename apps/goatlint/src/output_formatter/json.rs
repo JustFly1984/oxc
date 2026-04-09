@@ -1,7 +1,7 @@
 use std::{cell::RefCell, rc::Rc};
 
-use miette::JSONReportHandler;
 use goat_span::CompactStr;
+use miette::JSONReportHandler;
 use rustc_hash::FxHashSet;
 use serde::Serialize;
 
@@ -150,7 +150,7 @@ fn format_json(diagnostics: &mut Vec<Error>) -> String {
 mod test {
     use std::time::Duration;
 
-    use goat_diagnostics::{NamedSource, GoatDiagnostic, reporter::DiagnosticResult};
+    use goat_diagnostics::{GoatDiagnostic, NamedSource, reporter::DiagnosticResult};
     use goat_span::Span;
 
     use crate::output_formatter::{InternalFormatter, LintCommandInfo, json::JsonOutputFormatter};

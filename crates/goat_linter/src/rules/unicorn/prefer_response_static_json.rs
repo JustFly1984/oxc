@@ -14,7 +14,8 @@ use crate::{
 };
 
 fn prefer_response_static_json_diagnostic(span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn("Prefer using `Response.json(…)` over `JSON.stringify()`.").with_label(span)
+    GoatDiagnostic::warn("Prefer using `Response.json(…)` over `JSON.stringify()`.")
+        .with_label(span)
 }
 
 #[derive(Debug, Default, Clone)]

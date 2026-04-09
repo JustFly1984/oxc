@@ -1,4 +1,3 @@
-use memchr::memmem;
 use goat_ast::{AstKind, ast::RegExpFlags};
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
@@ -8,6 +7,7 @@ use goat_regular_expression::{
 };
 use goat_semantic::NodeId;
 use goat_span::Span;
+use memchr::memmem;
 use schemars::JsonSchema;
 use serde::Deserialize;
 

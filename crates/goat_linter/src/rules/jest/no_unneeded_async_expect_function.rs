@@ -131,7 +131,9 @@ impl Rule for NoUnneededAsyncExpectFunction {
 
 /// Gets the span of the awaited call expression from an async arrow function.
 /// Returns `None` if the function body doesn't contain exactly one await of a call expression.
-fn get_awaited_call_span_from_arrow(arrow: &goat_ast::ast::ArrowFunctionExpression) -> Option<Span> {
+fn get_awaited_call_span_from_arrow(
+    arrow: &goat_ast::ast::ArrowFunctionExpression,
+) -> Option<Span> {
     // Case 1: Arrow function with expression body (async () => await doSomething())
     if arrow.expression {
         if let Some(first) = arrow.body.statements.first()

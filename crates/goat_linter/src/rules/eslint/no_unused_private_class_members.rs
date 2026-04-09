@@ -1,10 +1,10 @@
-use itertools::Itertools;
 use goat_ast::{AstKind, ast::AssignmentOperator};
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_semantic::{AstNode, NodeId, Semantic};
 use goat_span::{GetSpan, Span};
 use goat_syntax::class::ElementKind;
+use itertools::Itertools;
 
 use crate::{context::LintContext, rule::Rule};
 

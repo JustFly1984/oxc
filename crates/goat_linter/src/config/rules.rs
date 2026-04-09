@@ -411,7 +411,9 @@ pub(super) fn unalias_plugin_name(plugin_name: &str, rule_name: &str) -> (String
         // The native rule lives in the oxc plugin.
         "i18next" if rule_name == "no-literal-string" => ("goat", "no-literal-string"),
         // The native rule lives in the oxc plugin.
-        "package-json" if rule_name == "no-empty-fields" => ("goat", "package-json-no-empty-fields"),
+        "package-json" if rule_name == "no-empty-fields" => {
+            ("goat", "package-json-no-empty-fields")
+        }
         // The native rule lives in the oxc plugin.
         "package-json" if rule_name == "no-redundant-publishConfig" => {
             ("goat", "package-json-no-redundant-publish-config")
@@ -427,7 +429,9 @@ pub(super) fn unalias_plugin_name(plugin_name: &str, rule_name: &str) -> (String
         // The native rule lives in the oxc plugin.
         "package-json" if rule_name == "require-type" => ("goat", "package-json-require-type"),
         // The native rule lives in the oxc plugin.
-        "package-json" if rule_name == "require-version" => ("goat", "package-json-require-version"),
+        "package-json" if rule_name == "require-version" => {
+            ("goat", "package-json-require-version")
+        }
         // The native rule lives in the oxc plugin.
         "package-json" if rule_name == "repository-shorthand" => {
             ("goat", "package-json-repository-shorthand")
@@ -869,7 +873,10 @@ mod test {
             unalias_plugin_name("package-json", "valid-version"),
             ("goat".to_string(), "package-json-valid-version".to_string())
         );
-        assert_eq!(unalias_plugin_name("json", "*"), ("goat".to_string(), "valid-json".to_string()));
+        assert_eq!(
+            unalias_plugin_name("json", "*"),
+            ("goat".to_string(), "valid-json".to_string())
+        );
         assert_eq!(
             unalias_plugin_name("i18n-json", "identical-keys"),
             ("goat".to_string(), "identical-keys".to_string())

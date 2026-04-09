@@ -1,5 +1,4 @@
 use cow_utils::CowUtils;
-use lazy_regex::Regex;
 use goat_ast::{
     AstKind,
     ast::{Argument, BindingPattern, Expression},
@@ -8,6 +7,7 @@ use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::{CompactStr, Span};
 use goat_syntax::identifier::is_identifier_name;
+use lazy_regex::Regex;
 use schemars::JsonSchema;
 
 use crate::{AstNode, context::LintContext, rule::Rule};

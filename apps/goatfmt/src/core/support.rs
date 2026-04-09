@@ -522,29 +522,36 @@ mod tests {
         let source = FormatFileStrategy::try_from(PathBuf::from("package.json")).unwrap();
         assert!(matches!(
             source,
-            FormatFileStrategy::OxfmtJson { variant: goat_json_formatter::JsonVariant::JsonStringify, .. }
+            FormatFileStrategy::OxfmtJson {
+                variant: goat_json_formatter::JsonVariant::JsonStringify,
+                ..
+            }
         ));
 
         let source = FormatFileStrategy::try_from(PathBuf::from("composer.json")).unwrap();
         assert!(matches!(
             source,
-            FormatFileStrategy::OxfmtJson { variant: goat_json_formatter::JsonVariant::JsonStringify, .. }
+            FormatFileStrategy::OxfmtJson {
+                variant: goat_json_formatter::JsonVariant::JsonStringify,
+                ..
+            }
         ));
     }
 
     #[test]
     fn test_json_files() {
-        let json_files = vec![
-            "data.json",
-            "schema.avsc",
-            ".babelrc",
-            ".swcrc",
-        ];
+        let json_files = vec!["data.json", "schema.avsc", ".babelrc", ".swcrc"];
 
         for file_name in json_files {
             let result = FormatFileStrategy::try_from(PathBuf::from(file_name));
             assert!(
-                matches!(result, Ok(FormatFileStrategy::OxfmtJson { variant: goat_json_formatter::JsonVariant::Json, .. })),
+                matches!(
+                    result,
+                    Ok(FormatFileStrategy::OxfmtJson {
+                        variant: goat_json_formatter::JsonVariant::Json,
+                        ..
+                    })
+                ),
                 "`{file_name}` should be detected as JSON"
             );
         }
@@ -553,13 +560,25 @@ mod tests {
         for file_name in jsonc_files {
             let result = FormatFileStrategy::try_from(PathBuf::from(file_name));
             assert!(
-                matches!(result, Ok(FormatFileStrategy::OxfmtJson { variant: goat_json_formatter::JsonVariant::Jsonc, .. })),
+                matches!(
+                    result,
+                    Ok(FormatFileStrategy::OxfmtJson {
+                        variant: goat_json_formatter::JsonVariant::Jsonc,
+                        ..
+                    })
+                ),
                 "`{file_name}` should be detected as JSONC"
             );
         }
 
         let result = FormatFileStrategy::try_from(PathBuf::from("config.json5"));
-        assert!(matches!(result, Ok(FormatFileStrategy::OxfmtJson { variant: goat_json_formatter::JsonVariant::Json5, .. })));
+        assert!(matches!(
+            result,
+            Ok(FormatFileStrategy::OxfmtJson {
+                variant: goat_json_formatter::JsonVariant::Json5,
+                ..
+            })
+        ));
     }
 
     #[test]

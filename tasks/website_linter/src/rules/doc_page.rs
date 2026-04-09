@@ -8,8 +8,8 @@ use std::{
     path::PathBuf,
 };
 
-use itertools::Itertools;
 use goat_linter::{LintPlugins, table::RuleTableRow};
+use itertools::Itertools;
 use schemars::{
     JsonSchema, SchemaGenerator,
     schema::{InstanceType, Schema, SchemaObject, SingleOrVec},

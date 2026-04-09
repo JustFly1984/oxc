@@ -150,7 +150,7 @@ impl StylishReporter {
 #[cfg(test)]
 mod test {
     use super::*;
-    use goat_diagnostics::{NamedSource, GoatDiagnostic, reporter::DiagnosticResult};
+    use goat_diagnostics::{GoatDiagnostic, NamedSource, reporter::DiagnosticResult};
     use goat_span::Span;
 
     #[test]

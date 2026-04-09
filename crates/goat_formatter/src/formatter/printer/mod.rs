@@ -1780,10 +1780,7 @@ Group 1 breaks"
             options,
         );
 
-        assert_eq!(
-            "{\n  {\n    {\n      deeply_nested_value\n    }\n  }\n}",
-            result.as_code()
-        );
+        assert_eq!("{\n  {\n    {\n      deeply_nested_value\n    }\n  }\n}", result.as_code());
     }
 
     #[test]
@@ -1809,10 +1806,8 @@ Group 1 breaks"
     #[test]
     fn hard_line_break_forces_group_to_break() {
         let allocator = Allocator::default();
-        let result = format(
-            &allocator,
-            &group(&format_args!(token("a"), hard_line_break(), token("b"))),
-        );
+        let result =
+            format(&allocator, &group(&format_args!(token("a"), hard_line_break(), token("b"))));
 
         assert_eq!("a\nb", result.as_code());
     }
@@ -1821,10 +1816,8 @@ Group 1 breaks"
     fn soft_line_break_preserved_in_flat_mode() {
         let allocator = Allocator::default();
         // Content fits on one line, so soft_line_break should produce nothing
-        let result = format(
-            &allocator,
-            &group(&format_args!(token("a"), soft_line_break(), token("b"))),
-        );
+        let result =
+            format(&allocator, &group(&format_args!(token("a"), soft_line_break(), token("b"))));
 
         assert_eq!("ab", result.as_code());
     }
@@ -1835,11 +1828,7 @@ Group 1 breaks"
         // Content fits, so soft_line_break_or_space produces a space
         let result = format(
             &allocator,
-            &group(&format_args!(
-                token("short"),
-                soft_line_break_or_space(),
-                token("text")
-            )),
+            &group(&format_args!(token("short"), soft_line_break_or_space(), token("text"))),
         );
 
         assert_eq!("short text", result.as_code());
@@ -1903,11 +1892,7 @@ Group 1 breaks"
         // A group containing only a soft_line_break that fits on one line
         let result = format(
             &allocator,
-            &format_args!(
-                token("before"),
-                group(&format_args!(soft_line_break())),
-                token("after")
-            ),
+            &format_args!(token("before"), group(&format_args!(soft_line_break())), token("after")),
         );
 
         assert_eq!("beforeafter", result.as_code());
@@ -1924,11 +1909,7 @@ Group 1 breaks"
 
         let result = format_with_options(
             &allocator,
-            &group(&format_args!(
-                token("if (x) {"),
-                block_indent(&token("return y;")),
-                token("}")
-            )),
+            &group(&format_args!(token("if (x) {"), block_indent(&token("return y;")), token("}"))),
             options,
         );
 

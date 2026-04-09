@@ -1,10 +1,10 @@
 //! This module contains logic for checking if any [`Reference`]s to a
 //! [`Symbol`] are considered a usage.
 
-use itertools::Itertools;
 use goat_ast::{AstKind, ast::*};
 use goat_semantic::{AstNode, NodeId, Reference, ScopeId, SymbolFlags, SymbolId};
 use goat_span::{GetSpan, Span};
+use itertools::Itertools;
 
 use super::{NoUnusedVars, Symbol, ignored::FoundStatus};
 

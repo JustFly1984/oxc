@@ -1,5 +1,5 @@
 use goat_ast::AstKind;
-use goat_diagnostics::{LabeledSpan, GoatDiagnostic};
+use goat_diagnostics::{GoatDiagnostic, LabeledSpan};
 use goat_macros::declare_goat_lint;
 use goat_semantic::AstNode;
 use goat_span::GetSpan;

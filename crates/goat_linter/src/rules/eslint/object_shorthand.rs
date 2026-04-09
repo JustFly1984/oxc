@@ -27,7 +27,8 @@ fn expected_all_properties_shorthanded(span: Span) -> GoatDiagnostic {
 }
 
 fn expected_literal_method_longform(span: Span) -> GoatDiagnostic {
-    GoatDiagnostic::warn("Expected longform method syntax for string literal keys.").with_label(span)
+    GoatDiagnostic::warn("Expected longform method syntax for string literal keys.")
+        .with_label(span)
 }
 
 fn expected_property_shorthand(span: Span) -> GoatDiagnostic {
@@ -427,22 +428,26 @@ fn check_consistency<'a>(
     obj_expr: &ObjectExpression<'a>,
     check_redundancy: bool,
 ) {
-    let properties = obj_expr.properties.iter().filter_map(|property_kind| match property_kind {
-        ObjectPropertyKind::ObjectProperty(property) => {
-            can_property_have_shorthand(property).then_some(property)
-        }
-        ObjectPropertyKind::SpreadProperty(_) => None,
-    });
+    let properties: Vec<_> = obj_expr
+        .properties
+        .iter()
+        .filter_map(|property_kind| match property_kind {
+            ObjectPropertyKind::ObjectProperty(property) => {
+                can_property_have_shorthand(property).then_some(property)
+            }
+            ObjectPropertyKind::SpreadProperty(_) => None,
+        })
+        .collect();
 
-    let properties_count = properties.clone().count();
+    let properties_count = properties.len();
     if properties_count > 0 {
         let shorthand_properties_count =
-            properties.clone().filter(|p| is_shorthand_property(p)).count();
+            properties.iter().filter(|p| is_shorthand_property(p)).count();
 
         if shorthand_properties_count != properties_count {
             if shorthand_properties_count > 0 {
                 ctx.diagnostic(unexpected_mix(obj_expr.span));
-            } else if check_redundancy && properties.clone().all(|p| is_redundant_property(p)) {
+            } else if check_redundancy && properties.iter().all(|p| is_redundant_property(p)) {
                 ctx.diagnostic(expected_all_properties_shorthanded(obj_expr.span));
             }
         }

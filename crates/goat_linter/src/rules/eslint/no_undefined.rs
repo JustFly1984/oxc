@@ -10,7 +10,9 @@ pub struct NoUndefined;
 
 fn no_undefined_diagnostic(span: Span) -> GoatDiagnostic {
     GoatDiagnostic::warn("Unexpected use of `undefined`")
-        .with_help("Use `void 0` instead of `undefined`, or avoid referencing `undefined` directly.")
+        .with_help(
+            "Use `void 0` instead of `undefined`, or avoid referencing `undefined` directly.",
+        )
         .with_label(span)
 }
 

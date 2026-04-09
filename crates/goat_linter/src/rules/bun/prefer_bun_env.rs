@@ -49,9 +49,7 @@ impl Rule for PreferBunEnv {
                 (mem.span, &mem.object)
             }
             AstKind::ComputedMemberExpression(mem)
-                if mem
-                    .static_property_name()
-                    .is_some_and(|name| name.as_str() == "env") =>
+                if mem.static_property_name().is_some_and(|name| name.as_str() == "env") =>
             {
                 (mem.span, &mem.object)
             }

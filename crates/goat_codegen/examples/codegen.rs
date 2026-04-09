@@ -24,8 +24,8 @@ use goat_allocator::Allocator;
 use goat_ast::ast::Program;
 use goat_codegen::{Codegen, CodegenOptions, CodegenReturn};
 use goat_parser::{ParseOptions, Parser};
-use oxc_sourcemap::SourcemapVisualizer;
 use goat_span::SourceType;
+use oxc_sourcemap::SourcemapVisualizer;
 
 // Instruction:
 // create a `test.js`,

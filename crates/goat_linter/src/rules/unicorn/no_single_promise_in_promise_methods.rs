@@ -9,7 +9,10 @@ use goat_span::{GetSpan, Span};
 
 use crate::{AstNode, ast_util::is_method_call, context::LintContext, rule::Rule};
 
-fn no_single_promise_in_promise_methods_diagnostic(span: Span, method_name: &str) -> GoatDiagnostic {
+fn no_single_promise_in_promise_methods_diagnostic(
+    span: Span,
+    method_name: &str,
+) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!(
         "Wrapping single-element array with `Promise.{method_name}()` is unnecessary."
     ))

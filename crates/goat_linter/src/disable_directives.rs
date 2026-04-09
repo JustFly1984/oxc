@@ -1,8 +1,8 @@
 use std::cell::RefCell;
 
-use itertools::Itertools;
 use goat_ast::Comment;
 use goat_span::Span;
+use itertools::Itertools;
 use rust_lapper::{Interval, Lapper};
 use rustc_hash::FxHashMap;
 
@@ -449,8 +449,9 @@ impl DisableDirectivesBuilder {
             let text = text_source.trim_start();
             let mut rule_name_start = comment_span.start + (text_source.len() - text.len()) as u32;
 
-            if let Some(text) =
-                text.strip_prefix("eslint-disable").or_else(|| text.strip_prefix("goatlint-disable"))
+            if let Some(text) = text
+                .strip_prefix("eslint-disable")
+                .or_else(|| text.strip_prefix("goatlint-disable"))
             {
                 rule_name_start += 14; // eslint-disable and goatlint-disable are each 14 bytes
                 // `eslint-disable`

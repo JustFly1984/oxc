@@ -15,7 +15,9 @@ static ESCAPED_SINGLE_QUOTE: &str = "&apos; or &lsquo; or &#39; or &rsquo;";
 fn no_unescaped_entities_diagnostic(span: Span, unescaped: char) -> GoatDiagnostic {
     let escaped = if unescaped == '"' { ESCAPED_DOUBLE_QUOTE } else { ESCAPED_SINGLE_QUOTE };
     GoatDiagnostic::warn(format!("`{unescaped}` can be escaped with {escaped}"))
-        .with_help(format!("Replace `{unescaped}` with the HTML entity {escaped} to avoid ambiguity in JSX."))
+        .with_help(format!(
+            "Replace `{unescaped}` with the HTML entity {escaped} to avoid ambiguity in JSX."
+        ))
         .with_label(span)
 }
 

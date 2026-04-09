@@ -46,12 +46,12 @@ mod unresolved_stack;
 #[cfg(feature = "linter")]
 pub use ast_types_bitset::AstTypesBitset;
 pub use builder::{SemanticBuilder, SemanticBuilderReturn};
+#[cfg(feature = "jsdoc")]
+pub use goat_jsdoc::{JSDoc, JSDocTag};
 pub use is_global_reference::IsGlobalReference;
 #[cfg(feature = "jsdoc")]
 pub use jsdoc::JSDocFinder;
 pub use node::{AstNode, AstNodes};
-#[cfg(feature = "jsdoc")]
-pub use goat_jsdoc::{JSDoc, JSDocTag};
 pub use scoping::Scoping;
 pub use stats::Stats;
 

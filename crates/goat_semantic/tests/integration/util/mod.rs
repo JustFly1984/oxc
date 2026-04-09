@@ -5,7 +5,7 @@ use itertools::Itertools;
 use goat_allocator::Allocator;
 #[cfg(feature = "cfg")]
 use goat_cfg::DisplayDot;
-use goat_diagnostics::{Error, NamedSource, GoatDiagnostic};
+use goat_diagnostics::{Error, GoatDiagnostic, NamedSource};
 #[cfg(feature = "cfg")]
 use goat_semantic::dot::DebugDot;
 use goat_semantic::{Semantic, SemanticBuilder, SemanticBuilderReturn};

@@ -1,11 +1,11 @@
 use std::iter::FusedIterator;
 
 use goat_ast::{AstKind, ast::Program};
-use oxc_index::{IndexSlice, IndexVec};
 use goat_syntax::{
     node::{NodeFlags, NodeId},
     scope::ScopeId,
 };
+use oxc_index::{IndexSlice, IndexVec};
 
 #[cfg(feature = "linter")]
 use goat_ast::AstType;

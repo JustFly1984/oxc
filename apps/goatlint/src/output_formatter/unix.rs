@@ -58,7 +58,7 @@ fn format_unix(diagnostic: &Error) -> String {
 #[cfg(test)]
 mod test {
     use goat_diagnostics::{
-        NamedSource, GoatDiagnostic,
+        GoatDiagnostic, NamedSource,
         reporter::{DiagnosticReporter, DiagnosticResult},
     };
     use goat_span::Span;

@@ -8,11 +8,11 @@ use std::{
 };
 
 use doc_page::Context;
-use html::HtmlWriter;
 use goat_linter::{
     Oxlintrc,
     table::{RuleTable, RuleTableRow},
 };
+use html::HtmlWriter;
 use pico_args::Arguments;
 use schemars::{SchemaGenerator, r#gen::SchemaSettings};
 

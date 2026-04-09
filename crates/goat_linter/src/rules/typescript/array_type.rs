@@ -106,7 +106,12 @@ fn generic(readonly_prefix: &str, name: &str, type_name: &str, span: Span) -> Go
     .with_label(span)
 }
 
-fn generic_simple(readonly_prefix: &str, name: &str, type_name: &str, span: Span) -> GoatDiagnostic {
+fn generic_simple(
+    readonly_prefix: &str,
+    name: &str,
+    type_name: &str,
+    span: Span,
+) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!(
         "Array type using '{readonly_prefix}{type_name}[]' is forbidden for non-simple types. Use '{name}<{type_name}>' instead."
     ))

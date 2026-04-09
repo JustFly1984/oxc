@@ -4,7 +4,7 @@ use crate::{
     module_graph_visitor::{ModuleGraphVisitorBuilder, VisitFoldWhile},
     rule::{DefaultRuleConfig, Rule},
 };
-use goat_diagnostics::{LabeledSpan, GoatDiagnostic};
+use goat_diagnostics::{GoatDiagnostic, LabeledSpan};
 use goat_macros::declare_goat_lint;
 use goat_span::Span;
 use schemars::JsonSchema;

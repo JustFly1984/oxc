@@ -1,7 +1,7 @@
 use std::{ffi::OsStr, path::PathBuf, sync::Arc, sync::mpsc};
 
-use ignore::{DirEntry, overrides::Override};
 use goat_linter::LINTABLE_EXTENSIONS;
+use ignore::{DirEntry, overrides::Override};
 
 use crate::cli::IgnoreOptions;
 

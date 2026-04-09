@@ -1,8 +1,8 @@
 use super::json_utils::{file_start_span, is_json_file};
 
-use lazy_regex::{Lazy, Regex, lazy_regex};
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
+use lazy_regex::{Lazy, Regex, lazy_regex};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value};

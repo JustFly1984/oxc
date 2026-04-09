@@ -60,17 +60,9 @@ impl Rule for NoProcessExit {
 fn test() {
     use crate::tester::Tester;
 
-    let pass = vec![
-        "process.exitCode = 1;",
-        "var exit = process.exit;",
-        "f(process.exit);",
-    ];
+    let pass = vec!["process.exitCode = 1;", "var exit = process.exit;", "f(process.exit);"];
 
-    let fail = vec![
-        "process.exit(0);",
-        "process.exit(1);",
-        "process.exit();",
-    ];
+    let fail = vec!["process.exit(0);", "process.exit(1);", "process.exit();"];
 
     Tester::new(NoProcessExit::NAME, NoProcessExit::PLUGIN, pass, fail).test_and_snapshot();
 }

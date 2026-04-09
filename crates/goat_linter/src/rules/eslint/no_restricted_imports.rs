@@ -1,7 +1,6 @@
 use std::borrow::Cow;
 
 use cow_utils::CowUtils as _;
-use lazy_regex::Regex;
 use goat_ast::{
     AstKind,
     ast::{ImportOrExportKind, StringLiteral, TSImportEqualsDeclaration, TSModuleReference},
@@ -9,6 +8,7 @@ use goat_ast::{
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::{CompactStr, Span};
+use lazy_regex::Regex;
 use rustc_hash::FxHashMap;
 use serde::{Deserialize, Deserializer, de::Error};
 use serde_json::Value;
@@ -20,21 +20,21 @@ use crate::{
     rule::Rule,
 };
 
-fn diagnostic_with_maybe_help(span: Span, msg: String, help: Option<CompactStr>) -> GoatDiagnostic {
+fn diagnostic_with_maybe_help(span: Span, msg: String, help: Option<&str>) -> GoatDiagnostic {
     if let Some(help) = help {
-        return GoatDiagnostic::warn(msg).with_help(help).with_label(span);
+        return GoatDiagnostic::warn(msg).with_help(help.to_string()).with_label(span);
     }
 
     GoatDiagnostic::warn(msg).with_label(span)
 }
 
-fn diagnostic_path(span: Span, help: Option<CompactStr>, source: &str) -> GoatDiagnostic {
+fn diagnostic_path(span: Span, help: Option<&str>, source: &str) -> GoatDiagnostic {
     let msg = format!("'{source}' import is restricted from being used.");
 
     diagnostic_with_maybe_help(span, msg, help)
 }
 
-fn diagnostic_pattern(span: Span, help: Option<CompactStr>, source: &str) -> GoatDiagnostic {
+fn diagnostic_pattern(span: Span, help: Option<&str>, source: &str) -> GoatDiagnostic {
     let msg = format!("'{source}' import is restricted from being used by a pattern.");
 
     diagnostic_with_maybe_help(span, msg, help)
@@ -42,7 +42,7 @@ fn diagnostic_pattern(span: Span, help: Option<CompactStr>, source: &str) -> Goa
 
 fn diagnostic_pattern_and_import_name(
     span: Span,
-    help: Option<CompactStr>,
+    help: Option<&str>,
     name: &str,
     source: &str,
 ) -> GoatDiagnostic {
@@ -54,7 +54,7 @@ fn diagnostic_pattern_and_import_name(
 
 fn diagnostic_pattern_and_everything(
     span: Span,
-    help: Option<CompactStr>,
+    help: Option<&str>,
     name: &str,
     source: &str,
 ) -> GoatDiagnostic {
@@ -67,7 +67,7 @@ fn diagnostic_pattern_and_everything(
 
 fn diagnostic_pattern_and_everything_with_regex_import_name(
     span: Span,
-    help: Option<CompactStr>,
+    help: Option<&str>,
     name: &SerdeRegexWrapper<Regex>,
     source: &str,
 ) -> GoatDiagnostic {
@@ -81,7 +81,7 @@ fn diagnostic_pattern_and_everything_with_regex_import_name(
 
 fn diagnostic_everything(
     span: Span,
-    help: Option<CompactStr>,
+    help: Option<&str>,
     name: &str,
     source: &str,
 ) -> GoatDiagnostic {
@@ -92,7 +92,7 @@ fn diagnostic_everything(
 
 fn diagnostic_import_name(
     span: Span,
-    help: Option<CompactStr>,
+    help: Option<&str>,
     name: &str,
     source: &str,
 ) -> GoatDiagnostic {
@@ -103,7 +103,7 @@ fn diagnostic_import_name(
 
 fn diagnostic_allowed_import_name(
     span: Span,
-    help: Option<CompactStr>,
+    help: Option<&str>,
     name: &str,
     source: &str,
     allowed: &str,
@@ -117,7 +117,7 @@ fn diagnostic_allowed_import_name(
 
 fn diagnostic_everything_with_allowed_import_name(
     span: Span,
-    help: Option<CompactStr>,
+    help: Option<&str>,
     source: &str,
     allowed: &str,
 ) -> GoatDiagnostic {
@@ -129,7 +129,7 @@ fn diagnostic_everything_with_allowed_import_name(
 
 fn diagnostic_allowed_import_name_pattern(
     span: Span,
-    help: Option<CompactStr>,
+    help: Option<&str>,
     name: &str,
     source: &str,
     allowed_pattern: &str,
@@ -143,7 +143,7 @@ fn diagnostic_allowed_import_name_pattern(
 
 fn diagnostic_everything_with_allowed_import_name_pattern(
     span: Span,
-    help: Option<CompactStr>,
+    help: Option<&str>,
     source: &str,
     allowed_pattern: &str,
 ) -> GoatDiagnostic {
@@ -1021,7 +1021,7 @@ impl NoRestrictedImports {
                         "all import entries must have at least one import entry"
                     );
                     if let Some(span) = spans.first() {
-                        ctx.diagnostic(diagnostic_path(*span, path.message.clone(), source));
+                        ctx.diagnostic(diagnostic_path(*span, path.message.as_deref(), source));
                     }
                 }
             }
@@ -1288,35 +1288,37 @@ fn get_diagnostic_from_import_name_result_path(
     path: &RestrictedPath,
 ) -> GoatDiagnostic {
     match result {
-        ImportNameResult::GeneralDisallowed => diagnostic_path(span, path.message.clone(), source),
+        ImportNameResult::GeneralDisallowed => {
+            diagnostic_path(span, path.message.as_deref(), source)
+        }
         ImportNameResult::DefaultDisallowed => match &path.import_names {
             Some(import_names) => diagnostic_everything(
                 span,
-                path.message.clone(),
+                path.message.as_deref(),
                 import_names.join(", ").as_str(),
                 source,
             ),
             _ => match &path.allow_import_names {
                 Some(allowed_import_names) => diagnostic_everything_with_allowed_import_name(
                     span,
-                    path.message.clone(),
+                    path.message.as_deref(),
                     source,
                     allowed_import_names.join(", ").as_str(),
                 ),
-                _ => diagnostic_path(span, path.message.clone(), source),
+                _ => diagnostic_path(span, path.message.as_deref(), source),
             },
         },
         ImportNameResult::NameDisallowed(name_span) => match &path.allow_import_names {
             Some(allow_import_names) => diagnostic_allowed_import_name(
                 name_span.span,
-                path.message.clone(),
+                path.message.as_deref(),
                 name_span.name(),
                 source,
                 allow_import_names.join(", ").as_str(),
             ),
             _ => diagnostic_import_name(
                 name_span.span,
-                path.message.clone(),
+                path.message.as_deref(),
                 name_span.name(),
                 source,
             ),
@@ -1333,13 +1335,13 @@ fn get_diagnostic_from_import_name_result_pattern(
 ) -> GoatDiagnostic {
     match result {
         ImportNameResult::GeneralDisallowed => {
-            diagnostic_pattern(span, pattern.message.clone(), source)
+            diagnostic_pattern(span, pattern.message.as_deref(), source)
         }
         ImportNameResult::DefaultDisallowed => {
             if let Some(import_names) = &pattern.import_names {
                 return diagnostic_pattern_and_everything(
                     span,
-                    pattern.message.clone(),
+                    pattern.message.as_deref(),
                     import_names.join(", ").as_str(),
                     source,
                 );
@@ -1348,7 +1350,7 @@ fn get_diagnostic_from_import_name_result_pattern(
             if let Some(import_name_patterns) = &pattern.import_name_pattern {
                 return diagnostic_pattern_and_everything_with_regex_import_name(
                     span,
-                    pattern.message.clone(),
+                    pattern.message.as_deref(),
                     import_name_patterns,
                     source,
                 );
@@ -1357,7 +1359,7 @@ fn get_diagnostic_from_import_name_result_pattern(
             if let Some(allow_import_name_pattern) = &pattern.allow_import_name_pattern {
                 return diagnostic_everything_with_allowed_import_name_pattern(
                     span,
-                    pattern.message.clone(),
+                    pattern.message.as_deref(),
                     source,
                     allow_import_name_pattern.as_str(),
                 );
@@ -1366,18 +1368,18 @@ fn get_diagnostic_from_import_name_result_pattern(
             if let Some(allowed_import_names) = &pattern.allow_import_names {
                 return diagnostic_everything_with_allowed_import_name(
                     span,
-                    pattern.message.clone(),
+                    pattern.message.as_deref(),
                     source,
                     allowed_import_names.join(", ").as_str(),
                 );
             }
 
-            diagnostic_pattern(span, pattern.message.clone(), source)
+            diagnostic_pattern(span, pattern.message.as_deref(), source)
         }
         ImportNameResult::NameDisallowed(name_span) => match &pattern.allow_import_names {
             Some(allow_import_names) => diagnostic_allowed_import_name(
                 name_span.span,
-                pattern.message.clone(),
+                pattern.message.as_deref(),
                 name_span.name(),
                 source,
                 allow_import_names.join(", ").as_str(),
@@ -1385,14 +1387,14 @@ fn get_diagnostic_from_import_name_result_pattern(
             _ => match &pattern.allow_import_name_pattern {
                 Some(allow_import_name_pattern) => diagnostic_allowed_import_name_pattern(
                     name_span.span,
-                    pattern.message.clone(),
+                    pattern.message.as_deref(),
                     name_span.name(),
                     source,
                     allow_import_name_pattern.as_str(),
                 ),
                 _ => diagnostic_pattern_and_import_name(
                     name_span.span,
-                    pattern.message.clone(),
+                    pattern.message.as_deref(),
                     name_span.name(),
                     source,
                 ),

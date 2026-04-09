@@ -2,10 +2,10 @@ use std::{collections::BTreeMap, collections::BTreeSet, path::Path};
 
 use super::json_utils::{file_start_span, is_json_file, resolve_reference_path};
 
-use lazy_regex::{Lazy, Regex, lazy_regex};
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::Span;
+use lazy_regex::{Lazy, Regex, lazy_regex};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 

@@ -383,9 +383,10 @@ impl ConfigStore {
 
         // Check cache first
         if let Ok(cache) = self.nearest_config_cache.lock()
-            && let Some(cached) = cache.get(dir) {
-                return cached.as_ref().and_then(|key| self.nested_configs.get(key));
-            }
+            && let Some(cached) = cache.get(dir)
+        {
+            return cached.as_ref().and_then(|key| self.nested_configs.get(key));
+        }
 
         // Walk up parent directories to find the nearest config
         let mut result = None;
@@ -433,8 +434,8 @@ mod test {
             LintConfig, OxlintEnv, OxlintGlobals, OxlintSettings,
             categories::OxlintCategories,
             config_store::{Config, ResolvedOxlintOverride, ResolvedOxlintOverrideRules},
-            overrides::GlobSet,
             goatlintrc::OxlintOptions,
+            overrides::GlobSet,
         },
         rule::Rule,
         rules::{

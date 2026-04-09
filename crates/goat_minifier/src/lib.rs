@@ -56,11 +56,11 @@ mod traverse_context;
 
 use goat_allocator::Allocator;
 use goat_ast::ast::Program;
-use oxc_index::IndexVec;
 use goat_mangler::Mangler;
 use goat_semantic::{Scoping, SemanticBuilder};
 use goat_span::CompactStr;
 use goat_syntax::class::ClassId;
+use oxc_index::IndexVec;
 use rustc_hash::FxHashMap;
 
 pub use goat_mangler::{MangleOptions, MangleOptionsKeepNames};

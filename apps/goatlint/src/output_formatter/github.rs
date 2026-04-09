@@ -87,7 +87,7 @@ fn escape_property(value: &str) -> String {
 #[cfg(test)]
 mod test {
     use goat_diagnostics::{
-        DiagnosticService, NamedSource, GoatDiagnostic,
+        DiagnosticService, GoatDiagnostic, NamedSource,
         reporter::{DiagnosticReporter, DiagnosticResult},
     };
     use goat_span::Span;

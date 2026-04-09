@@ -22,9 +22,11 @@ fn miss_on_focus(span: Span, attr_name: &str) -> GoatDiagnostic {
 }
 
 fn miss_on_blur(span: Span, attr_name: &str) -> GoatDiagnostic {
-    GoatDiagnostic::warn(format!("`{attr_name}` must be accompanied by `onBlur` for accessibility."))
-        .with_help("Try to add `onBlur`.")
-        .with_label(span)
+    GoatDiagnostic::warn(format!(
+        "`{attr_name}` must be accompanied by `onBlur` for accessibility."
+    ))
+    .with_help("Try to add `onBlur`.")
+    .with_label(span)
 }
 
 #[derive(Debug, Default, Clone, Deserialize)]

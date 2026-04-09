@@ -122,7 +122,11 @@ fn missing_dependency_diagnostic(
         .with_error_code_scope(SCOPE)
 }
 
-fn unnecessary_dependency_diagnostic(hook_name: &str, dep_name: &str, span: Span) -> GoatDiagnostic {
+fn unnecessary_dependency_diagnostic(
+    hook_name: &str,
+    dep_name: &str,
+    span: Span,
+) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!("React Hook {hook_name} has unnecessary dependency: {dep_name}"))
         .with_label(span)
         .with_help("Either include it or remove the dependency array.")
@@ -152,7 +156,10 @@ fn duplicate_dependency_diagnostic(span: Span) -> GoatDiagnostic {
         .with_error_code_scope(SCOPE)
 }
 
-fn complex_expression_in_dependency_array_diagnostic(hook_name: &str, span: Span) -> GoatDiagnostic {
+fn complex_expression_in_dependency_array_diagnostic(
+    hook_name: &str,
+    span: Span,
+) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!(
         "React Hook {hook_name} has a complex expression in the dependency array.",
     ))
@@ -1471,21 +1478,25 @@ impl<'a> Visit<'a> for ExhaustiveDepsVisitor<'a, '_> {
                                 symbol_id,
                             });
                         }
+                        let mut chain = source.chain.clone();
+                        chain.extend_from_slice(&new_chain);
                         self.found_dependencies.insert(Dependency {
                             name: source.name,
                             reference_id: source.reference_id,
                             span: source.span,
-                            chain: [source.chain.clone(), new_chain].concat(),
+                            chain,
                             symbol_id,
                         });
                     } else {
                         for prop in destructured_props {
+                            let mut chain = source.chain.clone();
+                            chain.extend_from_slice(&new_chain);
+                            chain.push(prop);
                             self.found_dependencies.insert(Dependency {
                                 name: source.name,
                                 reference_id: source.reference_id,
                                 span: source.span,
-                                chain: [source.chain.clone(), new_chain.clone(), vec![prop]]
-                                    .concat(),
+                                chain,
                                 symbol_id,
                             });
                         }

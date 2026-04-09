@@ -11,9 +11,9 @@ mod ast_kind;
 mod estree_visit;
 mod formatter;
 mod get_id;
-mod minifier_traverse;
 #[cfg(feature = "generate-js")]
 mod goatlint_envs;
+mod minifier_traverse;
 #[cfg(feature = "generate-js")]
 mod raw_transfer;
 #[cfg(feature = "generate-js")]
@@ -32,9 +32,9 @@ pub use ast_kind::AstKindGenerator;
 pub use estree_visit::ESTreeVisitGenerator;
 pub use formatter::{FormatterAstNodesGenerator, FormatterFormatGenerator};
 pub use get_id::GetIdGenerator;
-pub use minifier_traverse::MinifierTraverseGenerator;
 #[cfg(feature = "generate-js")]
 pub use goatlint_envs::OxlintEnvsGenerator;
+pub use minifier_traverse::MinifierTraverseGenerator;
 #[cfg(feature = "generate-js")]
 pub use raw_transfer::RawTransferGenerator;
 #[cfg(feature = "generate-js")]

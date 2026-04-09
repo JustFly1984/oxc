@@ -34,7 +34,9 @@ pub struct IsolatedDeclarationsOptions {
     pub sourcemap: Option<bool>,
 }
 
-impl From<IsolatedDeclarationsOptions> for goat::isolated_declarations::IsolatedDeclarationsOptions {
+impl From<IsolatedDeclarationsOptions>
+    for goat::isolated_declarations::IsolatedDeclarationsOptions
+{
     fn from(options: IsolatedDeclarationsOptions) -> Self {
         Self { strip_internal: options.strip_internal.unwrap_or_default() }
     }

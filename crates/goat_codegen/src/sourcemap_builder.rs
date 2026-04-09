@@ -1,8 +1,8 @@
 use std::path::Path;
 
-use oxc_index::{IndexVec, define_nonmax_u32_index_type};
 use goat_span::Span;
 use goat_syntax::line_terminator::{LS, LS_LAST_2_BYTES, LS_OR_PS_FIRST_BYTE, PS, PS_LAST_2_BYTES};
+use oxc_index::{IndexVec, define_nonmax_u32_index_type};
 
 /// Number of lines to check with linear search when translating byte position to line index
 const LINE_SEARCH_LINEAR_ITERATIONS: usize = 16;

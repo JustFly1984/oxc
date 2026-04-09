@@ -2,8 +2,8 @@ mod context;
 
 use context::Ctx;
 pub use context::{CtxCursor, CtxFlags};
-use oxc_index::IndexVec;
 use goat_syntax::node::NodeId;
+use oxc_index::IndexVec;
 use petgraph::Direction;
 
 use super::{

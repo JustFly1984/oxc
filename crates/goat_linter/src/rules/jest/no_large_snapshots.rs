@@ -1,6 +1,5 @@
 use std::ops::Deref;
 
-use lazy_regex::Regex;
 use goat_ast::{
     AstKind,
     ast::{Expression, ExpressionStatement, MemberExpression},
@@ -8,6 +7,7 @@ use goat_ast::{
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::{CompactStr, GetSpan, Span};
+use lazy_regex::Regex;
 use rustc_hash::FxHashMap;
 use schemars::JsonSchema;
 use serde::Deserialize;

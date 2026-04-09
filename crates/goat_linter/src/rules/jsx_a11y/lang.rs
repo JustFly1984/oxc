@@ -1,4 +1,3 @@
-use language_tags::LanguageTag;
 use goat_ast::{
     AstKind,
     ast::{JSXAttributeItem, JSXAttributeValue},
@@ -6,6 +5,7 @@ use goat_ast::{
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::{GetSpan, Span};
+use language_tags::LanguageTag;
 
 use crate::{
     AstNode,

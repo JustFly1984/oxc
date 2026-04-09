@@ -6,8 +6,8 @@ use std::{
 use goat_ast::{AstKind, ast::Expression};
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
-use oxc_resolver::{ResolveError, ResolveOptions, Resolver};
 use goat_span::Span;
+use oxc_resolver::{ResolveError, ResolveOptions, Resolver};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 

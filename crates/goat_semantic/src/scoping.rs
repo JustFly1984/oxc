@@ -4,7 +4,6 @@ use rustc_hash::{FxHashMap, FxHashSet};
 use self_cell::self_cell;
 
 use goat_allocator::{Allocator, CloneIn, Vec as ArenaVec};
-use oxc_index::IndexVec;
 use goat_span::{ArenaIdentHashMap, Ident, Span};
 use goat_syntax::constant_value::ConstantValue;
 use goat_syntax::{
@@ -13,6 +12,7 @@ use goat_syntax::{
     scope::{ScopeFlags, ScopeId},
     symbol::{SymbolFlags, SymbolId},
 };
+use oxc_index::IndexVec;
 
 use crate::multi_index_vec::multi_index_vec;
 

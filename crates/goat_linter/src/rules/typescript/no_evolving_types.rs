@@ -65,9 +65,10 @@ impl Rule for NoEvolvingTypes {
         // Only check `let` declarations (const/var have different semantics)
         let parent = ctx.nodes().parent_node(node.id());
         if let AstKind::VariableDeclaration(decl) = parent.kind()
-            && decl.kind != goat_ast::ast::VariableDeclarationKind::Let {
-                return;
-            }
+            && decl.kind != goat_ast::ast::VariableDeclarationKind::Let
+        {
+            return;
+        }
 
         let Some(init) = &declarator.init else {
             return;

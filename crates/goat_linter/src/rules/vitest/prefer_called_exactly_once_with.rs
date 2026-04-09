@@ -1,4 +1,3 @@
-use itertools::Itertools;
 use goat_allocator::Vec as OxcVec;
 use goat_ast::{
     AstKind,
@@ -7,6 +6,7 @@ use goat_ast::{
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::{CompactStr, GetSpan, Span};
+use itertools::Itertools;
 use std::collections::BTreeMap;
 
 use crate::{

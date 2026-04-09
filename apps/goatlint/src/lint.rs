@@ -11,7 +11,9 @@ use std::{
 use cow_utils::CowUtils;
 use ignore::{gitignore::Gitignore, overrides::OverrideBuilder};
 
-use goat_diagnostics::{DiagnosticSender, DiagnosticService, GraphicalReportHandler, GoatDiagnostic};
+use goat_diagnostics::{
+    DiagnosticSender, DiagnosticService, GoatDiagnostic, GraphicalReportHandler,
+};
 use goat_linter::{
     AllowWarnDeny, ConfigStore, ConfigStoreBuilder, ExternalLinter, ExternalPluginStore,
     InvalidFilterKind, LintFilter, LintOptions, LintRunner, LintServiceOptions, Linter,
@@ -1171,8 +1173,11 @@ mod test {
         // Verify that the CLI flag takes precedence over the config file value.
         // Config has `reportUnusedDisableDirectives: "warn"`, but CLI passes `off`,
         // so no unused-directive diagnostics should be reported.
-        let args =
-            &["-c", ".goatlintrc-with-rudd.json", "--report-unused-disable-directives-severity=off"];
+        let args = &[
+            "-c",
+            ".goatlintrc-with-rudd.json",
+            "--report-unused-disable-directives-severity=off",
+        ];
 
         Tester::new()
             .with_cwd("fixtures/cli/report_unused_directives".into())

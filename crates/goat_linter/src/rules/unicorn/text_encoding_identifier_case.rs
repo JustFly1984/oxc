@@ -18,7 +18,8 @@ fn text_encoding_identifier_case_diagnostic(
     good_encoding: &str,
     bad_encoding: &str,
 ) -> GoatDiagnostic {
-    GoatDiagnostic::warn(format!("Prefer `{good_encoding}` over `{bad_encoding}`.")).with_label(span)
+    GoatDiagnostic::warn(format!("Prefer `{good_encoding}` over `{bad_encoding}`."))
+        .with_label(span)
 }
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]

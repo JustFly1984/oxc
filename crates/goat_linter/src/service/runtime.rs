@@ -22,9 +22,9 @@ use smallvec::SmallVec;
 use goat_allocator::{Allocator, AllocatorGuard, AllocatorPool, Box as ArenaBox};
 use goat_diagnostics::{DiagnosticSender, DiagnosticService, Error, GoatDiagnostic};
 use goat_parser::{ParseOptions, Parser, Token, config::RuntimeParserConfig};
-use oxc_resolver::Resolver;
 use goat_semantic::{Semantic, SemanticBuilder};
 use goat_span::{CompactStr, SourceType, VALID_EXTENSIONS};
+use oxc_resolver::Resolver;
 
 use crate::{
     Fixer, Linter, Message, PossibleFixes,

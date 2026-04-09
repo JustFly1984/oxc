@@ -27,7 +27,9 @@ use crate::{
 
 fn always_return_diagnostic(span: Span) -> GoatDiagnostic {
     GoatDiagnostic::warn("Each then() should return a value or throw")
-        .with_help("Add a `return` statement to the `then()` callback, or use `async/await` instead.")
+        .with_help(
+            "Add a `return` statement to the `then()` callback, or use `async/await` instead.",
+        )
         .with_label(span)
 }
 

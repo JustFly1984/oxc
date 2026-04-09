@@ -1,7 +1,7 @@
-use lazy_regex::{Lazy, Regex, lazy_regex};
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::Span;
+use lazy_regex::{Lazy, Regex, lazy_regex};
 
 use crate::{context::LintContext, rule::Rule};
 

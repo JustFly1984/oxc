@@ -752,7 +752,10 @@ impl<'a> Visit<'a> for ResolveFinder<'a> {
     ) {
     }
 
-    fn visit_arrow_function_expression(&mut self, _it: &goat_ast::ast::ArrowFunctionExpression<'a>) {
+    fn visit_arrow_function_expression(
+        &mut self,
+        _it: &goat_ast::ast::ArrowFunctionExpression<'a>,
+    ) {
     }
 }
 

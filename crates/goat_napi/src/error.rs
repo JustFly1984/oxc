@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use napi_derive::napi;
 
-use goat_diagnostics::{LabeledSpan, NamedSource, GoatDiagnostic};
+use goat_diagnostics::{GoatDiagnostic, LabeledSpan, NamedSource};
 
 #[napi(object, use_nullable = true)]
 pub struct OxcError {

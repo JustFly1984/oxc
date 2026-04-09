@@ -65,9 +65,10 @@ impl Rule for NoImplicitAnyLet {
         // Only flag `let` declarations
         let parent = ctx.nodes().parent_node(node.id());
         if let AstKind::VariableDeclaration(decl) = parent.kind()
-            && decl.kind == goat_ast::ast::VariableDeclarationKind::Let {
-                ctx.diagnostic(no_implicit_any_let_diagnostic(declarator.span));
-            }
+            && decl.kind == goat_ast::ast::VariableDeclarationKind::Let
+        {
+            ctx.diagnostic(no_implicit_any_let_diagnostic(declarator.span));
+        }
     }
 }
 

@@ -1,9 +1,9 @@
 use std::borrow::Cow;
 
-use itertools::Itertools;
-use goat_diagnostics::{LabeledSpan, GoatDiagnostic};
+use goat_diagnostics::{GoatDiagnostic, LabeledSpan};
 use goat_macros::declare_goat_lint;
 use goat_span::Span;
+use itertools::Itertools;
 use rustc_hash::FxHashMap;
 use schemars::JsonSchema;
 use serde::Deserialize;

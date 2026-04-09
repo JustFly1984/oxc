@@ -1,11 +1,11 @@
 use goat_diagnostics::GoatDiagnostic;
-use oxc_index::{IndexVec, define_nonmax_u32_index_type};
 use goat_macros::declare_goat_lint;
 use goat_regular_expression::{
     ast::LookAroundAssertionKind,
     visit::{RegExpAstKind, Visit},
 };
 use goat_span::Span;
+use oxc_index::{IndexVec, define_nonmax_u32_index_type};
 
 use crate::{AstNode, context::LintContext, rule::Rule, utils::run_on_regex_node};
 

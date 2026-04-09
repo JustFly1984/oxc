@@ -8,7 +8,6 @@ use std::{
 };
 
 use convert_case::{Case, Casing};
-use lazy_regex::regex;
 use goat_allocator::Allocator;
 use goat_ast::ast::{
     Argument, ArrayExpression, ArrayExpressionElement, AssignmentTarget, CallExpression,
@@ -20,6 +19,7 @@ use goat_ast_visit::Visit;
 use goat_parser::Parser;
 use goat_span::{GetSpan, SourceType, Span};
 use goat_tasks_common::project_root;
+use lazy_regex::regex;
 use rustc_hash::{FxHashMap, FxHashSet};
 use serde::Serialize;
 

@@ -402,7 +402,9 @@ impl<'a> ContextHost<'a> {
                 .into_iter()
                 .map(|(message, span)| {
                     Message::new(
-                        GoatDiagnostic::error(message).with_label(span).with_severity(rule_severity),
+                        GoatDiagnostic::error(message)
+                            .with_label(span)
+                            .with_severity(rule_severity),
                         // TODO: fixer
                         // copy the structure of disable directives
                         PossibleFixes::None,

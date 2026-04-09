@@ -114,10 +114,11 @@ impl Rule for NoNoninteractiveElementInteractions {
         // Check for interactive event handlers
         for handler in INTERACTIVE_HANDLERS {
             if let Some(prop) = has_jsx_prop_ignore_case(jsx_el, handler)
-                && let goat_ast::ast::JSXAttributeItem::Attribute(attr) = prop {
-                    ctx.diagnostic(diagnostic(attr.span));
-                    return;
-                }
+                && let goat_ast::ast::JSXAttributeItem::Attribute(attr) = prop
+            {
+                ctx.diagnostic(diagnostic(attr.span));
+                return;
+            }
         }
     }
 }

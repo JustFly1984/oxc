@@ -1,7 +1,6 @@
 use std::hash::Hash;
 
 use cow_utils::CowUtils;
-use lazy_regex::Regex;
 use goat_ast::{
     AstKind,
     ast::{Argument, BinaryExpression, Expression},
@@ -9,6 +8,7 @@ use goat_ast::{
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::{CompactStr, GetSpan, Span};
+use lazy_regex::Regex;
 use rustc_hash::FxHashMap;
 use serde_json::Value;
 

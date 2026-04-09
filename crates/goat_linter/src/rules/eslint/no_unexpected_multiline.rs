@@ -1,8 +1,8 @@
-use memchr::{memchr, memrchr};
 use goat_ast::{AstKind, ast::BinaryOperator};
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::{GetSpan, Span};
+use memchr::{memchr, memrchr};
 
 use crate::{AstNode, context::LintContext, rule::Rule};
 

@@ -1,8 +1,8 @@
 use cow_utils::CowUtils;
-use lazy_regex::Regex;
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::Span;
+use lazy_regex::Regex;
 use schemars::JsonSchema;
 
 use crate::{

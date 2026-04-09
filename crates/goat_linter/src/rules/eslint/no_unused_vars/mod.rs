@@ -11,13 +11,13 @@ mod usage;
 
 use std::ops::Deref;
 
-use ignored::IgnoreReason;
-use options::{IgnorePattern, NoUnusedVarsFixMode, NoUnusedVarsOptions};
 use goat_ast::AstKind;
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_semantic::{AstNode, ScopeFlags, SymbolFlags};
 use goat_span::{GetSpan, Span};
+use ignored::IgnoreReason;
+use options::{IgnorePattern, NoUnusedVarsFixMode, NoUnusedVarsOptions};
 use symbol::Symbol;
 
 use crate::{

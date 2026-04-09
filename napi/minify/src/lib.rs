@@ -26,8 +26,8 @@ use goat_diagnostics::GoatDiagnostic;
 use goat_minifier::Minifier;
 use goat_napi::OxcError;
 use goat_parser::Parser;
-use oxc_sourcemap::napi::SourceMap;
 use goat_span::SourceType;
+use oxc_sourcemap::napi::SourceMap;
 
 pub use crate::options::*;
 

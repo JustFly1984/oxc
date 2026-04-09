@@ -1,7 +1,6 @@
 use std::{borrow::Cow, sync::OnceLock};
 
 use cow_utils::CowUtils;
-use itertools::Itertools;
 use goat_ast::{
     AstKind,
     ast::{JSXAttributeItem, JSXAttributeName, JSXElementName},
@@ -9,6 +8,7 @@ use goat_ast::{
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::{GetSpan, Span};
+use itertools::Itertools;
 use phf::{Map, Set, phf_map, phf_set};
 use rustc_hash::{FxHashMap, FxHashSet};
 use schemars::JsonSchema;

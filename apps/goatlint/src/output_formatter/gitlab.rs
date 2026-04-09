@@ -167,7 +167,7 @@ mod test {
     use std::path::{Path, PathBuf};
 
     use goat_diagnostics::{
-        Error, NamedSource, GoatDiagnostic,
+        Error, GoatDiagnostic, NamedSource,
         reporter::{DiagnosticReporter, DiagnosticResult},
     };
     use goat_span::Span;

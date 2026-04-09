@@ -749,10 +749,7 @@ fn optional_catch_binding() {
     test_same("try { foo } catch(e) { var {e} = obj }");
     test_same("try { foo } catch(e) { var [e] = arr }");
     // var hoists from nested blocks inside catch, so catch param must be kept.
-    test(
-        "try { foo } catch(e) { if (true) { var e = 2 } }",
-        "try { foo } catch(e) { var e = 2 }",
-    );
+    test("try { foo } catch(e) { if (true) { var e = 2 } }", "try { foo } catch(e) { var e = 2 }");
     test_same("try { foo } catch(e) { for (var e = 0;;) break }");
     // var inside a function does NOT interact with the catch parameter;
     // var doesn't hoist out of functions, so the catch param can be removed.

@@ -9,8 +9,8 @@
 // `--all-features` for this test file to run.
 #![cfg(feature = "ruledocs")]
 
-use lazy_regex::Regex;
 use goat_linter::{rules::RULES, table::RuleTable};
+use lazy_regex::Regex;
 use rustc_hash::FxHashSet;
 use schemars::r#gen;
 

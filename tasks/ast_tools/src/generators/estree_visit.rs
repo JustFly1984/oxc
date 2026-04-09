@@ -494,7 +494,8 @@ fn generate(codegen: &Codegen) -> Codes {
 
     // Create 2 type ID map variants for parser and goatlint, by setting `LINTER` const,
     // and running through minifier to shake out irrelevant code
-    let [type_ids_map_parser, type_ids_map_goatlint] = generate_variants!(&type_ids_map, ["LINTER"]);
+    let [type_ids_map_parser, type_ids_map_goatlint] =
+        generate_variants!(&type_ids_map, ["LINTER"]);
 
     // Versions of `visitor.d.ts` for parser and Oxlint import ESTree types from different places.
     // Oxlint version also allows any arbitrary properties (selectors).

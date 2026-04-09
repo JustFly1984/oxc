@@ -1,7 +1,7 @@
 use std::{borrow::Cow, fmt};
 
-use lazy_regex::{Lazy, Regex, lazy_regex};
 use goat_span::CompactStr;
+use lazy_regex::{Lazy, Regex, lazy_regex};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize, de};
 

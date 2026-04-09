@@ -1,9 +1,9 @@
 use super::json_utils::is_json_file;
 
 use cow_utils::CowUtils;
-use nodejs_built_in_modules::is_nodejs_builtin_module;
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
+use nodejs_built_in_modules::is_nodejs_builtin_module;
 
 use crate::{
     context::LintContext,

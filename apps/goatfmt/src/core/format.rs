@@ -66,7 +66,11 @@ impl SourceFormatter {
             ) => (Ok(Self::format_by_toml(source_text, toml_options)), insert_final_newline),
             (
                 FormatFileStrategy::OxfmtJson { .. },
-                ResolvedOptions::OxfmtJson { json_options, sort_package_json, insert_final_newline },
+                ResolvedOptions::OxfmtJson {
+                    json_options,
+                    sort_package_json,
+                    insert_final_newline,
+                },
             ) => (
                 Self::format_by_json(source_text, json_options, sort_package_json.as_ref()),
                 insert_final_newline,
@@ -198,8 +202,7 @@ impl SourceFormatter {
             Cow::Borrowed(source_text)
         };
 
-        goat_json_formatter::format(&source_text, options)
-            .map_err(GoatDiagnostic::error)
+        goat_json_formatter::format(&source_text, options).map_err(GoatDiagnostic::error)
     }
 }
 

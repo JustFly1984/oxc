@@ -11,7 +11,7 @@ use goat_ast::{
     },
 };
 use goat_ast_visit::{Visit, walk};
-use goat_diagnostics::{LabeledSpan, GoatDiagnostic};
+use goat_diagnostics::{GoatDiagnostic, LabeledSpan};
 use goat_macros::declare_goat_lint;
 use goat_semantic::{ReferenceId, ScopeId, SymbolId};
 use goat_span::{GetSpan, Span};

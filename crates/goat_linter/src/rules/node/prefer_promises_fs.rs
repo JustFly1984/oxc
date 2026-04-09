@@ -78,10 +78,7 @@ fn test() {
         r#"const path = require("path");"#,
     ];
 
-    let fail = vec![
-        r#"const fs = require("fs");"#,
-        r#"const fs = require("node:fs");"#,
-    ];
+    let fail = vec![r#"const fs = require("fs");"#, r#"const fs = require("node:fs");"#];
 
     Tester::new(PreferPromisesFs::NAME, PreferPromisesFs::PLUGIN, pass, fail).test_and_snapshot();
 }

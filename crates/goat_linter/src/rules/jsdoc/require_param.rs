@@ -2,8 +2,8 @@ use std::sync::{
     OnceLock, {RwLock, RwLockWriteGuard},
 };
 
-use lazy_regex::Regex;
 use goat_span::Span;
+use lazy_regex::Regex;
 use rustc_hash::{FxHashMap, FxHashSet};
 use schemars::JsonSchema;
 use serde::Deserialize;

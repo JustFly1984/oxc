@@ -94,7 +94,11 @@ fn get_assigned_identifier_name<'a>(
     }
 }
 
-fn is_validated_soon(node_id: goat_syntax::node::NodeId, name: &str, ctx: &LintContext<'_>) -> bool {
+fn is_validated_soon(
+    node_id: goat_syntax::node::NodeId,
+    name: &str,
+    ctx: &LintContext<'_>,
+) -> bool {
     let Some((statements, statement_index)) = find_enclosing_statement_body(node_id, ctx) else {
         return false;
     };

@@ -89,8 +89,7 @@ mod tests {
 
     #[test]
     fn test_empty_array_root_dir() {
-        let settings: NextPluginSettings =
-            serde_json::from_str(r#"{ "rootDir": [] }"#).unwrap();
+        let settings: NextPluginSettings = serde_json::from_str(r#"{ "rootDir": [] }"#).unwrap();
         let dirs = settings.get_root_dirs();
         assert!(dirs.is_empty());
     }

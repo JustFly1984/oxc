@@ -5,7 +5,6 @@ mod tests;
 
 use std::path::Path;
 
-use javascript_globals::GLOBALS;
 use goat_allocator::GetAddress;
 use goat_ast::{
     AstKind,
@@ -19,6 +18,7 @@ use goat_syntax::{
     node::NodeId,
     symbol::{SymbolFlags, SymbolId},
 };
+use javascript_globals::GLOBALS;
 
 use crate::{
     context::LintContext,

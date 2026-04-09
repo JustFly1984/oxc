@@ -1,8 +1,8 @@
 use super::json_utils::is_json_file;
 
-use lazy_regex::regex_is_match;
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
+use lazy_regex::regex_is_match;
 use spdx::Expression;
 
 use crate::{

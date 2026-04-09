@@ -8,7 +8,9 @@ use goat_ast::{
     ast::{BindingIdentifier, *},
 };
 use goat_ecmascript::{ToBoolean, WithoutGlobalReferenceInformation};
-use goat_semantic::{AstNode, AstNodes, IsGlobalReference, NodeId, ReferenceId, Semantic, SymbolId};
+use goat_semantic::{
+    AstNode, AstNodes, IsGlobalReference, NodeId, ReferenceId, Semantic, SymbolId,
+};
 use goat_span::{GetSpan, Span, ident::REQUIRE};
 use goat_syntax::{
     identifier::is_irregular_whitespace,

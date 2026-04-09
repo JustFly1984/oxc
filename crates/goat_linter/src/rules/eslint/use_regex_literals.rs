@@ -53,15 +53,19 @@ impl Rule for UseRegexLiterals {
         match node.kind() {
             AstKind::NewExpression(expr) => {
                 if let Expression::Identifier(ident) = &expr.callee
-                    && ident.name == "RegExp" && is_simple_regex_args(&expr.arguments) {
-                        ctx.diagnostic(use_regex_literals_diagnostic(expr.span));
-                    }
+                    && ident.name == "RegExp"
+                    && is_simple_regex_args(&expr.arguments)
+                {
+                    ctx.diagnostic(use_regex_literals_diagnostic(expr.span));
+                }
             }
             AstKind::CallExpression(expr) => {
                 if let Expression::Identifier(ident) = &expr.callee
-                    && ident.name == "RegExp" && is_simple_regex_args(&expr.arguments) {
-                        ctx.diagnostic(use_regex_literals_diagnostic(expr.span));
-                    }
+                    && ident.name == "RegExp"
+                    && is_simple_regex_args(&expr.arguments)
+                {
+                    ctx.diagnostic(use_regex_literals_diagnostic(expr.span));
+                }
             }
             _ => {}
         }

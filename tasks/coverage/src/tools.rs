@@ -10,7 +10,7 @@ use std::{
 use goat::{
     allocator::Allocator,
     ast_visit::utf8_to_utf16::Utf8ToUtf16,
-    diagnostics::{GraphicalReportHandler, GraphicalTheme, NamedSource, GoatDiagnostic},
+    diagnostics::{GoatDiagnostic, GraphicalReportHandler, GraphicalTheme, NamedSource},
     minifier::CompressOptions,
     parser::{ParseOptions, Parser, ParserReturn, config::RuntimeParserConfig},
     span::{ModuleKind, SourceType, Span},

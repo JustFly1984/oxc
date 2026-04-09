@@ -1,8 +1,8 @@
-use itertools::Itertools;
 use goat_ast::ast::{ModuleDeclaration, Statement};
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::{GetSpan, Span};
+use itertools::Itertools;
 
 use crate::{context::LintContext, rule::Rule};
 

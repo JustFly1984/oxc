@@ -1,4 +1,3 @@
-use lazy_regex::Regex;
 use goat_ast::{
     AstKind,
     ast::{
@@ -6,6 +5,7 @@ use goat_ast::{
         AssignmentTargetProperty, BindingPattern, ClassElement, ObjectAssignmentTarget,
     },
 };
+use lazy_regex::Regex;
 
 use super::{NoUnusedVars, Symbol, options::IgnorePattern};
 

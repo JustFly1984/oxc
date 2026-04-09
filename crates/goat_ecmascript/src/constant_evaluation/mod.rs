@@ -13,9 +13,9 @@ pub use value_type::{DetermineValueType, ValueType};
 
 use std::borrow::Cow;
 
+use goat_ast::{AstBuilder, ast::*};
 use num_bigint::BigInt;
 use num_traits::{ToPrimitive, Zero};
-use goat_ast::{AstBuilder, ast::*};
 
 use equality_comparison::{abstract_equality_comparison, strict_equality_comparison};
 

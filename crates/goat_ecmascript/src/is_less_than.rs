@@ -1,8 +1,8 @@
 use std::cmp::Ordering;
 
+use goat_ast::ast::Expression;
 use num_bigint::BigInt;
 use num_traits::FromPrimitive;
-use goat_ast::ast::Expression;
 
 use crate::{
     ToBigInt, ToJsString,
