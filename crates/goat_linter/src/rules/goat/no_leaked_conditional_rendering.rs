@@ -128,15 +128,15 @@ fn test() {
     use crate::tester::Tester;
 
     let pass = vec![
-        r#"<div>{count > 0 && <Component />}</div>"#,
-        r#"<div>{Boolean(count) && <Component />}</div>"#,
-        r#"<div>{!!count && <Component />}</div>"#,
-        r#"<div>{count ? <Component /> : null}</div>"#,
-        r#"<div>{true && <Component />}</div>"#,
+        r"<div>{count > 0 && <Component />}</div>",
+        r"<div>{Boolean(count) && <Component />}</div>",
+        r"<div>{!!count && <Component />}</div>",
+        r"<div>{count ? <Component /> : null}</div>",
+        r"<div>{true && <Component />}</div>",
     ];
 
     let fail =
-        vec![r#"<div>{count && <Component />}</div>"#, r#"<div>{data.length && <List />}</div>"#];
+        vec![r"<div>{count && <Component />}</div>", r"<div>{data.length && <List />}</div>"];
 
     Tester::new(
         NoLeakedConditionalRendering::NAME,

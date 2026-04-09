@@ -1,0 +1,15 @@
+---
+source: apps/goatlint/src/tester.rs
+---
+########## 
+arguments: --config goatlint-no-console.json
+working directory: fixtures/cli/nested_config
+----------
+Failed to parse goatlint configuration file.
+
+  x Failed to parse config <cwd>/fixtures/cli/nested_config/goatlint-no-console.json with error Os { code: 2, kind: NotFound, message: "No such file or
+  | directory" }
+
+----------
+CLI result: InvalidOptionConfig
+----------

@@ -141,24 +141,24 @@ fn test() {
 
     let pass = vec![
         (
-            r#"
+            r"
             let foo;
             export { foo };
-            "#,
+            ",
             None,
         ),
         (
-            r#"
+            r"
             let foo, bar;
             export { foo, bar };
-            "#,
+            ",
             None,
         ),
         (
-            r#"
+            r"
             let foo, bar, baz;
             export { foo, bar, baz };
-            "#,
+            ",
             None,
         ),
         (
@@ -170,9 +170,9 @@ fn test() {
             Some(json!([{ "amountOfExportsToConsiderModuleAsBarrel": 0 }])),
         ),
         (
-            r#"
+            r"
             export default defineFoo({});
-            "#,
+            ",
             Some(json!([{ "amountOfExportsToConsiderModuleAsBarrel": 0 }])),
         ),
     ];
@@ -199,7 +199,7 @@ fn test() {
             r#"export { foo, bar, baz } from "foo";"#,
             Some(json!([{ "amountOfExportsToConsiderModuleAsBarrel": 2 }])),
         ),
-        (r#"export default { var1, var2, var3, var4 };"#, None),
+        (r"export default { var1, var2, var3, var4 };", None),
     ];
 
     Tester::new(AvoidBarrelFiles::NAME, AvoidBarrelFiles::PLUGIN, pass, fail)

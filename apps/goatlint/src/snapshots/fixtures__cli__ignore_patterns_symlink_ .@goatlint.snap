@@ -1,0 +1,38 @@
+---
+source: apps/goatlint/src/tester.rs
+---
+########## 
+arguments: 
+working directory: fixtures/cli/ignore_patterns_symlink
+----------
+
+  ! eslint(no-debugger): `debugger` statement is not allowed
+   ,-[testdir/ignored_dir/index.ts:1:1]
+ 1 | debugger;
+   : ^^^^^^^^^
+   `----
+  help: Remove the debugger statement
+
+Found 1 warning and 0 errors.
+Finished in <variable>ms on 2 files using 1 threads.
+----------
+CLI result: LintSucceeded
+----------
+
+########## 
+arguments: .
+working directory: fixtures/cli/ignore_patterns_symlink
+----------
+
+  ! eslint(no-debugger): `debugger` statement is not allowed
+   ,-[testdir/ignored_dir/index.ts:1:1]
+ 1 | debugger;
+   : ^^^^^^^^^
+   `----
+  help: Remove the debugger statement
+
+Found 1 warning and 0 errors.
+Finished in <variable>ms on 2 files using 1 threads.
+----------
+CLI result: LintSucceeded
+----------

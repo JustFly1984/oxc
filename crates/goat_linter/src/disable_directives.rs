@@ -155,9 +155,9 @@ impl RuleCommentRule {
             .with_kind(FixKind::Suggestion);
         }
 
-        unreachable!(
-            "A `RuleCommentRule` should have a comma, because only one rule should be RuleCommentType::All"
-        );
+        // No comma found — this is the only rule in the comment.
+        // Delete just the rule name.
+        Fix::delete(self.name_span).with_kind(FixKind::Suggestion)
     }
 }
 
@@ -1484,18 +1484,18 @@ mod tests {
     }
 
     #[test]
-    #[should_panic(
-        expected = "A `RuleCommentRule` should have a comma, because only one rule should be RuleCommentType::All"
-    )]
     #[expect(clippy::cast_possible_truncation)] // for `as u32`
-    fn test_rule_comment_rule_create_fix_panic() {
-        // This test is expected to panic because it is a standalone rule.
-        // Standalone rules should be `RuleCommentType::All`.
+    fn test_rule_comment_rule_create_fix_single_rule() {
+        // When there's only one rule in the comment (no commas), the fix should
+        // delete just the rule name.
         let source_text = "// eslint-disable-next-line max-params";
         let comment_span = Span::new(0, source_text.len() as u32);
 
-        RuleCommentRule { rule_name: "max-params".to_string(), name_span: Span::sized(28, 10) }
-            .create_fix(source_text, comment_span);
+        let fix =
+            RuleCommentRule { rule_name: "max-params".to_string(), name_span: Span::sized(28, 10) }
+                .create_fix(source_text, comment_span);
+
+        assert_eq!(fix.span, Span::sized(28, 10)); // just the rule name
     }
 
     #[test]

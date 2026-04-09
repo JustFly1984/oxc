@@ -32,7 +32,7 @@ tags: None
 code: ""
 code_description.href: "None"
 message: "Unused goatlint-disable directive (no problems were reported)."
-range: Range { start: Position { line: 0, character: 0 }, end: Position { line: 0, character: 56 } }
+range: Range { start: Position { line: 0, character: 0 }, end: Position { line: 0, character: 58 } }
 related_information: None
 severity: Some(Error)
 source: Some("goat")
@@ -50,7 +50,7 @@ tags: None
 code: ""
 code_description.href: "None"
 message: "Unused goatlint-disable directive (no problems were reported)."
-range: Range { start: Position { line: 8, character: 0 }, end: Position { line: 8, character: 52 } }
+range: Range { start: Position { line: 8, character: 0 }, end: Position { line: 8, character: 54 } }
 related_information: None
 severity: Some(Error)
 source: Some("goat")
@@ -190,7 +190,7 @@ TextEdit: TextEdit {
     range: Range {
         start: Position {
             line: 5,
-            character: 39,
+            character: 41,
         },
         end: Position {
             line: 5,
@@ -253,7 +253,7 @@ TextEdit: TextEdit {
     range: Range {
         start: Position {
             line: 5,
-            character: 39,
+            character: 41,
         },
         end: Position {
             line: 5,

@@ -1,0 +1,28 @@
+---
+source: apps/goatlint/src/tester.rs
+---
+########## 
+arguments: -c goatlint-eslint.json test.js
+working directory: fixtures/cli/eslint_and_typescript_alias_rules
+----------
+Failed to parse goatlint configuration file.
+
+  x Failed to parse config <cwd>/fixtures/cli/eslint_and_typescript_alias_rules/goatlint-eslint.json with error Os { code: 2, kind: NotFound, message: "No
+  | such file or directory" }
+
+----------
+CLI result: InvalidOptionConfig
+----------
+
+########## 
+arguments: -c goatlint-typescript.json test.js
+working directory: fixtures/cli/eslint_and_typescript_alias_rules
+----------
+Failed to parse goatlint configuration file.
+
+  x Failed to parse config <cwd>/fixtures/cli/eslint_and_typescript_alias_rules/goatlint-typescript.json with error Os { code: 2, kind: NotFound, message:
+  | "No such file or directory" }
+
+----------
+CLI result: InvalidOptionConfig
+----------

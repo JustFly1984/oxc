@@ -92,7 +92,7 @@ impl Rule for JsonNoTrailingCommas {
 fn test() {
     use crate::tester::Tester;
 
-    let pass = vec![r#"{"name": "foo"}"#, r#"[1, 2, 3]"#, r#"{"a": [1, 2]}"#, "{}", "[]"];
+    let pass = vec![r#"{"name": "foo"}"#, r"[1, 2, 3]", r#"{"a": [1, 2]}"#, "{}", "[]"];
 
     let fail = vec![r#"{"name": "foo",}"#, "[1, 2, 3,]", r#"{"a": 1, "b": 2,}"#];
 

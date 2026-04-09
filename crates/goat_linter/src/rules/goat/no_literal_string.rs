@@ -200,7 +200,7 @@ fn test() {
     let fail: Vec<(&str, Option<Value>)> = vec![
         ("const el = <div>Hello world</div>;", config.clone()),
         ("const el = <><span>Save</span></>;", config.clone()),
-        ("const el = <Button>Submit</Button>;", config.clone()),
+        ("const el = <Button>Submit</Button>;", config),
     ];
 
     Tester::new(NoLiteralString::NAME, NoLiteralString::PLUGIN, pass, fail)

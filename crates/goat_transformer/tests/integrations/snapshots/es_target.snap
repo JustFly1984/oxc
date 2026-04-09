@@ -14,7 +14,7 @@ Math.pow(a, b);
 ########## 2 es2016
 async function foo() {}
 ----------
-import _asyncToGenerator from '@goat-project/runtime/helpers/asyncToGenerator';
+import _asyncToGenerator from 'goatlint-runtime/helpers/asyncToGenerator';
 function foo() {
 	return _foo.apply(this, arguments);
 }
@@ -26,7 +26,7 @@ function _foo() {
 ########## 3 es2017
 ({ ...x })
 ----------
-import _objectSpread from '@goat-project/runtime/helpers/objectSpread2';
+import _objectSpread from 'goatlint-runtime/helpers/objectSpread2';
 _objectSpread({}, x);
 
 ########## 4 es2018
@@ -79,7 +79,7 @@ class foo {}
 ########## 10 es2021
 class Foo { #a; }
 ----------
-import _classPrivateFieldInitSpec from '@goat-project/runtime/helpers/classPrivateFieldInitSpec';
+import _classPrivateFieldInitSpec from 'goatlint-runtime/helpers/classPrivateFieldInitSpec';
 var _a = /* @__PURE__ */ new WeakMap();
 class Foo {
 	constructor() {

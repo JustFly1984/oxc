@@ -1,0 +1,28 @@
+---
+source: apps/goatlint/src/tester.rs
+---
+########## 
+arguments: -c goatlint-jest.json test.js
+working directory: fixtures/cli/jest_and_vitest_alias_rules
+----------
+Failed to parse goatlint configuration file.
+
+  x Failed to parse config <cwd>/fixtures/cli/jest_and_vitest_alias_rules/goatlint-jest.json with error Os { code: 2, kind: NotFound, message: "No such file
+  | or directory" }
+
+----------
+CLI result: InvalidOptionConfig
+----------
+
+########## 
+arguments: -c goatlint-vitest.json test.js
+working directory: fixtures/cli/jest_and_vitest_alias_rules
+----------
+Failed to parse goatlint configuration file.
+
+  x Failed to parse config <cwd>/fixtures/cli/jest_and_vitest_alias_rules/goatlint-vitest.json with error Os { code: 2, kind: NotFound, message: "No such
+  | file or directory" }
+
+----------
+CLI result: InvalidOptionConfig
+----------

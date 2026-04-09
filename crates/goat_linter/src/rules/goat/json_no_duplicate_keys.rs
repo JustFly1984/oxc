@@ -96,8 +96,8 @@ fn test() {
     let pass = vec![
         r#"{"name": "foo", "version": "1.0"}"#,
         r#"{"a": 1, "b": 2, "c": 3}"#,
-        r#"[1, 2, 3]"#,
-        r#"{}"#,
+        r"[1, 2, 3]",
+        r"{}",
     ];
 
     let fail = vec![

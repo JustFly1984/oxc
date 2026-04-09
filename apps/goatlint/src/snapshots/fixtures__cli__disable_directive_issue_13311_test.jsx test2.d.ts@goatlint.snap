@@ -1,0 +1,41 @@
+---
+source: apps/goatlint/src/tester.rs
+---
+########## 
+arguments: test.jsx test2.d.ts
+working directory: fixtures/cli/disable_directive_issue_13311
+----------
+
+  ! eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'EVENTS.CLEAR'
+    ,-[test.jsx:10:6]
+  7 |   useEffect(() => {
+  8 |     emit(EVENTS.CLEAR);
+    :          ^^^|^^
+    :             `-- useEffect uses `EVENTS.CLEAR` here
+  9 |     // oxlint-disable-next-line exhaustive-deps
+ 10 |   }, []);
+    :      ^^
+ 11 | 
+    `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-react-hooks(rules-of-hooks): React Hook "useMostRelevantBreakdownType" is called in function "Anonymous" that is neither a React function component nor a custom React Hook
+  | function. React component names must start with an uppercase letter. React Hook names must start with the word "use".
+    ,-[test.jsx:24:3]
+ 20 |     
+ 21 | ,-> const cleanBreakdownParams = (cleanedParams, filters) => {
+ 22 | |     // this isn't a react hook
+ 23 | |     // oxlint-disable-next-line react-hooks/rules-of-hooks
+ 24 | |     useMostRelevantBreakdownType(cleanedParams, filters);
+    : |     ^^^^^^^^^^^^^^|^^^^^^^^^^^^^
+    : |                   `-- Hook is called here
+ 25 | |-> }
+    : `---- Outer function
+ 26 |     
+    `----
+
+Found 1 warning and 1 error.
+Finished in <variable>ms on 2 files with 3 rules using 1 threads.
+----------
+CLI result: LintFoundErrors
+----------

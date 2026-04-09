@@ -100,8 +100,8 @@ fn test() {
 
     let fix = vec![
         // Only property
-        (r#"{"keywords":[]}"#, r#"{}"#, None),
-        (r#"{"publishConfig":{}}"#, r#"{}"#, None),
+        (r#"{"keywords":[]}"#, r"{}", None),
+        (r#"{"publishConfig":{}}"#, r"{}", None),
         // First property with trailing comma — remove property + comma
         (r#"{"keywords":[],"name":"demo"}"#, r#"{"name":"demo"}"#, None),
         // Last property with leading comma — remove comma + property

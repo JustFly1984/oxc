@@ -264,12 +264,12 @@ fn test() {
 	    test('something');
         ",
         // test.extend() is a test factory, not a test call
-        r#"
+        r"
             import { test } from 'vitest';
             const myTest = test.extend({
                 fixture: async ({}, use) => { await use('value'); },
             });
-        "#,
+        ",
     ];
 
     let fail_vitest = vec![

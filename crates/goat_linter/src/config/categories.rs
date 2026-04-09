@@ -117,8 +117,7 @@ mod tests {
     fn test_categories_filters_count() {
         let categories: OxlintCategories =
             serde_json::from_str(r#"{ "correctness": "warn", "pedantic": "off" }"#).unwrap();
-        let filters: Vec<_> = categories.filters().collect();
-        assert_eq!(filters.len(), 2);
+        assert_eq!(categories.filters().count(), 2);
     }
 
     #[test]

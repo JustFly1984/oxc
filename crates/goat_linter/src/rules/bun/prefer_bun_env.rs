@@ -89,7 +89,7 @@ fn test() {
         r#"process.env["FOO"]"#,
         "const x = process.env",
         "f(process.env)",
-        r#"process['env']"#,
+        r"process['env']",
     ];
 
     let fix = vec![
@@ -97,7 +97,7 @@ fn test() {
         (r#"process.env["FOO"]"#, r#"Bun.env["FOO"]"#),
         ("const x = process.env", "const x = Bun.env"),
         ("f(process.env)", "f(Bun.env)"),
-        (r#"process['env']"#, r#"Bun['env']"#),
+        (r"process['env']", r"Bun['env']"),
     ];
 
     Tester::new(PreferBunEnv::NAME, PreferBunEnv::PLUGIN, pass, fail)

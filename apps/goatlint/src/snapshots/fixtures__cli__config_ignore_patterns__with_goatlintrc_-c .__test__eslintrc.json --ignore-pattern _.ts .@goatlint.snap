@@ -1,0 +1,15 @@
+---
+source: apps/goatlint/src/tester.rs
+---
+########## 
+arguments: -c ./test/eslintrc.json --ignore-pattern *.ts .
+working directory: fixtures/cli/config_ignore_patterns/with_goatlintrc
+----------
+Failed to parse goatlint configuration file.
+
+  x Failed to parse config <cwd>/fixtures/cli/config_ignore_patterns/with_goatlintrc/./test/eslintrc.json with error Os { code: 2, kind: NotFound, message:
+  | "No such file or directory" }
+
+----------
+CLI result: InvalidOptionConfig
+----------

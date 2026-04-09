@@ -314,290 +314,290 @@ fn test() {
         (r"const C = () => <div>{true && <span />}</div>", None),
         // Default config: && with unsafe left side
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{count && title}</div>
             }
-        "#,
+        ",
             None,
         ),
         (
-            r#"
+            r"
             const Component = ({ count }) => {
               return <div>{count && <span>There are {count} results</span>}</div>
             }
-        "#,
+        ",
             None,
         ),
         (
-            r#"
+            r"
             const Component = ({ elements }) => {
               return <div>{elements.length && <List elements={elements}/>}</div>
             }
-        "#,
+        ",
             None,
         ),
         (
-            r#"
+            r"
             const Component = ({ nestedCollection }) => {
               return <div>{nestedCollection.elements.length && <List elements={nestedCollection.elements}/>}</div>
             }
-        "#,
+        ",
             None,
         ),
         (
-            r#"
+            r"
             const Component = ({ elements }) => {
               return <div>{elements[0] && <List elements={elements}/>}</div>
             }
-        "#,
+        ",
             None,
         ),
         (
-            r#"
+            r"
             const Component = ({ numberA, numberB }) => {
               return <div>{(numberA || numberB) && <Results>{numberA+numberB}</Results>}</div>
             }
-        "#,
+        ",
             None,
         ),
         // Default config: && with both strategies explicit
         (
-            r#"
+            r"
             const Component = ({ numberA, numberB }) => {
               return <div>{(numberA || numberB) && <Results>{numberA+numberB}</Results>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce", "ternary"] }])),
         ),
         // Ternary-only: ALL && are flagged even with boolean-safe left side
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{count && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count }) => {
               return <div>{count && <span>There are {count} results</span>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ elements }) => {
               return <div>{elements.length && <List elements={elements}/>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ nestedCollection }) => {
               return <div>{nestedCollection.elements.length && <List elements={nestedCollection.elements}/>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ elements }) => {
               return <div>{elements[0] && <List elements={elements}/>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ numberA, numberB }) => {
               return <div>{(numberA || numberB) && <Results>{numberA+numberB}</Results>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ someCondition, title }) => {
               return <div>{!someCondition && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{!!count && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{count > 0 && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{0 != count && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count, total, title }) => {
               return <div>{count < total && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count, title, somethingElse }) => {
               return <div>{!!(count && somethingElse) && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         // Coerce-only: && with unsafe left side
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{count && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count }) => {
               return <div>{count && <span>There are {count} results</span>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ elements }) => {
               return <div>{elements.length && <List elements={elements}/>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ nestedCollection }) => {
               return <div>{nestedCollection.elements.length && <List elements={nestedCollection.elements}/>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ elements }) => {
               return <div>{elements[0] && <List elements={elements}/>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ numberA, numberB }) => {
               return <div>{(numberA || numberB) && <Results>{numberA+numberB}</Results>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ connection, hasError, hasErrorUpdate}) => {
               return <div>{connection && (hasError || hasErrorUpdate)}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         // Coerce-only: ternary with null alternate should use coerce
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{count ? title : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{!count ? title : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count, somethingElse, title }) => {
               return <div>{count && somethingElse ? title : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         // Chained && with coerce
         (
-            r#"
+            r"
             const Component = ({ items, somethingElse, title }) => {
               return <div>{items.length > 0 && somethingElse && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const MyComponent = () => {
               const items = []
               const breakpoint = { phones: true }
               return <div>{items.length > 0 && breakpoint.phones && <span />}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce", "ternary"] }])),
         ),
         // Coerce-only with ternary inside &&
         (
-            r#"
+            r"
             const MyComponent = () => {
               return <div>{maybeObject && (isFoo ? <Aaa /> : <Bbb />)}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         // Attribute values (default: not ignored)
         (
-            r#"
+            r"
             const Component = ({ enabled, checked }) => {
               return <CheckBox checked={enabled && checked} />
             }
-        "#,
+        ",
             None,
         ),
         (
-            r#"
+            r"
             const isOpen = 0;
             const Component = () => {
               return <Popover open={isOpen && items.length > 0} />
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         // ignoreAttributes: still checks children inside attribute JSX
         (
-            r#"
+            r"
             const Component = ({ enabled }) => {
               return (
                 <Foo bar={
@@ -605,7 +605,7 @@ fn test() {
                 } />
               )
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "ignoreAttributes": true }])),
         ),
     ];
@@ -613,464 +613,464 @@ fn test() {
     let fix = vec![
         // Default config: fix with ternary (preferred first strategy)
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{count && title}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count, title }) => {
               return <div>{count ? title : null}</div>
             }
-        "#,
+        ",
             None,
         ),
         (
-            r#"
+            r"
             const Component = ({ count }) => {
               return <div>{count && <span>There are {count} results</span>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count }) => {
               return <div>{count ? <span>There are {count} results</span> : null}</div>
             }
-        "#,
+        ",
             None,
         ),
         (
-            r#"
+            r"
             const Component = ({ elements }) => {
               return <div>{elements.length && <List elements={elements}/>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ elements }) => {
               return <div>{elements.length ? <List elements={elements}/> : null}</div>
             }
-        "#,
+        ",
             None,
         ),
         (
-            r#"
+            r"
             const Component = ({ nestedCollection }) => {
               return <div>{nestedCollection.elements.length && <List elements={nestedCollection.elements}/>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ nestedCollection }) => {
               return <div>{nestedCollection.elements.length ? <List elements={nestedCollection.elements}/> : null}</div>
             }
-        "#,
+        ",
             None,
         ),
         (
-            r#"
+            r"
             const Component = ({ elements }) => {
               return <div>{elements[0] && <List elements={elements}/>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ elements }) => {
               return <div>{elements[0] ? <List elements={elements}/> : null}</div>
             }
-        "#,
+        ",
             None,
         ),
         (
-            r#"
+            r"
             const Component = ({ numberA, numberB }) => {
               return <div>{(numberA || numberB) && <Results>{numberA+numberB}</Results>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ numberA, numberB }) => {
               return <div>{(numberA || numberB) ? <Results>{numberA+numberB}</Results> : null}</div>
             }
-        "#,
+        ",
             None,
         ),
         // Explicit ["coerce", "ternary"]: first strategy is coerce
         (
-            r#"
+            r"
             const Component = ({ numberA, numberB }) => {
               return <div>{(numberA || numberB) && <Results>{numberA+numberB}</Results>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ numberA, numberB }) => {
               return <div>{!!(numberA || numberB) && <Results>{numberA+numberB}</Results>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce", "ternary"] }])),
         ),
         // Ternary-only fixes
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{count && title}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count, title }) => {
               return <div>{count ? title : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count }) => {
               return <div>{count && <span>There are {count} results</span>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count }) => {
               return <div>{count ? <span>There are {count} results</span> : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ elements }) => {
               return <div>{elements.length && <List elements={elements}/>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ elements }) => {
               return <div>{elements.length ? <List elements={elements}/> : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ nestedCollection }) => {
               return <div>{nestedCollection.elements.length && <List elements={nestedCollection.elements}/>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ nestedCollection }) => {
               return <div>{nestedCollection.elements.length ? <List elements={nestedCollection.elements}/> : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ elements }) => {
               return <div>{elements[0] && <List elements={elements}/>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ elements }) => {
               return <div>{elements[0] ? <List elements={elements}/> : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ numberA, numberB }) => {
               return <div>{(numberA || numberB) && <Results>{numberA+numberB}</Results>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ numberA, numberB }) => {
               return <div>{(numberA || numberB) ? <Results>{numberA+numberB}</Results> : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         // Ternary-only: strips ! for non-negated, keeps ! for negated
         (
-            r#"
+            r"
             const Component = ({ someCondition, title }) => {
               return <div>{!someCondition && title}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ someCondition, title }) => {
               return <div>{!someCondition ? title : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         // Ternary-only: strips !! from left side
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{!!count && title}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count, title }) => {
               return <div>{count ? title : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{count > 0 && title}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count, title }) => {
               return <div>{count > 0 ? title : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{0 != count && title}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count, title }) => {
               return <div>{0 != count ? title : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count, total, title }) => {
               return <div>{count < total && title}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count, total, title }) => {
               return <div>{count < total ? title : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count, title, somethingElse }) => {
               return <div>{!!(count && somethingElse) && title}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count, title, somethingElse }) => {
               return <div>{count && somethingElse ? title : null}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["ternary"] }])),
         ),
         // Coerce-only fixes: add !! before unsafe operands
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{count && title}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count, title }) => {
               return <div>{!!count && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count }) => {
               return <div>{count && <span>There are {count} results</span>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count }) => {
               return <div>{!!count && <span>There are {count} results</span>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ elements }) => {
               return <div>{elements.length && <List elements={elements}/>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ elements }) => {
               return <div>{!!elements.length && <List elements={elements}/>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ nestedCollection }) => {
               return <div>{nestedCollection.elements.length && <List elements={nestedCollection.elements}/>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ nestedCollection }) => {
               return <div>{!!nestedCollection.elements.length && <List elements={nestedCollection.elements}/>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ elements }) => {
               return <div>{elements[0] && <List elements={elements}/>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ elements }) => {
               return <div>{!!elements[0] && <List elements={elements}/>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ numberA, numberB }) => {
               return <div>{(numberA || numberB) && <Results>{numberA+numberB}</Results>}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ numberA, numberB }) => {
               return <div>{!!(numberA || numberB) && <Results>{numberA+numberB}</Results>}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ connection, hasError, hasErrorUpdate}) => {
               return <div>{connection && (hasError || hasErrorUpdate)}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ connection, hasError, hasErrorUpdate}) => {
               return <div>{!!connection && (hasError || hasErrorUpdate)}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         // Coerce-only: convert ternary with null to coerce
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{count ? title : null}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count, title }) => {
               return <div>{!!count && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count, title }) => {
               return <div>{!count ? title : null}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count, title }) => {
               return <div>{!count && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const Component = ({ count, somethingElse, title }) => {
               return <div>{count && somethingElse ? title : null}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ count, somethingElse, title }) => {
               return <div>{!!count && !!somethingElse && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         // Chained && with coerce: only coerce unsafe operands
         (
-            r#"
+            r"
             const Component = ({ items, somethingElse, title }) => {
               return <div>{items.length > 0 && somethingElse && title}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ items, somethingElse, title }) => {
               return <div>{items.length > 0 && !!somethingElse && title}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         (
-            r#"
+            r"
             const MyComponent = () => {
               const items = []
               const breakpoint = { phones: true }
               return <div>{items.length > 0 && breakpoint.phones && <span />}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const MyComponent = () => {
               const items = []
               const breakpoint = { phones: true }
               return <div>{items.length > 0 && !!breakpoint.phones && <span />}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce", "ternary"] }])),
         ),
         (
-            r#"
+            r"
             const MyComponent = () => {
               return <div>{maybeObject && (isFoo ? <Aaa /> : <Bbb />)}</div>
             }
-        "#,
-            r#"
+        ",
+            r"
             const MyComponent = () => {
               return <div>{!!maybeObject && (isFoo ? <Aaa /> : <Bbb />)}</div>
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         // Attribute values
         (
-            r#"
+            r"
             const Component = ({ enabled, checked }) => {
               return <CheckBox checked={enabled && checked} />
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ enabled, checked }) => {
               return <CheckBox checked={enabled ? checked : null} />
             }
-        "#,
+        ",
             None,
         ),
         (
-            r#"
+            r"
             const isOpen = 0;
             const Component = () => {
               return <Popover open={isOpen && items.length > 0} />
             }
-        "#,
-            r#"
+        ",
+            r"
             const isOpen = 0;
             const Component = () => {
               return <Popover open={!!isOpen && items.length > 0} />
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "validStrategies": ["coerce"] }])),
         ),
         // ignoreAttributes: still fixes children inside attribute JSX
         (
-            r#"
+            r"
             const Component = ({ enabled }) => {
               return (
                 <Foo bar={
@@ -1078,8 +1078,8 @@ fn test() {
                 } />
               )
             }
-        "#,
-            r#"
+        ",
+            r"
             const Component = ({ enabled }) => {
               return (
                 <Foo bar={
@@ -1087,7 +1087,7 @@ fn test() {
                 } />
               )
             }
-        "#,
+        ",
             Some(serde_json::json!([{ "ignoreAttributes": true }])),
         ),
     ];

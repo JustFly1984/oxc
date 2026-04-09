@@ -1,7 +1,11 @@
+use std::collections::BTreeMap;
+
 use convert_case::{Boundary, Case, Converter};
 use goat_diagnostics::GoatDiagnostic;
 use goat_macros::declare_goat_lint;
 use goat_span::Span;
+use schemars::JsonSchema;
+use serde::Deserialize;
 
 use crate::{context::LintContext, rule::Rule};
 
@@ -26,6 +30,20 @@ pub struct FilenameNamingConvention(Box<FilenameNamingConventionConfig>);
 pub struct FilenameNamingConventionConfig {
     rules: Vec<(String, NamingConvention)>,
     ignore_middle_extensions: bool,
+}
+
+/// Schema type for JSON schema generation and documentation.
+/// The actual parsing is handled in `from_configuration`.
+#[expect(dead_code)]
+#[derive(Debug, Default, Clone, Deserialize, JsonSchema)]
+#[serde(default, deny_unknown_fields)]
+pub struct FilenameNamingConventionSchemaConfig {
+    /// A map of glob patterns to naming conventions.
+    /// Keys are glob patterns (e.g. `"src/**/*.ts"`), values are case styles
+    /// like `"KEBAB_CASE"`, `"CAMEL_CASE"`, `"PASCAL_CASE"`, `"SNAKE_CASE"`,
+    /// `"SCREAMING_SNAKE_CASE"`, or `"FLAT_CASE"`.
+    #[serde(flatten)]
+    rules: BTreeMap<String, String>,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -108,7 +126,8 @@ declare_goat_lint!(
     FilenameNamingConvention,
     goat,
     style,
-    none
+    none,
+    config = FilenameNamingConventionSchemaConfig
 );
 
 impl Rule for FilenameNamingConvention {

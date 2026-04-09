@@ -1186,10 +1186,11 @@ pub fn try_find_tsgolint_executable(cwd: &Path) -> Result<PathBuf, String> {
     // Since `cmd` is the most compatible one with older systems, we use that one first,
     // then check for `exe` which is also common. Bun, for example, does not create a `cmd`
     // file but still produces an `exe` file (https://github.com/oxc-project/oxc/issues/13784).
+    // Also look for `tsgo` which is the binary name from `@typescript/native-preview`.
     #[cfg(windows)]
-    let files = &["tsgolint.CMD", "tsgolint.exe"];
+    let files = &["tsgolint.CMD", "tsgolint.exe", "tsgo.CMD", "tsgo.exe"];
     #[cfg(not(windows))]
-    let files = &["tsgolint"];
+    let files = &["tsgolint", "tsgo"];
 
     // Move upwards until we find a `package.json`, then look at `node_modules/.bin/tsgolint`
     let mut current_dir = cwd.to_path_buf();
