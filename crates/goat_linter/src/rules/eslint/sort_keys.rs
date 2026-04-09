@@ -215,12 +215,20 @@ fn build_object_fix<'a>(
         return None;
     }
 
+    // Extract separators between consecutive properties.
+    // separators[i] = text between property i and property i+1 in the original source.
     let mut separators: Vec<String> = Vec::with_capacity(props.len());
     for i in 0..props.len() {
         if i + 1 < props.len() {
             let sep_start = props[i].span.end;
             let sep_end = props[i + 1].span.start;
-            separators.push(ctx.source_range(Span::new(sep_start, sep_end)).to_string());
+            let sep_text = ctx.source_range(Span::new(sep_start, sep_end)).to_string();
+            // If a separator contains an inline comment (// or /*), bail out.
+            // Reordering properties would move the comment to the wrong property.
+            if needs_reordering && (sep_text.contains("//") || sep_text.contains("/*")) {
+                return None;
+            }
+            separators.push(sep_text);
         } else {
             separators.push(String::new());
         }
@@ -231,6 +239,10 @@ fn build_object_fix<'a>(
         sorted_text.push_str(&props[index].text);
 
         if position + 1 < indices.len() {
+            // Use the separator from the original position in the sorted output,
+            // not from the reordered property. This preserves the separator structure
+            // (commas, whitespace) while keeping inline comments with their correct
+            // position in the output.
             let separator = if position < separators.len() && !separators[position].is_empty() {
                 separators[position].as_str()
             } else {
