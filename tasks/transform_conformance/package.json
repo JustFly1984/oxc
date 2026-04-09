@@ -22,6 +22,6 @@
     "@babel/plugin-transform-typescript": "^7.26.3",
     "goatlint-runtime": "link:../../npm/runtime",
     "reflect-metadata": "^0.2.2",
-    "vitest": "catalog:"
+    "vitest": "4.1.2"
   }
 }

@@ -20,11 +20,11 @@
     "postbuild": "publint"
   },
   "dependencies": {
-    "@napi-rs/wasm-runtime": "catalog:"
+    "@napi-rs/wasm-runtime": "1.1.2"
   },
   "devDependencies": {
-    "@napi-rs/cli": "catalog:",
-    "publint": "catalog:"
+    "@napi-rs/cli": "3.6.1",
+    "publint": "0.3.18"
   },
   "napi": {
     "binaryName": "playground",

@@ -48,10 +48,10 @@
     "test": "vitest run --dir ./test"
   },
   "devDependencies": {
-    "@napi-rs/cli": "catalog:",
-    "@types/node": "catalog:",
-    "publint": "catalog:",
-    "vitest": "catalog:"
+    "@napi-rs/cli": "3.6.1",
+    "@types/node": "24.1.0",
+    "publint": "0.3.18",
+    "vitest": "4.1.2"
   },
   "napi": {
     "binaryName": "transform",
