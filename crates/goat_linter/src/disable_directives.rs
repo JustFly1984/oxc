@@ -211,7 +211,19 @@ impl DisableDirectives {
         // This ensures that diagnostics starting before the disable comment (like no-empty-file)
         // are still suppressed.
         let mut has_match = false;
-        for interval in self.intervals.find(span.start, span.end) {
+        // File-scope diagnostics use Span(0, 0). Since the interval tree won't find
+        // intervals that start after position 0, we need to search ALL intervals for
+        // these diagnostics so that `/* eslint-disable rule */` at the top of a file
+        // can suppress file-scope rules like import/unambiguous.
+        let is_file_scope = span.start == 0 && span.end == 0;
+        let all_intervals;
+        let intervals: Box<dyn Iterator<Item = _>> = if is_file_scope {
+            all_intervals = self.intervals.find(0, u32::MAX);
+            Box::new(all_intervals)
+        } else {
+            Box::new(self.intervals.find(span.start, span.end))
+        };
+        for interval in intervals {
             // Check if this rule should be disabled
             let rule_matches = match &interval.val {
                 DisabledRule::All { .. } => true,
@@ -245,6 +257,11 @@ impl DisableDirectives {
                 {
                     span.start >= interval.start && span.start < interval.stop
                 }
+            } else if span.start == 0 && span.end == 0 {
+                // File-scope diagnostics (e.g., import/unambiguous) use Span(0, 0).
+                // These should be suppressed by any block-level disable directive in the file,
+                // since the diagnostic applies to the entire file, not a specific location.
+                true
             } else {
                 // For regular disable directives, check if there's any overlap
                 span.start < interval.stop && span.end > interval.start
@@ -1523,6 +1540,44 @@ function test() {
         assert!(
             !directives.contains("no-console", second_console_log_span),
             "eslint-disable-next-line should NOT suppress diagnostics on lines after the next line"
+        );
+    }
+
+    #[test]
+    fn test_file_level_disable_suppresses_file_scope_diagnostics() {
+        // File-scope rules like import/unambiguous report diagnostics at Span(0, 0).
+        // A block-level disable comment should suppress these diagnostics.
+        let source_text = r"/* eslint-disable import/unambiguous */
+const x = 1;
+";
+        let allocator = Allocator::default();
+        let semantic = process_source(&allocator, source_text);
+        let directives =
+            DisableDirectivesBuilder::new().build(semantic.source_text(), semantic.comments());
+
+        // File-scope diagnostics use Span(0, 0)
+        let file_scope_span = Span::new(0, 0);
+        assert!(
+            directives.contains("import/unambiguous", file_scope_span),
+            "eslint-disable should suppress file-scope diagnostics at Span(0, 0)"
+        );
+    }
+
+    #[test]
+    fn test_file_level_disable_all_suppresses_file_scope_diagnostics() {
+        // Same test but with disable-all (no specific rule)
+        let source_text = r"/* eslint-disable */
+const x = 1;
+";
+        let allocator = Allocator::default();
+        let semantic = process_source(&allocator, source_text);
+        let directives =
+            DisableDirectivesBuilder::new().build(semantic.source_text(), semantic.comments());
+
+        let file_scope_span = Span::new(0, 0);
+        assert!(
+            directives.contains("import/unambiguous", file_scope_span),
+            "eslint-disable (all) should suppress file-scope diagnostics at Span(0, 0)"
         );
     }
 
