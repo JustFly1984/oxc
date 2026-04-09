@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ eslint-plugin-node(prefer-global-url): Prefer the global `URL`/`URLSearchParams` over `require('url')`.
+   ╭─[prefer_global_url.tsx:1:17]
+ 1 │ const { URL } = require("url");
+   ·                 ──────────────
+   ╰────
+  help: `URL` and `URLSearchParams` are globals in Node.js 10+ and do not need to be imported.
+
+  ⚠ eslint-plugin-node(prefer-global-url): Prefer the global `URL`/`URLSearchParams` over `require('url')`.
+   ╭─[prefer_global_url.tsx:1:17]
+ 1 │ const { URL } = require("node:url");
+   ·                 ───────────────────
+   ╰────
+  help: `URL` and `URLSearchParams` are globals in Node.js 10+ and do not need to be imported.

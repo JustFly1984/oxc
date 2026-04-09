@@ -1,3 +1,4 @@
+use cow_utils::CowUtils;
 use goat_ast::AstKind;
 use goat_ast::ast::Expression;
 use goat_diagnostics::GoatDiagnostic;
@@ -76,19 +77,16 @@ impl Rule for NoShoutyConstants {
             return;
         };
 
-        match init {
-            Expression::StringLiteral(lit) => {
-                // Flag if the string value is basically the same as the name (case-insensitive)
-                let val = lit.value.as_str();
-                if val.eq_ignore_ascii_case(name)
-                    || val.eq_ignore_ascii_case(&name.to_lowercase())
-                    || val.eq_ignore_ascii_case(&name.replace('_', "-"))
-                    || val.eq_ignore_ascii_case(&name.replace('_', ""))
-                {
-                    ctx.diagnostic(no_shouty_constants_diagnostic(ident.span, name));
-                }
+        if let Expression::StringLiteral(lit) = init {
+            // Flag if the string value is basically the same as the name (case-insensitive)
+            let val = lit.value.as_str();
+            if val.eq_ignore_ascii_case(name)
+                || val.eq_ignore_ascii_case(&name.cow_to_ascii_lowercase())
+                || val.eq_ignore_ascii_case(&name.cow_replace('_', "-"))
+                || val.eq_ignore_ascii_case(&name.cow_replace('_', ""))
+            {
+                ctx.diagnostic(no_shouty_constants_diagnostic(ident.span, name));
             }
-            _ => {}
         }
     }
 }

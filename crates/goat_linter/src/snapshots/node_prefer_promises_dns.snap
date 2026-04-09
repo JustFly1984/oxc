@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ eslint-plugin-node(prefer-promises-dns): Prefer `dns/promises` over callback-based `dns` methods.
+   ╭─[prefer_promises_dns.tsx:1:13]
+ 1 │ const dns = require("dns");
+   ·             ──────────────
+   ╰────
+  help: Use `require('dns/promises')` or `import dns from 'node:dns/promises'` instead of the callback-based `dns` API.
+
+  ⚠ eslint-plugin-node(prefer-promises-dns): Prefer `dns/promises` over callback-based `dns` methods.
+   ╭─[prefer_promises_dns.tsx:1:13]
+ 1 │ const dns = require("node:dns");
+   ·             ───────────────────
+   ╰────
+  help: Use `require('dns/promises')` or `import dns from 'node:dns/promises'` instead of the callback-based `dns` API.

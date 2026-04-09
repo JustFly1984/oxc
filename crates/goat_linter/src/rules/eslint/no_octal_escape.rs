@@ -61,7 +61,7 @@ impl Rule for NoOctalEscape {
         while i < bytes.len() {
             if bytes[i] == b'\\' && i + 1 < bytes.len() {
                 let next = bytes[i + 1];
-                if next >= b'0' && next <= b'7' {
+                if (b'0'..=b'7').contains(&next) {
                     // This is an octal escape — but \0 not followed by a digit is allowed (null char)
                     if next == b'0'
                         && (i + 2 >= bytes.len() || bytes[i + 2] < b'0' || bytes[i + 2] > b'7')
@@ -69,6 +69,7 @@ impl Rule for NoOctalEscape {
                         i += 2;
                         continue;
                     }
+                    #[expect(clippy::cast_possible_truncation)]
                     let start = literal.span.start + 1 + i as u32;
                     // Find the end of the octal sequence (up to 3 digits)
                     let mut end = i + 2;
@@ -79,6 +80,7 @@ impl Rule for NoOctalEscape {
                     {
                         end += 1;
                     }
+                    #[expect(clippy::cast_possible_truncation)]
                     let span_end = literal.span.start + 1 + end as u32;
                     ctx.diagnostic(no_octal_escape_diagnostic(Span::new(start, span_end)));
                     return;

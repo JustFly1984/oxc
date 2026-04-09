@@ -16,6 +16,11 @@ pub enum FormatFileStrategy {
     OxfmtToml {
         path: PathBuf,
     },
+    /// JSON/JSONC files formatted natively (Pure Rust).
+    OxfmtJson {
+        path: PathBuf,
+        variant: goat_json_formatter::JsonVariant,
+    },
     ExternalFormatter {
         path: PathBuf,
         parser_name: &'static str,
@@ -52,13 +57,22 @@ impl TryFrom<PathBuf> for FormatFileStrategy {
             return Ok(Self::OxfmtToml { path });
         }
 
-        // Then external formatter files
-        // `package.json` is special: sorted then formatted
+        // `package.json` is special: sorted then formatted by native JSON formatter
         if file_name == "package.json" {
-            return Ok(Self::ExternalFormatterPackageJson { path, parser_name: "json-stringify" });
+            return Ok(Self::OxfmtJson {
+                path,
+                variant: goat_json_formatter::JsonVariant::JsonStringify,
+            });
         }
 
+        // Then JSON/JSONC files (native Rust formatter)
         let extension = path.extension().and_then(|ext| ext.to_str());
+        if let Some(variant) = get_json_variant(file_name, extension) {
+            return Ok(Self::OxfmtJson { path, variant });
+        }
+
+        // Then external formatter files
+
         if let Some(parser_name) = get_external_parser_name(file_name, extension) {
             return Ok(Self::ExternalFormatter { path, parser_name });
         }
@@ -70,13 +84,14 @@ impl TryFrom<PathBuf> for FormatFileStrategy {
 impl FormatFileStrategy {
     #[cfg(not(feature = "napi"))]
     pub fn can_format_without_external(&self) -> bool {
-        matches!(self, Self::OxcFormatter { .. } | Self::OxfmtToml { .. })
+        matches!(self, Self::OxcFormatter { .. } | Self::OxfmtToml { .. } | Self::OxfmtJson { .. })
     }
 
     pub fn path(&self) -> &Path {
         match self {
             Self::OxcFormatter { path, .. }
             | Self::OxfmtToml { path }
+            | Self::OxfmtJson { path, .. }
             | Self::ExternalFormatter { path, .. }
             | Self::ExternalFormatterPackageJson { path, .. } => path,
         }
@@ -108,6 +123,7 @@ impl FormatFileStrategy {
         match &mut self {
             Self::OxcFormatter { path, .. }
             | Self::OxfmtToml { path }
+            | Self::OxfmtJson { path, .. }
             | Self::ExternalFormatter { path, .. }
             | Self::ExternalFormatterPackageJson { path, .. } => {
                 *path = utils::normalize_relative_path(cwd, path);
@@ -184,31 +200,39 @@ static TOML_FILENAMES: phf::Set<&'static str> = phf_set! {
 
 // ---
 
-/// Returns parser name for external formatter, if supported.
-/// See also `prettier --support-info | jq '.languages[]'`
-fn get_external_parser_name(file_name: &str, extension: Option<&str>) -> Option<&'static str> {
-    // JSON and variants
-    // NOTE: `package.json` is handled separately in `FormatFileStrategy::try_from()`
+/// Returns JSON variant if this is a JSON/JSONC/JSON5 file.
+fn get_json_variant(
+    file_name: &str,
+    extension: Option<&str>,
+) -> Option<goat_json_formatter::JsonVariant> {
+    use goat_json_formatter::JsonVariant;
+
+    // `package.json` is handled separately in `FormatFileStrategy::try_from()`
     if file_name == "composer.json" || extension == Some("importmap") {
-        return Some("json-stringify");
+        return Some(JsonVariant::JsonStringify);
     }
     if JSON_FILENAMES.contains(file_name) {
-        return Some("json");
+        return Some(JsonVariant::Json);
     }
     if let Some(ext) = extension
         && JSON_EXTENSIONS.contains(ext)
     {
-        return Some("json");
+        return Some(JsonVariant::Json);
     }
     if let Some(ext) = extension
         && JSONC_EXTENSIONS.contains(ext)
     {
-        return Some("jsonc");
+        return Some(JsonVariant::Jsonc);
     }
     if extension == Some("json5") {
-        return Some("json5");
+        return Some(JsonVariant::Json5);
     }
+    None
+}
 
+/// Returns parser name for external formatter, if supported.
+/// See also `prettier --support-info | jq '.languages[]'`
+fn get_external_parser_name(file_name: &str, extension: Option<&str>) -> Option<&'static str> {
     // YAML
     if YAML_FILENAMES.contains(file_name) {
         return Some("yaml");
@@ -423,14 +447,27 @@ mod tests {
     }
 
     #[test]
+    fn test_json_variant_detection() {
+        use goat_json_formatter::JsonVariant;
+
+        fn get_variant(file_name: &str) -> Option<JsonVariant> {
+            let path = Path::new(file_name);
+            let extension = path.extension().and_then(|ext| ext.to_str());
+            get_json_variant(file_name, extension)
+        }
+
+        assert_eq!(get_variant("config.importmap"), Some(JsonVariant::JsonStringify));
+        assert_eq!(get_variant("data.json"), Some(JsonVariant::Json));
+        assert_eq!(get_variant("schema.avsc"), Some(JsonVariant::Json));
+        assert_eq!(get_variant("config.code-workspace"), Some(JsonVariant::Jsonc));
+        assert_eq!(get_variant("settings.json5"), Some(JsonVariant::Json5));
+        assert_eq!(get_variant("composer.json"), Some(JsonVariant::JsonStringify));
+        assert_eq!(get_variant("unknown.txt"), None);
+    }
+
+    #[test]
     fn test_get_external_parser_name() {
         let test_cases = vec![
-            // JSON (NOTE: `package.json` is handled in TryFrom, not here)
-            ("config.importmap", Some("json-stringify")),
-            ("data.json", Some("json")),
-            ("schema.avsc", Some("json")),
-            ("config.code-workspace", Some("jsonc")),
-            ("settings.json5", Some("json5")),
             // HTML
             ("index.html", Some("html")),
             ("page.htm", Some("html")),
@@ -483,10 +520,46 @@ mod tests {
     #[test]
     fn test_package_json_is_special() {
         let source = FormatFileStrategy::try_from(PathBuf::from("package.json")).unwrap();
-        assert!(matches!(source, FormatFileStrategy::ExternalFormatterPackageJson { .. }));
+        assert!(matches!(
+            source,
+            FormatFileStrategy::OxfmtJson { variant: goat_json_formatter::JsonVariant::JsonStringify, .. }
+        ));
 
         let source = FormatFileStrategy::try_from(PathBuf::from("composer.json")).unwrap();
-        assert!(matches!(source, FormatFileStrategy::ExternalFormatter { .. }));
+        assert!(matches!(
+            source,
+            FormatFileStrategy::OxfmtJson { variant: goat_json_formatter::JsonVariant::JsonStringify, .. }
+        ));
+    }
+
+    #[test]
+    fn test_json_files() {
+        let json_files = vec![
+            "data.json",
+            "schema.avsc",
+            ".babelrc",
+            ".swcrc",
+        ];
+
+        for file_name in json_files {
+            let result = FormatFileStrategy::try_from(PathBuf::from(file_name));
+            assert!(
+                matches!(result, Ok(FormatFileStrategy::OxfmtJson { variant: goat_json_formatter::JsonVariant::Json, .. })),
+                "`{file_name}` should be detected as JSON"
+            );
+        }
+
+        let jsonc_files = vec!["config.jsonc", "settings.code-workspace"];
+        for file_name in jsonc_files {
+            let result = FormatFileStrategy::try_from(PathBuf::from(file_name));
+            assert!(
+                matches!(result, Ok(FormatFileStrategy::OxfmtJson { variant: goat_json_formatter::JsonVariant::Jsonc, .. })),
+                "`{file_name}` should be detected as JSONC"
+            );
+        }
+
+        let result = FormatFileStrategy::try_from(PathBuf::from("config.json5"));
+        assert!(matches!(result, Ok(FormatFileStrategy::OxfmtJson { variant: goat_json_formatter::JsonVariant::Json5, .. })));
     }
 
     #[test]

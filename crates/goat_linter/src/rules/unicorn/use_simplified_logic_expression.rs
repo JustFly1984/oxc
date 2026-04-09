@@ -100,7 +100,7 @@ impl Rule for UseSimplifiedLogicExpression {
                     ));
                 }
             }
-            _ => {}
+            LogicalOperator::Coalesce => {}
         }
     }
 }

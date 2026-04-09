@@ -1,0 +1,31 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ eslint-plugin-node(file-extension-in-import): Import path `./foo` requires a file extension.
+   ╭─[file_extension_in_import.tsx:1:17]
+ 1 │ import foo from "./foo";
+   ·                 ───────
+   ╰────
+  help: Add a file extension to the import path. In ES modules, relative imports must include file extensions.
+
+  ⚠ eslint-plugin-node(file-extension-in-import): Import path `../utils/bar` requires a file extension.
+   ╭─[file_extension_in_import.tsx:1:17]
+ 1 │ import bar from "../utils/bar";
+   ·                 ──────────────
+   ╰────
+  help: Add a file extension to the import path. In ES modules, relative imports must include file extensions.
+
+  ⚠ eslint-plugin-node(file-extension-in-import): Import path `./baz` requires a file extension.
+   ╭─[file_extension_in_import.tsx:1:21]
+ 1 │ export { baz } from "./baz";
+   ·                     ───────
+   ╰────
+  help: Add a file extension to the import path. In ES modules, relative imports must include file extensions.
+
+  ⚠ eslint-plugin-node(file-extension-in-import): Import path `./baz` requires a file extension.
+   ╭─[file_extension_in_import.tsx:1:15]
+ 1 │ export * from "./baz";
+   ·               ───────
+   ╰────
+  help: Add a file extension to the import path. In ES modules, relative imports must include file extensions.

@@ -100,6 +100,7 @@ impl Rule for SwitchCaseBreakPosition {
         // Replace from before the closing brace's newline through the break statement
         // This preserves all content inside the block (including comments) and moves
         // the break before the closing brace
+        #[expect(clippy::cast_possible_truncation)]
         let replace_span = Span::new(brace_line_start as u32, last_statement.span().end);
 
         ctx.diagnostic_with_suggestion(

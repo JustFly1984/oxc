@@ -1245,6 +1245,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "goat_json_formatter"
+version = "0.1.0"
+
+[[package]]
 name = "goat_language_server"
 version = "1.41.0"
 dependencies = [
@@ -1745,6 +1749,7 @@ dependencies = [
  "goat_data_structures",
  "goat_diagnostics",
  "goat_formatter",
+ "goat_json_formatter",
  "goat_language_server",
  "goat_napi",
  "goat_parser",

@@ -112,7 +112,9 @@ impl Rule for NoCaseDeclarations {
                 };
 
                 if let Some(span) = diag_span {
-                    if !has_emitted_fix {
+                    if has_emitted_fix {
+                        ctx.diagnostic(no_case_declarations_diagnostic(span));
+                    } else {
                         // Get the span covering all consequent statements
                         let first_start = consequent.first().unwrap().span().start;
                         let last_end = consequent.last().unwrap().span().end;
@@ -126,8 +128,6 @@ impl Rule for NoCaseDeclarations {
                             },
                         );
                         has_emitted_fix = true;
-                    } else {
-                        ctx.diagnostic(no_case_declarations_diagnostic(span));
                     }
                 }
             }

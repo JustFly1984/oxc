@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ eslint-plugin-node(prefer-global-buffer): Prefer the global `Buffer` over `require('buffer').Buffer`.
+   ╭─[prefer_global_buffer.tsx:1:20]
+ 1 │ const { Buffer } = require("buffer");
+   ·                    ─────────────────
+   ╰────
+  help: `Buffer` is a global in Node.js and does not need to be imported.
+
+  ⚠ eslint-plugin-node(prefer-global-buffer): Prefer the global `Buffer` over `require('buffer').Buffer`.
+   ╭─[prefer_global_buffer.tsx:1:20]
+ 1 │ const { Buffer } = require("node:buffer");
+   ·                    ──────────────────────
+   ╰────
+  help: `Buffer` is a global in Node.js and does not need to be imported.

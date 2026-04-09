@@ -45,6 +45,7 @@ impl<'a> Template<'a> {
             RuleKind::Promise => Path::new("crates/goat_linter/src/rules/promise"),
             RuleKind::Vitest => Path::new("crates/goat_linter/src/rules/vitest"),
             RuleKind::Vue => Path::new("crates/goat_linter/src/rules/vue"),
+            RuleKind::Bun => Path::new("crates/goat_linter/src/rules/bun"),
         };
 
         std::fs::create_dir_all(path)?;

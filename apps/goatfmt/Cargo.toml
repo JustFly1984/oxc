@@ -32,6 +32,7 @@ goat_ast = { workspace = true }
 goat_data_structures = { workspace = true, features = ["rope"] }
 goat_diagnostics = { workspace = true }
 goat_formatter = { workspace = true }
+goat_json_formatter = { path = "../../crates/goat_json_formatter" }
 goat_language_server = { workspace = true }
 goat_napi = { workspace = true }
 goat_parser = { workspace = true }

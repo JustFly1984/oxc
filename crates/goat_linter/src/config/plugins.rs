@@ -61,9 +61,8 @@ pub fn is_normal_plugin_name(plugin_name: &str) -> bool {
 }
 
 bitflags! {
-    // NOTE: may be increased to a u32 if needed
     #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-    pub struct LintPlugins: u16 {
+    pub struct LintPlugins: u32 {
         /// Not really a plugin. Included for completeness.
         const ESLINT = 0;
         /// `eslint-plugin-react`, plus `eslint-plugin-react-hooks`
@@ -98,6 +97,8 @@ bitflags! {
         const JSON = 1 << 14;
         /// CSS linting rules
         const CSS = 1 << 15;
+        /// Bun-specific rules
+        const BUN = 1 << 16;
     }
 }
 
@@ -164,6 +165,7 @@ impl TryFrom<&str> for LintPlugins {
             "vue" => Ok(LintPlugins::VUE),
             "json" => Ok(LintPlugins::JSON),
             "css" => Ok(LintPlugins::CSS),
+            "bun" => Ok(LintPlugins::BUN),
             // "eslint" is not really a plugin, so it's 'empty'. This has the added benefit of
             // making it the default value.
             "eslint" => Ok(LintPlugins::ESLINT),
@@ -191,6 +193,7 @@ impl From<LintPlugins> for &'static str {
             LintPlugins::VUE => "vue",
             LintPlugins::JSON => "json",
             LintPlugins::CSS => "css",
+            LintPlugins::BUN => "bun",
             _ => "",
         }
     }
@@ -264,6 +267,7 @@ impl JsonSchema for LintPlugins {
             Vue,
             Json,
             Css,
+            Bun,
         }
 
         let enum_schema = r#gen.subschema_for::<LintPluginOptionsSchema>();

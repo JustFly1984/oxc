@@ -1,3 +1,4 @@
+use cow_utils::CowUtils;
 use goat_ast::AstKind;
 use goat_ast::ast::{JSXAttributeItem, JSXAttributeValue, JSXElementName};
 use goat_diagnostics::GoatDiagnostic;
@@ -141,8 +142,8 @@ impl Rule for NoNoninteractiveElementToInteractiveRole {
             return;
         };
 
-        let role = role_value.value.as_str().to_lowercase();
-        if INTERACTIVE_ROLES.contains(&role.as_str()) {
+        let role = role_value.value.as_str().cow_to_ascii_lowercase();
+        if INTERACTIVE_ROLES.contains(&role.as_ref()) {
             ctx.diagnostic(diagnostic(attr.span));
         }
     }

@@ -1,0 +1,38 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ bun(prefer-bun-env): Use `Bun.env` instead of `process.env`.
+   ╭─[prefer_bun_env.tsx:1:1]
+ 1 │ process.env.NODE_ENV
+   · ───────────
+   ╰────
+  help: `Bun.env` is faster and provides typed access to environment variables.
+
+  ⚠ bun(prefer-bun-env): Use `Bun.env` instead of `process.env`.
+   ╭─[prefer_bun_env.tsx:1:1]
+ 1 │ process.env["FOO"]
+   · ───────────
+   ╰────
+  help: `Bun.env` is faster and provides typed access to environment variables.
+
+  ⚠ bun(prefer-bun-env): Use `Bun.env` instead of `process.env`.
+   ╭─[prefer_bun_env.tsx:1:11]
+ 1 │ const x = process.env
+   ·           ───────────
+   ╰────
+  help: `Bun.env` is faster and provides typed access to environment variables.
+
+  ⚠ bun(prefer-bun-env): Use `Bun.env` instead of `process.env`.
+   ╭─[prefer_bun_env.tsx:1:3]
+ 1 │ f(process.env)
+   ·   ───────────
+   ╰────
+  help: `Bun.env` is faster and provides typed access to environment variables.
+
+  ⚠ bun(prefer-bun-env): Use `Bun.env` instead of `process.env`.
+   ╭─[prefer_bun_env.tsx:1:1]
+ 1 │ process['env']
+   · ──────────────
+   ╰────
+  help: `Bun.env` is faster and provides typed access to environment variables.

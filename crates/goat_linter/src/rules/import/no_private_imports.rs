@@ -4,7 +4,7 @@ use goat_span::Span;
 
 use crate::{AstNode, context::LintContext, rule::Rule};
 
-#[allow(dead_code)]
+#[expect(dead_code)]
 fn no_private_imports_diagnostic(span: Span, source: &str) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!("Import from `{source}` accesses a private module path."))
         .with_help("Only import from paths that are explicitly exported in the package's `exports` field in package.json.")

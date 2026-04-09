@@ -70,11 +70,10 @@ impl Rule for NoSvgWithoutTitle {
         let parent = ctx.nodes().parent_node(node.id());
         if let AstKind::JSXElement(element) = parent.kind() {
             for child in &element.children {
-                if let JSXChild::Element(child_el) = child {
-                    if get_element_name(&child_el.opening_element.name) == Some("title") {
+                if let JSXChild::Element(child_el) = child
+                    && get_element_name(&child_el.opening_element.name) == Some("title") {
                         return;
                     }
-                }
             }
         }
 

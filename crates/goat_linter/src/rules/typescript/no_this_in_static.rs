@@ -83,9 +83,7 @@ impl Rule for NoThisInStatic {
                         return; // Nested function has its own `this`
                     }
                 }
-                AstKind::ArrowFunctionExpression(_) => {
-                    // Arrow functions inherit `this`, keep looking
-                }
+                // Arrow functions inherit `this`, keep looking; other nodes are ignored
                 _ => {}
             }
         }

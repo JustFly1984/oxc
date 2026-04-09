@@ -8,6 +8,9 @@
     clippy::missing_errors_doc,
     clippy::match_same_arms
 )]
+pub use crate::rules::bun::no_node_fs::NoNodeFs as BunNoNodeFs;
+pub use crate::rules::bun::prefer_bun_env::PreferBunEnv as BunPreferBunEnv;
+pub use crate::rules::bun::prefer_bun_test::PreferBunTest as BunPreferBunTest;
 pub use crate::rules::eslint::accessor_pairs::AccessorPairs as EslintAccessorPairs;
 pub use crate::rules::eslint::array_callback_return::ArrayCallbackReturn as EslintArrayCallbackReturn;
 pub use crate::rules::eslint::arrow_body_style::ArrowBodyStyle as EslintArrowBodyStyle;
@@ -460,6 +463,7 @@ pub use crate::rules::nextjs::no_sync_scripts::NoSyncScripts as NextjsNoSyncScri
 pub use crate::rules::nextjs::no_title_in_document_head::NoTitleInDocumentHead as NextjsNoTitleInDocumentHead;
 pub use crate::rules::nextjs::no_typos::NoTypos as NextjsNoTypos;
 pub use crate::rules::nextjs::no_unwanted_polyfillio::NoUnwantedPolyfillio as NextjsNoUnwantedPolyfillio;
+pub use crate::rules::node::file_extension_in_import::FileExtensionInImport as NodeFileExtensionInImport;
 pub use crate::rules::node::global_require::GlobalRequire as NodeGlobalRequire;
 pub use crate::rules::node::handle_callback_err::HandleCallbackErr as NodeHandleCallbackErr;
 pub use crate::rules::node::no_exports_assign::NoExportsAssign as NodeNoExportsAssign;
@@ -467,6 +471,13 @@ pub use crate::rules::node::no_global_dirname_filename::NoGlobalDirnameFilename 
 pub use crate::rules::node::no_new_require::NoNewRequire as NodeNoNewRequire;
 pub use crate::rules::node::no_path_concat::NoPathConcat as NodeNoPathConcat;
 pub use crate::rules::node::no_process_env::NoProcessEnv as NodeNoProcessEnv;
+pub use crate::rules::node::no_process_exit::NoProcessExit as NodeNoProcessExit;
+pub use crate::rules::node::prefer_global_buffer::PreferGlobalBuffer as NodePreferGlobalBuffer;
+pub use crate::rules::node::prefer_global_console::PreferGlobalConsole as NodePreferGlobalConsole;
+pub use crate::rules::node::prefer_global_process::PreferGlobalProcess as NodePreferGlobalProcess;
+pub use crate::rules::node::prefer_global_url::PreferGlobalUrl as NodePreferGlobalUrl;
+pub use crate::rules::node::prefer_promises_dns::PreferPromisesDns as NodePreferPromisesDns;
+pub use crate::rules::node::prefer_promises_fs::PreferPromisesFs as NodePreferPromisesFs;
 pub use crate::rules::promise::always_return::AlwaysReturn as PromiseAlwaysReturn;
 pub use crate::rules::promise::avoid_new::AvoidNew as PromiseAvoidNew;
 pub use crate::rules::promise::catch_or_return::CatchOrReturn as PromiseCatchOrReturn;
@@ -1665,6 +1676,7 @@ pub enum RuleEnum {
     VitestRequireMockTypeParameters(VitestRequireMockTypeParameters),
     VitestRequireTestTimeout(VitestRequireTestTimeout),
     VitestWarnTodo(VitestWarnTodo),
+    NodeFileExtensionInImport(NodeFileExtensionInImport),
     NodeGlobalRequire(NodeGlobalRequire),
     NodeHandleCallbackErr(NodeHandleCallbackErr),
     NodeNoExportsAssign(NodeNoExportsAssign),
@@ -1672,6 +1684,16 @@ pub enum RuleEnum {
     NodeNoNewRequire(NodeNoNewRequire),
     NodeNoPathConcat(NodeNoPathConcat),
     NodeNoProcessEnv(NodeNoProcessEnv),
+    NodeNoProcessExit(NodeNoProcessExit),
+    NodePreferGlobalBuffer(NodePreferGlobalBuffer),
+    NodePreferGlobalConsole(NodePreferGlobalConsole),
+    NodePreferGlobalProcess(NodePreferGlobalProcess),
+    NodePreferGlobalUrl(NodePreferGlobalUrl),
+    NodePreferPromisesDns(NodePreferPromisesDns),
+    NodePreferPromisesFs(NodePreferPromisesFs),
+    BunNoNodeFs(BunNoNodeFs),
+    BunPreferBunEnv(BunPreferBunEnv),
+    BunPreferBunTest(BunPreferBunTest),
     VueDefineEmitsDeclaration(VueDefineEmitsDeclaration),
     VueDefinePropsDeclaration(VueDefinePropsDeclaration),
     VueDefinePropsDestructuring(VueDefinePropsDestructuring),
@@ -2601,14 +2623,25 @@ const VITEST_REQUIRE_MOCK_TYPE_PARAMETERS_ID: usize =
     VITEST_REQUIRE_LOCAL_TEST_CONTEXT_FOR_CONCURRENT_SNAPSHOTS_ID + 1usize;
 const VITEST_REQUIRE_TEST_TIMEOUT_ID: usize = VITEST_REQUIRE_MOCK_TYPE_PARAMETERS_ID + 1usize;
 const VITEST_WARN_TODO_ID: usize = VITEST_REQUIRE_TEST_TIMEOUT_ID + 1usize;
-const NODE_GLOBAL_REQUIRE_ID: usize = VITEST_WARN_TODO_ID + 1usize;
+const NODE_FILE_EXTENSION_IN_IMPORT_ID: usize = VITEST_WARN_TODO_ID + 1usize;
+const NODE_GLOBAL_REQUIRE_ID: usize = NODE_FILE_EXTENSION_IN_IMPORT_ID + 1usize;
 const NODE_HANDLE_CALLBACK_ERR_ID: usize = NODE_GLOBAL_REQUIRE_ID + 1usize;
 const NODE_NO_EXPORTS_ASSIGN_ID: usize = NODE_HANDLE_CALLBACK_ERR_ID + 1usize;
 const NODE_NO_GLOBAL_DIRNAME_FILENAME_ID: usize = NODE_NO_EXPORTS_ASSIGN_ID + 1usize;
 const NODE_NO_NEW_REQUIRE_ID: usize = NODE_NO_GLOBAL_DIRNAME_FILENAME_ID + 1usize;
 const NODE_NO_PATH_CONCAT_ID: usize = NODE_NO_NEW_REQUIRE_ID + 1usize;
 const NODE_NO_PROCESS_ENV_ID: usize = NODE_NO_PATH_CONCAT_ID + 1usize;
-const VUE_DEFINE_EMITS_DECLARATION_ID: usize = NODE_NO_PROCESS_ENV_ID + 1usize;
+const NODE_NO_PROCESS_EXIT_ID: usize = NODE_NO_PROCESS_ENV_ID + 1usize;
+const NODE_PREFER_GLOBAL_BUFFER_ID: usize = NODE_NO_PROCESS_EXIT_ID + 1usize;
+const NODE_PREFER_GLOBAL_CONSOLE_ID: usize = NODE_PREFER_GLOBAL_BUFFER_ID + 1usize;
+const NODE_PREFER_GLOBAL_PROCESS_ID: usize = NODE_PREFER_GLOBAL_CONSOLE_ID + 1usize;
+const NODE_PREFER_GLOBAL_URL_ID: usize = NODE_PREFER_GLOBAL_PROCESS_ID + 1usize;
+const NODE_PREFER_PROMISES_DNS_ID: usize = NODE_PREFER_GLOBAL_URL_ID + 1usize;
+const NODE_PREFER_PROMISES_FS_ID: usize = NODE_PREFER_PROMISES_DNS_ID + 1usize;
+const BUN_NO_NODE_FS_ID: usize = NODE_PREFER_PROMISES_FS_ID + 1usize;
+const BUN_PREFER_BUN_ENV_ID: usize = BUN_NO_NODE_FS_ID + 1usize;
+const BUN_PREFER_BUN_TEST_ID: usize = BUN_PREFER_BUN_ENV_ID + 1usize;
+const VUE_DEFINE_EMITS_DECLARATION_ID: usize = BUN_PREFER_BUN_TEST_ID + 1usize;
 const VUE_DEFINE_PROPS_DECLARATION_ID: usize = VUE_DEFINE_EMITS_DECLARATION_ID + 1usize;
 const VUE_DEFINE_PROPS_DESTRUCTURING_ID: usize = VUE_DEFINE_PROPS_DECLARATION_ID + 1usize;
 const VUE_MAX_PROPS_ID: usize = VUE_DEFINE_PROPS_DESTRUCTURING_ID + 1usize;
@@ -3570,6 +3603,7 @@ impl RuleEnum {
             Self::VitestRequireMockTypeParameters(_) => VITEST_REQUIRE_MOCK_TYPE_PARAMETERS_ID,
             Self::VitestRequireTestTimeout(_) => VITEST_REQUIRE_TEST_TIMEOUT_ID,
             Self::VitestWarnTodo(_) => VITEST_WARN_TODO_ID,
+            Self::NodeFileExtensionInImport(_) => NODE_FILE_EXTENSION_IN_IMPORT_ID,
             Self::NodeGlobalRequire(_) => NODE_GLOBAL_REQUIRE_ID,
             Self::NodeHandleCallbackErr(_) => NODE_HANDLE_CALLBACK_ERR_ID,
             Self::NodeNoExportsAssign(_) => NODE_NO_EXPORTS_ASSIGN_ID,
@@ -3577,6 +3611,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(_) => NODE_NO_NEW_REQUIRE_ID,
             Self::NodeNoPathConcat(_) => NODE_NO_PATH_CONCAT_ID,
             Self::NodeNoProcessEnv(_) => NODE_NO_PROCESS_ENV_ID,
+            Self::NodeNoProcessExit(_) => NODE_NO_PROCESS_EXIT_ID,
+            Self::NodePreferGlobalBuffer(_) => NODE_PREFER_GLOBAL_BUFFER_ID,
+            Self::NodePreferGlobalConsole(_) => NODE_PREFER_GLOBAL_CONSOLE_ID,
+            Self::NodePreferGlobalProcess(_) => NODE_PREFER_GLOBAL_PROCESS_ID,
+            Self::NodePreferGlobalUrl(_) => NODE_PREFER_GLOBAL_URL_ID,
+            Self::NodePreferPromisesDns(_) => NODE_PREFER_PROMISES_DNS_ID,
+            Self::NodePreferPromisesFs(_) => NODE_PREFER_PROMISES_FS_ID,
+            Self::BunNoNodeFs(_) => BUN_NO_NODE_FS_ID,
+            Self::BunPreferBunEnv(_) => BUN_PREFER_BUN_ENV_ID,
+            Self::BunPreferBunTest(_) => BUN_PREFER_BUN_TEST_ID,
             Self::VueDefineEmitsDeclaration(_) => VUE_DEFINE_EMITS_DECLARATION_ID,
             Self::VueDefinePropsDeclaration(_) => VUE_DEFINE_PROPS_DECLARATION_ID,
             Self::VueDefinePropsDestructuring(_) => VUE_DEFINE_PROPS_DESTRUCTURING_ID,
@@ -4524,6 +4568,7 @@ impl RuleEnum {
             Self::VitestRequireMockTypeParameters(_) => VitestRequireMockTypeParameters::NAME,
             Self::VitestRequireTestTimeout(_) => VitestRequireTestTimeout::NAME,
             Self::VitestWarnTodo(_) => VitestWarnTodo::NAME,
+            Self::NodeFileExtensionInImport(_) => NodeFileExtensionInImport::NAME,
             Self::NodeGlobalRequire(_) => NodeGlobalRequire::NAME,
             Self::NodeHandleCallbackErr(_) => NodeHandleCallbackErr::NAME,
             Self::NodeNoExportsAssign(_) => NodeNoExportsAssign::NAME,
@@ -4531,6 +4576,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(_) => NodeNoNewRequire::NAME,
             Self::NodeNoPathConcat(_) => NodeNoPathConcat::NAME,
             Self::NodeNoProcessEnv(_) => NodeNoProcessEnv::NAME,
+            Self::NodeNoProcessExit(_) => NodeNoProcessExit::NAME,
+            Self::NodePreferGlobalBuffer(_) => NodePreferGlobalBuffer::NAME,
+            Self::NodePreferGlobalConsole(_) => NodePreferGlobalConsole::NAME,
+            Self::NodePreferGlobalProcess(_) => NodePreferGlobalProcess::NAME,
+            Self::NodePreferGlobalUrl(_) => NodePreferGlobalUrl::NAME,
+            Self::NodePreferPromisesDns(_) => NodePreferPromisesDns::NAME,
+            Self::NodePreferPromisesFs(_) => NodePreferPromisesFs::NAME,
+            Self::BunNoNodeFs(_) => BunNoNodeFs::NAME,
+            Self::BunPreferBunEnv(_) => BunPreferBunEnv::NAME,
+            Self::BunPreferBunTest(_) => BunPreferBunTest::NAME,
             Self::VueDefineEmitsDeclaration(_) => VueDefineEmitsDeclaration::NAME,
             Self::VueDefinePropsDeclaration(_) => VueDefinePropsDeclaration::NAME,
             Self::VueDefinePropsDestructuring(_) => VueDefinePropsDestructuring::NAME,
@@ -5532,6 +5587,7 @@ impl RuleEnum {
             Self::VitestRequireMockTypeParameters(_) => VitestRequireMockTypeParameters::CATEGORY,
             Self::VitestRequireTestTimeout(_) => VitestRequireTestTimeout::CATEGORY,
             Self::VitestWarnTodo(_) => VitestWarnTodo::CATEGORY,
+            Self::NodeFileExtensionInImport(_) => NodeFileExtensionInImport::CATEGORY,
             Self::NodeGlobalRequire(_) => NodeGlobalRequire::CATEGORY,
             Self::NodeHandleCallbackErr(_) => NodeHandleCallbackErr::CATEGORY,
             Self::NodeNoExportsAssign(_) => NodeNoExportsAssign::CATEGORY,
@@ -5539,6 +5595,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(_) => NodeNoNewRequire::CATEGORY,
             Self::NodeNoPathConcat(_) => NodeNoPathConcat::CATEGORY,
             Self::NodeNoProcessEnv(_) => NodeNoProcessEnv::CATEGORY,
+            Self::NodeNoProcessExit(_) => NodeNoProcessExit::CATEGORY,
+            Self::NodePreferGlobalBuffer(_) => NodePreferGlobalBuffer::CATEGORY,
+            Self::NodePreferGlobalConsole(_) => NodePreferGlobalConsole::CATEGORY,
+            Self::NodePreferGlobalProcess(_) => NodePreferGlobalProcess::CATEGORY,
+            Self::NodePreferGlobalUrl(_) => NodePreferGlobalUrl::CATEGORY,
+            Self::NodePreferPromisesDns(_) => NodePreferPromisesDns::CATEGORY,
+            Self::NodePreferPromisesFs(_) => NodePreferPromisesFs::CATEGORY,
+            Self::BunNoNodeFs(_) => BunNoNodeFs::CATEGORY,
+            Self::BunPreferBunEnv(_) => BunPreferBunEnv::CATEGORY,
+            Self::BunPreferBunTest(_) => BunPreferBunTest::CATEGORY,
             Self::VueDefineEmitsDeclaration(_) => VueDefineEmitsDeclaration::CATEGORY,
             Self::VueDefinePropsDeclaration(_) => VueDefinePropsDeclaration::CATEGORY,
             Self::VueDefinePropsDestructuring(_) => VueDefinePropsDestructuring::CATEGORY,
@@ -6489,6 +6555,7 @@ impl RuleEnum {
             Self::VitestRequireMockTypeParameters(_) => VitestRequireMockTypeParameters::FIX,
             Self::VitestRequireTestTimeout(_) => VitestRequireTestTimeout::FIX,
             Self::VitestWarnTodo(_) => VitestWarnTodo::FIX,
+            Self::NodeFileExtensionInImport(_) => NodeFileExtensionInImport::FIX,
             Self::NodeGlobalRequire(_) => NodeGlobalRequire::FIX,
             Self::NodeHandleCallbackErr(_) => NodeHandleCallbackErr::FIX,
             Self::NodeNoExportsAssign(_) => NodeNoExportsAssign::FIX,
@@ -6496,6 +6563,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(_) => NodeNoNewRequire::FIX,
             Self::NodeNoPathConcat(_) => NodeNoPathConcat::FIX,
             Self::NodeNoProcessEnv(_) => NodeNoProcessEnv::FIX,
+            Self::NodeNoProcessExit(_) => NodeNoProcessExit::FIX,
+            Self::NodePreferGlobalBuffer(_) => NodePreferGlobalBuffer::FIX,
+            Self::NodePreferGlobalConsole(_) => NodePreferGlobalConsole::FIX,
+            Self::NodePreferGlobalProcess(_) => NodePreferGlobalProcess::FIX,
+            Self::NodePreferGlobalUrl(_) => NodePreferGlobalUrl::FIX,
+            Self::NodePreferPromisesDns(_) => NodePreferPromisesDns::FIX,
+            Self::NodePreferPromisesFs(_) => NodePreferPromisesFs::FIX,
+            Self::BunNoNodeFs(_) => BunNoNodeFs::FIX,
+            Self::BunPreferBunEnv(_) => BunPreferBunEnv::FIX,
+            Self::BunPreferBunTest(_) => BunPreferBunTest::FIX,
             Self::VueDefineEmitsDeclaration(_) => VueDefineEmitsDeclaration::FIX,
             Self::VueDefinePropsDeclaration(_) => VueDefinePropsDeclaration::FIX,
             Self::VueDefinePropsDestructuring(_) => VueDefinePropsDestructuring::FIX,
@@ -7690,6 +7767,7 @@ impl RuleEnum {
             }
             Self::VitestRequireTestTimeout(_) => VitestRequireTestTimeout::documentation(),
             Self::VitestWarnTodo(_) => VitestWarnTodo::documentation(),
+            Self::NodeFileExtensionInImport(_) => NodeFileExtensionInImport::documentation(),
             Self::NodeGlobalRequire(_) => NodeGlobalRequire::documentation(),
             Self::NodeHandleCallbackErr(_) => NodeHandleCallbackErr::documentation(),
             Self::NodeNoExportsAssign(_) => NodeNoExportsAssign::documentation(),
@@ -7697,6 +7775,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(_) => NodeNoNewRequire::documentation(),
             Self::NodeNoPathConcat(_) => NodeNoPathConcat::documentation(),
             Self::NodeNoProcessEnv(_) => NodeNoProcessEnv::documentation(),
+            Self::NodeNoProcessExit(_) => NodeNoProcessExit::documentation(),
+            Self::NodePreferGlobalBuffer(_) => NodePreferGlobalBuffer::documentation(),
+            Self::NodePreferGlobalConsole(_) => NodePreferGlobalConsole::documentation(),
+            Self::NodePreferGlobalProcess(_) => NodePreferGlobalProcess::documentation(),
+            Self::NodePreferGlobalUrl(_) => NodePreferGlobalUrl::documentation(),
+            Self::NodePreferPromisesDns(_) => NodePreferPromisesDns::documentation(),
+            Self::NodePreferPromisesFs(_) => NodePreferPromisesFs::documentation(),
+            Self::BunNoNodeFs(_) => BunNoNodeFs::documentation(),
+            Self::BunPreferBunEnv(_) => BunPreferBunEnv::documentation(),
+            Self::BunPreferBunTest(_) => BunPreferBunTest::documentation(),
             Self::VueDefineEmitsDeclaration(_) => VueDefineEmitsDeclaration::documentation(),
             Self::VueDefinePropsDeclaration(_) => VueDefinePropsDeclaration::documentation(),
             Self::VueDefinePropsDestructuring(_) => VueDefinePropsDestructuring::documentation(),
@@ -10058,6 +10146,10 @@ impl RuleEnum {
                 .or_else(|| VitestRequireTestTimeout::schema(generator)),
             Self::VitestWarnTodo(_) => VitestWarnTodo::config_schema(generator)
                 .or_else(|| VitestWarnTodo::schema(generator)),
+            Self::NodeFileExtensionInImport(_) => {
+                NodeFileExtensionInImport::config_schema(generator)
+                    .or_else(|| NodeFileExtensionInImport::schema(generator))
+            }
             Self::NodeGlobalRequire(_) => NodeGlobalRequire::config_schema(generator)
                 .or_else(|| NodeGlobalRequire::schema(generator)),
             Self::NodeHandleCallbackErr(_) => NodeHandleCallbackErr::config_schema(generator)
@@ -10074,6 +10166,27 @@ impl RuleEnum {
                 .or_else(|| NodeNoPathConcat::schema(generator)),
             Self::NodeNoProcessEnv(_) => NodeNoProcessEnv::config_schema(generator)
                 .or_else(|| NodeNoProcessEnv::schema(generator)),
+            Self::NodeNoProcessExit(_) => NodeNoProcessExit::config_schema(generator)
+                .or_else(|| NodeNoProcessExit::schema(generator)),
+            Self::NodePreferGlobalBuffer(_) => NodePreferGlobalBuffer::config_schema(generator)
+                .or_else(|| NodePreferGlobalBuffer::schema(generator)),
+            Self::NodePreferGlobalConsole(_) => NodePreferGlobalConsole::config_schema(generator)
+                .or_else(|| NodePreferGlobalConsole::schema(generator)),
+            Self::NodePreferGlobalProcess(_) => NodePreferGlobalProcess::config_schema(generator)
+                .or_else(|| NodePreferGlobalProcess::schema(generator)),
+            Self::NodePreferGlobalUrl(_) => NodePreferGlobalUrl::config_schema(generator)
+                .or_else(|| NodePreferGlobalUrl::schema(generator)),
+            Self::NodePreferPromisesDns(_) => NodePreferPromisesDns::config_schema(generator)
+                .or_else(|| NodePreferPromisesDns::schema(generator)),
+            Self::NodePreferPromisesFs(_) => NodePreferPromisesFs::config_schema(generator)
+                .or_else(|| NodePreferPromisesFs::schema(generator)),
+            Self::BunNoNodeFs(_) => {
+                BunNoNodeFs::config_schema(generator).or_else(|| BunNoNodeFs::schema(generator))
+            }
+            Self::BunPreferBunEnv(_) => BunPreferBunEnv::config_schema(generator)
+                .or_else(|| BunPreferBunEnv::schema(generator)),
+            Self::BunPreferBunTest(_) => BunPreferBunTest::config_schema(generator)
+                .or_else(|| BunPreferBunTest::schema(generator)),
             Self::VueDefineEmitsDeclaration(_) => {
                 VueDefineEmitsDeclaration::config_schema(generator)
                     .or_else(|| VueDefineEmitsDeclaration::schema(generator))
@@ -10937,6 +11050,7 @@ impl RuleEnum {
             Self::VitestRequireMockTypeParameters(_) => "vitest",
             Self::VitestRequireTestTimeout(_) => "vitest",
             Self::VitestWarnTodo(_) => "vitest",
+            Self::NodeFileExtensionInImport(_) => "node",
             Self::NodeGlobalRequire(_) => "node",
             Self::NodeHandleCallbackErr(_) => "node",
             Self::NodeNoExportsAssign(_) => "node",
@@ -10944,6 +11058,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(_) => "node",
             Self::NodeNoPathConcat(_) => "node",
             Self::NodeNoProcessEnv(_) => "node",
+            Self::NodeNoProcessExit(_) => "node",
+            Self::NodePreferGlobalBuffer(_) => "node",
+            Self::NodePreferGlobalConsole(_) => "node",
+            Self::NodePreferGlobalProcess(_) => "node",
+            Self::NodePreferGlobalUrl(_) => "node",
+            Self::NodePreferPromisesDns(_) => "node",
+            Self::NodePreferPromisesFs(_) => "node",
+            Self::BunNoNodeFs(_) => "bun",
+            Self::BunPreferBunEnv(_) => "bun",
+            Self::BunPreferBunTest(_) => "bun",
             Self::VueDefineEmitsDeclaration(_) => "vue",
             Self::VueDefinePropsDeclaration(_) => "vue",
             Self::VueDefinePropsDestructuring(_) => "vue",
@@ -13570,6 +13694,9 @@ impl RuleEnum {
             Self::VitestWarnTodo(_) => {
                 Ok(Self::VitestWarnTodo(VitestWarnTodo::from_configuration(value)?))
             }
+            Self::NodeFileExtensionInImport(_) => Ok(Self::NodeFileExtensionInImport(
+                NodeFileExtensionInImport::from_configuration(value)?,
+            )),
             Self::NodeGlobalRequire(_) => {
                 Ok(Self::NodeGlobalRequire(NodeGlobalRequire::from_configuration(value)?))
             }
@@ -13590,6 +13717,34 @@ impl RuleEnum {
             }
             Self::NodeNoProcessEnv(_) => {
                 Ok(Self::NodeNoProcessEnv(NodeNoProcessEnv::from_configuration(value)?))
+            }
+            Self::NodeNoProcessExit(_) => {
+                Ok(Self::NodeNoProcessExit(NodeNoProcessExit::from_configuration(value)?))
+            }
+            Self::NodePreferGlobalBuffer(_) => {
+                Ok(Self::NodePreferGlobalBuffer(NodePreferGlobalBuffer::from_configuration(value)?))
+            }
+            Self::NodePreferGlobalConsole(_) => Ok(Self::NodePreferGlobalConsole(
+                NodePreferGlobalConsole::from_configuration(value)?,
+            )),
+            Self::NodePreferGlobalProcess(_) => Ok(Self::NodePreferGlobalProcess(
+                NodePreferGlobalProcess::from_configuration(value)?,
+            )),
+            Self::NodePreferGlobalUrl(_) => {
+                Ok(Self::NodePreferGlobalUrl(NodePreferGlobalUrl::from_configuration(value)?))
+            }
+            Self::NodePreferPromisesDns(_) => {
+                Ok(Self::NodePreferPromisesDns(NodePreferPromisesDns::from_configuration(value)?))
+            }
+            Self::NodePreferPromisesFs(_) => {
+                Ok(Self::NodePreferPromisesFs(NodePreferPromisesFs::from_configuration(value)?))
+            }
+            Self::BunNoNodeFs(_) => Ok(Self::BunNoNodeFs(BunNoNodeFs::from_configuration(value)?)),
+            Self::BunPreferBunEnv(_) => {
+                Ok(Self::BunPreferBunEnv(BunPreferBunEnv::from_configuration(value)?))
+            }
+            Self::BunPreferBunTest(_) => {
+                Ok(Self::BunPreferBunTest(BunPreferBunTest::from_configuration(value)?))
             }
             Self::VueDefineEmitsDeclaration(_) => Ok(Self::VueDefineEmitsDeclaration(
                 VueDefineEmitsDeclaration::from_configuration(value)?,
@@ -14458,6 +14613,7 @@ impl RuleEnum {
             Self::VitestRequireMockTypeParameters(rule) => rule.to_configuration(),
             Self::VitestRequireTestTimeout(rule) => rule.to_configuration(),
             Self::VitestWarnTodo(rule) => rule.to_configuration(),
+            Self::NodeFileExtensionInImport(rule) => rule.to_configuration(),
             Self::NodeGlobalRequire(rule) => rule.to_configuration(),
             Self::NodeHandleCallbackErr(rule) => rule.to_configuration(),
             Self::NodeNoExportsAssign(rule) => rule.to_configuration(),
@@ -14465,6 +14621,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(rule) => rule.to_configuration(),
             Self::NodeNoPathConcat(rule) => rule.to_configuration(),
             Self::NodeNoProcessEnv(rule) => rule.to_configuration(),
+            Self::NodeNoProcessExit(rule) => rule.to_configuration(),
+            Self::NodePreferGlobalBuffer(rule) => rule.to_configuration(),
+            Self::NodePreferGlobalConsole(rule) => rule.to_configuration(),
+            Self::NodePreferGlobalProcess(rule) => rule.to_configuration(),
+            Self::NodePreferGlobalUrl(rule) => rule.to_configuration(),
+            Self::NodePreferPromisesDns(rule) => rule.to_configuration(),
+            Self::NodePreferPromisesFs(rule) => rule.to_configuration(),
+            Self::BunNoNodeFs(rule) => rule.to_configuration(),
+            Self::BunPreferBunEnv(rule) => rule.to_configuration(),
+            Self::BunPreferBunTest(rule) => rule.to_configuration(),
             Self::VueDefineEmitsDeclaration(rule) => rule.to_configuration(),
             Self::VueDefinePropsDeclaration(rule) => rule.to_configuration(),
             Self::VueDefinePropsDestructuring(rule) => rule.to_configuration(),
@@ -15294,6 +15460,7 @@ impl RuleEnum {
             Self::VitestRequireMockTypeParameters(rule) => rule.run(node, ctx),
             Self::VitestRequireTestTimeout(rule) => rule.run(node, ctx),
             Self::VitestWarnTodo(rule) => rule.run(node, ctx),
+            Self::NodeFileExtensionInImport(rule) => rule.run(node, ctx),
             Self::NodeGlobalRequire(rule) => rule.run(node, ctx),
             Self::NodeHandleCallbackErr(rule) => rule.run(node, ctx),
             Self::NodeNoExportsAssign(rule) => rule.run(node, ctx),
@@ -15301,6 +15468,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(rule) => rule.run(node, ctx),
             Self::NodeNoPathConcat(rule) => rule.run(node, ctx),
             Self::NodeNoProcessEnv(rule) => rule.run(node, ctx),
+            Self::NodeNoProcessExit(rule) => rule.run(node, ctx),
+            Self::NodePreferGlobalBuffer(rule) => rule.run(node, ctx),
+            Self::NodePreferGlobalConsole(rule) => rule.run(node, ctx),
+            Self::NodePreferGlobalProcess(rule) => rule.run(node, ctx),
+            Self::NodePreferGlobalUrl(rule) => rule.run(node, ctx),
+            Self::NodePreferPromisesDns(rule) => rule.run(node, ctx),
+            Self::NodePreferPromisesFs(rule) => rule.run(node, ctx),
+            Self::BunNoNodeFs(rule) => rule.run(node, ctx),
+            Self::BunPreferBunEnv(rule) => rule.run(node, ctx),
+            Self::BunPreferBunTest(rule) => rule.run(node, ctx),
             Self::VueDefineEmitsDeclaration(rule) => rule.run(node, ctx),
             Self::VueDefinePropsDeclaration(rule) => rule.run(node, ctx),
             Self::VueDefinePropsDestructuring(rule) => rule.run(node, ctx),
@@ -16130,6 +16307,7 @@ impl RuleEnum {
             Self::VitestRequireMockTypeParameters(rule) => rule.run_once(ctx),
             Self::VitestRequireTestTimeout(rule) => rule.run_once(ctx),
             Self::VitestWarnTodo(rule) => rule.run_once(ctx),
+            Self::NodeFileExtensionInImport(rule) => rule.run_once(ctx),
             Self::NodeGlobalRequire(rule) => rule.run_once(ctx),
             Self::NodeHandleCallbackErr(rule) => rule.run_once(ctx),
             Self::NodeNoExportsAssign(rule) => rule.run_once(ctx),
@@ -16137,6 +16315,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(rule) => rule.run_once(ctx),
             Self::NodeNoPathConcat(rule) => rule.run_once(ctx),
             Self::NodeNoProcessEnv(rule) => rule.run_once(ctx),
+            Self::NodeNoProcessExit(rule) => rule.run_once(ctx),
+            Self::NodePreferGlobalBuffer(rule) => rule.run_once(ctx),
+            Self::NodePreferGlobalConsole(rule) => rule.run_once(ctx),
+            Self::NodePreferGlobalProcess(rule) => rule.run_once(ctx),
+            Self::NodePreferGlobalUrl(rule) => rule.run_once(ctx),
+            Self::NodePreferPromisesDns(rule) => rule.run_once(ctx),
+            Self::NodePreferPromisesFs(rule) => rule.run_once(ctx),
+            Self::BunNoNodeFs(rule) => rule.run_once(ctx),
+            Self::BunPreferBunEnv(rule) => rule.run_once(ctx),
+            Self::BunPreferBunTest(rule) => rule.run_once(ctx),
             Self::VueDefineEmitsDeclaration(rule) => rule.run_once(ctx),
             Self::VueDefinePropsDeclaration(rule) => rule.run_once(ctx),
             Self::VueDefinePropsDestructuring(rule) => rule.run_once(ctx),
@@ -17088,6 +17276,7 @@ impl RuleEnum {
             Self::VitestRequireMockTypeParameters(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::VitestRequireTestTimeout(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::VitestWarnTodo(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::NodeFileExtensionInImport(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::NodeGlobalRequire(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::NodeHandleCallbackErr(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::NodeNoExportsAssign(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17095,6 +17284,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::NodeNoPathConcat(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::NodeNoProcessEnv(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::NodeNoProcessExit(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::NodePreferGlobalBuffer(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::NodePreferGlobalConsole(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::NodePreferGlobalProcess(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::NodePreferGlobalUrl(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::NodePreferPromisesDns(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::NodePreferPromisesFs(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::BunNoNodeFs(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::BunPreferBunEnv(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::BunPreferBunTest(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::VueDefineEmitsDeclaration(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::VueDefinePropsDeclaration(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::VueDefinePropsDestructuring(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17924,6 +18123,7 @@ impl RuleEnum {
             Self::VitestRequireMockTypeParameters(rule) => rule.should_run(ctx),
             Self::VitestRequireTestTimeout(rule) => rule.should_run(ctx),
             Self::VitestWarnTodo(rule) => rule.should_run(ctx),
+            Self::NodeFileExtensionInImport(rule) => rule.should_run(ctx),
             Self::NodeGlobalRequire(rule) => rule.should_run(ctx),
             Self::NodeHandleCallbackErr(rule) => rule.should_run(ctx),
             Self::NodeNoExportsAssign(rule) => rule.should_run(ctx),
@@ -17931,6 +18131,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(rule) => rule.should_run(ctx),
             Self::NodeNoPathConcat(rule) => rule.should_run(ctx),
             Self::NodeNoProcessEnv(rule) => rule.should_run(ctx),
+            Self::NodeNoProcessExit(rule) => rule.should_run(ctx),
+            Self::NodePreferGlobalBuffer(rule) => rule.should_run(ctx),
+            Self::NodePreferGlobalConsole(rule) => rule.should_run(ctx),
+            Self::NodePreferGlobalProcess(rule) => rule.should_run(ctx),
+            Self::NodePreferGlobalUrl(rule) => rule.should_run(ctx),
+            Self::NodePreferPromisesDns(rule) => rule.should_run(ctx),
+            Self::NodePreferPromisesFs(rule) => rule.should_run(ctx),
+            Self::BunNoNodeFs(rule) => rule.should_run(ctx),
+            Self::BunPreferBunEnv(rule) => rule.should_run(ctx),
+            Self::BunPreferBunTest(rule) => rule.should_run(ctx),
             Self::VueDefineEmitsDeclaration(rule) => rule.should_run(ctx),
             Self::VueDefinePropsDeclaration(rule) => rule.should_run(ctx),
             Self::VueDefinePropsDestructuring(rule) => rule.should_run(ctx),
@@ -19124,6 +19334,7 @@ impl RuleEnum {
             }
             Self::VitestRequireTestTimeout(_) => VitestRequireTestTimeout::IS_TSGOLINT_RULE,
             Self::VitestWarnTodo(_) => VitestWarnTodo::IS_TSGOLINT_RULE,
+            Self::NodeFileExtensionInImport(_) => NodeFileExtensionInImport::IS_TSGOLINT_RULE,
             Self::NodeGlobalRequire(_) => NodeGlobalRequire::IS_TSGOLINT_RULE,
             Self::NodeHandleCallbackErr(_) => NodeHandleCallbackErr::IS_TSGOLINT_RULE,
             Self::NodeNoExportsAssign(_) => NodeNoExportsAssign::IS_TSGOLINT_RULE,
@@ -19131,6 +19342,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(_) => NodeNoNewRequire::IS_TSGOLINT_RULE,
             Self::NodeNoPathConcat(_) => NodeNoPathConcat::IS_TSGOLINT_RULE,
             Self::NodeNoProcessEnv(_) => NodeNoProcessEnv::IS_TSGOLINT_RULE,
+            Self::NodeNoProcessExit(_) => NodeNoProcessExit::IS_TSGOLINT_RULE,
+            Self::NodePreferGlobalBuffer(_) => NodePreferGlobalBuffer::IS_TSGOLINT_RULE,
+            Self::NodePreferGlobalConsole(_) => NodePreferGlobalConsole::IS_TSGOLINT_RULE,
+            Self::NodePreferGlobalProcess(_) => NodePreferGlobalProcess::IS_TSGOLINT_RULE,
+            Self::NodePreferGlobalUrl(_) => NodePreferGlobalUrl::IS_TSGOLINT_RULE,
+            Self::NodePreferPromisesDns(_) => NodePreferPromisesDns::IS_TSGOLINT_RULE,
+            Self::NodePreferPromisesFs(_) => NodePreferPromisesFs::IS_TSGOLINT_RULE,
+            Self::BunNoNodeFs(_) => BunNoNodeFs::IS_TSGOLINT_RULE,
+            Self::BunPreferBunEnv(_) => BunPreferBunEnv::IS_TSGOLINT_RULE,
+            Self::BunPreferBunTest(_) => BunPreferBunTest::IS_TSGOLINT_RULE,
             Self::VueDefineEmitsDeclaration(_) => VueDefineEmitsDeclaration::IS_TSGOLINT_RULE,
             Self::VueDefinePropsDeclaration(_) => VueDefinePropsDeclaration::IS_TSGOLINT_RULE,
             Self::VueDefinePropsDestructuring(_) => VueDefinePropsDestructuring::IS_TSGOLINT_RULE,
@@ -20163,6 +20384,7 @@ impl RuleEnum {
             Self::VitestRequireMockTypeParameters(_) => VitestRequireMockTypeParameters::HAS_CONFIG,
             Self::VitestRequireTestTimeout(_) => VitestRequireTestTimeout::HAS_CONFIG,
             Self::VitestWarnTodo(_) => VitestWarnTodo::HAS_CONFIG,
+            Self::NodeFileExtensionInImport(_) => NodeFileExtensionInImport::HAS_CONFIG,
             Self::NodeGlobalRequire(_) => NodeGlobalRequire::HAS_CONFIG,
             Self::NodeHandleCallbackErr(_) => NodeHandleCallbackErr::HAS_CONFIG,
             Self::NodeNoExportsAssign(_) => NodeNoExportsAssign::HAS_CONFIG,
@@ -20170,6 +20392,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(_) => NodeNoNewRequire::HAS_CONFIG,
             Self::NodeNoPathConcat(_) => NodeNoPathConcat::HAS_CONFIG,
             Self::NodeNoProcessEnv(_) => NodeNoProcessEnv::HAS_CONFIG,
+            Self::NodeNoProcessExit(_) => NodeNoProcessExit::HAS_CONFIG,
+            Self::NodePreferGlobalBuffer(_) => NodePreferGlobalBuffer::HAS_CONFIG,
+            Self::NodePreferGlobalConsole(_) => NodePreferGlobalConsole::HAS_CONFIG,
+            Self::NodePreferGlobalProcess(_) => NodePreferGlobalProcess::HAS_CONFIG,
+            Self::NodePreferGlobalUrl(_) => NodePreferGlobalUrl::HAS_CONFIG,
+            Self::NodePreferPromisesDns(_) => NodePreferPromisesDns::HAS_CONFIG,
+            Self::NodePreferPromisesFs(_) => NodePreferPromisesFs::HAS_CONFIG,
+            Self::BunNoNodeFs(_) => BunNoNodeFs::HAS_CONFIG,
+            Self::BunPreferBunEnv(_) => BunPreferBunEnv::HAS_CONFIG,
+            Self::BunPreferBunTest(_) => BunPreferBunTest::HAS_CONFIG,
             Self::VueDefineEmitsDeclaration(_) => VueDefineEmitsDeclaration::HAS_CONFIG,
             Self::VueDefinePropsDeclaration(_) => VueDefinePropsDeclaration::HAS_CONFIG,
             Self::VueDefinePropsDestructuring(_) => VueDefinePropsDestructuring::HAS_CONFIG,
@@ -21001,6 +21233,7 @@ impl RuleEnum {
             Self::VitestRequireMockTypeParameters(rule) => rule.types_info(),
             Self::VitestRequireTestTimeout(rule) => rule.types_info(),
             Self::VitestWarnTodo(rule) => rule.types_info(),
+            Self::NodeFileExtensionInImport(rule) => rule.types_info(),
             Self::NodeGlobalRequire(rule) => rule.types_info(),
             Self::NodeHandleCallbackErr(rule) => rule.types_info(),
             Self::NodeNoExportsAssign(rule) => rule.types_info(),
@@ -21008,6 +21241,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(rule) => rule.types_info(),
             Self::NodeNoPathConcat(rule) => rule.types_info(),
             Self::NodeNoProcessEnv(rule) => rule.types_info(),
+            Self::NodeNoProcessExit(rule) => rule.types_info(),
+            Self::NodePreferGlobalBuffer(rule) => rule.types_info(),
+            Self::NodePreferGlobalConsole(rule) => rule.types_info(),
+            Self::NodePreferGlobalProcess(rule) => rule.types_info(),
+            Self::NodePreferGlobalUrl(rule) => rule.types_info(),
+            Self::NodePreferPromisesDns(rule) => rule.types_info(),
+            Self::NodePreferPromisesFs(rule) => rule.types_info(),
+            Self::BunNoNodeFs(rule) => rule.types_info(),
+            Self::BunPreferBunEnv(rule) => rule.types_info(),
+            Self::BunPreferBunTest(rule) => rule.types_info(),
             Self::VueDefineEmitsDeclaration(rule) => rule.types_info(),
             Self::VueDefinePropsDeclaration(rule) => rule.types_info(),
             Self::VueDefinePropsDestructuring(rule) => rule.types_info(),
@@ -21837,6 +22080,7 @@ impl RuleEnum {
             Self::VitestRequireMockTypeParameters(rule) => rule.run_info(),
             Self::VitestRequireTestTimeout(rule) => rule.run_info(),
             Self::VitestWarnTodo(rule) => rule.run_info(),
+            Self::NodeFileExtensionInImport(rule) => rule.run_info(),
             Self::NodeGlobalRequire(rule) => rule.run_info(),
             Self::NodeHandleCallbackErr(rule) => rule.run_info(),
             Self::NodeNoExportsAssign(rule) => rule.run_info(),
@@ -21844,6 +22088,16 @@ impl RuleEnum {
             Self::NodeNoNewRequire(rule) => rule.run_info(),
             Self::NodeNoPathConcat(rule) => rule.run_info(),
             Self::NodeNoProcessEnv(rule) => rule.run_info(),
+            Self::NodeNoProcessExit(rule) => rule.run_info(),
+            Self::NodePreferGlobalBuffer(rule) => rule.run_info(),
+            Self::NodePreferGlobalConsole(rule) => rule.run_info(),
+            Self::NodePreferGlobalProcess(rule) => rule.run_info(),
+            Self::NodePreferGlobalUrl(rule) => rule.run_info(),
+            Self::NodePreferPromisesDns(rule) => rule.run_info(),
+            Self::NodePreferPromisesFs(rule) => rule.run_info(),
+            Self::BunNoNodeFs(rule) => rule.run_info(),
+            Self::BunPreferBunEnv(rule) => rule.run_info(),
+            Self::BunPreferBunTest(rule) => rule.run_info(),
             Self::VueDefineEmitsDeclaration(rule) => rule.run_info(),
             Self::VueDefinePropsDeclaration(rule) => rule.run_info(),
             Self::VueDefinePropsDestructuring(rule) => rule.run_info(),
@@ -22813,6 +23067,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::VitestRequireMockTypeParameters(VitestRequireMockTypeParameters::default()),
         RuleEnum::VitestRequireTestTimeout(VitestRequireTestTimeout::default()),
         RuleEnum::VitestWarnTodo(VitestWarnTodo::default()),
+        RuleEnum::NodeFileExtensionInImport(NodeFileExtensionInImport::default()),
         RuleEnum::NodeGlobalRequire(NodeGlobalRequire::default()),
         RuleEnum::NodeHandleCallbackErr(NodeHandleCallbackErr::default()),
         RuleEnum::NodeNoExportsAssign(NodeNoExportsAssign::default()),
@@ -22820,6 +23075,16 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::NodeNoNewRequire(NodeNoNewRequire::default()),
         RuleEnum::NodeNoPathConcat(NodeNoPathConcat::default()),
         RuleEnum::NodeNoProcessEnv(NodeNoProcessEnv::default()),
+        RuleEnum::NodeNoProcessExit(NodeNoProcessExit::default()),
+        RuleEnum::NodePreferGlobalBuffer(NodePreferGlobalBuffer::default()),
+        RuleEnum::NodePreferGlobalConsole(NodePreferGlobalConsole::default()),
+        RuleEnum::NodePreferGlobalProcess(NodePreferGlobalProcess::default()),
+        RuleEnum::NodePreferGlobalUrl(NodePreferGlobalUrl::default()),
+        RuleEnum::NodePreferPromisesDns(NodePreferPromisesDns::default()),
+        RuleEnum::NodePreferPromisesFs(NodePreferPromisesFs::default()),
+        RuleEnum::BunNoNodeFs(BunNoNodeFs::default()),
+        RuleEnum::BunPreferBunEnv(BunPreferBunEnv::default()),
+        RuleEnum::BunPreferBunTest(BunPreferBunTest::default()),
         RuleEnum::VueDefineEmitsDeclaration(VueDefineEmitsDeclaration::default()),
         RuleEnum::VueDefinePropsDeclaration(VueDefinePropsDeclaration::default()),
         RuleEnum::VueDefinePropsDestructuring(VueDefinePropsDestructuring::default()),

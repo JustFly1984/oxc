@@ -4,7 +4,7 @@ use goat_span::Span;
 
 use crate::{AstNode, context::LintContext, rule::Rule};
 
-#[allow(dead_code)]
+#[expect(dead_code)]
 fn no_unresolved_imports_diagnostic(span: Span, source: &str) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!("Unable to resolve import `{source}`."))
         .with_help("Ensure the module exists, the path is correct, and the package is installed.")

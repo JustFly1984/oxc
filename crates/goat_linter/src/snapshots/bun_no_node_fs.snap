@@ -1,0 +1,59 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ bun(no-node-fs): Avoid using the Node.js `fs` module in Bun projects.
+   ╭─[no_node_fs.tsx:1:12]
+ 1 │ const fs = require("fs");
+   ·            ─────────────
+   ╰────
+  help: Use `Bun.file()` and `Bun.write()` for file operations instead.
+
+  ⚠ bun(no-node-fs): Avoid using the Node.js `fs` module in Bun projects.
+   ╭─[no_node_fs.tsx:1:12]
+ 1 │ const fs = require("node:fs");
+   ·            ──────────────────
+   ╰────
+  help: Use `Bun.file()` and `Bun.write()` for file operations instead.
+
+  ⚠ bun(no-node-fs): Avoid using the Node.js `fs` module in Bun projects.
+   ╭─[no_node_fs.tsx:1:13]
+ 1 │ const fsp = require("fs/promises");
+   ·             ──────────────────────
+   ╰────
+  help: Use `Bun.file()` and `Bun.write()` for file operations instead.
+
+  ⚠ bun(no-node-fs): Avoid using the Node.js `fs` module in Bun projects.
+   ╭─[no_node_fs.tsx:1:13]
+ 1 │ const fsp = require("node:fs/promises");
+   ·             ───────────────────────────
+   ╰────
+  help: Use `Bun.file()` and `Bun.write()` for file operations instead.
+
+  ⚠ bun(no-node-fs): Avoid using the Node.js `fs` module in Bun projects.
+   ╭─[no_node_fs.tsx:1:1]
+ 1 │ import fs from "fs";
+   · ────────────────────
+   ╰────
+  help: Use `Bun.file()` and `Bun.write()` for file operations instead.
+
+  ⚠ bun(no-node-fs): Avoid using the Node.js `fs` module in Bun projects.
+   ╭─[no_node_fs.tsx:1:1]
+ 1 │ import fs from "node:fs";
+   · ─────────────────────────
+   ╰────
+  help: Use `Bun.file()` and `Bun.write()` for file operations instead.
+
+  ⚠ bun(no-node-fs): Avoid using the Node.js `fs` module in Bun projects.
+   ╭─[no_node_fs.tsx:1:1]
+ 1 │ import { readFile } from "fs/promises";
+   · ───────────────────────────────────────
+   ╰────
+  help: Use `Bun.file()` and `Bun.write()` for file operations instead.
+
+  ⚠ bun(no-node-fs): Avoid using the Node.js `fs` module in Bun projects.
+   ╭─[no_node_fs.tsx:1:1]
+ 1 │ import { readFile } from "node:fs/promises";
+   · ────────────────────────────────────────────
+   ╰────
+  help: Use `Bun.file()` and `Bun.write()` for file operations instead.

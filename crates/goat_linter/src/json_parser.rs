@@ -4,6 +4,10 @@
 //! key, value, property, object, and array in the JSON document. This enables
 //! precise diagnostics and autofixes for JSON lint rules.
 
+// All `usize as u32` casts in this module are for source positions, which
+// will never exceed `u32::MAX` for any realistic JSON file processed by the linter.
+#![expect(clippy::cast_possible_truncation)]
+
 use goat_span::Span;
 
 // ── AST ──────────────────────────────────────────────────────────────────────

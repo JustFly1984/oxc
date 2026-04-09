@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ eslint-plugin-node(prefer-promises-fs): Prefer `fs/promises` over callback-based `fs` methods.
+   ╭─[prefer_promises_fs.tsx:1:12]
+ 1 │ const fs = require("fs");
+   ·            ─────────────
+   ╰────
+  help: Use `require('fs/promises')` or `import fs from 'node:fs/promises'` instead of the callback-based `fs` API.
+
+  ⚠ eslint-plugin-node(prefer-promises-fs): Prefer `fs/promises` over callback-based `fs` methods.
+   ╭─[prefer_promises_fs.tsx:1:12]
+ 1 │ const fs = require("node:fs");
+   ·            ──────────────────
+   ╰────
+  help: Use `require('fs/promises')` or `import fs from 'node:fs/promises'` instead of the callback-based `fs` API.

@@ -64,6 +64,13 @@ impl SourceFormatter {
                 FormatFileStrategy::OxfmtToml { .. },
                 ResolvedOptions::OxfmtToml { toml_options, insert_final_newline },
             ) => (Ok(Self::format_by_toml(source_text, toml_options)), insert_final_newline),
+            (
+                FormatFileStrategy::OxfmtJson { .. },
+                ResolvedOptions::OxfmtJson { json_options, sort_package_json, insert_final_newline },
+            ) => (
+                Self::format_by_json(source_text, json_options, sort_package_json.as_ref()),
+                insert_final_newline,
+            ),
             #[cfg(feature = "napi")]
             (
                 FormatFileStrategy::ExternalFormatter { path, parser_name },
@@ -173,6 +180,26 @@ impl SourceFormatter {
     #[instrument(level = "debug", name = "goatfmt::format::oxc_toml", skip_all)]
     fn format_by_toml(source_text: &str, options: oxc_toml::Options) -> String {
         oxc_toml::format(source_text, options)
+    }
+
+    /// Format JSON/JSONC/JSON5 file using native Rust formatter.
+    #[instrument(level = "debug", name = "goatfmt::format::json", skip_all)]
+    fn format_by_json(
+        source_text: &str,
+        options: goat_json_formatter::Options,
+        sort_options: Option<&sort_package_json::SortOptions>,
+    ) -> Result<String, GoatDiagnostic> {
+        let source_text: Cow<'_, str> = if let Some(sort_opts) = sort_options {
+            match sort_package_json::sort_package_json_with_options(source_text, sort_opts) {
+                Ok(sorted) => Cow::Owned(sorted),
+                Err(_) => Cow::Borrowed(source_text),
+            }
+        } else {
+            Cow::Borrowed(source_text)
+        };
+
+        goat_json_formatter::format(&source_text, options)
+            .map_err(GoatDiagnostic::error)
     }
 }
 

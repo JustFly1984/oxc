@@ -1,3 +1,4 @@
+use cow_utils::CowUtils;
 use goat_ast::{
     AstKind,
     ast::{BinaryExpression, BinaryOperator, Expression},
@@ -77,10 +78,7 @@ impl Rule for PreferTemplate {
                 let mut result = String::from('`');
                 for part in &parts {
                     match part {
-                        Part::StringContent(s) => {
-                            result.push_str(s);
-                        }
-                        Part::TemplatePart(s) => {
+                        Part::StringContent(s) | Part::Template(s) => {
                             result.push_str(s);
                         }
                         Part::Expression(s) => {
@@ -104,7 +102,7 @@ enum Part {
     /// Content from a string literal (already unescaped from JS string to raw text)
     StringContent(String),
     /// Content from a template literal (already valid template content)
-    TemplatePart(String),
+    Template(String),
     /// An expression to be wrapped in ${}
     Expression(String),
     /// An expression we can't safely autofix
@@ -157,14 +155,14 @@ fn collect_part(expr: &Expression<'_>, source: &str, parts: &mut Vec<Part>) {
             }
             // Unescape the string for template literal context
             // The lit.value is already the interpreted value
-            let content = raw.replace('`', "\\`").replace("${", "\\${");
+            let content = raw.cow_replace('`', "\\`").cow_replace("${", "\\${").into_owned();
             parts.push(Part::StringContent(content));
         }
         Expression::TemplateLiteral(tmpl) => {
             // Extract the content between backticks
             let inner_span = Span::new(tmpl.span.start + 1, tmpl.span.end - 1);
             let content = inner_span.source_text(source);
-            parts.push(Part::TemplatePart(content.to_string()));
+            parts.push(Part::Template(content.to_string()));
         }
         _ => {
             let expr_text = expr.span().source_text(source);
@@ -192,11 +190,8 @@ fn has_unsafe_escapes(source: &str) -> bool {
                         return true;
                     }
                 }
-                b'1'..=b'7' => return true,
-                b'8' | b'9' => return true, // non-octal decimal escape
-                b'x' => {
-                    // \xNN - hex escape, safe to keep
-                }
+                b'1'..=b'9' => return true, // octal or non-octal decimal escape
+                // \xNN - hex escape, safe to keep; other escapes also safe
                 _ => {}
             }
         }

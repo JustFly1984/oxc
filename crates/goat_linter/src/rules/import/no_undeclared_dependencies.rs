@@ -5,7 +5,7 @@ use goat_span::Span;
 
 use crate::{AstNode, context::LintContext, rule::Rule};
 
-#[allow(dead_code)]
+#[expect(dead_code)]
 fn no_undeclared_dependencies_diagnostic(span: Span, name: &str) -> GoatDiagnostic {
     GoatDiagnostic::warn(format!("Import of `{name}` is not listed as a dependency in package.json."))
         .with_help("Add this package to your dependencies, devDependencies, peerDependencies, or optionalDependencies in package.json.")

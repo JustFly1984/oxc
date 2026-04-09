@@ -56,13 +56,11 @@ impl Rule for NoForwardRef {
         match &call.callee {
             // React.forwardRef(...)
             Expression::StaticMemberExpression(member) => {
-                if member.property.name.as_str() == "forwardRef" {
-                    if let Expression::Identifier(obj) = &member.object {
-                        if obj.name == "React" {
+                if member.property.name.as_str() == "forwardRef"
+                    && let Expression::Identifier(obj) = &member.object
+                        && obj.name == "React" {
                             ctx.diagnostic(no_forward_ref_diagnostic(call.span));
                         }
-                    }
-                }
             }
             // forwardRef(...)
             Expression::Identifier(ident) => {

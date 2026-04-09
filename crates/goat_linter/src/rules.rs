@@ -856,6 +856,7 @@ pub(crate) mod vitest {
 }
 
 pub(crate) mod node {
+    pub mod file_extension_in_import;
     pub mod global_require;
     pub mod handle_callback_err;
     pub mod no_exports_assign;
@@ -863,6 +864,19 @@ pub(crate) mod node {
     pub mod no_new_require;
     pub mod no_path_concat;
     pub mod no_process_env;
+    pub mod no_process_exit;
+    pub mod prefer_global_buffer;
+    pub mod prefer_global_console;
+    pub mod prefer_global_process;
+    pub mod prefer_global_url;
+    pub mod prefer_promises_dns;
+    pub mod prefer_promises_fs;
+}
+
+pub(crate) mod bun {
+    pub mod no_node_fs;
+    pub mod prefer_bun_env;
+    pub mod prefer_bun_test;
 }
 
 pub(crate) mod vue {

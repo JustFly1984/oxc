@@ -111,6 +111,12 @@ pub enum ResolvedOptions {
     },
     /// For TOML files.
     OxfmtToml { toml_options: TomlFormatterOptions, insert_final_newline: bool },
+    /// For JSON/JSONC/JSON5 files.
+    OxfmtJson {
+        json_options: goat_json_formatter::Options,
+        sort_package_json: Option<sort_package_json::SortOptions>,
+        insert_final_newline: bool,
+    },
     /// For non-JS files formatted by external formatter (Prettier).
     #[cfg(feature = "napi")]
     ExternalFormatter { external_options: Value, insert_final_newline: bool },
@@ -135,11 +141,8 @@ impl ResolvedOptions {
         // Apply plugin-specific options based on strategy
         finalize_external_options(&mut external_options, strategy);
 
-        #[cfg(feature = "napi")]
         let OxfmtOptions { format_options, toml_options, sort_package_json, insert_final_newline } =
             goatfmt_options;
-        #[cfg(not(feature = "napi"))]
-        let OxfmtOptions { format_options, toml_options, insert_final_newline, .. } = goatfmt_options;
 
         match strategy {
             FormatFileStrategy::OxcFormatter { .. } => ResolvedOptions::OxcFormatter {
@@ -150,6 +153,24 @@ impl ResolvedOptions {
             },
             FormatFileStrategy::OxfmtToml { .. } => {
                 ResolvedOptions::OxfmtToml { toml_options, insert_final_newline }
+            }
+            FormatFileStrategy::OxfmtJson { variant, .. } => {
+                let json_options = goat_json_formatter::Options {
+                    indent_string: if format_options.indent_style.is_tab() {
+                        "\t".to_string()
+                    } else {
+                        " ".repeat(format_options.indent_width.value() as usize)
+                    },
+                    trailing_comma: false,
+                    crlf: format_options.line_ending.is_carriage_return_line_feed(),
+                    trailing_newline: true,
+                    variant: *variant,
+                };
+                ResolvedOptions::OxfmtJson {
+                    json_options,
+                    sort_package_json,
+                    insert_final_newline,
+                }
             }
             #[cfg(feature = "napi")]
             FormatFileStrategy::ExternalFormatter { .. } => {

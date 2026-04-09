@@ -1,0 +1,24 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ eslint-plugin-node(no-process-exit): Don't use `process.exit()`.
+   ╭─[no_process_exit.tsx:1:1]
+ 1 │ process.exit(0);
+   · ───────────────
+   ╰────
+  help: Use `throw` or allow the process to exit naturally. `process.exit()` prevents cleanup handlers and can hide errors.
+
+  ⚠ eslint-plugin-node(no-process-exit): Don't use `process.exit()`.
+   ╭─[no_process_exit.tsx:1:1]
+ 1 │ process.exit(1);
+   · ───────────────
+   ╰────
+  help: Use `throw` or allow the process to exit naturally. `process.exit()` prevents cleanup handlers and can hide errors.
+
+  ⚠ eslint-plugin-node(no-process-exit): Don't use `process.exit()`.
+   ╭─[no_process_exit.tsx:1:1]
+ 1 │ process.exit();
+   · ──────────────
+   ╰────
+  help: Use `throw` or allow the process to exit naturally. `process.exit()` prevents cleanup handlers and can hide errors.

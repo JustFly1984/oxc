@@ -37,8 +37,7 @@ impl PartialLoader {
             "vue" => Some(VuePartialLoader::new(source_text).parse()),
             "astro" => Some(AstroPartialLoader::new(source_text).parse()),
             "svelte" => Some(SveltePartialLoader::new(source_text).parse()),
-            "json" => Some(vec![JavaScriptSource::partial("", SourceType::default(), 0)]),
-            "css" => Some(vec![JavaScriptSource::partial("", SourceType::default(), 0)]),
+            "json" | "css" => Some(vec![JavaScriptSource::partial("", SourceType::default(), 0)]),
             _ => None,
         }
     }

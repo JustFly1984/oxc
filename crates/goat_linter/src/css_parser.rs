@@ -103,6 +103,7 @@ pub struct CssParseResult<'a> {
 
 // ── Parser ───────────────────────────────────────────────────────────────────
 
+#[expect(clippy::cast_possible_truncation)]
 pub fn parse_css(source: &str) -> CssParseResult<'_> {
     let mut parser = Parser::new(source);
     let rules = parser.parse_rule_list();
@@ -117,6 +118,7 @@ struct Parser<'a> {
     errors: Vec<CssParseError>,
 }
 
+#[expect(clippy::cast_possible_truncation)]
 impl<'a> Parser<'a> {
     fn new(source: &'a str) -> Self {
         Self { source, bytes: source.as_bytes(), pos: 0, errors: Vec::new() }
@@ -157,7 +159,7 @@ impl<'a> Parser<'a> {
 
         // At-rule
         if self.peek() == Some(b'@') {
-            return self.parse_at_rule().map(CssRule::AtRule);
+            return Some(CssRule::AtRule(self.parse_at_rule()));
         }
 
         // Closing brace (end of nested block)
@@ -195,7 +197,7 @@ impl<'a> Parser<'a> {
         }
     }
 
-    fn parse_at_rule(&mut self) -> Option<CssAtRule<'a>> {
+    fn parse_at_rule(&mut self) -> CssAtRule<'a> {
         let start = self.pos;
         self.pos += 1; // skip @
 
@@ -215,8 +217,7 @@ impl<'a> Parser<'a> {
         let mut depth = 0u32;
         while self.pos < self.bytes.len() {
             match self.bytes[self.pos] {
-                b'{' if depth == 0 => break,
-                b';' if depth == 0 => break,
+                b'{' | b';' if depth == 0 => break,
                 b'(' => {
                     depth += 1;
                     self.pos += 1;
@@ -234,39 +235,39 @@ impl<'a> Parser<'a> {
         let prelude_span = Span::new(prelude_start as u32, prelude_end as u32);
 
         if self.pos >= self.bytes.len() {
-            return Some(CssAtRule {
+            return CssAtRule {
                 name,
                 name_span,
                 prelude,
                 prelude_span,
                 block: None,
                 span: Span::new(start as u32, self.pos as u32),
-            });
+            };
         }
 
         // Semicolon-terminated at-rule (e.g., @import)
         if self.bytes[self.pos] == b';' {
             self.pos += 1;
-            return Some(CssAtRule {
+            return CssAtRule {
                 name,
                 name_span,
                 prelude,
                 prelude_span,
                 block: None,
                 span: Span::new(start as u32, self.pos as u32),
-            });
+            };
         }
 
         // Block at-rule (e.g., @media)
         let block = self.parse_rule_block();
-        Some(CssAtRule {
+        CssAtRule {
             name,
             name_span,
             prelude,
             prelude_span,
             block: Some(block),
             span: Span::new(start as u32, self.pos as u32),
-        })
+        }
     }
 
     fn parse_rule_block(&mut self) -> CssRuleBlock<'a> {
@@ -379,8 +380,7 @@ impl<'a> Parser<'a> {
         let mut depth = 0u32;
         while self.pos < self.bytes.len() {
             match self.bytes[self.pos] {
-                b';' if depth == 0 => break,
-                b'}' if depth == 0 => break,
+                b';' | b'}' if depth == 0 => break,
                 b'(' => {
                     depth += 1;
                     self.pos += 1;

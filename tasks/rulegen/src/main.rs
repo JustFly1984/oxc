@@ -1363,6 +1363,7 @@ pub enum RuleKind {
     Promise,
     Vitest,
     Vue,
+    Bun,
 }
 
 impl TryFrom<&str> for RuleKind {
@@ -1385,6 +1386,7 @@ impl TryFrom<&str> for RuleKind {
             "promise" => Ok(Self::Promise),
             "vitest" => Ok(Self::Vitest),
             "vue" => Ok(Self::Vue),
+            "bun" => Ok(Self::Bun),
             _ => Err(format!("Invalid `RuleKind`, got `{value}`")),
         }
     }
@@ -1408,6 +1410,7 @@ impl Display for RuleKind {
             Self::Promise => "eslint-plugin-promise",
             Self::Vitest => "eslint-plugin-vitest",
             Self::Vue => "eslint-plugin-vue",
+            Self::Bun => "bun",
         };
         f.write_str(kind_name)
     }
@@ -1441,7 +1444,7 @@ fn main() {
         RuleKind::Promise => format!("{PROMISE_TEST_PATH}/{kebab_rule_name}.js"),
         RuleKind::Vitest => format!("{VITEST_TEST_PATH}/{kebab_rule_name}.test.ts"),
         RuleKind::Vue => format!("{VUE_TEST_PATH}/{kebab_rule_name}.test.ts"),
-        RuleKind::Oxc => String::new(),
+        RuleKind::Oxc | RuleKind::Bun => String::new(),
     };
     let rule_src_path = match rule_kind {
         RuleKind::ESLint => format!("{ESLINT_RULES_PATH}/{kebab_rule_name}.js"),
@@ -1458,7 +1461,7 @@ fn main() {
         RuleKind::Promise => format!("{PROMISE_RULES_PATH}/{kebab_rule_name}.js"),
         RuleKind::Vitest => format!("{VITEST_RULES_PATH}/{kebab_rule_name}.ts"),
         RuleKind::Vue => format!("{VUE_RULES_PATH}/{kebab_rule_name}.js"),
-        RuleKind::Oxc => String::new(),
+        RuleKind::Oxc | RuleKind::Bun => String::new(),
     };
     let language = match rule_kind {
         RuleKind::Typescript | RuleKind::Oxc => "ts",
@@ -1864,6 +1867,7 @@ fn get_mod_name(rule_kind: RuleKind) -> String {
         RuleKind::Vitest => "vitest".into(),
         RuleKind::Node => "node".into(),
         RuleKind::Vue => "vue".into(),
+        RuleKind::Bun => "bun".into(),
     }
 }
 
@@ -1885,6 +1889,7 @@ fn get_unsupported_rule_prefix(rule_kind: RuleKind) -> &'static str {
         RuleKind::Promise => "promise",
         RuleKind::Vitest => "vitest",
         RuleKind::Vue => "vue",
+        RuleKind::Bun => "bun",
     }
 }
 

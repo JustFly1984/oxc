@@ -287,7 +287,7 @@ impl Clone for ConfigStore {
         Self {
             base: self.base.clone(),
             nested_configs: self.nested_configs.clone(),
-            external_plugin_store: self.external_plugin_store.clone(),
+            external_plugin_store: Arc::clone(&self.external_plugin_store),
             nearest_config_cache: Mutex::new(FxHashMap::default()),
         }
     }
@@ -376,11 +376,10 @@ impl ConfigStore {
         let dir = path.parent()?;
 
         // Check cache first
-        if let Ok(cache) = self.nearest_config_cache.lock() {
-            if let Some(cached) = cache.get(dir) {
+        if let Ok(cache) = self.nearest_config_cache.lock()
+            && let Some(cached) = cache.get(dir) {
                 return cached.as_ref().and_then(|key| self.nested_configs.get(key));
             }
-        }
 
         // Walk up parent directories to find the nearest config
         let mut result = None;

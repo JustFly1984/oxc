@@ -1,0 +1,17 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ eslint-plugin-node(prefer-global-console): Prefer the global `console` over `require('console')`.
+   ╭─[prefer_global_console.tsx:1:17]
+ 1 │ const console = require("console");
+   ·                 ──────────────────
+   ╰────
+  help: `console` is a global in Node.js and does not need to be imported.
+
+  ⚠ eslint-plugin-node(prefer-global-console): Prefer the global `console` over `require('console')`.
+   ╭─[prefer_global_console.tsx:1:17]
+ 1 │ const console = require("node:console");
+   ·                 ───────────────────────
+   ╰────
+  help: `console` is a global in Node.js and does not need to be imported.

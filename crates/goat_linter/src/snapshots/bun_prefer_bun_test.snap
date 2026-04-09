@@ -1,0 +1,38 @@
+---
+source: crates/goat_linter/src/tester.rs
+---
+
+  ⚠ bun(prefer-bun-test): Prefer `bun:test` over `@jest/globals`.
+   ╭─[prefer_bun_test.tsx:1:1]
+ 1 │ import { describe, it } from "@jest/globals";
+   · ─────────────────────────────────────────────
+   ╰────
+  help: Use `import { describe, it, expect } from 'bun:test'` instead.
+
+  ⚠ bun(prefer-bun-test): Prefer `bun:test` over `vitest`.
+   ╭─[prefer_bun_test.tsx:1:1]
+ 1 │ import { expect } from "vitest";
+   · ────────────────────────────────
+   ╰────
+  help: Use `import { describe, it, expect } from 'bun:test'` instead.
+
+  ⚠ bun(prefer-bun-test): Prefer `bun:test` over `@vitest/expect`.
+   ╭─[prefer_bun_test.tsx:1:1]
+ 1 │ import { expect } from "@vitest/expect";
+   · ────────────────────────────────────────
+   ╰────
+  help: Use `import { describe, it, expect } from 'bun:test'` instead.
+
+  ⚠ bun(prefer-bun-test): Prefer `bun:test` over `vitest`.
+   ╭─[prefer_bun_test.tsx:1:22]
+ 1 │ const { describe } = require("vitest");
+   ·                      ─────────────────
+   ╰────
+  help: Use `import { describe, it, expect } from 'bun:test'` instead.
+
+  ⚠ bun(prefer-bun-test): Prefer `bun:test` over `@jest/globals`.
+   ╭─[prefer_bun_test.tsx:1:18]
+ 1 │ const { jest } = require("@jest/globals");
+   ·                  ────────────────────────
+   ╰────
+  help: Use `import { describe, it, expect } from 'bun:test'` instead.

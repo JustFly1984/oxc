@@ -105,9 +105,9 @@ fn check_case_mismatch(
 
     // Check for case mismatch
     let has_mismatch = if is_to_lower {
-        value.chars().any(|c| c.is_uppercase())
+        value.chars().any(char::is_uppercase)
     } else {
-        value.chars().any(|c| c.is_lowercase())
+        value.chars().any(char::is_lowercase)
     };
 
     if has_mismatch {

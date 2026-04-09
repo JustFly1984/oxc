@@ -158,9 +158,10 @@ impl<'alloc_pool> ModuleToLint<'alloc_pool> {
     }
 }
 
-/// A simple trait for the `Runtime` to load and save file from a filesystem
-/// The `Runtime` uses OsFileSystem as a default
-/// The Tester and `goat_language_server` would like to provide the content from memory
+/// A simple trait for the `Runtime` to load and save file from a filesystem.
+///
+/// The `Runtime` uses OsFileSystem as a default.
+/// The Tester and `goat_language_server` would like to provide the content from memory.
 pub trait RuntimeFileSystem {
     /// reads the content of a file path
     ///

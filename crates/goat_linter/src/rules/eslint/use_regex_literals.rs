@@ -52,18 +52,16 @@ impl Rule for UseRegexLiterals {
     fn run<'a>(&self, node: &AstNode<'a>, ctx: &LintContext<'a>) {
         match node.kind() {
             AstKind::NewExpression(expr) => {
-                if let Expression::Identifier(ident) = &expr.callee {
-                    if ident.name == "RegExp" && is_simple_regex_args(&expr.arguments) {
+                if let Expression::Identifier(ident) = &expr.callee
+                    && ident.name == "RegExp" && is_simple_regex_args(&expr.arguments) {
                         ctx.diagnostic(use_regex_literals_diagnostic(expr.span));
                     }
-                }
             }
             AstKind::CallExpression(expr) => {
-                if let Expression::Identifier(ident) = &expr.callee {
-                    if ident.name == "RegExp" && is_simple_regex_args(&expr.arguments) {
+                if let Expression::Identifier(ident) = &expr.callee
+                    && ident.name == "RegExp" && is_simple_regex_args(&expr.arguments) {
                         ctx.diagnostic(use_regex_literals_diagnostic(expr.span));
                     }
-                }
             }
             _ => {}
         }
