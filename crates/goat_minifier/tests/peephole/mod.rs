@@ -16,7 +16,7 @@ mod minimize_not_expression;
 mod minimize_statements;
 mod normalize;
 mod obscure_edge_cases;
-mod oxc;
+mod goat;
 mod real_world_patterns;
 mod remove_dead_code;
 mod remove_unused_declaration;

@@ -22,7 +22,6 @@ source: crates/goat_linter/src/tester.rs
    ·       ──
    ╰────
   help: Remove the fragment and render the child directly.
-  help: Replace `<>foo</>` with `foo`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Passing a fragment to a HTML element is useless.
    ╭─[jsx_no_useless_fragment.tsx:1:7]
@@ -30,7 +29,6 @@ source: crates/goat_linter/src/tester.rs
    ·       ──
    ╰────
   help: Remove the fragment and pass the children directly to the HTML element.
-  help: Replace `<>foo</>` with `foo`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Fragments should contain more than one child.
    ╭─[jsx_no_useless_fragment.tsx:1:1]
@@ -45,7 +43,6 @@ source: crates/goat_linter/src/tester.rs
    ·    ──
    ╰────
   help: Remove the fragment and render the child directly.
-  help: Replace `<>{meow}</>` with `{meow}`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Passing a fragment to a HTML element is useless.
    ╭─[jsx_no_useless_fragment.tsx:1:4]
@@ -53,7 +50,6 @@ source: crates/goat_linter/src/tester.rs
    ·    ──
    ╰────
   help: Remove the fragment and pass the children directly to the HTML element.
-  help: Replace `<>{meow}</>` with `{meow}`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Fragments should contain more than one child.
    ╭─[jsx_no_useless_fragment.tsx:1:1]
@@ -61,7 +57,6 @@ source: crates/goat_linter/src/tester.rs
    · ──
    ╰────
   help: Remove the fragment and render the child directly.
-  help: Replace `<><div/></>` with `<div/>`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Fragments should contain more than one child.
    ╭─[jsx_no_useless_fragment.tsx:2:13]
@@ -71,9 +66,6 @@ source: crates/goat_linter/src/tester.rs
  3 │               <div/>
    ╰────
   help: Remove the fragment and render the child directly.
-  help: Replace `<>
-                      <div/>
-                    </>` with `<div/>`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Fragments should contain more than one child.
    ╭─[jsx_no_useless_fragment.tsx:1:1]
@@ -90,9 +82,6 @@ source: crates/goat_linter/src/tester.rs
  3 │                   <Foo />
    ╰────
   help: Remove the fragment and render the child directly.
-  help: Replace `<React.Fragment>
-                          <Foo />
-                        </React.Fragment>` with `<Foo />`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Fragments should contain more than one child.
    ╭─[jsx_no_useless_fragment.tsx:1:7]
@@ -107,7 +96,6 @@ source: crates/goat_linter/src/tester.rs
    ·      ──
    ╰────
   help: Remove the fragment and render the child directly.
-  help: Replace `<>foo</>` with `foo`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Passing a fragment to a HTML element is useless.
    ╭─[jsx_no_useless_fragment.tsx:1:6]
@@ -115,7 +103,6 @@ source: crates/goat_linter/src/tester.rs
    ·      ──
    ╰────
   help: Remove the fragment and pass the children directly to the HTML element.
-  help: Replace `<>foo</>` with `foo`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Passing a fragment to a HTML element is useless.
    ╭─[jsx_no_useless_fragment.tsx:1:6]
@@ -123,7 +110,6 @@ source: crates/goat_linter/src/tester.rs
    ·      ──
    ╰────
   help: Remove the fragment and pass the children directly to the HTML element.
-  help: Replace `<>{"a"}{"b"}</>` with `{"a"}{"b"}`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Passing a fragment to a HTML element is useless.
    ╭─[jsx_no_useless_fragment.tsx:1:6]
@@ -131,7 +117,6 @@ source: crates/goat_linter/src/tester.rs
    ·      ──
    ╰────
   help: Remove the fragment and pass the children directly to the HTML element.
-  help: Replace `<>{"a"}{"b"}</>` with `{"a"}{"b"}`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Passing a fragment to a HTML element is useless.
    ╭─[jsx_no_useless_fragment.tsx:5:15]
@@ -141,7 +126,6 @@ source: crates/goat_linter/src/tester.rs
  6 │             </section>
    ╰────
   help: Remove the fragment and pass the children directly to the HTML element.
-  help: Replace `<>{"a"}{"b"}</>` with `{"a"}{"b"}`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Passing a fragment to a HTML element is useless.
    ╭─[jsx_no_useless_fragment.tsx:1:6]
@@ -149,7 +133,6 @@ source: crates/goat_linter/src/tester.rs
    ·      ──────────
    ╰────
   help: Remove the fragment and pass the children directly to the HTML element.
-  help: Replace `<Fragment>{"a"}{"b"}</Fragment>` with `{"a"}{"b"}`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Passing a fragment to a HTML element is useless.
    ╭─[jsx_no_useless_fragment.tsx:3:18]
@@ -159,9 +142,6 @@ source: crates/goat_linter/src/tester.rs
  4 │                 <b>hub</b>.
    ╰────
   help: Remove the fragment and pass the children directly to the HTML element.
-  help: Replace `<>
-                        <b>hub</b>.
-                      </>` with `<b>hub</b>.`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Passing a fragment to a HTML element is useless.
    ╭─[jsx_no_useless_fragment.tsx:7:18]
@@ -171,7 +151,6 @@ source: crates/goat_linter/src/tester.rs
  8 │             </section>
    ╰────
   help: Remove the fragment and pass the children directly to the HTML element.
-  help: Replace `<> <b>hub</b></>` with ` <b>hub</b>`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Passing a fragment to a HTML element is useless.
    ╭─[jsx_no_useless_fragment.tsx:1:8]
@@ -179,7 +158,6 @@ source: crates/goat_linter/src/tester.rs
    ·        ──
    ╰────
   help: Remove the fragment and pass the children directly to the HTML element.
-  help: Replace `<>{""}{""}</>` with `{""}{""}`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Fragments should contain more than one child.
    ╭─[jsx_no_useless_fragment.tsx:4:17]
@@ -189,7 +167,6 @@ source: crates/goat_linter/src/tester.rs
  5 │               </html>
    ╰────
   help: Remove the fragment and render the child directly.
-  help: Remove `<React.Fragment />`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Passing a fragment to a HTML element is useless.
    ╭─[jsx_no_useless_fragment.tsx:4:17]
@@ -199,7 +176,6 @@ source: crates/goat_linter/src/tester.rs
  5 │               </html>
    ╰────
   help: Remove the fragment and pass the children directly to the HTML element.
-  help: Remove `<React.Fragment />`.
 
   ⚠ eslint-plugin-react(jsx-no-useless-fragment): Fragments should contain more than one child.
    ╭─[jsx_no_useless_fragment.tsx:1:1]
@@ -207,4 +183,3 @@ source: crates/goat_linter/src/tester.rs
    · ──
    ╰────
   help: Remove the fragment and render the child directly.
-  help: Replace `<><Foo>{moo}</Foo></>` with `<Foo>{moo}</Foo>`.

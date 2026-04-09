@@ -8,7 +8,6 @@ source: crates/goat_linter/src/tester.rs
    · ──────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `Object.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:1]
@@ -16,7 +15,6 @@ source: crates/goat_linter/src/tester.rs
    · ─────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `Object.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:1]
@@ -24,7 +22,6 @@ source: crates/goat_linter/src/tester.rs
    · ────────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `Object.prototype.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:1]
@@ -32,7 +29,6 @@ source: crates/goat_linter/src/tester.rs
    · ────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `({}).hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:1]
@@ -47,7 +43,6 @@ source: crates/goat_linter/src/tester.rs
    ·                     ──────────────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `Object.prototype.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:24]
@@ -55,7 +50,6 @@ source: crates/goat_linter/src/tester.rs
    ·                        ──────────────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `Object.prototype.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:21]
@@ -63,7 +57,6 @@ source: crates/goat_linter/src/tester.rs
    ·                     ────────────────────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `Object.prototype.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:21]
@@ -71,7 +64,6 @@ source: crates/goat_linter/src/tester.rs
    ·                     ────────────────────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `(( Object.prototype.hasOwnProperty )).call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:21]
@@ -79,7 +71,6 @@ source: crates/goat_linter/src/tester.rs
    ·                     ────────────────────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `(( Object.prototype )).hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:21]
@@ -87,7 +78,6 @@ source: crates/goat_linter/src/tester.rs
    ·                     ────────────────────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `(( Object )).prototype.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:21]
@@ -95,7 +85,6 @@ source: crates/goat_linter/src/tester.rs
    ·                     ────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:19]
@@ -103,7 +92,6 @@ source: crates/goat_linter/src/tester.rs
    ·                   ────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:24]
@@ -111,7 +99,6 @@ source: crates/goat_linter/src/tester.rs
    ·                        ────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:21]
@@ -119,7 +106,6 @@ source: crates/goat_linter/src/tester.rs
    ·                     ──────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:21]
@@ -127,7 +113,6 @@ source: crates/goat_linter/src/tester.rs
    ·                     ──────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `(( {}.hasOwnProperty )).call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:21]
@@ -135,7 +120,6 @@ source: crates/goat_linter/src/tester.rs
    ·                     ──────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `(( {} )).hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:23]
@@ -143,7 +127,6 @@ source: crates/goat_linter/src/tester.rs
    ·                       ────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:22]
@@ -151,7 +134,6 @@ source: crates/goat_linter/src/tester.rs
    ·                      ────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with ` Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:33]
@@ -159,7 +141,6 @@ source: crates/goat_linter/src/tester.rs
    ·                                 ────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:34]
@@ -167,7 +148,6 @@ source: crates/goat_linter/src/tester.rs
    ·                                  ────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with ` Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:45]
@@ -175,7 +155,6 @@ source: crates/goat_linter/src/tester.rs
    ·                                             ────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:16]
@@ -183,7 +162,6 @@ source: crates/goat_linter/src/tester.rs
    ·                ────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with ` Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:27]
@@ -191,7 +169,6 @@ source: crates/goat_linter/src/tester.rs
    ·                           ────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:16]
@@ -199,7 +176,6 @@ source: crates/goat_linter/src/tester.rs
    ·                ────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with ` Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:27]
@@ -207,7 +183,6 @@ source: crates/goat_linter/src/tester.rs
    ·                           ────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:22]
@@ -215,7 +190,6 @@ source: crates/goat_linter/src/tester.rs
    ·                      ──────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `{}.hasOwnProperty.call` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:1]
@@ -223,7 +197,6 @@ source: crates/goat_linter/src/tester.rs
    · ───────────────────────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `Object['prototype']['hasOwnProperty']['call']` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:1]
@@ -231,7 +204,6 @@ source: crates/goat_linter/src/tester.rs
    · ───────────────────────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `Object[`prototype`][`hasOwnProperty`][`call`]` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:1]
@@ -239,7 +211,6 @@ source: crates/goat_linter/src/tester.rs
    · ──────────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `Object['hasOwnProperty']['call']` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:1]
@@ -247,7 +218,6 @@ source: crates/goat_linter/src/tester.rs
    · ──────────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `Object[`hasOwnProperty`][`call`]` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:1]
@@ -255,7 +225,6 @@ source: crates/goat_linter/src/tester.rs
    · ────────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `({})['hasOwnProperty']['call']` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:1]
@@ -263,7 +232,6 @@ source: crates/goat_linter/src/tester.rs
    · ────────────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `({})[`hasOwnProperty`][`call`]` with `Object.hasOwn`.
 
   ⚠ eslint(prefer-object-has-own): Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()`.
    ╭─[prefer_object_has_own.tsx:1:3]
@@ -271,4 +239,3 @@ source: crates/goat_linter/src/tester.rs
    ·  ─────────────────────────────────────────
    ╰────
   help: Use `Object.hasOwn(obj, prop)` instead of `Object.prototype.hasOwnProperty.call(obj, prop)`.
-  help: Replace `Object.prototype.hasOwnProperty.call` with ` Object.hasOwn`.

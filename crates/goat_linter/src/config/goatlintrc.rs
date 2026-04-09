@@ -636,7 +636,7 @@ mod test {
             serde_json::from_str(r#"{ "plugins": ["typescript", "unicorn"] }"#).unwrap();
         assert_eq!(config.plugins, Some(LintPlugins::TYPESCRIPT | LintPlugins::UNICORN));
         let config: Oxlintrc =
-            serde_json::from_str(r#"{ "plugins": ["typescript", "unicorn", "react", "goat", "import", "jsdoc", "jest", "vitest", "jsx-a11y", "nextjs", "react-perf", "promise", "node", "vue", "json", "css"] }"#).unwrap();
+            serde_json::from_str(r#"{ "plugins": ["typescript", "unicorn", "react", "goat", "import", "jsdoc", "jest", "vitest", "jsx-a11y", "nextjs", "react-perf", "promise", "node", "vue", "json", "css", "bun"] }"#).unwrap();
         assert_eq!(config.plugins, Some(LintPlugins::all()));
 
         let config: Oxlintrc =
