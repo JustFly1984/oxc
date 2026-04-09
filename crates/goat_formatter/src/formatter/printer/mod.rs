@@ -1755,6 +1755,186 @@ Group 1 breaks"
         assert_eq!("(\nThis is a string\n containing a newline\n)", result.as_code());
     }
 
+    #[test]
+    fn deeply_nested_groups_all_break() {
+        let allocator = Allocator::default();
+        let options =
+            PrinterOptions { print_width: PrintWidth::new(20), ..PrinterOptions::default() };
+
+        // Nest groups 4 levels deep, each with content that won't fit at width 20
+        let result = format_with_options(
+            &allocator,
+            &group(&format_args!(
+                token("{"),
+                soft_block_indent(&group(&format_args!(
+                    token("{"),
+                    soft_block_indent(&group(&format_args!(
+                        token("{"),
+                        soft_block_indent(&token("deeply_nested_value")),
+                        token("}")
+                    ))),
+                    token("}")
+                ))),
+                token("}")
+            )),
+            options,
+        );
+
+        assert_eq!(
+            "{\n  {\n    {\n      deeply_nested_value\n    }\n  }\n}",
+            result.as_code()
+        );
+    }
+
+    #[test]
+    fn deeply_nested_groups_fit_on_line() {
+        let allocator = Allocator::default();
+        // With wide print width, nested groups should stay flat
+        let result = format(
+            &allocator,
+            &group(&format_args!(
+                token("{"),
+                soft_block_indent(&group(&format_args!(
+                    token("{"),
+                    soft_block_indent(&token("x")),
+                    token("}")
+                ))),
+                token("}")
+            )),
+        );
+
+        assert_eq!("{{x}}", result.as_code());
+    }
+
+    #[test]
+    fn hard_line_break_forces_group_to_break() {
+        let allocator = Allocator::default();
+        let result = format(
+            &allocator,
+            &group(&format_args!(token("a"), hard_line_break(), token("b"))),
+        );
+
+        assert_eq!("a\nb", result.as_code());
+    }
+
+    #[test]
+    fn soft_line_break_preserved_in_flat_mode() {
+        let allocator = Allocator::default();
+        // Content fits on one line, so soft_line_break should produce nothing
+        let result = format(
+            &allocator,
+            &group(&format_args!(token("a"), soft_line_break(), token("b"))),
+        );
+
+        assert_eq!("ab", result.as_code());
+    }
+
+    #[test]
+    fn soft_line_break_or_space_in_flat_mode() {
+        let allocator = Allocator::default();
+        // Content fits, so soft_line_break_or_space produces a space
+        let result = format(
+            &allocator,
+            &group(&format_args!(
+                token("short"),
+                soft_line_break_or_space(),
+                token("text")
+            )),
+        );
+
+        assert_eq!("short text", result.as_code());
+    }
+
+    #[test]
+    fn soft_line_break_or_space_breaks_when_exceeds_width() {
+        let allocator = Allocator::default();
+        let options =
+            PrinterOptions { print_width: PrintWidth::new(10), ..PrinterOptions::default() };
+
+        let result = format_with_options(
+            &allocator,
+            &group(&format_args!(
+                token("somewhat"),
+                soft_line_break_or_space(),
+                token("longer_text")
+            )),
+            options,
+        );
+
+        assert_eq!("somewhat\nlonger_text", result.as_code());
+    }
+
+    #[test]
+    fn line_suffix_with_hard_line_break() {
+        let allocator = Allocator::default();
+        let result = format(
+            &allocator,
+            &format_args!(
+                token("code"),
+                line_suffix(&format_args!(space(), token("// comment"))),
+                hard_line_break(),
+                token("next_line"),
+            ),
+        );
+
+        assert_eq!("code // comment\nnext_line", result.as_code());
+    }
+
+    #[test]
+    fn multiple_line_suffixes() {
+        let allocator = Allocator::default();
+        let result = format(
+            &allocator,
+            &format_args!(
+                token("a"),
+                line_suffix(&format_args!(space(), token("/* c1 */"))),
+                line_suffix(&format_args!(space(), token("/* c2 */"))),
+                hard_line_break(),
+                token("b"),
+            ),
+        );
+
+        assert_eq!("a /* c1 */ /* c2 */\nb", result.as_code());
+    }
+
+    #[test]
+    fn group_with_only_soft_break_flat() {
+        let allocator = Allocator::default();
+        // A group containing only a soft_line_break that fits on one line
+        let result = format(
+            &allocator,
+            &format_args!(
+                token("before"),
+                group(&format_args!(soft_line_break())),
+                token("after")
+            ),
+        );
+
+        assert_eq!("beforeafter", result.as_code());
+    }
+
+    #[test]
+    fn tab_indent_style() {
+        let allocator = Allocator::default();
+        let options = PrinterOptions {
+            indent_style: IndentStyle::Tab,
+            print_width: PrintWidth::new(10),
+            ..PrinterOptions::default()
+        };
+
+        let result = format_with_options(
+            &allocator,
+            &group(&format_args!(
+                token("if (x) {"),
+                block_indent(&token("return y;")),
+                token("}")
+            )),
+            options,
+        );
+
+        assert_eq!("if (x) {\n\treturn y;\n}", result.as_code());
+    }
+
     struct FormatArrayElements<'a> {
         items: Vec<&'a dyn Format<'a>>,
     }

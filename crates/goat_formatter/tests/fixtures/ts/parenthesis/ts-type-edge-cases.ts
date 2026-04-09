@@ -1,0 +1,41 @@
+// typeof in index access — needs parens
+type A = (typeof x)[number];
+type B = (typeof x)["key"];
+
+// keyof in array type — needs parens
+type C = (keyof X)[];
+type D = readonly (keyof X)[];
+
+// infer with extends in conditional
+type E = X extends (infer U extends string) ? U : never;
+type F = X extends (infer U extends readonly any[]) ? U : never;
+
+// Conditional types with nested unions
+type G = T extends string | number ? "primitive" : T extends object ? "object" : "other";
+type H = (T extends string ? A : B) | (T extends number ? C : D);
+
+// Mapped types with as clause
+type I = { [K in keyof T as `get${Capitalize<string & K>}`]: T[K] };
+type J = { [K in keyof T as K extends "id" ? never : K]: T[K] };
+
+// Intersection and union with function types
+type K = (() => void) | (() => string);
+type L = (() => void) & { label: string };
+
+// Nested conditional types
+type M = T extends [infer Head, ...infer Tail]
+  ? Head extends string
+    ? [Uppercase<Head>, ...M<Tail>]
+    : [Head, ...M<Tail>]
+  : [];
+
+// Type operator combinations
+type N = keyof typeof obj;
+type O = readonly (keyof typeof obj)[];
+
+// Template literal types with unions
+type P = `${string & keyof T}Changed`;
+type Q = `${"get" | "set"}${Capitalize<string & keyof T>}`;
+
+// Complex generic constraints
+type R<T extends readonly unknown[]> = T extends readonly [infer F, ...infer R] ? F : never;

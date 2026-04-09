@@ -93,3 +93,40 @@ Example
         schema.into()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_empty_categories_no_filters() {
+        let categories = OxlintCategories::default();
+        assert_eq!(categories.filters().count(), 0);
+    }
+
+    #[test]
+    fn test_categories_deserialization() {
+        let categories: OxlintCategories =
+            serde_json::from_str(r#"{ "correctness": "warn", "suspicious": "error" }"#).unwrap();
+        assert_eq!(categories.len(), 2);
+        assert_eq!(categories[&RuleCategory::Correctness], AllowWarnDeny::Warn);
+        assert_eq!(categories[&RuleCategory::Suspicious], AllowWarnDeny::Deny);
+    }
+
+    #[test]
+    fn test_categories_filters_count() {
+        let categories: OxlintCategories =
+            serde_json::from_str(r#"{ "correctness": "warn", "pedantic": "off" }"#).unwrap();
+        let filters: Vec<_> = categories.filters().collect();
+        assert_eq!(filters.len(), 2);
+    }
+
+    #[test]
+    fn test_categories_roundtrip() {
+        let categories: OxlintCategories =
+            serde_json::from_str(r#"{ "correctness": "warn" }"#).unwrap();
+        let serialized = serde_json::to_string(&categories).unwrap();
+        let deserialized: OxlintCategories = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(categories.len(), deserialized.len());
+    }
+}

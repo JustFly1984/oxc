@@ -59,3 +59,65 @@ impl<T: Serialize> Serialize for OneOrMany<T> {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_single_root_dir() {
+        let settings: NextPluginSettings =
+            serde_json::from_str(r#"{ "rootDir": "apps/web" }"#).unwrap();
+        let dirs = settings.get_root_dirs();
+        assert_eq!(dirs.as_ref(), &["apps/web".to_string()]);
+    }
+
+    #[test]
+    fn test_multiple_root_dirs() {
+        let settings: NextPluginSettings =
+            serde_json::from_str(r#"{ "rootDir": ["apps/web", "apps/docs"] }"#).unwrap();
+        let dirs = settings.get_root_dirs();
+        assert_eq!(dirs.as_ref(), &["apps/web".to_string(), "apps/docs".to_string()]);
+    }
+
+    #[test]
+    fn test_default_root_dir() {
+        let settings: NextPluginSettings = serde_json::from_str(r"{}").unwrap();
+        let dirs = settings.get_root_dirs();
+        assert!(dirs.is_empty());
+    }
+
+    #[test]
+    fn test_empty_array_root_dir() {
+        let settings: NextPluginSettings =
+            serde_json::from_str(r#"{ "rootDir": [] }"#).unwrap();
+        let dirs = settings.get_root_dirs();
+        assert!(dirs.is_empty());
+    }
+
+    #[test]
+    fn test_roundtrip_single() {
+        let settings: NextPluginSettings =
+            serde_json::from_str(r#"{ "rootDir": "apps/web" }"#).unwrap();
+        let serialized = serde_json::to_string(&settings).unwrap();
+        let deserialized: NextPluginSettings = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(settings, deserialized);
+    }
+
+    #[test]
+    fn test_roundtrip_many() {
+        let settings: NextPluginSettings =
+            serde_json::from_str(r#"{ "rootDir": ["a", "b"] }"#).unwrap();
+        let serialized = serde_json::to_string(&settings).unwrap();
+        let deserialized: NextPluginSettings = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(settings, deserialized);
+    }
+
+    #[test]
+    fn test_unknown_fields_rejected() {
+        // NextPluginSettings doesn't have deny_unknown_fields, so this should pass
+        // but OneOrMany<String> should handle only strings
+        let result = serde_json::from_str::<NextPluginSettings>(r#"{ "rootDir": 42 }"#);
+        assert!(result.is_err());
+    }
+}
