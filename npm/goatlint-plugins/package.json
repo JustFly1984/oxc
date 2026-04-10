@@ -1,7 +1,7 @@
 {
   "name": "goatlint-plugins",
-  "version": "1.60.0",
-  "description": "Plugin utilities for Oxlint",
+  "version": "1.61.0",
+  "description": "Plugin utilities for Goatlint",
   "keywords": [
     "eslint",
     "linter",

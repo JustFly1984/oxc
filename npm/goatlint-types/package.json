@@ -1,7 +1,7 @@
 {
   "name": "goatlint-types",
-  "version": "0.125.0",
-  "description": "Types for Oxc AST nodes",
+  "version": "0.126.0",
+  "description": "TypeScript definitions for Oxc AST nodes",
   "keywords": [
     "AST",
     "Parser"

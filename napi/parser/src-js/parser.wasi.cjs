@@ -39,9 +39,9 @@ if (__nodeFs.existsSync(__wasmDebugFilePath)) {
   __wasmFilePath = __wasmDebugFilePath
 } else if (!__nodeFs.existsSync(__wasmFilePath)) {
   try {
-    __wasmFilePath = require.resolve('@oxc-parser/binding-wasm32-wasi/parser.wasm32-wasi.wasm')
+    __wasmFilePath = require.resolve('@goatlint-parser/binding-wasm32-wasi/parser.wasm32-wasi.wasm')
   } catch {
-    throw new Error('Cannot find parser.wasm32-wasi.wasm file, and @oxc-parser/binding-wasm32-wasi package is not installed.')
+    throw new Error('Cannot find parser.wasm32-wasi.wasm file, and @goatlint-parser/binding-wasm32-wasi package is not installed.')
   }
 }
 

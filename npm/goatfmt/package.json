@@ -1,7 +1,7 @@
 {
   "name": "goatfmt",
-  "version": "0.45.0",
-  "description": "Formatter for the JavaScript Oxidation Compiler",
+  "version": "0.46.0",
+  "description": "High-performance Prettier-compatible JavaScript/TypeScript formatter",
   "keywords": [
     "formatter",
     "javascript",

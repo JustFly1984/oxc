@@ -1,7 +1,7 @@
 {
   "name": "goatlint-plugin-eslint",
-  "version": "1.60.0",
-  "description": "ESLint's built-in rules as an Oxlint plugin",
+  "version": "1.61.0",
+  "description": "ESLint's built-in rules as a Goatlint plugin",
   "keywords": [
     "eslint",
     "linter",

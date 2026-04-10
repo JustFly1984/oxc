@@ -1,7 +1,7 @@
 {
   "name": "goatlint-runtime",
-  "version": "0.125.0",
-  "description": "Oxc's modular runtime helpers",
+  "version": "0.126.0",
+  "description": "Modular runtime helpers for Oxc transformer output",
   "homepage": "https://github.com/JustFly1984/oxc",
   "bugs": "https://github.com/JustFly1984/oxc/issues",
   "license": "MIT",
