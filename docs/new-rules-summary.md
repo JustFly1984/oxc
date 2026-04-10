@@ -1,4 +1,4 @@
-# New Oxlint Rules & Infrastructure — Branch Summary
+# New Goatlint Rules & Infrastructure — Branch Summary
 
 ## Overview
 

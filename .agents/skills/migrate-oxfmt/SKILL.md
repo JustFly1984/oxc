@@ -1,13 +1,13 @@
 ---
 name: migrate-goatfmt
-description: Guide for migrating a project from Prettier or Biome to Oxfmt. Use when asked to migrate, convert, or switch a JavaScript/TypeScript project's formatter from Prettier or Biome to Oxfmt.
+description: Guide for migrating a project from Prettier or Biome to Goatfmt. Use when asked to migrate, convert, or switch a JavaScript/TypeScript project's formatter from Prettier or Biome to Goatfmt or oxfmt.
 ---
 
-This skill guides you through migrating a JavaScript/TypeScript project from Prettier or Biome to [Oxfmt](https://goatlint.dev/docs/guide/usage/formatter).
+This skill guides you through migrating a JavaScript/TypeScript project from Prettier or Biome to [Goatfmt](https://goatlint.dev/docs/guide/usage/formatter).
 
 ## Overview
 
-Oxfmt is a high-performance, Prettier-compatible code formatter. Most Prettier options are supported directly.
+Goatfmt is a high-performance, Prettier-compatible code formatter. Most Prettier options are supported directly.
 
 An automated migration tool is built into goatfmt, supporting both Prettier and Biome as migration sources.
 
@@ -85,7 +85,7 @@ These Prettier options are skipped during migration:
 
 Enabled by default in goatfmt, but the migration tool disables it unless `prettier-plugin-packagejson` was detected. Review whether you want this enabled.
 
-Note: Oxfmt's sorting algorithm differs from `prettier-plugin-packagejson`.
+Note: goatfmt's sorting algorithm differs from `prettier-plugin-packagejson`.
 
 ### embeddedLanguageFormatting (Prettier only)
 
@@ -108,16 +108,16 @@ The `overrides` field cannot be auto-migrated from either Prettier or Biome. Con
 
 ### Nested Config
 
-Oxfmt does not support nested configuration files (e.g., a separate `.goatfmtrc.json` in a subdirectory). If your project used per-directory Prettier or Biome configs, consolidate them using `overrides` with file glob patterns, or run goatfmt separately per directory with different working directories.
+goatfmt does not support nested configuration files (e.g., a separate `.goatfmtrc.json` in a subdirectory). If your project used per-directory Prettier or Biome configs, consolidate them using `overrides` with file glob patterns, or run goatfmt separately per directory with different working directories.
 
 ### Prettier-Compatible Options
 
 These options transfer directly with the same behavior:
 `tabWidth`, `useTabs`, `semi`, `singleQuote`, `jsxSingleQuote`, `quoteProps`, `trailingComma`, `arrowParens`, `bracketSpacing`, `bracketSameLine`, `endOfLine`, `proseWrap`, `htmlWhitespaceSensitivity`, `singleAttributePerLine`, `vueIndentScriptAndStyle`
 
-## Step 3: Configure Oxfmt Extensions
+## Step 3: Configure Goatfmt Extensions
 
-Oxfmt offers features not available in Prettier:
+goatfmt offers features not available in Prettier:
 
 ### sortImports
 
@@ -189,7 +189,7 @@ npx goatfmt@latest --check
 
 ## Tips
 
-- EditorConfig: Oxfmt reads `.editorconfig` automatically for `useTabs`, `tabWidth`, `endOfLine`, `insertFinalNewline`, and `printWidth`. Options in `.goatfmtrc.json` take precedence.
+- EditorConfig: goatfmt reads `.editorconfig` automatically for `useTabs`, `tabWidth`, `endOfLine`, `insertFinalNewline`, and `printWidth`. Options in `.goatfmtrc.json` take precedence.
 - CI: Use `npx goatfmt@latest --check` to enforce formatting in CI.
 - LSP: Run `goatfmt --lsp` for editor integration via Language Server Protocol.
 - Schema support: Add `"$schema": "./node_modules/goatfmt/configuration_schema.json"` to `.goatfmtrc.json` for editor autocompletion.

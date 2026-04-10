@@ -124,3 +124,92 @@ fn normalized_path_suffixes(path: &Path) -> Vec<String> {
 
     (0..components.len()).map(|index| components[index..].join("/")).collect()
 }
+
+#[cfg(test)]
+mod test {
+    use std::path::Path;
+
+    use super::*;
+
+    #[test]
+    fn test_boundary_patterns_iter_single() {
+        let pattern = BoundaryPatterns::Single("src/**".to_string());
+        let items: Vec<&str> = pattern.iter().collect();
+        assert_eq!(items, vec!["src/**"]);
+    }
+
+    #[test]
+    fn test_boundary_patterns_iter_many() {
+        let pattern = BoundaryPatterns::Many(vec!["a/**".to_string(), "b/**".to_string()]);
+        let items: Vec<&str> = pattern.iter().collect();
+        assert_eq!(items, vec!["a/**", "b/**"]);
+    }
+
+    #[test]
+    fn test_boundary_patterns_iter_empty() {
+        let pattern = BoundaryPatterns::Empty;
+        let items: Vec<&str> = pattern.iter().collect();
+        assert!(items.is_empty());
+    }
+
+    #[test]
+    fn test_normalize_path_removes_current_dir() {
+        assert_eq!(normalize_path(Path::new("a/./b/c")), Path::new("a/b/c"));
+    }
+
+    #[test]
+    fn test_normalize_path_resolves_parent_dir() {
+        assert_eq!(normalize_path(Path::new("a/b/../c")), Path::new("a/c"));
+    }
+
+    #[test]
+    fn test_normalized_path_suffixes_basic() {
+        let suffixes = normalized_path_suffixes(Path::new("src/components/Button.tsx"));
+        assert_eq!(
+            suffixes,
+            vec!["src/components/Button.tsx", "components/Button.tsx", "Button.tsx"]
+        );
+    }
+
+    #[test]
+    fn test_normalized_path_suffixes_single() {
+        let suffixes = normalized_path_suffixes(Path::new("file.ts"));
+        assert_eq!(suffixes, vec!["file.ts"]);
+    }
+
+    #[test]
+    fn test_classify_path_match() {
+        let elements = vec![BoundaryElementSetting {
+            element_type: "component".to_string(),
+            pattern: BoundaryPatterns::Single("src/components/**".to_string()),
+        }];
+        let result = classify_path(Path::new("src/components/Button.tsx"), &elements);
+        assert_eq!(result, Some("component".to_string()));
+    }
+
+    #[test]
+    fn test_classify_path_no_match() {
+        let elements = vec![BoundaryElementSetting {
+            element_type: "component".to_string(),
+            pattern: BoundaryPatterns::Single("src/components/**".to_string()),
+        }];
+        let result = classify_path(Path::new("src/utils/helper.ts"), &elements);
+        assert_eq!(result, None);
+    }
+
+    #[test]
+    fn test_classify_path_first_match_wins() {
+        let elements = vec![
+            BoundaryElementSetting {
+                element_type: "component".to_string(),
+                pattern: BoundaryPatterns::Single("**/*.tsx".to_string()),
+            },
+            BoundaryElementSetting {
+                element_type: "other".to_string(),
+                pattern: BoundaryPatterns::Single("**/*.tsx".to_string()),
+            },
+        ];
+        let result = classify_path(Path::new("src/Button.tsx"), &elements);
+        assert_eq!(result, Some("component".to_string()));
+    }
+}

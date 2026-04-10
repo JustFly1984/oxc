@@ -22,7 +22,7 @@ When making changes, consider the impact on all paths.
 
 ## Platform Considerations
 
-Oxfmt is built for multiple platforms (Linux, macOS, Windows) and architectures.
+Goatfmt is built for multiple platforms (Linux, macOS, Windows) and architectures.
 
 When working with file paths in CLI code, be aware of Windows path differences:
 

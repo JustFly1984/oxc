@@ -9,11 +9,11 @@ type: Bug
 ⚠️ IMPORTANT ⚠️
 Please use the appropriate template for each!
 
-- If you are reporting a bug for Oxlint:
+- If you are reporting a bug for Goatlint:
   - https://github.com/goat-project/oxc/issues/new?template=linter_bug_report.yaml
 - If you are reporting a bug for the Oxc VS Code extension:
   - https://github.com/goat-project/oxc-vscode/issues/new
-- If you are reporting a bug for Oxfmt, especially a difference with Prettier:
+- If you are reporting a bug for Goatfmt, especially a difference with Prettier:
   - https://github.com/goat-project/oxc/issues/new?template=formatter_diff_report.yaml
 
 Other than that, feel free to enter whatever information you like.

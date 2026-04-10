@@ -1,43 +1,41 @@
 # @goatlint/plugins
 
-Plugin utilities for [Oxlint](https://goatlint.dev/docs/guide/usage/linter/js-plugins).
+Utilities for authoring [Goatlint JS plugins](https://goatlint.dev/docs/guide/usage/linter/js-plugins).
 
-This package provides optional functions to assist in creating Oxlint JS plugins and rules.
+Provides `definePlugin`, `defineRule`, and TypeScript types for building custom lint rules that run in Goatlint.
 
 ## Installation
 
-```bash
+```sh
 npm install @goatlint/plugins
 ```
 
 ## Usage
 
-### Define functions
-
-Use `definePlugin` and `defineRule` if authoring your plugin in TypeScript for type safety.
+### Define a plugin
 
 ```typescript
 import { definePlugin, defineRule } from "@goatlint/plugins";
 
-const rule = defineRule({
+const noFoo = defineRule({
   create(context) {
     return {
-      Program(node) {
-        // Rule logic here
+      Identifier(node) {
+        if (node.name === "foo") {
+          context.report({ node, message: "Avoid using 'foo'" });
+        }
       },
     };
   },
 });
 
 export default definePlugin({
-  meta: { name: "goatlint-plugin-amazing" },
-  rules: { amazing: rule },
+  meta: { name: "goatlint-plugin-example" },
+  rules: { "no-foo": noFoo },
 });
 ```
 
-### Types
-
-This package also includes types for plugins and rules.
+### Types only
 
 ```typescript
 import type { Context, Rule, ESTree } from "@goatlint/plugins";
@@ -46,7 +44,7 @@ const rule: Rule = {
   create(context: Context) {
     return {
       Program(node: ESTree.Program) {
-        // Rule logic here
+        // ...
       },
     };
   },
@@ -55,41 +53,28 @@ const rule: Rule = {
 
 ### ESLint compatibility
 
-If your plugin uses Oxlint's [alternative `createOnce` API](https://goatlint.dev/docs/guide/usage/linter/js-plugins#alternative-api),
-use `eslintCompatPlugin` to convert the plugin so it will also work with ESLint.
+If your plugin uses the [`createOnce` API](https://goatlint.dev/docs/guide/usage/linter/js-plugins#alternative-api), wrap it with `eslintCompatPlugin` to make it work with ESLint too:
 
 ```typescript
 import { eslintCompatPlugin } from "@goatlint/plugins";
 
-const rule = {
-  createOnce(context) {
-    return {
-      Program(node) {
-        // Rule logic here
-      },
-    };
-  },
-};
-
 export default eslintCompatPlugin({
-  meta: { name: "goatlint-plugin-amazing" },
-  rules: { amazing: rule },
+  meta: { name: "goatlint-plugin-example" },
+  rules: { "no-foo": noFooRule },
 });
 ```
 
-## Node.js version
+## Compatibility
 
-This package requires Node.js 12.22.0+, 14.17.0+, 16.0.0+, or later.
-This matches the minimum Node.js version required by ESLint 8.
+- Node.js 12.22.0+, 14.17.0+, or 16.0.0+
+- ESM and CommonJS entry points
+- Works with any version of Goatlint and ESLint 8+
 
-This package provides both ESM and CommonJS entry points.
+## Links
 
-So a plugin which depends on `@goatlint/plugins` can be:
+- [JS Plugins Documentation](https://goatlint.dev/docs/guide/usage/linter/js-plugins)
+- [GitHub](https://github.com/goat-project/oxc)
 
-- Used with any version of Oxlint.
-- Used with ESLint 8+.
-- Published as either ESM or CommonJS.
+## License
 
-## Docs
-
-For full documentation, see [Oxlint JS Plugins docs](https://goatlint.dev/docs/guide/usage/linter/js-plugins).
+[MIT](https://github.com/goat-project/oxc/blob/main/LICENSE)

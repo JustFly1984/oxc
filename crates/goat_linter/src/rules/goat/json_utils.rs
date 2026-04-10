@@ -153,3 +153,180 @@ pub(super) fn compare_json_shapes(
         _ => {}
     }
 }
+
+#[cfg(test)]
+mod test {
+    use std::path::Path;
+
+    use goat_span::Span;
+
+    use super::*;
+    use crate::json_parser::{JsonArray, JsonObject, JsonProperty};
+
+    #[test]
+    fn test_is_json_file() {
+        assert!(is_json_file(Path::new("foo.json")));
+        assert!(is_json_file(Path::new("/a/b/c.json")));
+        assert!(!is_json_file(Path::new("foo.jsonc")));
+        assert!(!is_json_file(Path::new("foo.js")));
+        assert!(!is_json_file(Path::new("foo")));
+    }
+
+    #[test]
+    fn test_file_start_span() {
+        assert_eq!(file_start_span(""), Span::default());
+        assert_eq!(file_start_span("x"), Span::new(0, 1));
+        assert_eq!(file_start_span("hello"), Span::new(0, 1));
+    }
+
+    #[test]
+    fn test_resolve_reference_path_absolute() {
+        let result = resolve_reference_path(Path::new("/a/b/c.json"), "/x/y/z.json");
+        assert_eq!(result, Path::new("/x/y/z.json"));
+    }
+
+    #[test]
+    fn test_resolve_reference_path_relative() {
+        let result = resolve_reference_path(Path::new("/a/b/c.json"), "./d.json");
+        assert_eq!(result, Path::new("/a/b/d.json"));
+    }
+
+    #[test]
+    fn test_resolve_reference_path_parent() {
+        let result = resolve_reference_path(Path::new("/a/b/c.json"), "../d.json");
+        assert_eq!(result, Path::new("/a/d.json"));
+    }
+
+    #[test]
+    fn test_normalize_path() {
+        assert_eq!(normalize_path(Path::new("/a/b/../c")), Path::new("/a/c"));
+        assert_eq!(normalize_path(Path::new("/a/./b/c")), Path::new("/a/b/c"));
+        assert_eq!(normalize_path(Path::new("/a/b/c/../..")), Path::new("/a"));
+    }
+
+    #[test]
+    fn test_join_object_path() {
+        assert_eq!(join_object_path("", "key"), "key");
+        assert_eq!(join_object_path("root", "key"), "root.key");
+    }
+
+    #[test]
+    fn test_join_array_path() {
+        assert_eq!(join_array_path("", 0), "[0]");
+        assert_eq!(join_array_path("arr", 2), "arr[2]");
+    }
+
+    #[test]
+    fn test_display_path() {
+        assert_eq!(display_path(""), "<root>");
+        assert_eq!(display_path("foo"), "foo");
+    }
+
+    #[test]
+    fn test_compare_json_shapes_matching_scalars() {
+        let a = JsonValue::String("hello", Span::new(0, 7));
+        let b = JsonValue::String("world", Span::new(0, 7));
+        let mut diff = JsonShapeDiff::default();
+        compare_json_shapes(&a, &b, "", &mut diff);
+        assert!(diff.missing.is_empty());
+        assert!(diff.extra.is_empty());
+        assert!(diff.type_mismatches.is_empty());
+    }
+
+    #[test]
+    fn test_compare_json_shapes_type_mismatch() {
+        let a = JsonValue::Object(JsonObject { properties: vec![], span: Span::new(0, 2) });
+        let b = JsonValue::String("x", Span::new(0, 3));
+        let mut diff = JsonShapeDiff::default();
+        compare_json_shapes(&a, &b, "root", &mut diff);
+        assert_eq!(diff.type_mismatches, vec!["root"]);
+    }
+
+    #[test]
+    fn test_compare_json_shapes_missing_and_extra_keys() {
+        let ref_obj = JsonValue::Object(JsonObject {
+            properties: vec![JsonProperty {
+                key: "a",
+                key_span: Span::new(1, 4),
+                value: JsonValue::Null(Span::new(6, 10)),
+                span: Span::new(1, 10),
+            }],
+            span: Span::new(0, 11),
+        });
+        let cand_obj = JsonValue::Object(JsonObject {
+            properties: vec![JsonProperty {
+                key: "b",
+                key_span: Span::new(1, 4),
+                value: JsonValue::Null(Span::new(6, 10)),
+                span: Span::new(1, 10),
+            }],
+            span: Span::new(0, 11),
+        });
+        let mut diff = JsonShapeDiff::default();
+        compare_json_shapes(&ref_obj, &cand_obj, "", &mut diff);
+        assert_eq!(diff.missing, vec!["a"]);
+        assert_eq!(diff.extra, vec!["b"]);
+    }
+
+    #[test]
+    fn test_compare_json_shapes_array_length_diff() {
+        let ref_arr = JsonValue::Array(JsonArray {
+            elements: vec![
+                JsonValue::Null(Span::new(1, 5)),
+                JsonValue::Null(Span::new(7, 11)),
+            ],
+            span: Span::new(0, 12),
+        });
+        let cand_arr = JsonValue::Array(JsonArray {
+            elements: vec![JsonValue::Null(Span::new(1, 5))],
+            span: Span::new(0, 6),
+        });
+        let mut diff = JsonShapeDiff::default();
+        compare_json_shapes(&ref_arr, &cand_arr, "arr", &mut diff);
+        assert_eq!(diff.missing, vec!["arr[1]"]);
+        assert!(diff.extra.is_empty());
+    }
+
+    #[test]
+    fn test_property_deletion_span_trailing_comma() {
+        //                    0123456789012345678
+        let source_text = r#"{ "a": 1, "b": 2 }"#;
+        let obj = JsonObject {
+            properties: vec![
+                JsonProperty {
+                    key: "a",
+                    key_span: Span::new(2, 5),
+                    value: JsonValue::Number("1", Span::new(7, 8)),
+                    span: Span::new(2, 8),
+                },
+                JsonProperty {
+                    key: "b",
+                    key_span: Span::new(10, 13),
+                    value: JsonValue::Number("2", Span::new(15, 16)),
+                    span: Span::new(10, 16),
+                },
+            ],
+            span: Span::new(0, 18),
+        };
+        // Deleting first property should consume the trailing comma + whitespace
+        let span = property_deletion_span(source_text, &obj, &obj.properties[0], 0);
+        assert!(span.start <= obj.properties[0].span.start);
+        assert!(span.end > obj.properties[0].span.end);
+    }
+
+    #[test]
+    fn test_property_deletion_span_only_property() {
+        let source_text = r#"{ "a": 1 }"#;
+        let obj = JsonObject {
+            properties: vec![JsonProperty {
+                key: "a",
+                key_span: Span::new(2, 5),
+                value: JsonValue::Number("1", Span::new(7, 8)),
+                span: Span::new(2, 8),
+            }],
+            span: Span::new(0, 10),
+        };
+        let span = property_deletion_span(source_text, &obj, &obj.properties[0], 0);
+        assert_eq!(span, Span::new(2, 8));
+    }
+}

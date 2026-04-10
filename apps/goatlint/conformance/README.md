@@ -1,18 +1,18 @@
-# Oxlint JS plugins conformance tests
+# Goatlint JS plugins conformance tests
 
 Conformance tests run:
 
-- All ESLint's tests for its built-in rules as Oxlint JS plugins.
-- Tests from various ESLint plugins, running in Oxlint.
+- All ESLint's tests for its built-in rules as Goatlint JS plugins.
+- Tests from various ESLint plugins, running in Goatlint.
 
-They do this by substituting ESLint's `RuleTester` for Oxlint's version, and then `require()`ing the test files
+They do this by substituting ESLint's `RuleTester` for Goatlint's version, and then `require()`ing the test files
 to run the tests.
 
 The results are saved in `snapshots` directory.
 
 ## Setup
 
-Build Oxlint in conformance mode:
+Build Goatlint in conformance mode:
 
 ```sh
 cd apps/goatlint

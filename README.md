@@ -47,8 +47,8 @@ For more information, check out our website at [goatlint.dev](https://goatlint.d
 
 ## 🔧 Lint or Format a Codebase
 
-- **Lint**: [Oxlint](https://goatlint.dev/docs/guide/usage/linter) — `npx goatlint@latest`
-- **Format**: [Oxfmt](https://goatlint.dev/docs/guide/usage/formatter) — `npx goatfmt@latest`
+- **Lint**: [Goatlint](https://goatlint.dev/docs/guide/usage/linter) — `npx goatlint@latest`
+- **Format**: [Goatfmt](https://goatlint.dev/docs/guide/usage/formatter) — `npx goatfmt@latest`
 
 ## 🧰 Build Tooling on Top of Oxc
 

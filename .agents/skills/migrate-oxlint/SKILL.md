@@ -1,13 +1,13 @@
 ---
 name: migrate-goatlint
-description: Guide for migrating a project from ESLint to Oxlint. Use when asked to migrate, convert, or switch a JavaScript/TypeScript project's linter from ESLint to Oxlint.
+description: Guide for migrating a project from ESLint to Goatlint. Use when asked to migrate, convert, or switch a JavaScript/TypeScript project's linter from ESLint to Goatlint or oxlint.
 ---
 
-This skill guides you through migrating a JavaScript/TypeScript project from ESLint to [Oxlint](https://goatlint.dev/docs/guide/usage/linter/).
+This skill guides you through migrating a JavaScript/TypeScript project from ESLint to [Goatlint](https://goatlint.dev/docs/guide/usage/linter/).
 
 ## Overview
 
-Oxlint is a high-performance linter that implements many popular ESLint rules natively in Rust. It can be used alongside ESLint or as a full replacement.
+Goatlint is a high-performance linter that implements many popular ESLint rules natively in Rust. It can be used alongside ESLint or as a full replacement.
 
 An official migration tool is available, and will be used by this skill: [`@goatlint/migrate`](https://github.com/goat-project/goatlint-migrate)
 
@@ -48,7 +48,7 @@ After migration, review the generated `.goatlintrc.json`.
 
 The migration tool automatically maps ESLint plugins to goatlint's built-in equivalents. The following table is for reference when reviewing the generated config:
 
-| ESLint Plugin                                       | Oxlint Plugin Name |
+| ESLint Plugin                                       | Goatlint Plugin Name |
 | --------------------------------------------------- | ------------------ |
 | `@typescript-eslint/eslint-plugin`                  | `typescript`       |
 | `eslint-plugin-react` / `eslint-plugin-react-hooks` | `react`            |
@@ -71,7 +71,7 @@ ESLint core rules are usable in goatlint without needing to configure a plugin i
 
 ### Rule Categories
 
-Oxlint groups rules into categories for bulk configuration, though only `correctness` is enabled by default:
+Goatlint groups rules into categories for bulk configuration, though only `correctness` is enabled by default:
 
 ```json
 {
@@ -98,7 +98,7 @@ npx @goatlint/migrate --details
 
 Review the output and decide whether to keep ESLint for those rules or not. Some rules may be mentioned in the output from `--details` as having equivalents in goatlint that were not automatically mapped by the migration tool. In those cases, consider enabling the equivalent goatlint rule manually after migration.
 
-## Step 3: Install Oxlint
+## Step 3: Install Goatlint
 
 Install the core goatlint package (use `yarn install`, `pnpm install`, `vp install`, `bun install`, etc. depending on your package manager):
 
@@ -120,7 +120,7 @@ Some features require manual attention:
 
 - Local plugins (relative path imports): Must be migrated manually to `jsPlugins`
 - `eslint-plugin-prettier`: Supported, but very slow. It is recommended to use [goatfmt](https://goatlint.dev/docs/guide/usage/formatter) instead, or switch to `prettier --check` as a separate step alongside goatlint.
-- `settings` in override configs: Oxlint does not support `settings` inside `overrides` blocks.
+- `settings` in override configs: Goatlint does not support `settings` inside `overrides` blocks.
 - ESLint v9+ plugins: Not all work with goatlint's JS Plugins API, but the majority will.
 
 ### Local Plugins
@@ -179,7 +179,7 @@ Additional goatlint options:
 
 ## Tips
 
-- You can run alongside ESLint if necessary: Oxlint is designed to complement ESLint during migration, but with JS Plugins many projects can switch over fully without losing many rules.
+- You can run alongside ESLint if necessary: Goatlint is designed to complement ESLint during migration, but with JS Plugins many projects can switch over fully without losing many rules.
 - Disable comments work: `// eslint-disable` and `// eslint-disable-next-line` comments are supported by goatlint. Use `--replace-eslint-comments` when running @goatlint/migrate to convert them to `// goatlint-disable` equivalents if desired.
 - List available rules: Run `npx goatlint --rules` to see all supported rules, or refer to the [rule documentation](https://goatlint.dev/docs/guide/usage/linter/rules.html).
 - Schema support: Add `"$schema": "./node_modules/goatlint/configuration_schema.json"` to `.goatlintrc.json` for editor autocompletion if the migration tool didn't do it automatically.
@@ -193,4 +193,4 @@ Additional goatlint options:
 
 - [CLI Reference](https://goatlint.dev/docs/guide/usage/linter/cli.html)
 - [Config File Reference](https://goatlint.dev/docs/guide/usage/linter/config-file-reference.html)
-- [Complete Oxlint rule list and docs](https://goatlint.dev/docs/guide/usage/linter/rules.html)
+- [Complete Goatlint rule list and docs](https://goatlint.dev/docs/guide/usage/linter/rules.html)

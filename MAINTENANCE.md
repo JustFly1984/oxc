@@ -1,6 +1,6 @@
-## Oxlint & Oxfmt
+## Goatlint & Goatfmt
 
-### Release Oxlint & Oxfmt
+### Release Goatlint & Goatfmt
 
 - Run [Prepare Release Apps](https://github.com/goat-project/oxc/actions/workflows/prepare_release_apps.yml)
   - Releases both goatlint and goatfmt together as a single GitHub release (with different versions)
@@ -8,8 +8,8 @@
 
 ### E2E Testing
 
-- Run [Oxlint Ecosystem CI](https://github.com/goat-project/oxc-ecosystem-ci/actions/workflows/ci.yml)
-- Run [Oxfmt Ecosystem CI](https://github.com/goat-project/oxc-ecosystem-ci/actions/workflows/goatfmt-ci.yml)
+- Run [Goatlint Ecosystem CI](https://github.com/goat-project/oxc-ecosystem-ci/actions/workflows/ci.yml)
+- Run [Goatfmt Ecosystem CI](https://github.com/goat-project/oxc-ecosystem-ci/actions/workflows/goatfmt-ci.yml)
 
 ## Publish Crates
 

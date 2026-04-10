@@ -1,22 +1,18 @@
 # goatlint-plugin-eslint
 
-ESLint's built-in rules as an Oxlint plugin.
+ESLint's built-in rules as a Goatlint JS plugin.
 
-This package exports all of ESLint's built-in rules as a JS plugin that Oxlint users can use.
+Use this to run ESLint core rules that Goatlint doesn't implement natively yet — no ESLint installation required.
 
-Allows using ESLint rules that Oxlint doesn't implement natively yet.
+## Installation
 
-More details in [Oxlint docs](https://goatlint.dev/docs/guide/usage/linter/js-plugins).
+```sh
+npm install -D goatlint-plugin-eslint
+```
 
 ## Usage
 
-Install the package:
-
-```sh
-npm install --save-dev goatlint-plugin-eslint
-```
-
-Add to your Oxlint config:
+Add to your `.goatlintrc.json`:
 
 ```json
 {
@@ -33,4 +29,14 @@ Add to your Oxlint config:
 }
 ```
 
-All rules are prefixed with `eslint-js/`, to distinguish from Oxlint's Rust implementation of ESLint rules.
+All rules are prefixed with `eslint-js/` to distinguish them from Goatlint's native Rust implementations of ESLint rules.
+
+## Links
+
+- [JS Plugins Documentation](https://goatlint.dev/docs/guide/usage/linter/js-plugins)
+- [ESLint Rules Reference](https://eslint.org/docs/latest/rules/)
+- [GitHub](https://github.com/goat-project/oxc)
+
+## License
+
+[MIT](https://github.com/goat-project/oxc/blob/main/LICENSE)

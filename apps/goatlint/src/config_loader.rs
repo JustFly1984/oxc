@@ -156,7 +156,7 @@ struct ConfigWalkCollector {
 impl Drop for ConfigWalkCollector {
     fn drop(&mut self) {
         let configs = std::mem::take(&mut self.configs);
-        self.sender.send(configs).unwrap();
+        let _ = self.sender.send(configs);
     }
 }
 
@@ -424,7 +424,10 @@ impl<'a> ConfigLoader<'a> {
 
         for config in configs {
             let path = config.path.clone();
-            let dir = path.parent().unwrap().to_path_buf();
+            let Some(dir) = path.parent() else {
+                continue;
+            };
+            let dir = dir.to_path_buf();
             let ignore_patterns = config.ignore_patterns.clone();
             let is_root_config = root_config_dir
                 .and_then(|root| path.parent().map(|parent| parent == root))
